@@ -30,7 +30,7 @@ $msg .= ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
 <script src="./static/js/marquee.js"></script>
 <script>        
 	
-    Text_marquee('scroller','<?= $msg; ?>',385);
+    Text_marquee('scroller',"<?= $msg; ?>",385);
 </script>
 
 </html>
