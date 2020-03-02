@@ -19,6 +19,7 @@ var draw2 = function(){
 	if(thisWord.length <= block_num){
 		// right now the words are placed at the middle
 		// this line is to find out where to start putting thisWord
+		
 		var beginHere = Math.round((block_num - thisWord.length)/2);
 		for(j = 0; j < thisWord.length; j++){
 			var thisBlock = sBlock[beginHere];
