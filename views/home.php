@@ -23,10 +23,14 @@ foreach($msg_array as $ma){
 ?>
 
 <div id="mask">
-    <div id="scroller"></div>   
+    <div id="display">
+    	<p id = "title">NEW YORK CONSOLIDATED</p>
+    	<div id = "scroller"></div>
+    </div>   
 </div>   
     
-<script src="./static/js/marquee.js"></script>
-<script>        
-    Text_marquee('scroller',"<?= $msg; ?>",385);
+<script src="./static/js/init.js"></script>
+<script src="./static/js/marquee_matrix.js"></script>
+<script>    
+    text_marquee("<?= $msg ?>");
 </script>
