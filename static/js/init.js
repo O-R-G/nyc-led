@@ -10,7 +10,6 @@ var cBlock = document.createElement("span");
 	cBlock.className = "block";
 var block_num = sTitle.innerHTML.split("").length;
 
-// this loop is only for draw1
 for ( i = 0 ; i < block_num ; i ++ ){
 	var cBlock = document.createElement("span");
 	cBlock.innerHTML = ".";

@@ -1,49 +1,37 @@
-// 54 DEGREES AND WINDY
-var progress = 0; 
+var progress = 0; //which word in msg
 var msg_array;
 
 
 var text_marquee = function(msg){
-	// medthod 1
-		// Wei: was wondering if more spacing between streamed words will improve
-		// the legibility of NEW YORK CONSOLIDATED.
-
-		// Add extra spaces between words in msg
-		msg_array = msg.split(" ");
-		msg = "";
-		for(i = 0 ; i<msg_array.length; i++){
-			msg += msg_array[i]+"   ";
-		}
-
-	// Adding extra spaces at the very end of msg
-	for(i = 0 ; i < block_num ; i++){
-		msg += " ";
-	}
-
-	msg_array = msg.split("");
-	setInterval(draw1, 200);
+	// split msg into words
+	msg_array = msg.split(" ");
+	setInterval(draw2, 500);
 }
 
-var draw1  = function(){
+var draw2 = function(){
+	// reset all blocks
+	for(i = 0 ; i < block_num ; i++){
+		sBlock[i].innerHTML = ".";
+		sBlock[i].classList.remove("on");
+	}
 
-	if (progress < msg_array.length){
+	var thisWord = msg_array[progress];
+	if(thisWord.length <= block_num){
+		// right now the words are placed at the middle
+		// this line is to find out where to start putting thisWord
+		var beginHere = Math.round((block_num - thisWord.length)/2);
+		for(j = 0; j < thisWord.length; j++){
+			var thisBlock = sBlock[beginHere];
+			thisBlock.innerHTML = thisWord[j];
+			thisBlock.classList.add("on");
+			beginHere++;
+		}
+	}else{
+		console.log("Got a word longer than "+block_num+" letters")
+	}
+	if(progress<msg_array.length-1){
 		progress++;
-	}else {
+	}else{
 		progress = 0;
 	}
-
-	for(i = 0 ; i < progress ; i ++){
-		var block_order = block_num - progress + i;
-		var thisBlock = sBlock[block_order];
-		if (block_order >= 0){
-			if(msg_array[i]!==" "){
-				thisBlock.classList.add("on");
-				thisBlock.innerHTML = msg_array[i];
-			}else{
-				thisBlock.classList.remove("on");
-				thisBlock.innerHTML = ".";
-			}
-		}
-	}
-	
 }
