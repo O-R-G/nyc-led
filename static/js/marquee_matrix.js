@@ -1,5 +1,4 @@
-// 54 DEGREES AND WINDY
-var progress = 0; 
+var progress = 0; //how many letters in msg has been fed in screen
 var msg_array;
 
 
@@ -26,11 +25,7 @@ var text_marquee = function(msg){
 
 var draw1  = function(){
 
-	if (progress < msg_array.length){
-		progress++;
-	}else {
-		progress = 0;
-	}
+	
 
 	for(i = 0 ; i < progress ; i ++){
 		var block_order = block_num - progress + i;
@@ -44,6 +39,11 @@ var draw1  = function(){
 				thisBlock.innerHTML = ".";
 			}
 		}
+	}
+	if (progress < msg_array.length){
+		progress++;
+	}else {
+		progress = 1;
 	}
 	
 }

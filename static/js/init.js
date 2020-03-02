@@ -5,12 +5,16 @@ var sDisplay = document.getElementById("display"),
 	sTitle = document.getElementById("title"),
 	sScroller = document.getElementById("scroller");
 
-//  adding blocks for text replacement
 var cBlock = document.createElement("span");
 	cBlock.className = "block";
 var block_num = sTitle.innerHTML.split("").length;
 
-// this loop is only for draw1
+
+// overlap div#scroller on p#title, and add div.block in #scroller
+// then feed msg in .block in marquee_matrix.js
+// .block is styled opacity:0 and will gain a class "on", which makes opacity 1, 
+// when used to display a letter
+// .block also has content "." to prevent its width from collapsing
 for ( i = 0 ; i < block_num ; i ++ ){
 	var cBlock = document.createElement("span");
 	cBlock.innerHTML = ".";
