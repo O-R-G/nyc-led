@@ -5,40 +5,23 @@ var msg_array;
 
 var text_marquee = function(msg){
 	// medthod 1
+		// Wei: was wondering if more spacing between streamed words will improve
+		// the legibility of NEW YORK CONSOLIDATED.
+
+		// Add extra spaces between words in msg
+		msg_array = msg.split(" ");
+		msg = "";
+		for(i = 0 ; i<msg_array.length; i++){
+			msg += msg_array[i]+"   ";
+		}
+
+	// Adding extra spaces at the very end of msg
 	for(i = 0 ; i < block_num ; i++){
 		msg += " ";
 	}
+
 	msg_array = msg.split("");
-	setInterval(draw1, 250);
-
-	// medthod 2
-	// msg_array = msg.split(" ");
-	// setInterval(draw2, 500);
-}
-
-var draw2 = function(){
-	for(i = 0 ; i < block_num ; i++){
-		sBlock[i].innerHTML = ".";
-		sBlock[i].classList.remove("on");
-	}
-
-	var thisMsg = msg_array[progress];
-	if(thisMsg.length <= block_num){
-		var startingBlock_order = Math.round((block_num - thisMsg.length)/2);
-		for(j = 0; j < thisMsg.length; j++){
-			var thisBlock = sBlock[startingBlock_order];
-			thisBlock.innerHTML = thisMsg[j];
-			thisBlock.classList.add("on");
-			startingBlock_order++;
-		}
-	}else{
-		console.log("Got a word longer than "+block_num+" letters")
-	}
-	if(progress<msg_array.length-1){
-		progress++;
-	}else{
-		progress = 0;
-	}
+	setInterval(draw1, 200);
 }
 
 var draw1  = function(){
