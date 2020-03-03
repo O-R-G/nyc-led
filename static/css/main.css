@@ -30,7 +30,7 @@ div#mask {
     width :1200px;
 }
 
-div#scroller {
+div.scroller {
     position:absolute;
     top:0;
     left:0;
@@ -39,8 +39,10 @@ div#scroller {
     /*white-space: nowrap;*/
     /*display:inline-block;*/
 }
-#scroller .block{
-    border-right: 1px;
+.title_wrapper{
+    position: relative;
+}
+.scroller .block{
     box-sizing: border-box;
     height: 100%;
     /*background-color: rgba(255, 255, 255, .5);*/
@@ -50,7 +52,7 @@ div#scroller {
     /*border-bottom: 2px solid black;*/
     color: blue;
 }
-#scroller .block.on{
+.scroller .block.on{
     opacity: 1;
 }
 

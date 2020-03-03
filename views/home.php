@@ -24,13 +24,28 @@ foreach($msg_array as $ma){
 
 <div id="mask">
     <div id="display">
-    	<p id = "title">NEW YORK CONSOLIDATED</p>
-    	<div id = "scroller"></div>
+    	<div class = "title_wrapper">
+	    	<p class = "title"><span id = "letter_measure">N</span>EW</p>
+	    	<div class = "scroller"></div>
+	    </div>
+		<div class = "title_wrapper">
+			<p class = "title">YORK</p>
+    		<div class = "scroller"></div>
+    	</div>
+    	<div class = "title_wrapper">
+    		<p class = "title">CONSOLIDATED</p>
+    		<div class = "scroller"></div>
+    	</div>
+    	
     </div>   
 </div>   
-    
+<script>
+</script>
 <script src="./static/js/init.js"></script>
 <script src="./static/js/marquee_matrix.js"></script>
-<script>    
-    text_marquee("<?= $msg ?>");
+<script>  
+	var msg_array_php = <?php echo json_encode($msg_array); ?>;
+    
+	// var msg_array_php = ["a a a", "Hello, World!","This is a test string.","How are you?","I am a computer."];
+    text_marquee(msg_array_php);
 </script>
