@@ -8,48 +8,44 @@
 var c = document.getElementById("c");
 var ctx = c.getContext("2d");
 
-//making the canvas full screen
+// full screen
 c.height = window.innerHeight;
 c.width = window.innerWidth;
 
-//chinese characters - taken from the unicode charset
-// var chinese = "田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑";
-// var chinese = "NEW YORK CONSOLIDATED 田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑";
-var chinese = "NEW YORK CONSOLIDATED";
-//converting the string into an array of single characters
-chinese = chinese.split("");
+c.onclick = stop_start;
 
-// var font_size = 120;
-var font_size = 30;
-var columns = c.width/font_size*.5; //number of columns for the rain
-//an array of drops - one per column
+var font_size = 36;
+var columns = c.width/font_size; 
+
+// msg set dynamically in views/home
+// var msg = "田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑";
+// var msg = "NEW YORK CONSOLIDATED 田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑";
+// var msg = "NEW YORK CONSOLIDATED";
+// msg += "田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑";
+msg = msg.toUpperCase();
+msg = msg.split("");    // str to array of chars
+
+// array of drops - one per column
 var drops = [];
-//x below is the x coordinate
-//1 = y co-ordinate of the drop(same for every drop initially)
-for(var x = 0; x < columns; x++)
-    drops[x] = 1; 
+// init y coords
+for(var y = 0; y < columns; y++)
+    drops[y] = 1;
 
-//drawing the characters
-function draw()
-{
-    //Black BG for the canvas
-    //translucent BG to show trail
+// console.log(msg);
+// console.log(drops);
+
+function update() {
     ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
     ctx.fillRect(0, 0, c.width, c.height);
-    
-    ctx.fillStyle = "#000"; //green text
-    // ctx.font = font_size + "px arial";
+    ctx.fillStyle = "#00F";
     ctx.font = font_size + "px relative10_pitch";
-    //looping over drops
-    for(var i = 0; i < drops.length; i++)
-    {
-        //a random chinese character to print
-        var text = chinese[Math.floor(Math.random()*chinese.length)];
-        //x = i*font_size, y = value of drops[i]*font_size
+    for(var i = 0; i < drops.length; i++) {
+        var text = msg[Math.floor(Math.random()*msg.length)];   // one random char
+        // x = i*font_size, y = value of drops[i]*font_size
         ctx.fillText(text, i*font_size, drops[i]*font_size);
         
-        //sending the drop back to the top randomly after it has crossed the screen
-        //adding a randomness to the reset to make the drops scattered on the Y axis
+        // sending the drop back to the top randomly after it has crossed the screen
+        // adding a randomness to the reset to make the drops scattered on the Y axis
         if(drops[i]*font_size > c.height && Math.random() > 0.975)
             drops[i] = 0;
         
@@ -58,6 +54,13 @@ function draw()
     }
 }
 
-// setInterval(draw, 33);
-setInterval(draw, 100);
+var timer = setInterval(update, 33);
 
+function stop_start() {
+    if (!timer) {
+        timer = setInterval(update, 33);
+    } else {
+        clearInterval(timer);
+        timer = false;
+    }
+}
