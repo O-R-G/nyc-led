@@ -3,6 +3,7 @@
     matrix rain flipboard
 
     adapted from https://codepen.io/P3R0/pen/MwgoKv
+    in process
 */
 
 var c = document.getElementById("c");
