@@ -1,4 +1,5 @@
 <?
+// $msg_beginning  = 'New York Consolidated . . . ';
 $msg_beginning  = 'New York Consolidated . . . ';
 $msg_ending  = ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
 $msg_array = array();
@@ -6,6 +7,7 @@ $children = $oo->children($uu->id);
 foreach($children as $c)
     array_push($msg_array, " " . $c['name1']);
 
+// array_push($msg_array, '////////////////////////////////////////');
 array_push($msg_array, ' currently ' . $output['wind_string']);
 array_push($msg_array, ' /// Currently ' . $output['temp_f'] . ' degrees.');
 array_push($msg_array, ' There are trains arriving at: ' . $output_train.".");
@@ -18,7 +20,7 @@ foreach($msg_array as $ma){
 	$msg .= $ma;
 }
 
-// $msg = $msg_beginning . $msg . $msg_ending;
+$msg = $msg_beginning . $msg . $msg_ending;
 ?>
 
 <style>
@@ -35,7 +37,8 @@ canvas {
 }
 div#mask {
     /* background-color: #FF0; */
-    height: 25%;
+    height: 10%;
+    /* height: 100%; */
     width: 75%;
 }
 </style>
