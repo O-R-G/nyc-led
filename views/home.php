@@ -19,18 +19,38 @@ foreach($msg_array as $ma){
 }
 
 // $msg = $msg_beginning . $msg . $msg_ending;
-
 ?>
+
+<style>
+* {
+    margin: 0; 
+    padding: 0;   
+}
+body {
+    background: #FFF;    
+}
+canvas {
+    display: block;
+    /* specify width and height? */
+}
+div#mask {
+    /* background-color: #FF0; */
+    height: 25%;
+    width: 75%;
+}
+</style>
 
 <div id="mask">
     <div id="display">
-    	<p id = "title">NEW YORK CONSOLIDATED</p>
-    	<div id = "scroller"></div>
+        <canvas id="c"></canvas>
     </div>   
 </div>   
     
-<script src="./static/js/init.js"></script>
-<script src="./static/js/marquee_matrix.js"></script>
+<!--
 <script>    
     text_marquee("<?= $msg ?>");
 </script>
+-->
+
+<script src='/static/js/matrix.js'></script>
+

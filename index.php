@@ -16,8 +16,7 @@ require_once('./views/jobs.php');
 require_once('./views/permitted_event.php');
 
 if (!$uri[1])
-	// require_once('views/home.php');
-	require_once('views/matrix.php');
+	require_once('views/home.php');
 else 
 	require_once('views/main.php');
 
