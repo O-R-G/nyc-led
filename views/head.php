@@ -5,10 +5,10 @@ require_once($config);
 
 // specific to this 'app'
 $config_dir = $root."/config/";
-require_once($config_dir."url.php");
-require_once($config_dir."request.php");
+// require_once($config_dir."url.php");
+// require_once($config_dir."request.php");
 
-require_once("lib/lib.php");
+// require_once("lib/lib.php");
 
 
 $db = db_connect("guest");
@@ -45,6 +45,7 @@ else
         <meta name="apple-mobile-web-app-title" content="nyc-led">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="apple-touch-icon" href="./media/png/apple-touch-icon.png" />
+        <link rel="stylesheet" href="./static/css/font-relative10_pitch.css">
         <link rel="stylesheet" href="./static/css/main.css">
     </head>
     <body>
