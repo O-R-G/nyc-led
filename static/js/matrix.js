@@ -1,3 +1,10 @@
+/*
+    new york consolidated
+    matrix rain flipboard
+
+    adapted from https://codepen.io/P3R0/pen/MwgoKv
+*/
+
 var c = document.getElementById("c");
 var ctx = c.getContext("2d");
 
@@ -6,11 +13,14 @@ c.height = window.innerHeight;
 c.width = window.innerWidth;
 
 //chinese characters - taken from the unicode charset
-var chinese = "田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑";
+// var chinese = "田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑";
+// var chinese = "NEW YORK CONSOLIDATED 田NEW申甴甽YORK畄畅畆畇CONSOLIDATED畈畎畏畐畑";
+var chinese = "NEW YORK CONSOLIDATED";
 //converting the string into an array of single characters
 chinese = chinese.split("");
 
-var font_size = 120;
+// var font_size = 120;
+var font_size = 30;
 var columns = c.width/font_size*.5; //number of columns for the rain
 //an array of drops - one per column
 var drops = [];
@@ -28,7 +38,8 @@ function draw()
     ctx.fillRect(0, 0, c.width, c.height);
     
     ctx.fillStyle = "#000"; //green text
-    ctx.font = font_size + "px arial";
+    // ctx.font = font_size + "px arial";
+    ctx.font = font_size + "px relative10_pitch";
     //looping over drops
     for(var i = 0; i < drops.length; i++)
     {
@@ -42,10 +53,11 @@ function draw()
         if(drops[i]*font_size > c.height && Math.random() > 0.975)
             drops[i] = 0;
         
-        //incrementing Y coordinate
+        // increment Y (rain)
         // drops[i]++;
     }
 }
 
-setInterval(draw, 33);
+// setInterval(draw, 33);
+setInterval(draw, 100);
 
