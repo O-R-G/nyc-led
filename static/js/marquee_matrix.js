@@ -1,24 +1,25 @@
+<<<<<<< HEAD
 var progress = 0; //how many letters in msg has been fed in screen
+=======
+var progress = 0; //which word in msg
+>>>>>>> text_matrix2
 var msg_array;
 
 
 var text_marquee = function(msg){
-	// medthod 1
-		// Wei: was wondering if more spacing between streamed words will improve
-		// the legibility of NEW YORK CONSOLIDATED.
+	// split msg into words
+	msg_array = msg.split(" ");
+	setInterval(draw2, 500);
+}
 
-		// Add extra spaces between words in msg
-		msg_array = msg.split(" ");
-		msg = "";
-		for(i = 0 ; i<msg_array.length; i++){
-			msg += msg_array[i]+"   ";
-		}
-
-	// Adding extra spaces at the very end of msg
+var draw2 = function(){
+	// reset all blocks
 	for(i = 0 ; i < block_num ; i++){
-		msg += " ";
+		sBlock[i].innerHTML = ".";
+		sBlock[i].classList.remove("on");
 	}
 
+<<<<<<< HEAD
 	msg_array = msg.split("");
 	setInterval(draw1, 200);
 }
@@ -46,4 +47,26 @@ var draw1  = function(){
 		progress = 1;
 	}
 	
+=======
+	var thisWord = msg_array[progress];
+	if(thisWord.length <= block_num){
+		// right now the words are placed at the middle
+		// this line is to find out where to start putting thisWord
+		
+		var beginHere = Math.round((block_num - thisWord.length)/2);
+		for(j = 0; j < thisWord.length; j++){
+			var thisBlock = sBlock[beginHere];
+			thisBlock.innerHTML = thisWord[j];
+			thisBlock.classList.add("on");
+			beginHere++;
+		}
+	}else{
+		console.log("Got a word longer than "+block_num+" letters")
+	}
+	if(progress<msg_array.length-1){
+		progress++;
+	}else{
+		progress = 0;
+	}
+>>>>>>> text_matrix2
 }
