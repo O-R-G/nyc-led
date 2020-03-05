@@ -13,7 +13,8 @@ c.height = window.innerHeight;
 c.width = window.innerWidth;
 c.onclick = stop_start;
 
-var font_size = 36;
+var font_size = 72;
+//var font_size = 36;
 // var font_size = 18;
 var refresh = 30;     // lower = faster, really delay before update
 var pause = 3000;
