@@ -48,10 +48,7 @@ div#mask {
     
 
 <script>
-    // var chinese = "1234567890";
     var msg = "<?= $msg ?>";
-    // draw(chinese);
-    // text_marquee("<?= $msg ?>");
 </script>
 
 <script src='/static/js/matrix.js'></script>
