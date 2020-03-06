@@ -13,8 +13,9 @@ c.height = window.innerHeight;
 c.width = window.innerWidth;
 c.onclick = stop_start;
 
-var font_size = 72;
-//var font_size = 36;
+// var font_size = 72;
+var font_size = 48;
+// var font_size = 36;
 // var font_size = 18;
 var refresh = 30;     // lower = faster, really delay before update
 var pause = 3000;
@@ -59,8 +60,8 @@ function update() {
         } else {
             letters[i] = base[i];
             ctx.fillStyle = "rgba(255, 255, 255, 1.0)";
-            ctx.fillRect(i*font_size, slots[i]*font_size-font_size, font_size, 100);
-            ctx.fillStyle = "#000";
+            ctx.fillRect(i*font_size, slots[i]*font_size-font_size, font_size, font_size*2);
+            ctx.fillStyle = "#00F";
             ctx.fillText(letters[i], i*font_size, slots[i]*font_size);
         }
 
