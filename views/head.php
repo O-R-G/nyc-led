@@ -5,10 +5,10 @@ require_once($config);
 
 // specific to this 'app'
 $config_dir = $root."/config/";
-// require_once($config_dir."url.php");
-// require_once($config_dir."request.php");
+require_once($config_dir."url.php");
+require_once($config_dir."request.php");
 
-// require_once("lib/lib.php");
+require_once("lib/lib.php");
 
 $db = db_connect("guest");
 
