@@ -1,18 +1,17 @@
 <?
-// $msg_beginning  = 'New York Consolidated . . . ';
-$msg_beginning  = 'New York Consolidated . . . ';
+$msg_beginning  = 'New York Consolidated ... ';
 $msg_ending  = ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
 $msg_array = array();
 $children = $oo->children($uu->id);
 foreach($children as $c)
     array_push($msg_array, " " . $c['name1']);
+$break = '/////////////////////';
 
-// array_push($msg_array, '////////////////////////////////////////');
-array_push($msg_array, ' currently ' . $output['wind_string']);
-array_push($msg_array, ' /// Currently ' . $output['temp_f'] . ' degrees.');
-array_push($msg_array, ' There are trains arriving at: ' . $output_train.".");
-array_push($msg_array, ' ' . $output_jobs["job_agency"] . ' is hiring ' . $output_jobs["job_title"] . " at " . $output_jobs["job_division"] . ", " . $output_jobs["job_location"] . ".");
-array_push($msg_array, ' ' . $output_permitted_event["event_name"] . ' will be happening from ' . $output_permitted_event["event_start_time"] . " until " . $output_permitted_event["event_end_time"] . ", at " . $output_permitted_event["event_location"] . ".");
+array_push($msg_array, ' currently ' . $output['wind_string'] . $break);
+array_push($msg_array, ' /// Currently ' . $output['temp_f'] . '°.' . $break);
+array_push($msg_array, ' There are trains arriving at: ' . $output_train."." . $break);
+array_push($msg_array, ' ' . $output_jobs["job_agency"] . ' is hiring ' . $output_jobs["job_title"] . " at " . $output_jobs["job_division"] . ", " . $output_jobs["job_location"] . "." . $break);
+array_push($msg_array, ' ' . $output_permitted_event["event_name"] . ' will be happening from ' . $output_permitted_event["event_start_time"] . " until " . $output_permitted_event["event_end_time"] . ", at " . $output_permitted_event["event_location"] . "." . $break);
 
 shuffle($msg_array);
 
@@ -31,15 +30,13 @@ $msg = $msg_beginning . $msg . $msg_ending;
 body {
     background: #FFF;    
 }
-canvas {
-    display: block;
-    /* specify width and height? */
+#mask {
+    height: 150px;
 }
-div#mask {
-    /* background-color: #FF0; */
-    height: 10%;
-    /* height: 100%; */
-    width: 75%;
+#display {
+    text-align: center;
+}
+#c {
 }
 </style>
 
@@ -49,7 +46,6 @@ div#mask {
     </div>   
 </div>   
     
-
 <script>
     var msg = "<?= $msg ?>";
 </script>

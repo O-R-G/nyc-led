@@ -10,7 +10,6 @@ $config_dir = $root."/config/";
 
 // require_once("lib/lib.php");
 
-
 $db = db_connect("guest");
 
 $oo = new Objects();
