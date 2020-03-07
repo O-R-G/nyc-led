@@ -9,7 +9,7 @@
 var c = document.getElementById("c");
 var ctx = c.getContext("2d");
 
-var font_size = 36;     // relative sizes depend on font_size
+var font_size = 18;     // relative sizes depend on font_size
 var base_size = 21;     // base message length [21]
 var timer;              // update
 var delay;              // pause between messages
