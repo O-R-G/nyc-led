@@ -24,7 +24,11 @@ var slots = [];
 var letters = [];
 for(var y = 0; y < columns; y++)
     slots[y] = 1;       // for rain only, can rm and use columns
-msg = msg.toUpperCase().split("");
+// msg = msg.join('');     // array to string
+// msg = msg.join('').toUpperCase().split("");
+// trouble passing an array from php to js and then using it
+msg = msg.toUpperCase().split('');
+// console.log(msgs);
 c.height = font_size;
 c.width = font_size * columns;
 c.onclick = stop_start;
@@ -49,7 +53,7 @@ function update() {
         }
     }
 
-    // all letters resolved or timed out ?
+    // all letters resolved or timed out
     if (letters.join('') == base.join('')) {
         clearInterval(timer);
         delay = setInterval(stop_start, delay_ms);
