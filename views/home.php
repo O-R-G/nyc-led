@@ -9,6 +9,7 @@ $msg[0] = 'New York Consolidated ... ';
 
 $break = '///';
 $msg[] =  ' Currently ' . $output['temp_f'] . '°.' . $break;
+$msg[] = $output_nyt . $break;              // could be an array
 $msg[] = ' Winds ' . $output['wind_string'] . $break;
 $msg[] = ' There are trains arriving at: ' . $output_train."." . $break;
 $msg[]  = ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
