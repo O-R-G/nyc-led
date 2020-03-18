@@ -1,18 +1,23 @@
 <?
-// $msg can be an array split on ' '
+// $msgs can be an array split on ' '
 // or could be array of msgs split on '///' which are then
 // split into 2d array [msgs][words]
 // do in php or in js?
 
-$msg = [];
-$msg[0] = 'New York Consolidated ... ';
+
+$msgs = [];
+$msgs[0] = 'New York Consolidated ...                                                           ';
+// $msgs[1] = '纽约合并. . . . . . . . . . .';
 
 $break = '///';
-$msg[] =  ' Currently ' . $output['temp_f'] . '°.' . $break;
-$msg[] = $output_nyt . $break;              // could be an array
-$msg[] = ' Winds ' . $output['wind_string'] . $break;
-$msg[] = ' There are trains arriving at: ' . $output_train."." . $break;
-$msg[]  = ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
+$msgs[] =  ' Currently ' . $output['temp_f'] . '°.' . $break;
+$msgs[] = ' Winds ' . $output['wind_string'] . $break;
+$msgs[] = ' Here are some headlines from the NYTimes : ' . $break;
+for ($i=0; $i<5; $i++) {
+    $msgs[] = $output_nyt[$i] . $break;              // could be an array
+}
+// $msgs[] = ' There are trains arriving at: ' . $output_train."." . $break;
+$msgs[]  = ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
 
 // other feeds, could use same syntax as above
 // array_push($msg_array, ' ' . $output_jobs["job_agency"] . ' is hiring ' . $output_jobs["job_title"] . " at " . $output_jobs["job_division"] . ", " . $output_jobs["job_location"] . "." . $break);
@@ -24,11 +29,11 @@ foreach($children as $c)
     array_push($msg_array, " " . $c['name1']);
 */
 
-// shuffle($msg);
+// shuffle($msgs);
 
 // for debug
 // $msgs = $msg;                   // array
-$msg = implode($msg, ' ');      // string
+$msgs = implode($msgs, ' ');      // string
 ?>
 
 <style>
@@ -40,7 +45,8 @@ body {
     background: #FFF;    
 }
 #mask {
-    height: 150px;
+    /* height: 400px; */
+    height: 400px;
 }
 #display {
     text-align: center;
@@ -56,7 +62,7 @@ body {
 </div>   
     
 <script>
-    var msg = "<?= $msg ?>";
+    var msgs = "<?= $msgs ?>";
     // var msgs = "<? print_r($msgs) ?>";
 </script>
 
