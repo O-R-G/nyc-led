@@ -15,7 +15,7 @@ body {
     color: #000;
     font-family: 'relative10_pitch', monospace;
     font-weight: 400;
-    font-size: 94px;
+    /* font-size: 94px; */
 }
 div#mask {
     position: absolute;
