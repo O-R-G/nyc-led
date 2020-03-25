@@ -14,7 +14,8 @@ $msgs[2] = 'Nueva York Consolidada....................';
 $msgs[3] = '   نيويورك الموحدة....................';
 */
 
-$msgs[] = 'New York Consolidated';
+// $msgs[] = 'New York Consolidated';
+$msgs[] = 'NEW YORK CONSOLIDATED';
 $msgs[] = '                     ';
 
 $msgs[] = 'New York             ';

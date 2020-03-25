@@ -42,11 +42,13 @@ var updates = 0;        // counter
 var pointer = 0;
 // var msg = msgs.substr(pointer,rows*columns).toUpperCase().split("");
 var msg = msgs.substr(pointer,rows*columns).split("");
+console.log(msg);
 // var msgs_array from .php
 // msgs_array = msgs_array.join('');     // array to string
 msgs = msgs_array.join('');     // array to string
 // msgs = msgs.join('').toUpperCase().split("");
 // msgs = msgs.toUpperCase().split('');
+msgs = msgs.toUpperCase();      // temp force all to upper case
 msgs = msgs.split('');
 
 // ** fix **
