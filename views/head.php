@@ -46,5 +46,6 @@ else
         <link rel="apple-touch-icon" href="./media/png/apple-touch-icon.png" />
         <link rel="stylesheet" href="./static/css/font-relative10_pitch.css">
         <link rel="stylesheet" href="./static/css/main.css">
+        <link rel="stylesheet" href="./static/css/helveticaocr.css">
     </head>
     <body>
