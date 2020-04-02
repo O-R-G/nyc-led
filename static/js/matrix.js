@@ -30,7 +30,8 @@ work in progess
 var c = document.getElementById("c");
 var ctx = c.getContext("2d");
 
-var rows = 2;
+
+var rows = 4;
 var columns = 21;
 var font_size = 18;     // relative sizes depend on font_size [18]
 var font_leading = 21;  // [21]
@@ -51,6 +52,7 @@ msgs = msgs_array.join('');     // array to string
 msgs = msgs.toUpperCase();      // temp force all to upper case
 msgs = msgs.split('');
 
+
 // ** fix **
 
 var letters = [];
@@ -58,17 +60,18 @@ var words = [];
 // words = msgs_array[0].toUpperCase().split(' ');
 words = msgs_array[0].split(' ');
 
-console.log(msgs_array);
-console.log(msgs_array);
-console.log(words);
+// console.log(msgs_array);
+// console.log(msgs_array);
+// console.log(words);
 
 c.height = font_size * rows * 3;
 c.width = font_size * columns;
 c.onclick = stop_start;
 
 function update() {
+    ctx.font = font_size + "px helveticaocr";
+    // ctx.font = font_size + "px relative10_pitch";
     ctx.fillStyle = "#FFF";
-    ctx.font = font_size + "px relative10_pitch";
     ctx.rect(0,0,c.width, c.height);
     ctx.fill();
 

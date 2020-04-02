@@ -1,17 +1,42 @@
-<style>
-#menu {
-    position: absolute;
-    top: 10px;
-    left: 300px;
-    width: 75%;
-    font-size: 36px;
-    background: #FFF;
-}
-</style>
+<?
+/*
+    simple menu
+    adapted from http://www.o-r-g.com
+*/
+// $body = $item['body'];  // hide/show
+$body = TRUE;
+$nav = $oo->nav($uu->ids);
+// $traverse = $oo->traverse($item);
+// $nav = $oo->nav_full($traverse);
 
-<div id="menu">
-<p>New York Consolidated is a new nonprofit organization founded to leverage accountable, trust-based philanthropy to support equity in the arts. We stage exhibitions, publish books, fund research, provide a public space for study and conversation and advocate on behalf of the diverse artists (and platforms?) that are integral to the health and vibrancy of our society.</p>
-<br>
-<p>We envision a future where art’s value is determined by its cultural and social impact and where all artists benefit from resources and visibility. We achieve this vision by producing exhibitions, publishing books, funding research, engaging in advocacy and offering a public space for study and conversation. We will shine a light on artists whose work demands our attention.</p>
+if($uu->id) { 
+    ?><div id='home'><a href="/">Materia Abierta</a></div><?
+}
+?><div id='menu' class='centered centeralign <?= ($body) ? "hidden" : ""; ?>'>
+    <ul class="nav-level"><?
+        $prevd = $nav[0]['depth'];
+        foreach($nav as $n) {
+            $d = $n['depth'];
+            if($d > $prevd){
+                ?><ul class="nav-level"><?
+            }
+            if(substr($n['o']['name1'],0,1) != '_') {
+                ?><li><?
+                    if($n['o']['id'] != $uu->id) {
+                        ?><a class='active' href='<?= '/' . $n["url"]; ?>'><?= $n['o']['name1']; ?></a><?
+                    } else {
+                        ?><span class='static'><?= $n['o']['name1']; ?></span><?
+                    }
+                ?></li><?
+            }
+            $prevd = $d;
+        }
+        ?></ul>
+    </ul>
+    <div id='name'>NEWYORKCONSOLIDATED&nbsp;</div>
+</div>    
+<div id='xx' class='<?= ($body) ? "" : "hidden"; ?>'>
+    <a><img src='/media/svg/hamburger-6-k.svg'></a>
 </div>
-    
+<script type = "text/javascript" src = "/static/js/menu.js"></script>
+

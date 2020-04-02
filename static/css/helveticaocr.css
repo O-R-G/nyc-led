@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'helveticaocr';
-    src: url('helveticaocr-medium.woff2') format('woff2'),
-         url('helveticaocr-medium.woff') format('woff');
+    src: url('/static/fonts/helveticaocr/helveticaocr-medium.woff2') format('woff2'),
+         url('static/fonts/helveticaocr/helveticaocr-medium.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 

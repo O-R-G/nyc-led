@@ -13,10 +13,22 @@ body {
     /*color:#FFF;*/
     background: #FFF;
     color: #000;
-    font-family: 'relative10_pitch', monospace;
+    /* font-family: 'relative10_pitch', monospace; */
+    font-family: 'helveticaocr', monospace;
     font-weight: 400;
     /* font-size: 94px; */
 }
+
+a {
+    text-decoration: none;
+}
+
+
+ul {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
 div#mask {
     position: absolute;
     overflow: hidden;
@@ -50,5 +62,60 @@ div#scroller {
     opacity: 1;
 }
 
+#menu {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    padding: 50px;
+    font-size: 24px;
+    line-height: 36px;
+    /* font-family: "Helvetica", sans-serif; */
+    text-transform: uppercase;
+    background-color: #FFF;
+}
 
+#menu .active {
+}
 
+#menu .static, #home .static, #selected .static {
+    border-bottom:4px solid #FF0;
+}
+
+#menu a {
+    color: #000;
+}
+
+#menu a:hover {
+    color: #00F;
+    border-bottom:4px solid #00F;
+}
+
+#menu #name {
+    position: fixed;
+    left: 50px;
+    bottom: 50px;
+    color: #00F;
+}
+
+#xx {
+    width: 100px;
+}
+
+#xx, #menu_xx {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1000;
+    width: 50px;
+}
+
+#xx a {
+    border-bottom: none;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}

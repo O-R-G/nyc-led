@@ -43,9 +43,9 @@ else
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-title" content="nyc-led">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <link rel="apple-touch-icon" href="./media/png/apple-touch-icon.png" />
-        <link rel="stylesheet" href="./static/css/font-relative10_pitch.css">
-        <link rel="stylesheet" href="./static/css/main.css">
-        <link rel="stylesheet" href="./static/css/helveticaocr.css">
+        <link rel="apple-touch-icon" href="/media/png/apple-touch-icon.png" />
+        <link rel="stylesheet" href="/static/css/font-relative10_pitch.css">
+        <link rel="stylesheet" href="/static/css/main.css">
+        <link rel="stylesheet" href="/static/css/helveticaocr.css">
     </head>
     <body>

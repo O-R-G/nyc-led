@@ -18,7 +18,7 @@ require_once('./views/train.php');
 
 if (!$uri[1]) {
 	require_once('views/home.php');
-	// require_once('views/menu.php');
+	require_once('views/menu.php');
 } else  
 	require_once('views/main.php');
 
