@@ -102,12 +102,21 @@ div#scroller {
     border-bottom:4px solid #00F;
 }
 
-#menu #name, #main #name {
+#name {
     position: fixed;
     left: 50px;
     bottom: 50px;
     color: #00F;
-    font-family: inherit;
+    font-size: 24px;
+    line-height: 36px;
+}
+
+#name a {
+    color: #00F;
+}
+
+#name a:hover {
+    border-bottom:4px solid #00F;
 }
 
 #xx {
@@ -131,9 +140,9 @@ div#scroller {
     position: absolute;
     background-color: #FFF;
     color: #000;
-    width: 500px;
-    top: 50px;
+    top: 0px;
     left: 50px;
+    width: 500px;
     padding: 100px;
 }
 

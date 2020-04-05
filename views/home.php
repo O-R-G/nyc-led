@@ -7,24 +7,16 @@
 
 $msgs = [];
 
-/*
-$msgs[0] = 'New York Consolidated.....................';
-$msgs[1] = '       纽 约 合 并       .....................';
-$msgs[2] = 'Nueva York Consolidada....................';
-$msgs[3] = '   نيويورك الموحدة....................';
-*/
-
-// $msgs[] = 'New York Consolidated';
 $msgs[] = 'NEW YORK CONSOLIDATED';
 $msgs[] = '                     ';
 
-$msgs[] = 'New York             ';
-$msgs[] = '         Consolidated';
+$msgs[] = 'NEW YORK             ';
+$msgs[] = '         CONSOLIDATED';
 
 $msgs[] = 'Nueva York           ';
 $msgs[] = 'Consolidada          ';
 
-$msgs[] = '纽 约 合 并              ';
+$msgs[] = '纽约合并                 ';
 $msgs[] = '                     ';
 
 $msgs[] = '      نيويورك الموحدة';

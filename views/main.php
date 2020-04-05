@@ -2,12 +2,20 @@
 /*
     display menu item
 */
+$name = $item['name1'];  // hide/show
 $body = $item['body'];  // hide/show
 
-// $body = TRUE;
+?>
 
-?><div id='main' class='hnr centered centeralign'><?
+<style>
+body {
+    background: #FFF;
+    color: #000;
+}
+</style>
+
+<div id='main' class='hnr centered centeralign'><?
+    echo $name . '</br></br>';
     echo $body;
-    ?><div id='name'>NEWYORKCONSOLIDATED&nbsp;</div>
-</div>    
-
+?></div>
+<div id='name'><a href='/'>NEWYORKCONSOLIDATED&nbsp;</a></div>
