@@ -5,7 +5,7 @@ var toggleMenu = function(){
 		menu.style.display='block';
 		// cv.style.display='none';
 		// selected.style.display='none';
-		xx.style.opacity='0.5';
+		xx.style.opacity='0.0';
 	} else {
 		menu.style.display='none';
 		// cv.style.display='block';

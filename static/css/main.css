@@ -64,6 +64,14 @@ div#scroller {
     opacity: 1;
 }
 
+#home a {
+    color: #FF0;
+}
+
+#home a:hover {
+    color: #FFF;
+}
+
 #menu {
     position: absolute;
     top: 0px;
@@ -94,11 +102,12 @@ div#scroller {
     border-bottom:4px solid #00F;
 }
 
-#menu #name {
+#menu #name, #main #name {
     position: fixed;
     left: 50px;
     bottom: 50px;
     color: #00F;
+    font-family: inherit;
 }
 
 #xx {
@@ -116,6 +125,20 @@ div#scroller {
 #xx a {
     border-bottom: none;
     cursor: pointer;
+}
+
+#main {
+    position: absolute;
+    background-color: #FFF;
+    color: #000;
+    width: 500px;
+    top: 50px;
+    left: 50px;
+    padding: 100px;
+}
+
+.hnr {
+    font-family: 'hnr', helvetica, sans-serif;
 }
 
 .hidden {

@@ -10,7 +10,7 @@ $nav = $oo->nav($uu->ids);
 // $nav = $oo->nav_full($traverse);
 
 if($uu->id) { 
-    ?><div id='home'><a href="/">Materia Abierta</a></div><?
+    ?><div id='home'><a href="/">&nbsp;</a></div><?
 }
 ?><div id='menu' class='centered centeralign <?= ($body) ? "hidden" : ""; ?>'>
     <ul class="nav-level"><?
@@ -35,8 +35,11 @@ if($uu->id) {
     </ul>
     <div id='name'>NEWYORKCONSOLIDATED&nbsp;</div>
 </div>    
+<div id='menu_xx' class='<?= ($body) ? "" : "hidden"; ?>'>
+    <a><img src='/media/svg/x-6-k.svg'></a>
+</div>
 <div id='xx' class='<?= ($body) ? "" : "hidden"; ?>'>
-    <a><img src='/media/svg/hamburger-6-k.svg'></a>
+    <a><img src='/media/svg/hamburger-6-w.svg'></a>
 </div>
 <script type = "text/javascript" src = "/static/js/menu.js"></script>
 
