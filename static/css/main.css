@@ -11,8 +11,10 @@ body {
 
     /*background: #000;*/
     /*color:#FFF;*/
-    background: #FFF;
-    color: #000;
+    /* background: #FFF; */
+    background: #000;
+    /* color: #000; */
+    color: #FFF;
     /* font-family: 'relative10_pitch', monospace; */
     font-family: 'helveticaocr', monospace;
     font-weight: 400;

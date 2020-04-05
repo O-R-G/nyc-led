@@ -30,15 +30,20 @@ work in progess
 var c = document.getElementById("c");
 var ctx = c.getContext("2d");
 
-
-var rows = 4;
+                        // 2 rows x 21 columns = 42
+                        // 4 rows x 21 columns = 84
+                        // 9 rows x 9 columns  = 81
+                        // 9 rows x 10 columns  = 90
+var rows = 2;
 var columns = 21;
 var font_size = 18;     // relative sizes depend on font_size [18]
 var font_leading = 21;  // [21]
 var timer;              // update
 var delay;              // pause between messages
+// var timer_ms = 30;      // ms before next update [30]
+// var delay_ms = 3000;    // ms after msg complete
 var timer_ms = 30;      // ms before next update [30]
-var delay_ms = 3000;    // ms after msg complete
+var delay_ms = 6000;    // ms after msg complete
 var updates = 0;        // counter
 var pointer = 0;
 // var msg = msgs.substr(pointer,rows*columns).toUpperCase().split("");
@@ -71,7 +76,8 @@ c.onclick = stop_start;
 function update() {
     ctx.font = font_size + "px helveticaocr";
     // ctx.font = font_size + "px relative10_pitch";
-    ctx.fillStyle = "#FFF";
+    // ctx.fillStyle = "#FFF";
+    ctx.fillStyle = "#000";
     ctx.rect(0,0,c.width, c.height);
     ctx.fill();
 
@@ -82,15 +88,18 @@ function update() {
             i = x+y*columns;
             if ((letters[i] !== msg[i]) && (updates <= 50)) {
                 letters[i] = msgs[Math.floor(Math.random()*msgs.length)];   // one random char
-                ctx.fillStyle = "rgba(255, 255, 255, .75)";
+                // ctx.fillStyle = "rgba(255, 255, 255, .75)";
+                ctx.fillStyle = "rgba(0, 0, 0, .75)";
                 ctx.fillRect(x*font_size, y*font_leading, font_size, font_leading);
-                ctx.fillStyle = "#000";
+                // ctx.fillStyle = "#000";
+                ctx.fillStyle = "#FF0";
                 ctx.fillText(letters[i], x*font_size, (y+1)*(font_leading));
             } else {
                 letters[i] = msg[i];
                 // ctx.fillStyle = "rgba(255, 255, 255, 1.0)";
                 // ctx.fillRect(x*font_size, y*font_leading, font_size, font_leading);
-                ctx.fillStyle = "#00F";
+                // ctx.fillStyle = "#00F";
+                ctx.fillStyle = "#FF0";
                 ctx.fillText(letters[i], x*font_size, (y+1)*font_leading);
             }
         }

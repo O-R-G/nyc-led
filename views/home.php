@@ -78,7 +78,7 @@ $msgs = implode($msgs, ' ');      // string
     padding: 0;   
 }
 body {
-    background: #FFF;    
+    /* background: #FFF;*/
 }
 #mask {
     /* height: 400px; */
