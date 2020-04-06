@@ -10,8 +10,8 @@ $msgs = [];
 $msgs[] = 'NEW YORK CONSOLIDATED';
 $msgs[] = '                     ';
 
-$msgs[] = 'NEW YORK             ';
-$msgs[] = '         CONSOLIDATED';
+$msgs[] = '                     ';
+$msgs[] = '                     ';
 
 $msgs[] = 'Nueva York           ';
 $msgs[] = 'Consolidada          ';
