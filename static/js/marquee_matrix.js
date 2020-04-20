@@ -1,43 +1,59 @@
-var progress_senetnce = 0,
-	progress_word = 0; //which word in msg
-var thisRow = 0,
-	thisRow_text = sTitle[thisRow].innerHTML;
-var msg_array = [];
+<<<<<<< HEAD
+var progress = 0; //how many letters in msg has been fed in screen
+=======
+var progress = 0; //which word in msg
+>>>>>>> text_matrix2
+var msg_array;
 
 
 var text_marquee = function(msg){
 	// split msg into words
-	console.log(msg);
-	console.log("hihi");
-	for(i = 0; i<msg.length;i++){
-		msg_array[i]  = msg[i].split(" ");
-		while(msg_array[i][msg_array[i].length] == "" || msg_array[i][msg_array[i].length] == " "){
-			msg_array[i].pop();
-		}
-		while(msg_array[i][0] == "" || msg_array[i][0] == " "){
-			msg_array[i].shift();
-		}
-	}
-	
-	setInterval(draw3, 500);
+	msg_array = msg.split(" ");
+	setInterval(draw2, 500);
 }
 
-var draw3 = function(){
+var draw2 = function(){
 	// reset all blocks
-	if(progress_word == 0){
-		sTitle[thisRow].innerHTML = thisRow_text;
-		thisRow = (thisRow+1)%sScroller.length;
-		thisRow_text = sTitle[thisRow].innerHTML;
-		sTitle[thisRow].innerHTML = "&#160;";
-	}
-	for(i = 0 ; i < block_num_sum ; i++){
+	for(i = 0 ; i < block_num ; i++){
 		sBlock[i].innerHTML = ".";
 		sBlock[i].classList.remove("on");
 	}
 
-	var thisWord = msg_array[progress_senetnce][progress_word];
+<<<<<<< HEAD
+	msg_array = msg.split("");
+	setInterval(draw1, 200);
+}
+
+var draw1  = function(){
+
+	
+
+	for(i = 0 ; i < progress ; i ++){
+		var block_order = block_num - progress + i;
+		var thisBlock = sBlock[block_order];
+		if (block_order >= 0){
+			if(msg_array[i]!==" "){
+				thisBlock.classList.add("on");
+				thisBlock.innerHTML = msg_array[i];
+			}else{
+				thisBlock.classList.remove("on");
+				thisBlock.innerHTML = ".";
+			}
+		}
+	}
+	if (progress < msg_array.length){
+		progress++;
+	}else {
+		progress = 1;
+	}
+	
+=======
+	var thisWord = msg_array[progress];
 	if(thisWord.length <= block_num){
-		var beginHere = thisRow*block_num;
+		// right now the words are placed at the middle
+		// this line is to find out where to start putting thisWord
+		
+		var beginHere = Math.round((block_num - thisWord.length)/2);
 		for(j = 0; j < thisWord.length; j++){
 			var thisBlock = sBlock[beginHere];
 			thisBlock.innerHTML = thisWord[j];
@@ -47,12 +63,10 @@ var draw3 = function(){
 	}else{
 		console.log("Got a word longer than "+block_num+" letters")
 	}
-	if(progress_word<msg_array[progress_senetnce].length-1){
-		progress_word++;
+	if(progress<msg_array.length-1){
+		progress++;
 	}else{
-		progress_word = 0;
-		progress_senetnce = (progress_senetnce+1)%msg_array.length;
-		
-		
+		progress = 0;
 	}
+>>>>>>> text_matrix2
 }
