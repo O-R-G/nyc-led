@@ -34,8 +34,9 @@ var ctx = c.getContext("2d");
                         // 4 rows x 21 columns = 84
                         // 9 rows x 9 columns  = 81
                         // 9 rows x 10 columns  = 90
-var rows = 4;
-var columns = 21;
+// var rows = 4;
+var rows = query_rows;
+var columns = query_columns;
 var font_size = 18;     // relative sizes depend on font_size [18]
 var font_leading = 21;  // [21]
 var timer;              // update
@@ -48,7 +49,7 @@ var updates = 0;        // counter
 var pointer = 0;
 // var msg = msgs.substr(pointer,rows*columns).toUpperCase().split("");
 var msg = msgs.substr(pointer,rows*columns).split("");
-console.log(msg);
+// console.log(msg);
 // var msgs_array from .php
 // msgs_array = msgs_array.join('');     // array to string
 msgs = msgs_array.join('');     // array to string
@@ -92,15 +93,25 @@ function update() {
                 ctx.fillStyle = "rgba(0, 0, 0, .75)";
                 ctx.fillRect(x*font_size, y*font_leading, font_size, font_leading);
                 // ctx.fillStyle = "#000";
-                ctx.fillStyle = "#FF0";
+                ctx.fillStyle = query_color_changing;
                 ctx.fillText(letters[i], x*font_size, (y+1)*(font_leading));
             } else {
                 letters[i] = msg[i];
-                // ctx.fillStyle = "rgba(255, 255, 255, 1.0)";
-                // ctx.fillRect(x*font_size, y*font_leading, font_size, font_leading);
-                // ctx.fillStyle = "#00F";
-                ctx.fillStyle = "#FF0";
-                ctx.fillText(letters[i], x*font_size, (y+1)*font_leading);
+                // console.log(msg[i]);
+                if(typeof letters[i] == 'undefined'){
+                    // ctx.fillStyle = "rgba(0, 0, 0, .75)";
+                    // ctx.fillRect(x*font_size, y*font_leading, font_size, font_leading);
+                    // // ctx.fillStyle = "#000";
+                    ctx.fillStyle = query_color_settled;
+                    ctx.fillText(' ', x*font_size, (y+1)*(font_leading));
+                }else{
+                    // ctx.fillStyle = "rgba(255, 255, 255, 1.0)";
+                    // ctx.fillRect(x*font_size, y*font_leading, font_size, font_leading);
+                    // ctx.fillStyle = "#00F";
+                    ctx.fillStyle = query_color_settled;
+                    ctx.fillText(letters[i], x*font_size, (y+1)*font_leading);
+                }
+                
             }
         }
     }

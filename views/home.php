@@ -62,6 +62,28 @@ $msgs_array = $msgs;
 // var_dump(json_encode($msgs_array));
 
 $msgs = implode($msgs, ' ');      // string
+
+// added by Wei 4/20
+// get query strings
+$query_color_changing = $_GET['color_changing'];
+if($query_color_changing == NULL)
+    $query_color_changing = '#FF0';
+else
+    $query_color_changing = '#'.$query_color_changing;
+
+$query_color_settled = $_GET['color_settled'];
+if($query_color_settled == NULL)
+    $query_color_settled = '#FF0';
+else
+    $query_color_settled = '#'.$query_color_settled;
+
+$query_rows = $_GET['rows'];
+if($query_rows == NULL)
+    $query_rows = 4;
+
+$query_columns = $_GET['columns'];
+if($query_columns == NULL)
+    $query_columns = 21;
 ?>
 
 <style>
@@ -94,6 +116,12 @@ body {
     // json_encode outputs quotes around each val in array[]
     // so no additional quotes here to pass as array to js
     var msgs_array = <?= json_encode($msgs_array); ?>;
-</script>
 
+    // added by Wei 4/20
+    // query strings -> js variables
+    var query_color_changing = "<? echo $query_color_changing; ?>";
+    var query_color_settled = "<? echo $query_color_settled; ?>";
+    var query_rows = "<? echo $query_rows; ?>";
+    var query_columns = "<? echo $query_columns; ?>";
+</script>
 <script src='/static/js/matrix.js'></script>
