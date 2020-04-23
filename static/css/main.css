@@ -1,91 +1,166 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 body {
     position: absolute;
     width: 100%;
     height: 100%;
     margin: 0px;
+
+    /*background: #000;*/
+    /*color:#FFF;*/
+    /* background: #FFF; */
     background: #000;
-    color:#FFF;
+    /* color: #000; */
+    color: #FFF;
+    /* font-family: 'relative10_pitch', monospace; */
+    font-family: 'helveticaocr', monospace;
+    font-weight: 400;
+    /* font-size: 94px; */
 }
+
+a {
+    text-decoration: none;
+}
+
+
+ul {
+    list-style-type: none;
+    padding-left: 0px;
+}
+
 div#mask {
     position: absolute;
     overflow: hidden;
-    /*
-    width: 400px;
-    height: 42px;
-    */
-    /* transform: scale(2,2); */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-div#scroller {
-    /*width: 720px;*/
     width: 1200px;
-    /* width is 6 x cols init() */
-    /* where 6 stands for 4px width + 2px margin, as in div#scroller div*/
-    /* width = cols * ( pixel.width + pxiel.margin * 2 )*/ 
-    background:#000;
-    overflow:hidden;
-}
-div#scroller div {
-    /*width: 4px;*/
-    /*height: 4px;*/
-    width: 12px;
-    height: 12px;
-    float: left;
-    margin: 1.5px;
-    background: #111;
-/*    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;*/
-    -webkit-border-radius: 15px;
-    -moz-border-radius: 15px;
-    border-radius: 15px;
-}
-div#scroller div.on{
-    /* filter: blur(1px); */
-    background: #FFF;
 }
 
-/* Wei: say we want at least 40px on the sides of the marquee*/
-@media screen and (max-width: 1280px){
-    div#scroller div {
-        width: 9px;
-        height: 9px;
-        margin: 1.5px;
-        -webkit-border-radius: 11.25px;
-        -moz-border-radius: 11.25px;
-        border-radius: 11.25px;
-    }
-    div#scroller {
-        width: 960px;
-    }
-    
+div.scroller {
+    position:absolute;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    /*white-space: nowrap;*/
+    /*display:inline-block;*/
 }
-@media screen and (max-width: 1040px){
-    div#scroller div {
-        width: 6px;
-        height: 6px;
-        margin: 1px;
-        -webkit-border-radius: 7.5px;
-        -moz-border-radius: 7.5px;
-        border-radius: 7.5px;
-    }
-    div#scroller {
-        width: 640px;
+.title_wrapper{
+    position: relative;
+}
+.scroller .block{
+    box-sizing: border-box;
+    height: 100%;
+    /*background-color: rgba(255, 255, 255, .5);*/
+    background-color: rgba(255, 255, 255, 1);
+    opacity: 0;
+    /*text-decoration: underline;*/
+    /*border-bottom: 2px solid black;*/
+    color: blue;
+}
+.scroller .block.on{
+    opacity: 1;
+}
+
+#home a {
+    color: #FF0;
+}
+
+#home a:hover {
+    color: #FFF;
+}
+
+#menu {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    padding: 50px;
+    font-size: 24px;
+    line-height: 36px;
+    /* font-family: "Helvetica", sans-serif; */
+    text-transform: uppercase;
+    background-color: #FFF;
+}
+
+#menu .active {
+}
+
+#menu .static, #home .static, #selected .static {
+    border-bottom:4px solid #FF0;
+}
+
+#menu a {
+    color: #000;
+}
+
+#menu a:hover {
+    color: #00F;
+    border-bottom:4px solid #00F;
+}
+
+#name {
+    position: fixed;
+    left: 50px;
+    bottom: 50px;
+    color: #00F;
+    font-size: 24px;
+    line-height: 36px;
+}
+
+#name a {
+    color: #00F;
+}
+
+#name a:hover {
+    border-bottom:4px solid #00F;
+}
+
+#xx {
+    width: 100px;
+}
+
+#xx, #menu_xx {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 1000;
+    width: 50px;
+}
+
+#xx a {
+    border-bottom: none;
+    cursor: pointer;
+}
+
+#main {
+    position: absolute;
+    background-color: #FFF;
+    color: #000;
+    top: 0px;
+    left: 50px;
+    width: 500px;
+    padding: 100px;
+}
+
+.hnr {
+    font-family: 'hnr', helvetica, sans-serif;
+}
+
+.hidden {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    #main {
+        padding: 25px;
+        width: 70%;
     }
 }
-@media screen and (max-width: 720px){
-    div#scroller div {
-        width: 4px;
-        height: 4px;
-        margin: 1px;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-    }
-    div#scroller {
-        width: 480px;
-    }
-}
+
 
