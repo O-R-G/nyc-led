@@ -6,7 +6,9 @@
 
 
 $msgs = [];
+$break = '///';
 
+// opening msg
 $msgs[] = 'NEW YORK CONSOLIDATED';
 $msgs[] = '                     ';
 
@@ -25,22 +27,51 @@ $msgs[] = '                     ';
 $msgs[] = '...........hello?....';
 $msgs[] = '....:)...............';
 
-$break = '///';
-$msgs[] =  ' Currently ' . $output['temp_f'] . '°....' . $break;
-$msgs[] = ' Winds ' . $output['wind_string'] . $break;
-$msgs[] = ' There is a train arriving now : ' . $output_train."." . $break;
+// msgs in between
+// 4/23 Wei: Every group of msg is put in $msgs_temp first then added to $msgs_shuffle
+// In other words, $msgs_shuffle = array of msg groups (nyt, covid, etc...)
+// Then shuffle them, and add them back to $msgs.
 
-$msgs[] = 'UNIQUE COPY CENTER   ';
-$msgs[] = '     No Thin Special ';
-$msgs[] = 'STORE for RENT call  ';
-$msgs[] = '(347) 680-3340 / / . ';
-$msgs[] = 'Tai Loong Landromat  ';
-$msgs[] = '> Work-in-Progress 合 ';
+$msgs_shuffle = [];
 
-$msgs[] = ' from the NYTimes : ' . $break;
+$msgs_temp = array();
+$msgs_temp[] =  ' Currently ' . $output['temp_f'] . '°....' . $break;
+$msgs_temp[] = ' Winds ' . $output['wind_string'] . $break;
+$msgs_shuffle[] = $msgs_temp;
+
+$msgs_temp = array();
+$msgs_temp[] = ' There is a train arriving now : ' . $output_train."." . $break;
+$msgs_shuffle[] = $msgs_temp;
+
+$msgs_temp = array();
+$msgs_temp[] = 'UNIQUE COPY CENTER   ';
+$msgs_temp[] = '     No Thin Special ';
+$msgs_temp[] = 'STORE for RENT call  ';
+$msgs_temp[] = '(347) 680-3340 / / . ';
+$msgs_temp[] = 'Tai Loong Landromat  ';
+$msgs_temp[] = '> Work-in-Progress 合 ';
+$msgs_shuffle[] = $msgs_temp;
+
+$msgs_temp = array();
+$msgs_temp[] = ' from the NYTimes : ' . $break;
 for ($i=0; $i<5; $i++) {
-    $msgs[] = $output_nyt[$i] . $break;              // could be an array
+    $msgs_temp[] = $output_nyt[$i] . $break;              // could be an array
 }
+$msgs_shuffle[] = $msgs_temp;
+
+$msgs_temp = array();
+$msgs_temp[] = ' from covidtracking.com : ' . $break;
+foreach($output_covid as $oc)
+    $msgs_temp[] = $oc . $break;
+$msgs_shuffle[] = $msgs_temp;
+
+shuffle($msgs_shuffle);
+foreach ($msgs_shuffle as $m_shuffle) {
+    foreach($m_shuffle as $ms)
+        $msgs[] = $ms;
+}
+
+// ending msg
 $msgs[]  = ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
 
 // other feeds, could use same syntax as above
@@ -84,6 +115,33 @@ if($query_rows == NULL)
 $query_columns = $_GET['columns'];
 if($query_columns == NULL)
     $query_columns = 21;
+
+$query_bg_color = $_GET['bg_color'];
+if($query_bg_color == NULL)
+    $query_bg_color = '#000';
+else
+    $query_bg_color = '#'.$query_bg_color;
+
+function hex_to_rgb( $colour ) {
+    if ( $colour[0] == '#' ) {
+            $colour = substr( $colour, 1 );
+    }
+    if ( strlen( $colour ) == 6 ) {
+            list( $r, $g, $b ) = array( $colour[0] . $colour[1], $colour[2] . $colour[3], $colour[4] . $colour[5] );
+    } elseif ( strlen( $colour ) == 3 ) {
+            list( $r, $g, $b ) = array( $colour[0] . $colour[0], $colour[1] . $colour[1], $colour[2] . $colour[2] );
+    } else {
+            return false;
+    }
+    $r = hexdec( $r );
+    $g = hexdec( $g );
+    $b = hexdec( $b );
+    // return array( 'red' => $r, 'green' => $g, 'blue' => $b );
+    return $r.', '.$g.', '.$b;
+}
+
+$query_bg_color = hex_to_rgb ( $query_bg_color );
+
 ?>
 
 <style>
@@ -123,5 +181,9 @@ body {
     var query_color_settled = "<? echo $query_color_settled; ?>";
     var query_rows = "<? echo $query_rows; ?>";
     var query_columns = "<? echo $query_columns; ?>";
+    var query_bg_color = "<? echo $query_bg_color; ?>";
+
+    var sBody = document.body;
+    sBody.style.background = 'rgb('+query_bg_color+')';
 </script>
 <script src='/static/js/matrix.js'></script>

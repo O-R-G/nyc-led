@@ -70,15 +70,18 @@ words = msgs_array[0].split(' ');
 // console.log(msgs_array);
 // console.log(words);
 
-c.height = font_size * rows * 3;
+c.height = font_leading * rows + 20;
 c.width = font_size * columns;
 c.onclick = stop_start;
+
+var sMask = document.getElementById('mask');
+sMask.style.height = c.height+'px';
 
 function update() {
     ctx.font = font_size + "px helveticaocr";
     // ctx.font = font_size + "px relative10_pitch";
     // ctx.fillStyle = "#FFF";
-    ctx.fillStyle = "#000";
+    ctx.fillStyle = "rgb("+query_bg_color+")";
     ctx.rect(0,0,c.width, c.height);
     ctx.fill();
 
@@ -90,7 +93,8 @@ function update() {
             if ((letters[i] !== msg[i]) && (updates <= 50)) {
                 letters[i] = msgs[Math.floor(Math.random()*msgs.length)];   // one random char
                 // ctx.fillStyle = "rgba(255, 255, 255, .75)";
-                ctx.fillStyle = "rgba(0, 0, 0, .75)";
+                ctx.fillStyle = "rgba("+query_bg_color+", .75)";
+                // ctx.fillStyle = "rgba("+query_bg_color+", .75)";
                 ctx.fillRect(x*font_size, y*font_leading, font_size, font_leading);
                 // ctx.fillStyle = "#000";
                 ctx.fillStyle = query_color_changing;
