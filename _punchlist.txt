@@ -9,3 +9,6 @@ x css 100% width
 - 311 (open-data)
   https://opendata.cityofnewyork.us
 - json parse (ica)
+
+- add users n_y_c_full, rw, _r to database n_y_c in mysql
+  grant privileges, which may require root user
