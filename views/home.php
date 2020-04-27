@@ -178,10 +178,10 @@ body {
 </div>   
     
 <script>
-    var msgs = '<?= $msgs; ?>';
+    msgs = '<?= $msgs; ?>';
     // json_encode outputs quotes around each val in array[]
     // so no additional quotes here to pass as array to js
-    var msgs_array = <?= json_encode($msgs_array); ?>;
+    msgs_array = <?= json_encode($msgs_array); ?>;
 
     // added by Wei 4/20
     // query strings -> js variables
