@@ -16,6 +16,9 @@ if($uu->id) {
     </div><?
 } else {
     ?><div id='menu' class='centered centeralign <?= ($body) ? "hidden" : ""; ?>'>
+        <div id='menu_xx' class='<?= ($body) ? "" : "hidden"; ?>'>
+            <a><img src='/media/svg/x-6-k.svg'></a>
+        </div>
         <ul class="nav-level"><?
             $prevd = $nav[0]['depth'];
             foreach($nav as $n) {
@@ -39,11 +42,8 @@ if($uu->id) {
         <div id='name'><a href='/'>NEWYORKCONSOLIDATED&nbsp;</a></div>
     </div><?
 }
-?><div id='menu_xx' class='<?= ($body) ? "" : "hidden"; ?>'>
-    <a><img src='/media/svg/x-6-k.svg'></a>
-</div>
-<div id='xx' class='<?= ($body) ? "" : "hidden"; ?>'>
-    <a><img src='/media/svg/hamburger-6-w.svg'></a>
+?><div id='xx' class='<?= ($body) ? "" : "hidden"; ?>'>
+    <a><img src='/media/svg/hamburger-6-k.svg'></a>
 </div>
 <script type = "text/javascript" src = "/static/js/menu.js"></script>
 

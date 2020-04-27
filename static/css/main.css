@@ -76,6 +76,7 @@ div.scroller {
 }
 
 #menu {
+    display: none;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -123,6 +124,7 @@ div.scroller {
 }
 
 #xx {
+    display: block;
     width: 100px;
 }
 
