@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'helveticaautospaced';
+    src: url('/static/fonts/helveticaautospaced/HelveticaAutospaced-SemiBold.woff2') format('woff2'),
+         url('static/fonts/helveticaautospaced/HelveticaAutospaced-SemiBold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+

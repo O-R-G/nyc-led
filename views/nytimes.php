@@ -10,10 +10,10 @@
     // $req_url = 'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=FJ5pNfQtwlkTP27jg62s2De8IM0Ozvjk';
     // $req_url = 'https://api.nytimes.com/svc/topstories/v2/business.json?api-key=FJ5pNfQtwlkTP27jg62s2De8IM0Ozvjk';
     // $req_url = 'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=' . $key;
-    // $req_url = 'https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=' . $key;
+    $req_url = 'https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=' . $key;
     // $req_url = 'https://api.nytimes.com/svc/news/v3/content/all/business.json?api-key=' . $key;
     // $req_url = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=' . $key;
-    $req_url = 'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=' . $key;
+    // $req_url = 'https://api.nytimes.com/svc/topstories/v2/arts.json?api-key=' . $key;
 
     $results = file_get_contents($req_url, false, $context);
     $results_decoded = json_decode($results, true);

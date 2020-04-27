@@ -122,6 +122,14 @@ if($query_bg_color == NULL)
 else
     $query_bg_color = '#'.$query_bg_color;
 
+$query_font = $_GET['font'];
+if($query_font == NULL)
+    $query_font = 'helveticaautospaced';
+
+$query_font_size = $_GET['font_size'];
+if($query_font_size == NULL)
+    $query_font_size = '18';
+
 function hex_to_rgb( $colour ) {
     if ( $colour[0] == '#' ) {
             $colour = substr( $colour, 1 );
@@ -182,6 +190,8 @@ body {
     var query_rows = "<? echo $query_rows; ?>";
     var query_columns = "<? echo $query_columns; ?>";
     var query_bg_color = "<? echo $query_bg_color; ?>";
+    var query_font = "<? echo $query_font; ?>";
+    var query_font_size = "<? echo $query_font_size; ?>";
 
     var sBody = document.body;
     sBody.style.background = 'rgb('+query_bg_color+')';

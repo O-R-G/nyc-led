@@ -47,5 +47,6 @@ else
         <link rel="stylesheet" href="/static/css/font-relative10_pitch.css">
         <link rel="stylesheet" href="/static/css/main.css">
         <link rel="stylesheet" href="/static/css/helveticaocr.css">
+        <link rel="stylesheet" href="/static/css/helveticaautospaced.css">
     </head>
     <body>

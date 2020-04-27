@@ -37,8 +37,12 @@ var ctx = c.getContext("2d");
 // var rows = 4;
 var rows = query_rows;
 var columns = query_columns;
-var font_size = 18;     // relative sizes depend on font_size [18]
-var font_leading = 21;  // [21]
+// var font_size = 18;     // relative sizes depend on font_size [18]
+var font_size = query_font_size;     // relative sizes depend on font_size [18]
+// var font_leading = 21;  // [21]
+var font_leading = font_size * 1.1667;  // [21]
+// var font = 'helveticaautospaced';
+var font = query_font;
 var timer;              // update
 var delay;              // pause between messages
 // var timer_ms = 30;      // ms before next update [30]
@@ -78,7 +82,9 @@ var sMask = document.getElementById('mask');
 sMask.style.height = c.height+'px';
 
 function update() {
-    ctx.font = font_size + "px helveticaocr";
+    ctx.font = font_size + "px " + font;
+    // ctx.font = font_size + "px helveticaautospaced";
+    // ctx.font = font_size + "px helveticaocr";
     // ctx.font = font_size + "px relative10_pitch";
     // ctx.fillStyle = "#FFF";
     ctx.fillStyle = "rgb("+query_bg_color+")";
