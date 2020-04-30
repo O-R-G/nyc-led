@@ -19,15 +19,15 @@
     $results_decoded = json_decode($results, true);
 
 
-    $output_nyt = array();   
-    $results_total = count($results_decoded['results']);
-    $results_count = 3;
+    // $output_nyt = array();   
+    // $results_total = count($results_decoded['results']);
+    // $results_count = 3;
 
     // looping through every val
-    foreach($results_decoded['results'] as $r){
-        // $output_nyt .= $r['title'] . ' / / / ';
-        $output_nyt[] = $r['title'] . ' / / / ';
-    }
+    // foreach($results_decoded['results'] as $r){
+    //     // $output_nyt .= $r['title'] . ' / / / ';
+    //     $output_nyt[] = $r['title'] . ' / / / ';
+    // }
 
     /*
     var_dump($results_decoded['results'][0]['title']);
@@ -36,3 +36,14 @@
     die();
     */
 ?>
+<script>
+    var req_nyt = {
+        'req_url': '<? echo $req_url; ?>', 
+        'cache_filename': 'new-york-times', 
+        'results_count': 3
+    }; 
+    var thisResult = request_json(req_nyt['req_url'], req_nyt['cache_filename']);
+    msgs_mid.push(thisResult);
+</script>
+
+

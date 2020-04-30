@@ -12,23 +12,13 @@ Date.prototype.addDays = function(days) {
 }
 var document_root = '<? echo $_SERVER["DOCUMENT_ROOT"] ?>';
 var cache_filenames = <? echo json_encode($cache_filenames); ?>;
-console.log(cache_filenames);
 
-function request_json_api(request_url, endpoint, cache = false){
-	if (cache) {
-        var doc_root = "<? echo $_SERVER["DOCUMENT_ROOT"]; ?>/";
-        var json = json_cached_api_results(doc_root + '/static/data/' + endpoint + '/' + argument + '.json', json_host + '/' + endpoint + '/' + argument);
-    } else {
-        var json = request_json(request_url);
-    }
-}
-
-function request_json(request_url, cache_filename = '') {
+function request_json(name = '', request_url, results_count = false) {
+	console.log(name);
 	var counter = 0;
 	var counter_max = 5;
     var json = '';
-    var hasCache = ( cache_filenames.indexOf(cache_filename+'.json') != -1 ) ? true : false;
-    console.log(hasCache);
+    var hasCache = ( cache_filenames.indexOf(name+'.json') != -1 ) ? true : false;
     if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
 	    var httpRequest = new XMLHttpRequest();
 	} else if (window.ActiveXObject) { // IE 6 and older
@@ -38,23 +28,31 @@ function request_json(request_url, cache_filename = '') {
 	httpRequest.onreadystatechange = function(){
 		if (httpRequest.readyState === XMLHttpRequest.DONE) {
 	      if (httpRequest.status === 200) {	
-	      	console.log('httpRequest.status === 200'); 
 	      	if(counter > counter_max && hasCache){
 	      		// request cache
-	      		console.log('requesting cache...');
-	      		output.push(hasCache);
+	      		// console.log('requesting cache...');
+	      		var response = request_cache(name);
+	      		handle_msgs(name, response, results_count); // static/js/msg.js
 	      	}else{
-	      		// if counter less than counter_max OR cache doesn't exist
+	      		// if counter less than counter_max OR cache doesn't exist, keep fetching data
 	      		var response = JSON.parse(httpRequest.responseText);
 	      		if(response){
-	      			update_cache(response, cache_filename); // update cache
-		        	output.push(response); // add the result to output
+	      			update_cache(name, response); // update cache
+	      			if(ready_now == 0){
+	      				// fire the display first
+	      				// console.log('fire');
+	      				timer = setInterval(update, timer_ms);
+	      			}
+	      			ready_now ++;
+	      			if(name == 'new-york-times'){
+	      				// console.log(response);
+	      			}
+		        	handle_msgs(name, response, results_count); // static/js/msg.js
 	      		}
 	      	}
 	      	counter++;
-	      	console.log(counter);
 	      } else {
-	        // request cache
+	        console.log('please check the request url');
 	      }
 	    }
 	};
@@ -63,8 +61,8 @@ function request_json(request_url, cache_filename = '') {
 	httpRequest.send();
 }
 
-function update_cache(response, cache_filename = ''){
-	console.log('update cache: sending json to server...');
+function update_cache(cache_filename = '', response){
+	// console.log('update cache: sending json to server...');
 
 	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
 	    var xhr_update_cache = new XMLHttpRequest();
@@ -92,6 +90,12 @@ function request_cache(cache_filename = ''){
 		if (xhr_request_cache.readyState === XMLHttpRequest.DONE) {
 	      if (xhr_request_cache.status === 200) {	
 	      	var response = JSON.parse(xhr_request_cache.responseText);
+	      	if(ready_now == 0){
+	      		// fire the display first
+	      		console.log('fire');
+	      		timer = setInterval(update, timer_ms);
+	      	}
+	      	ready_now ++;
         	return response;
 	      }else if(xhr_request_cache.status === 404){
 	      	return false;

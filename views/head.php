@@ -48,6 +48,6 @@ else
         <link rel="stylesheet" href="/static/css/main.css">
         <link rel="stylesheet" href="/static/css/helveticaocr.css">
         <link rel="stylesheet" href="/static/css/helveticaautospaced.css">
-        <script src = 'static/js/msgs.js'></script>
+        <!-- <script src = 'static/js/msgs.js'></script> -->
     </head>
     <body>

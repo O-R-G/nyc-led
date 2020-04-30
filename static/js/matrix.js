@@ -52,23 +52,23 @@ var delay_ms = 6000;    // ms after msg complete
 var updates = 0;        // counter
 var pointer = 0;
 // var msg = msgs.substr(pointer,rows*columns).toUpperCase().split("");
-var msg = msgs.substr(pointer,rows*columns).split("");
-// console.log(msg);
-// var msgs_array from .php
-// msgs_array = msgs_array.join('');     // array to string
-msgs = msgs_array.join('');     // array to string
-// msgs = msgs.join('').toUpperCase().split("");
-// msgs = msgs.toUpperCase().split('');
-msgs = msgs.toUpperCase();      // temp force all to upper case
-msgs = msgs.split('');
+// var msg = msgs.substr(pointer,rows*columns).split("");
+// // console.log(msg);
+// // var msgs_array from .php
+// // msgs_array = msgs_array.join('');     // array to string
+// msgs = msgs_array.join('');     // array to string
+// // msgs = msgs.join('').toUpperCase().split("");
+// // msgs = msgs.toUpperCase().split('');
+// msgs = msgs.toUpperCase();      // temp force all to upper case
+// msgs = msgs.split('');
 
 
-// ** fix **
+// // ** fix **
 
-var letters = [];
-var words = [];
-// words = msgs_array[0].toUpperCase().split(' ');
-words = msgs_array[0].split(' ');
+// var letters = [];
+// var words = [];
+// // words = msgs_array[0].toUpperCase().split(' ');
+// words = msgs_array[0].split(' ');
 
 // console.log(msgs_array);
 // console.log(msgs_array);
@@ -90,7 +90,6 @@ function update() {
     ctx.fillStyle = "rgb("+query_bg_color+")";
     ctx.rect(0,0,c.width, c.height);
     ctx.fill();
-
     // display, compare to random letter
     var i;  // index to current position in letters
     for (var y = 0; y < rows; y++) {
@@ -125,7 +124,6 @@ function update() {
             }
         }
     }
-
     // all letters resolved or timed out, move to next msg
     if (letters.join('') == msg.join('')) {
         clearInterval(timer);
@@ -159,4 +157,4 @@ function stop_start() {
 }
 
 // start
-var timer = setInterval(update, timer_ms);
+// var timer = setInterval(update, timer_ms);
