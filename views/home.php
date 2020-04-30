@@ -8,25 +8,6 @@
 $msgs = [];
 $break = '///';
 
-// opening msg
-$msgs[] = 'NEW YORK CONSOLIDATED';
-$msgs[] = '                     ';
-
-$msgs[] = '                     ';
-$msgs[] = '                     ';
-
-$msgs[] = 'Nueva York           ';
-$msgs[] = 'Consolidada          ';
-
-$msgs[] = '纽约合并                 ';
-$msgs[] = '                     ';
-
-$msgs[] = '      نيويورك الموحدة';
-$msgs[] = '                     ';
-
-$msgs[] = '...........hello?....';
-$msgs[] = '....:)...............';
-
 // msgs in between
 // 4/23 Wei: Every group of msg is put in $msgs_temp first then added to $msgs_shuffle
 // In other words, $msgs_shuffle = array of msg groups (nyt, covid, etc...)
@@ -61,9 +42,9 @@ $msgs_shuffle[] = $msgs_temp;
 
 $msgs_temp = array();
 $msgs_temp[] = ' from covidtracking.com : ' . $break;
-foreach($output_covid as $oc)
-    $msgs_temp[] = $oc . $break;
-$msgs_shuffle[] = $msgs_temp;
+// foreach($output_covid as $oc)
+//     $msgs_temp[] = $oc . $break;
+// $msgs_shuffle[] = $msgs_temp;
 
 shuffle($msgs_shuffle);
 foreach ($msgs_shuffle as $m_shuffle) {
@@ -178,10 +159,10 @@ body {
 </div>   
     
 <script>
-    msgs = '<?= $msgs; ?>';
+    // msgs = '<?= $msgs; ?>';
     // json_encode outputs quotes around each val in array[]
     // so no additional quotes here to pass as array to js
-    msgs_array = <?= json_encode($msgs_array); ?>;
+    // msgs_array = <?= json_encode($msgs_array); ?>;
 
     // added by Wei 4/20
     // query strings -> js variables
