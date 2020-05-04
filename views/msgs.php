@@ -5,21 +5,25 @@ var req_array = [
 	{	
 		'name': 'new-york-times',
 		'req_url': 'https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=FJ5pNfQtwlkTP27jg62s2De8IM0Ozvjk', 
+		'data_type': 'json',
         'results_count': 3
 	},
 	{	
 		'name': 'covidtracking',
 		'req_url': 'https://covidtracking.com/api/v1/states/current.json', 
+		'data_type': 'json',
         'results_count': ''
 	},
 	{	
-		'name': 'covidtracking',
-		'req_url': 'https://covidtracking.com/api/v1/states/current.json', 
+		'name': '311',
+		'req_url': 'https://data.cityofnewyork.us/resource/erm2-nwe9.json?$$app_token=LTyWtvrOoHffWyAwXcdEIQDup&$limit=2', 
+		'data_type': 'json',
         'results_count': ''
 	},
 	{	
-		'name': 'covidtracking',
-		'req_url': 'https://covidtracking.com/api/v1/states/current.json', 
+		'name': 'temp',
+		'req_url': 'https://w1.weather.gov/xml/current_obs/KNYC.xml', 
+		'data_type': 'xml',
         'results_count': ''
 	}
 ];
@@ -80,22 +84,10 @@ function handle_msgs(name, response, results_count = false){
 	var response = response;
 	// opening msg for each section;
 	if(name == 'new-york-times'){
+		// console.log('updaing new-york-times');
 		var this_msgs = [' from the NYTimes : ' + msgs_break ];
 		response = response['results'] ;
-	}else if(name == 'covidtracking'){
-		var this_msgs = [' from covidtracking.com : ' + msgs_break];
-		for(i = 0 ; i < response.length ; i++){
-			if(response[i]['state'] == 'NY'){
-				console.log(response[i]);
-				response = response[i];
-				break;
-			}
-		}
-	}else{
-		var this_msgs = [ ];
-	}
 
-	if(results_count){
 		if(name == 'new-york-times'){
 			for(i = 0 ; i < results_count ; i++){
 				var this_msg = response[i]['title'];
@@ -103,14 +95,34 @@ function handle_msgs(name, response, results_count = false){
 					this_msgs.push(this_msg);
 			}
 		}
-	}else{
-		if(name == 'covidtracking'){
-			this_msgs.push('Positive cases: '+response['positive']);
-			this_msgs.push(' Negative cases: '+response['negative']);
-			this_msgs.push(' Currently hospitalized cases: '+response['hospitalizedCurrently']);
+
+	}else if(name == 'covidtracking'){
+		// console.log('updaing covidtracking');
+		var this_msgs = [' from covidtracking.com : ' + msgs_break];
+		for(i = 0 ; i < response.length ; i++){
+			if(response[i]['state'] == 'NY'){
+				response = response[i];
+				break;
+			}
 		}
-		
+
+		this_msgs.push('Positive cases: '+response['positive']);
+		this_msgs.push(' Negative cases: '+response['negative']);
+		this_msgs.push(' Currently hospitalized cases: '+response['hospitalizedCurrently']);
+
+	}else if(name == '311'){
+		// console.log('updating 311');
+		var this_msgs = [];
+
+		for(i = 0 ; i < response.length ; i++){
+        	var this_msg = ' from '+response[i]['agency']+': ';
+        	this_msg += response[i]['descriptor']+' is reported around '+response[i]['landmark']+' ';
+        	this_msgs.push( msgs_break+this_msg.toUpperCase() );
+        }
+	}else if(name == 'temp'){
+		console.log(response);
 	}
+
 	msgs_mid[name] = this_msgs;
 	update_msgs();
 }
