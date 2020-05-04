@@ -13,12 +13,11 @@ Date.prototype.addDays = function(days) {
 var document_root = '<? echo $_SERVER["DOCUMENT_ROOT"] ?>';
 var cache_filenames = <? echo json_encode($cache_filenames); ?>;
 
-function request_json(name = '', request_url, results_count = false) {
-	console.log(name);
+function request_json(name = '', request_url, data_type,results_count = false) {
 	var counter = 0;
 	var counter_max = 5;
     var json = '';
-    var hasCache = ( cache_filenames.indexOf(name+'.json') != -1 ) ? true : false;
+    var hasCache = ( cache_filenames.indexOf(name+'.'+data_type) != -1 ) ? true : false;
     if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
 	    var httpRequest = new XMLHttpRequest();
 	} else if (window.ActiveXObject) { // IE 6 and older
@@ -31,24 +30,23 @@ function request_json(name = '', request_url, results_count = false) {
 	      	if(counter > counter_max && hasCache){
 	      		// request cache
 	      		// console.log('requesting cache...');
-	      		var response = request_cache(name);
+	      		var response = request_cache(name, data_type);
 	      		handle_msgs(name, response, results_count); // static/js/msg.js
 	      	}else{
 	      		// if counter less than counter_max OR cache doesn't exist, keep fetching data
-	      		var response = JSON.parse(httpRequest.responseText);
+	      		if(data_type == 'json'){
+	      			var response = JSON.parse(httpRequest.responseText);
+	      		}else if(data_type == 'xml'){
+	      			var response = httpRequest.responseText;
+	      		}
 	      		if(response){
-	      			update_cache(name, response); // update cache
-	      			if(ready_now == 0){
-	      				// fire the display first
-	      				// console.log('fire');
+	      			update_cache(name, response, data_type); // update cache
+	      			if(ready_now == 0)
 	      				timer = setInterval(update, timer_ms);
-	      			}
 	      			ready_now ++;
-	      			if(name == 'new-york-times'){
-	      				// console.log(response);
-	      			}
 		        	handle_msgs(name, response, results_count); // static/js/msg.js
 	      		}
+	      		
 	      	}
 	      	counter++;
 	      } else {
@@ -57,12 +55,17 @@ function request_json(name = '', request_url, results_count = false) {
 	    }
 	};
 	httpRequest.open('GET', request_url);
-	httpRequest.setRequestHeader('Content-Type', 'application/json');
+	if(data_type == 'json')
+		httpRequest.setRequestHeader('Content-Type', 'application/json');
+	else if(data_type == 'xml'){
+		httpRequest.setRequestHeader('Content-Type', 'application/xml');
+		
+	}
 	httpRequest.send();
 }
 
-function update_cache(cache_filename = '', response){
-	// console.log('update cache: sending json to server...');
+function update_cache(cache_filename = '', response, data_type){
+	console.log('update cache: sending json to server...');
 
 	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
 	    var xhr_update_cache = new XMLHttpRequest();
@@ -71,21 +74,27 @@ function update_cache(cache_filename = '', response){
 	}
 
 	xhr_update_cache.open( 'POST', 'views/receive_cache.php', true );
-	xhr_update_cache.setRequestHeader("Content-Type", "application/json");
-	var data = response;
-	data['cache_filename'] = cache_filename;
+	if(data_type == 'json'){
+		xhr_update_cache.setRequestHeader("Content-Type", "application/json");
+		response = JSON.stringify(response);
+	}else if(data_type == 'xml')
+		xhr_update_cache.setRequestHeader("Content-Type", "application/xml");
+	var data = {
+		"cache_filename": cache_filename, 
+		"response": response, 
+		"data_type": data_type
+	};
 	data = JSON.stringify(data);
 	xhr_update_cache.send(data);
 }
 
-function request_cache(cache_filename = ''){
+function request_cache(cache_filename = '', data_type){
 	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
 	    var xhr_request_cache = new XMLHttpRequest();
 	} else if (window.ActiveXObject) { // IE 6 and older
 	    var xhr_request_cache = new ActiveXObject("Microsoft.XMLHTTP");
 	}
-	var req_url = 'static/data/'+cache_filename+'.json';
-	console.log(req_url);
+	var req_url = 'static/data/'+cache_filename+'.'+data_type;
 	xhr_request_cache.onreadystatechange = function(){
 		if (xhr_request_cache.readyState === XMLHttpRequest.DONE) {
 	      if (xhr_request_cache.status === 200) {	
@@ -103,7 +112,10 @@ function request_cache(cache_filename = ''){
 	    }
 	};
 	xhr_request_cache.open( 'GET', req_url, true );
-	xhr_request_cache.setRequestHeader("Content-Type", "application/json");
+	if(data_type == 'json')
+		xhr_request_cache.setRequestHeader("Content-Type", "application/json");
+	else if(data_type == 'xml')
+		xhr_request_cache.setRequestHeader("Content-Type", "application/xml");
 	xhr_request_cache.send();
 }
 

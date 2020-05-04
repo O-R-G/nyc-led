@@ -26,7 +26,7 @@ $req_url = 'https://data.cityofnewyork.us/resource/erm2-nwe9.json'."?$$app_token
 		console.log('displayresult');
 		if (httpRequest.readyState === XMLHttpRequest.DONE) {
 	      if (httpRequest.status === 200) {	    
-	      	console.log('httpRequest.status === 200');    
+	      	// console.log('httpRequest.status === 200');    
 	        var response = JSON.parse(httpRequest.responseText);
 	        var msgs_temp = msgs.join('');
 	        var index = msgs_temp.indexOf(msgs_ending);
@@ -38,7 +38,7 @@ $req_url = 'https://data.cityofnewyork.us/resource/erm2-nwe9.json'."?$$app_token
 	        	msgs_temp += msgs_break+thisMsg.toUpperCase();
 	        }
 	        msgs_temp+= msgs_break + msgs_ending;
-	        console.log(msgs_ending);
+	        // console.log(msgs_ending);
 	        msgs = msgs_temp.split('');
 	      } else {
 	        // alert('There was a problem with the request.');
