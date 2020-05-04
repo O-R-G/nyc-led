@@ -1,5 +1,5 @@
-AuthUserFile /Library/WebServer/Documents/.htpasswd
-#AuthUserFile /var/www/.htpasswd
+#AuthUserFile /Library/WebServer/Documents/.htpasswd
+AuthUserFile /var/www/.htpasswd
 AuthName "staging"
 AuthType Basic
 Require valid-user

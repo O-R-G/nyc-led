@@ -31,7 +31,7 @@ var req_array = [
 	},
 	{	
 		'name': 'train',
-		'req_url': "http://mtaapi.herokuapp.com/times?hour="+now_hr+"&minute="+now_min,
+		'req_url': "https://mtaapi.herokuapp.com/times?hour="+now_hr+"&minute="+now_min,
 		'data_type': 'json',
         'results_count': ''
 	},
