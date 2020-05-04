@@ -94,31 +94,31 @@ function handle_msgs(name, response, results_count = false){
 	msgs_mid.push(this_msgs);
 	console.log(this_msgs);
 	update_msgs();
+}
+
+function shuffle(array) {
+  array.sort(() => Math.random() - 0.5);
+}
+
+function update_msgs(){
+	shuffle(msgs_mid);
+
+	msgs = [msgs_opening];
+
+	for(i = 0 ; i < msgs_mid.length ; i++){
+		for(j = 0 ; j < msgs_mid[i].length ; j++)
+			msgs.push(msgs_mid[i][j]);
 	}
 
-	function shuffle(array) {
-	  array.sort(() => Math.random() - 0.5);
-	}
-
-	function update_msgs(){
-		shuffle(msgs_mid);
-
-		msgs = [msgs_opening];
-
-		for(i = 0 ; i < msgs_mid.length ; i++){
-			for(j = 0 ; j < msgs_mid[i].length ; j++)
-				msgs.push(msgs_mid[i][j]);
-		}
-
-		msgs.push(msgs_ending);
-		msgs_array = msgs;
-		msgs = msgs.join(' ');
-		var msg = msgs.substr(pointer,rows*columns).split("");
-		console.log(msg);
-		msgs = msgs.toUpperCase();
-		msgs = msgs.split('');
-		
-		// words = msgs_array[0].toUpperCase().split(' ');
-		words = msgs_array[0].split(' ');
-	}
+	msgs.push(msgs_ending);
+	msgs_array = msgs;
+	msgs = msgs.join(' ');
+	var msg = msgs.substr(pointer,rows*columns).split("");
+	console.log(msg);
+	msgs = msgs.toUpperCase();
+	msgs = msgs.split('');
+	
+	// words = msgs_array[0].toUpperCase().split(' ');
+	words = msgs_array[0].split(' ');
+}
 </script>

@@ -13,3 +13,5 @@ $file = fopen('../static/data/' . $file_name, 'w') or die("can't create / open f
 
 fwrite($file, json_encode($data));
 fclose($file);
+
+?>

@@ -85,7 +85,6 @@ function request_cache(cache_filename = ''){
 	    var xhr_request_cache = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	var req_url = 'static/data/'+cache_filename+'.json';
-	console.log(req_url);
 	xhr_request_cache.onreadystatechange = function(){
 		if (xhr_request_cache.readyState === XMLHttpRequest.DONE) {
 	      if (xhr_request_cache.status === 200) {	

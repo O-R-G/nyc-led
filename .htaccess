@@ -1,7 +1,8 @@
+#AuthUserFile /Library/WebServer/Documents/.htpasswd
 AuthUserFile /var/www/.htpasswd
 AuthName "staging"
 AuthType Basic
-# Require valid-user
+Require valid-user
 
 Options +FollowSymLinks -Indexes
 # Options +FollowSymLinks +Indexes
