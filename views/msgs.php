@@ -1,6 +1,15 @@
 <?
+
 ?>
 <script type="text/javascript">
+var now = new Date();
+var now_hr = now.getHours();
+var now_min = now.getMinutes();
+if(now_hr < 10)
+	now_hr = "0"+now_hr;
+if(now_min < 10)
+	now_min = "0"+now_min;
+
 var req_array = [
 	{	
 		'name': 'new-york-times',
@@ -17,6 +26,12 @@ var req_array = [
 	{	
 		'name': '311',
 		'req_url': 'https://data.cityofnewyork.us/resource/erm2-nwe9.json?$$app_token=LTyWtvrOoHffWyAwXcdEIQDup&$limit=2', 
+		'data_type': 'json',
+        'results_count': ''
+	},
+	{	
+		'name': 'train',
+		'req_url': "http://mtaapi.herokuapp.com/times?hour="+now_hr+"&minute="+now_min,
 		'data_type': 'json',
         'results_count': ''
 	},
@@ -82,23 +97,22 @@ function handle_msgs(name, response, results_count = false){
 		results_count = false;
 
 	var response = response;
+	var this_msgs = [];
 	// opening msg for each section;
 	if(name == 'new-york-times'){
 		// console.log('updaing new-york-times');
-		var this_msgs = [' from the NYTimes : ' + msgs_break ];
+		this_msgs = [' from the NYTimes : ' + msgs_break ];
 		response = response['results'] ;
 
-		if(name == 'new-york-times'){
-			for(i = 0 ; i < results_count ; i++){
-				var this_msg = response[i]['title'];
-				if(typeof this_msg != 'undefined')
-					this_msgs.push(this_msg);
-			}
+		for(i = 0 ; i < results_count ; i++){
+			var this_msg = response[i]['title'];
+			if(typeof this_msg != 'undefined')
+				this_msgs.push(this_msg);
 		}
 
 	}else if(name == 'covidtracking'){
 		// console.log('updaing covidtracking');
-		var this_msgs = [' from covidtracking.com : ' + msgs_break];
+		this_msgs.push(' from covidtracking.com : ' + msgs_break);
 		for(i = 0 ; i < response.length ; i++){
 			if(response[i]['state'] == 'NY'){
 				response = response[i];
@@ -112,15 +126,22 @@ function handle_msgs(name, response, results_count = false){
 
 	}else if(name == '311'){
 		// console.log('updating 311');
-		var this_msgs = [];
-
 		for(i = 0 ; i < response.length ; i++){
         	var this_msg = ' from '+response[i]['agency']+': ';
         	this_msg += response[i]['descriptor']+' is reported around '+response[i]['landmark']+' ';
         	this_msgs.push( msgs_break+this_msg.toUpperCase() );
         }
 	}else if(name == 'temp'){
-		console.log(response);
+		var oParser = new DOMParser();
+		var oDOM = oParser.parseFromString(response, "application/xml");
+		var current = oDOM.getElementsByTagName('weather')[0].innerHTML;
+		var temp_f = oDOM.getElementsByTagName('temp_f')[0].innerHTML;
+		var temp_c = oDOM.getElementsByTagName('temp_c')[0].innerHTML;
+		var wind_string = oDOM.getElementsByTagName('wind_string')[0].innerHTML;
+
+		this_msgs.push( ' Currently ' + temp_f + '°....' + msgs_break );
+		this_msgs.push( ' Winds ' + wind_string + msgs_break );
+
 	}
 
 	msgs_mid[name] = this_msgs;

@@ -57,10 +57,7 @@ function request_json(name = '', request_url, data_type,results_count = false) {
 	httpRequest.open('GET', request_url);
 	if(data_type == 'json')
 		httpRequest.setRequestHeader('Content-Type', 'application/json');
-	else if(data_type == 'xml'){
-		httpRequest.setRequestHeader('Content-Type', 'application/xml');
-		
-	}
+
 	httpRequest.send();
 }
 
