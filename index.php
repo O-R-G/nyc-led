@@ -25,11 +25,11 @@ if (end($uri) == 'receive_cache.php') {
 	require_once('./views/json.php');
 	require_once('./views/call_request_json.php');
 
-	require_once('./views/temp.php');
+	// require_once('./views/temp.php');
 	// require_once('./views/nytimes.php');
-	require_once('./views/train.php');
+	// require_once('./views/train.php');
 	// require_once('./views/covidtracking.php');
-	require_once('./views/311.php');
+	// require_once('./views/311.php');
 	// require_once('./views/jobs.php');
 	// require_once('./views/permitted_event.php');
 

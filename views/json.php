@@ -14,7 +14,6 @@ var document_root = '<? echo $_SERVER["DOCUMENT_ROOT"] ?>';
 var cache_filenames = <? echo json_encode($cache_filenames); ?>;
 
 function request_json(name = '', request_url, results_count = false) {
-	console.log(name);
 	var counter = 0;
 	var counter_max = 5;
     var json = '';
@@ -44,9 +43,6 @@ function request_json(name = '', request_url, results_count = false) {
 	      				timer = setInterval(update, timer_ms);
 	      			}
 	      			ready_now ++;
-	      			if(name == 'new-york-times'){
-	      				// console.log(response);
-	      			}
 		        	handle_msgs(name, response, results_count); // static/js/msg.js
 	      		}
 	      	}

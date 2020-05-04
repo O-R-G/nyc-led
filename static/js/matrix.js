@@ -49,13 +49,16 @@ var delay_ms = 6000;    // ms after msg complete
 var updates = 0;        // counter
 var pointer = 0;
 
-var msg = msgs.substr(pointer,rows*columns).split("");
-msgs = msgs_array.join('');     // array to string
-msgs = msgs.toUpperCase();      // all to upper case
-msgs = msgs.split('');
-var letters = [];
-var words = [];
-words = msgs_array[0].split(' ');
+/* ======================================
+            moved to msg.php
+=======================================*/
+// var msg = msgs.substr(pointer,rows*columns).split("");
+// msgs = msgs_array.join('');     // array to string
+// msgs = msgs.toUpperCase();      // all to upper case
+// msgs = msgs.split('');
+// var letters = [];
+// var words = [];
+// words = msgs_array[0].split(' ');
 
 c.height = font_leading * rows + 20;
 c.width = font_size * columns;
@@ -64,7 +67,17 @@ c.onclick = stop_start;
 var sMask = document.getElementById('mask');
 sMask.style.height = c.height+'px';
 
+var isBeginning = true;
+
 function update() {
+    if(isBeginning){
+        update_msgs_opening();
+        update_msgs();
+        msgs = msgs_temp;
+        msgs_array = msgs_array_temp;
+        msg = msgs.join('').substr(pointer,columns*rows).split('');
+        isBeginning = false;
+    }
     ctx.font = font_size + "px " + font;
     ctx.fillStyle = "rgb("+query_bg_color+")";
     ctx.rect(0,0,c.width, c.height);
@@ -98,8 +111,11 @@ function update() {
         delay = setInterval(stop_start, delay_ms);
         letters = [];
         pointer += msg.length;
-        if (pointer >= msgs.length)
+        if (pointer >= msgs.length){
             pointer = 0;
+            isBeginning = true;
+            console.log('pointer = 0');
+        }
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         timer = false;
         updates = 0;
