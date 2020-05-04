@@ -67,7 +67,7 @@ msgs_opening_2.push(now_msg[1]);
 msgs_opening_2 = msgs_opening_2.join('');
 msgs_opening_3.push('Nueva York           '); 
 msgs_opening_3.push('Consolidada          '); 
-msgs_opening_3.push('纽约合并                 '); 
+msgs_opening_3.push('紐約合作基金會              '); 
 msgs_opening_3.push('                     '); 
 msgs_opening_3.push('      نيويورك الموحدة');
 msgs_opening_3.push('                     '); 
@@ -142,6 +142,8 @@ function handle_msgs(name, response, results_count = false){
 		this_msgs.push( ' Currently ' + temp_f + '°....' + msgs_break );
 		this_msgs.push( ' Winds ' + wind_string + msgs_break );
 
+	}else if(name == 'train'){
+		$this_msgs = [' There is a train arriving now at : ' + response['result'][0]['name'] + ". " + msgs_break ];
 	}
 
 	msgs_mid[name] = this_msgs;

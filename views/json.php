@@ -55,7 +55,7 @@ function request_json(name = '', request_url, data_type,results_count = false) {
 	    }
 	};
 	httpRequest.open('GET', request_url);
-	if(data_type == 'json')
+	if(data_type == 'json' && name != 'train')
 		httpRequest.setRequestHeader('Content-Type', 'application/json');
 
 	httpRequest.send();
@@ -96,7 +96,7 @@ function request_cache(cache_filename = '', data_type){
 		if (xhr_request_cache.readyState === XMLHttpRequest.DONE) {
 	      if (xhr_request_cache.status === 200) {	
 	      	var response = JSON.parse(xhr_request_cache.responseText);
-	      	if(ready_now == 0){
+	      	if(ready_now == 1){
 	      		// fire the display first
 	      		console.log('fire');
 	      		timer = setInterval(update, timer_ms);
