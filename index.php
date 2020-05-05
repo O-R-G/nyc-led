@@ -18,6 +18,9 @@ if (end($uri) == 'receive_cache.php') {
 	require_once('./views/receive_cache.php');
 } else {
 	require_once('views/msgs.php');
+	if ($uri[1] == 'blur') {
+		require_once('views/blur.php');
+    } else
 	if (!$uri[1]) {
 		require_once('views/home.php');
 		require_once('views/menu.php');
@@ -40,8 +43,5 @@ if (end($uri) == 'receive_cache.php') {
 	
 }
 
-
-
 require_once('views/foot.php');
-
 ?>
