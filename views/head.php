@@ -34,6 +34,8 @@ if ($title)
 else
     $title = $site_name;
 
+$devhash = rand();  // to force .css reloads
+
 ?><!DOCTYPE html>
 <html>
     <head>
@@ -44,10 +46,10 @@ else
         <meta name="apple-mobile-web-app-title" content="nyc-led">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="apple-touch-icon" href="/media/png/apple-touch-icon.png" />
-        <link rel="stylesheet" href="/static/css/font-relative10_pitch.css">
-        <link rel="stylesheet" href="/static/css/main.css">
-        <link rel="stylesheet" href="/static/css/helveticaocr.css">
-        <link rel="stylesheet" href="/static/css/helveticaautospaced.css">
+        <link rel="stylesheet" href="/static/css/font-relative10_pitch.css?<?= $devhash; ?>">
+        <link rel="stylesheet" href="/static/css/main.css?<?= $devhash; ?>">
+        <link rel="stylesheet" href="/static/css/helveticaocr.css?<?= $devhash; ?>">
+        <link rel="stylesheet" href="/static/css/helveticaautospaced.css?<?= $devhash; ?>">
         <!-- <script src = 'static/js/msgs.js'></script> -->
     </head>
     <body>
