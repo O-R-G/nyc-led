@@ -61,12 +61,18 @@ var msgs_opening = [],
 	msgs_opening_3 = [];
 // msgs_opening_1.push('––––––––––––––––––––'); // en-dash (S)
 // msgs_opening_1.push('————————————————————'); // em-dash (M)
+/*
 msgs_opening_1.push('•••••••••••••••••••••');    // bullet (L)
 msgs_opening_1.push('•••••••••••••••••••••');    // bullet (L)
-msgs_opening_1.push('                     ');    
-msgs_opening_1.push('                     ');    
-// msgs_opening_1.push('NEW YORK CONSOLIDATED'); 
-// msgs_opening_1.push('                     '); 
+msgs_opening_1.push('•••••••••••••••••••••');    // bullet (L)
+msgs_opening_1.push('•••••••••••••••••••••');    // bullet (L)
+*/
+msgs_opening_1.push('NEW YORK CONSOLIDATED'); 
+msgs_opening_1.push('                     '); 
+msgs_opening_1.push('                     '); 
+msgs_opening_1.push('                     '); 
+msgs_opening_1.push('                     '); 
+msgs_opening_1.push('                     '); 
 msgs_opening_1 = msgs_opening_1.join('');
 msgs_opening_2.push(now_msg[0]); 
 msgs_opening_2.push(now_msg[1]); 

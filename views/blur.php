@@ -77,7 +77,15 @@ if ($cursor_color == '') $cursor_color = 'FFF';
 </div>
 
 <div class='box letterspaced-more'>
-<span class='cursor animate'>—</span><span class='cursor-only'>NEW YORK<br/>CONSOLIDATED</span>
+<span class='cursor animate'>—</span><span class='cursor-only'>NEW YORK CONSOLIDATED</span>
+</div>
+
+<div class='box'>
+&nbsp;
+</div>
+
+<div class='box letterspaced-more'>
+<span class='cursor-only'>NEW YORK CONSOLIDATED</span><span class='cursor animate cursor-only'>—</span>
 </div>
 
 <div class='box'>
@@ -94,6 +102,22 @@ if ($cursor_color == '') $cursor_color = 'FFF';
 
 <div class='box letterspaced-more'>
 <span class='cursor-only'>N</span><span class='cursor animate cursor-only'>—</span><br/><span class='cursor-only'>YC</span>
+</div>
+
+<div class='box'>
+&nbsp;
+</div>
+
+<div class='box letterspaced-more'>
+<span class='cursor-only'>NY</span><br/><span class='cursor animate cursor-only'>—</span><span class='cursor-only'>C</span>
+</div>
+
+<div class='box'>
+&nbsp;
+</div>
+
+<div class='box letterspaced-more'>
+<span class='cursor-only'>NY</span><br/><span class='cursor-only'>C</span><span class='cursor animate cursor-only'>—</span>
 </div>
 
 <!-- -->
@@ -162,6 +186,13 @@ NEW YORK CONSOLIDATED
 NEW YORK CONSOLIDATED
 </div>
 
+<div class='box'>
+&nbsp;
+</div>
+
+<div class='box'>
+&nbsp;
+</div>
 
 
 
