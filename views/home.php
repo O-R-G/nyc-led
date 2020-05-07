@@ -131,31 +131,16 @@ function hex_to_rgb( $colour ) {
 
 $query_bg_color = hex_to_rgb ( $query_bg_color );
 
-?>
-
-<style>
-* {
-    margin: 0; 
-    padding: 0;   
-}
-body {
-    /* background: #FFF;*/
-}
-#mask {
-    /* height: 400px; */
-    height: 100px;
-}
-#display {
-    text-align: center;
-}
-#c {
-}
-</style>
-
-<div id="mask">
+?><div id="mask">
+    <div id="display">
+        <div id='d'>
+        </div>
+    </div>   
+    <!--
     <div id="display">
         <canvas id="c"></canvas>
-    </div>   
+    </div>
+    -->
 </div>   
     
 <script>
@@ -177,4 +162,5 @@ body {
     var sBody = document.body;
     sBody.style.background = 'rgb('+query_bg_color+')';
 </script>
-<script src='/static/js/matrix.js'></script>
+<!-- <script src='/static/js/matrix.js'></script> -->
+<script src='/static/js/matrix-dom.js'></script>

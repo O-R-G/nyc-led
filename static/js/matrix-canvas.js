@@ -3,7 +3,6 @@
     matrix rain flipboard
 
     adapted from https://codepen.io/P3R0/pen/MwgoKv
-    now using d-o-m instead of canvas
 
     msgs[]      all messages assembled, indexed
                 array passed from .php
@@ -31,15 +30,18 @@
     values passed from php
 
         msgs
-        letters
-        words
 */
+
+var c = document.getElementById("c");
+var ctx = c.getContext("2d");
 
 var rows = query_rows;                  // [4] 
 var columns = query_columns;            // [21]
+
 var font_size = query_font_size;        // [18] 24 36 48
 var font_leading = font_size * 1.1667;  // [21]
 var font = query_font;
+
 var timer;              // update
 var delay;              // pause between messages
 var timer_ms = 30;      // ms before next update [30]
@@ -47,28 +49,27 @@ var delay_ms = 6000;    // ms after msg complete
 var updates = 0;        // counter
 var pointer = 0;
 
-var d = document.getElementById('d');
+/* ======================================
+            moved to msg.php
+=======================================*/
+// var msg = msgs.substr(pointer,rows*columns).split("");
+// msgs = msgs_array.join('');     // array to string
+// msgs = msgs.toUpperCase();      // all to upper case
+// msgs = msgs.split('');
+// var letters = [];
+// var words = [];
+// words = msgs_array[0].split(' ');
 
-// ** fix **  ----->
-// currently uses letter-spacing to accommodate
-// could use proportion of the letter to do the same thing
-// then possibly adjust letter-spacing after that
-d.style.width = font_size * columns + 'px';     // ** fix **
-d.style.height = font_leading * rows + 20 + 'px';  // ** fix **
+c.height = font_leading * rows + 20;
+c.width = font_size * columns;
+c.onclick = stop_start;
 
-d.style.fontSize = font_size + 'px';
-// d.style.backgroundColor = '#00F';        // debug
-d.innerHTML = '••••••••••••••••••';   
-d.onclick = stop_start;
+var sMask = document.getElementById('mask');
+sMask.style.height = c.height+'px';
 
-var mask = document.getElementById('mask');
-mask.style.height = d.style.height;
-mask.style.width = d.style.width;         
-
-var isBeginning = true;     /* fix */
+var isBeginning = true;
 
 function update() {
-    // init * should this be moved? *
     if(isBeginning){
         update_msgs_opening();
         update_msgs();
@@ -77,7 +78,10 @@ function update() {
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         isBeginning = false;
     }
-
+    ctx.font = font_size + "px " + font;
+    ctx.fillStyle = "rgb("+query_bg_color+")";
+    ctx.rect(0,0,c.width, c.height);
+    ctx.fill();
     // display, compare to random letter
     var i;          
     for (var y = 0; y < rows; y++) {
@@ -85,25 +89,22 @@ function update() {
             i = x+y*columns;
             if ((letters[i] !== msg[i]) && (updates <= 50)) {
                 letters[i] = msgs[Math.floor(Math.random()*msgs.length)];   // one random char
+                ctx.fillStyle = "rgba("+query_bg_color+", .75)";
+                ctx.fillRect(x*font_size, y*font_leading, font_size, font_leading);
+                ctx.fillStyle = query_color_changing;
+                ctx.fillText(letters[i], x*font_size, (y+1)*(font_leading));
             } else {
-                letters[i] = msg[i];                
-// ** fix ** ---->
+                letters[i] = msg[i];
                 if(typeof letters[i] == 'undefined'){
-                    letters[i] = '•';
-                    //ctx.fillStyle = query_color_settled;
-                    //ctx.fillText(' ', x*font_size, (y+1)*(font_leading));
+                    ctx.fillStyle = query_color_settled;
+                    ctx.fillText(' ', x*font_size, (y+1)*(font_leading));
                 } else {
-                    //ctx.fillStyle = query_color_settled;
-                    //ctx.fillText(letters[i], x*font_size, (y+1)*font_leading);
+                    ctx.fillStyle = query_color_settled;
+                    ctx.fillText(letters[i], x*font_size, (y+1)*font_leading);
                 }
             }
         }
     }
-
-// ** check / compare speed ** ---->
-    // d.innerText = letters.join('');
-    d.innerHTML = letters.join('');
-
     // all letters resolved or timed out, move to next msg
     if (letters.join('') == msg.join('')) {
         clearInterval(timer);
@@ -133,8 +134,5 @@ function stop_start() {
     }
 }
 
-// ** fix ** -----> 
-// how does this start now?
-// > grep -rE 'setInterval' *
 // start
 // var timer = setInterval(update, timer_ms);
