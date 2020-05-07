@@ -72,7 +72,7 @@ var isBeginning = true;
 function update() {
     if(isBeginning){
         update_msgs_opening();
-        update_msgs();
+        update_msgs(isBeginning);
         msgs = msgs_temp;
         msgs_array = msgs_array_temp;
         msg = msgs.join('').substr(pointer,columns*rows).split('');
@@ -114,8 +114,9 @@ function update() {
         if (pointer >= msgs.length){
             pointer = 0;
             isBeginning = true;
-            console.log('pointer = 0');
         }
+        // update_msgs();
+        call_request_json();
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         timer = false;
         updates = 0;

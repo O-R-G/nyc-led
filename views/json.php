@@ -13,9 +13,9 @@ Date.prototype.addDays = function(days) {
 var document_root = '<? echo $_SERVER["DOCUMENT_ROOT"] ?>';
 var cache_filenames = <? echo json_encode($cache_filenames); ?>;
 
-function request_json(name = '', request_url, data_type,results_count = false) {
+function request_json(name = '', request_url, data_type,results_count = false, use_header = true) {
 	var counter = 0;
-	var counter_max = 5;
+	var counter_max = 3;
     var json = '';
     var hasCache = ( cache_filenames.indexOf(name+'.'+data_type) != -1 ) ? true : false;
     if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
@@ -30,8 +30,8 @@ function request_json(name = '', request_url, data_type,results_count = false) {
 	      	if(counter > counter_max && hasCache){
 	      		// request cache
 	      		// console.log('requesting cache...');
-	      		var response = request_cache(name, data_type);
-	      		handle_msgs(name, response, results_count); // static/js/msg.js
+	      		request_cache(name, data_type, results_count);
+
 	      	}else{
 	      		// if counter less than counter_max OR cache doesn't exist, keep fetching data
 	      		if(data_type == 'json'){
@@ -41,8 +41,9 @@ function request_json(name = '', request_url, data_type,results_count = false) {
 	      		}
 	      		if(response){
 	      			update_cache(name, response, data_type); // update cache
-	      			if(ready_now == 0)
+	      			if(ready_now == 2){
 	      				timer = setInterval(update, timer_ms);
+	      			}
 	      			ready_now ++;
 		        	handle_msgs(name, response, results_count); // static/js/msg.js
 	      		}
@@ -50,19 +51,24 @@ function request_json(name = '', request_url, data_type,results_count = false) {
 	      	}
 	      	counter++;
 	      } else {
-	        console.log('please check the request url');
+	      	if(hasCache){
+	      		console.log('status !== 200, use cached file for '+name);
+	      		request_cache(name, data_type, results_count);
+	      	}else{
+	      		console.log('please check the request url');
+	      	}
 	      }
 	    }
 	};
 	httpRequest.open('GET', request_url);
-	if(data_type == 'json' && name != 'train')
-		httpRequest.setRequestHeader('Content-Type', 'application/json');
+	if(use_header)
+		httpRequest.setRequestHeader('Content-Type', 'application/'+data_type);
 
 	httpRequest.send();
 }
 
 function update_cache(cache_filename = '', response, data_type){
-	console.log('update cache: sending json to server...');
+	// console.log('update cache: sending json to server...');
 
 	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
 	    var xhr_update_cache = new XMLHttpRequest();
@@ -71,11 +77,14 @@ function update_cache(cache_filename = '', response, data_type){
 	}
 
 	xhr_update_cache.open( 'POST', 'views/receive_cache.php', true );
-	if(data_type == 'json'){
-		xhr_update_cache.setRequestHeader("Content-Type", "application/json");
-		response = JSON.stringify(response);
-	}else if(data_type == 'xml')
-		xhr_update_cache.setRequestHeader("Content-Type", "application/xml");
+	// if(data_type == 'json'){
+	// 	xhr_update_cache.setRequestHeader("Content-Type", "application/json");
+	// 	response = JSON.stringify(response);
+	// }else if(data_type == 'xml')
+	// 	xhr_update_cache.setRequestHeader("Content-Type", "application/xml");
+	xhr_update_cache.setRequestHeader("Content-Type", "application/"+data_type);
+	// if(data_type == 'json')
+	// 	response = JSON.stringify(response);
 	var data = {
 		"cache_filename": cache_filename, 
 		"response": response, 
@@ -85,7 +94,8 @@ function update_cache(cache_filename = '', response, data_type){
 	xhr_update_cache.send(data);
 }
 
-function request_cache(cache_filename = '', data_type){
+function request_cache(cache_filename = '', data_type, results_count = false){
+	console.log('requesting cache for '+cache_filename);
 	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
 	    var xhr_request_cache = new XMLHttpRequest();
 	} else if (window.ActiveXObject) { // IE 6 and older
@@ -96,23 +106,23 @@ function request_cache(cache_filename = '', data_type){
 		if (xhr_request_cache.readyState === XMLHttpRequest.DONE) {
 	      if (xhr_request_cache.status === 200) {	
 	      	var response = JSON.parse(xhr_request_cache.responseText);
-	      	if(ready_now == 1){
-	      		// fire the display first
-	      		console.log('fire');
+	      	response = JSON.parse(response);
+	      	if(ready_now == 2){
 	      		timer = setInterval(update, timer_ms);
 	      	}
 	      	ready_now ++;
-        	return response;
+        	handle_msgs(cache_filename, response, results_count);
 	      }else if(xhr_request_cache.status === 404){
 	      	return false;
 	      }
 	    }
 	};
 	xhr_request_cache.open( 'GET', req_url, true );
-	if(data_type == 'json')
-		xhr_request_cache.setRequestHeader("Content-Type", "application/json");
-	else if(data_type == 'xml')
-		xhr_request_cache.setRequestHeader("Content-Type", "application/xml");
+	// if(data_type == 'json')
+	// 	xhr_request_cache.setRequestHeader("Content-Type", "application/json");
+	// else if(data_type == 'xml')
+	// 	xhr_request_cache.setRequestHeader("Content-Type", "application/xml");
+	xhr_request_cache.setRequestHeader("Content-Type", "application/"+data_type);
 	xhr_request_cache.send();
 }
 
