@@ -1,11 +1,39 @@
 <script type="text/javascript">
+
+/*
+    date / time
+*/
+
+Date.prototype.today = function () { 
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return days[this.getDay()] + " " + this.getDate() + " " + months[this.getMonth()] + " " + this.getFullYear();
+}
+
+Date.prototype.now = function () {
+     return this.hour() + ":" + this.minute() +":"+ this.second();
+}
+
+Date.prototype.hour = function () {
+     return ((this.getHours() < 10)?"0":"") + this.getHours();
+}
+
+Date.prototype.minute = function () {
+     return ((this.getMinutes() < 10)?"0":"") + this.getMinutes();
+}
+
+Date.prototype.second = function () {
+    return ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+}
+
+function get_time(){
+    var d = new Date();
+	return [d.today().toUpperCase(), d.now().toUpperCase()];
+}
+
 var now = new Date();
-var now_hr = now.getHours();
-var now_min = now.getMinutes();
-if(now_hr < 10)
-	now_hr = "0"+now_hr;
-if(now_min < 10)
-	now_min = "0"+now_min;
+var now_hr = now.hour();
+var now_min = now.minute();
 
 var req_array = [
 	{	
@@ -39,26 +67,6 @@ var req_array = [
         'results_count': ''
 	}
 ];
-
-/*
-    date / time
-*/
-
-Date.prototype.today = function () { 
-    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    return days[this.getDay()] + " " + this.getDate() + " " + months[this.getMonth()] + " " + this.getFullYear();
-}
-
-Date.prototype.now = function () {
-     return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
-}
-
-function get_time(){
-    var d = new Date();
-	// now.setTime(now.getTime()+now.getTimezoneOffset()*60*1000); // EST
-	return [d.today().toUpperCase(), d.now().toUpperCase()];
-}
 
 var now_msg = get_time();
 var msgs = [], 
@@ -120,7 +128,6 @@ var ready_full = req_array.length;
 function handle_msgs(name, response, results_count = false){
 	if(results_count == '')
 		results_count = false;
-
 	var response = response;
 	var this_msgs = [];
 	// opening msg for each section;
@@ -128,7 +135,6 @@ function handle_msgs(name, response, results_count = false){
 		// console.log('updaing new-york-times');
 		this_msgs = [' from the NYTimes : ' + msgs_break ];
 		response = response['results'] ;
-
 		for(i = 0 ; i < results_count ; i++){
 			var this_msg = response[i]['title'];
 			if(typeof this_msg != 'undefined')
@@ -144,7 +150,6 @@ function handle_msgs(name, response, results_count = false){
 				break;
 			}
 		}
-
 		this_msgs.push('Positive cases: '+response['positive']);
 		this_msgs.push(' Negative cases: '+response['negative']);
 		this_msgs.push(' Currently hospitalized cases: '+response['hospitalizedCurrently']);
@@ -156,6 +161,7 @@ function handle_msgs(name, response, results_count = false){
         	this_msg += response[i]['descriptor']+' is reported around '+response[i]['landmark']+' ';
         	this_msgs.push( msgs_break+this_msg.toUpperCase() );
         }
+
 	}else if(name == 'temp'){
 		var oParser = new DOMParser();
 		var oDOM = oParser.parseFromString(response, "application/xml");
@@ -163,7 +169,6 @@ function handle_msgs(name, response, results_count = false){
 		var temp_f = oDOM.getElementsByTagName('temp_f')[0].innerHTML;
 		var temp_c = oDOM.getElementsByTagName('temp_c')[0].innerHTML;
 		var wind_string = oDOM.getElementsByTagName('wind_string')[0].innerHTML;
-
 		this_msgs.push( ' Currently ' + temp_f + '°....' + msgs_break );
 		this_msgs.push( ' Winds ' + wind_string + msgs_break );
 
@@ -214,5 +219,4 @@ function update_msgs_opening(){
 	msgs_opening_2 = msgs_opening_2.join('');
 	msgs_opening = msgs_opening_1.concat(msgs_opening_2, msgs_opening_3);
 }
-
 </script>
