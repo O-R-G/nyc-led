@@ -9,19 +9,15 @@ Date.prototype.today = function () {
     var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return days[this.getDay()] + " " + this.getDate() + " " + months[this.getMonth()] + " " + this.getFullYear();
 }
-
 Date.prototype.now = function () {
      return this.hour() + ":" + this.minute() +":"+ this.second();
 }
-
 Date.prototype.hour = function () {
      return ((this.getHours() < 10)?"0":"") + this.getHours();
 }
-
 Date.prototype.minute = function () {
      return ((this.getMinutes() < 10)?"0":"") + this.getMinutes();
 }
-
 Date.prototype.second = function () {
     return ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
 }
