@@ -162,5 +162,4 @@ $query_bg_color = hex_to_rgb ( $query_bg_color );
     var sBody = document.body;
     sBody.style.background = 'rgb('+query_bg_color+')';
 </script>
-<!-- <script src='/static/js/matrix.js'></script> -->
-<script src='/static/js/matrix-dom.js'></script>
+<script src='/static/js/matrix.js'></script>
