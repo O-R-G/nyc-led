@@ -37,7 +37,7 @@ var req_array = [
 		'req_url': 'https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=FJ5pNfQtwlkTP27jg62s2De8IM0Ozvjk', 
 		'data_type': 'json',
         'results_count': 3,
-        'use_header': true
+        'use_header': false
 	},
 	{	
 		'name': 'covidtracking',
