@@ -1,6 +1,3 @@
-<?
-
-?>
 <script type="text/javascript">
 var now = new Date();
 var now_hr = now.getHours();
@@ -43,14 +40,27 @@ var req_array = [
 	}
 ];
 
+/*
+    date / time
+*/
 
-// preparing current date + time
-var month_names = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "Jun.",
-  "Jul.", "Aug.", "Sep.", "Oct.", "Nov.", "Dec."
-];
+Date.prototype.today = function () { 
+    var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return days[this.getDay()] + " " + this.getDate() + " " + months[this.getMonth()] + " " + this.getFullYear();
+}
+
+Date.prototype.now = function () {
+     return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+}
+
+function get_time(){
+    var d = new Date();
+	// now.setTime(now.getTime()+now.getTimezoneOffset()*60*1000); // EST
+	return [d.today().toUpperCase(), d.now().toUpperCase()];
+}
 
 var now_msg = get_time();
-
 var msgs = [], 
 	msgs_temp = [];
 var msgs_array = [], 
@@ -71,12 +81,13 @@ msgs_opening_1.push('NEW YORK CONSOLIDATED');
 msgs_opening_1.push('                     '); 
 msgs_opening_1.push('                     '); 
 msgs_opening_1.push('                     '); 
-msgs_opening_1.push('                     '); 
-msgs_opening_1.push('                     '); 
 msgs_opening_1 = msgs_opening_1.join('');
 msgs_opening_2.push(now_msg[0]); 
 msgs_opening_2.push(now_msg[1]); 
+msgs_opening_2.push('–––––––––––––––––––––'); 
+msgs_opening_2.push('—————————————————————'); 
 msgs_opening_2 = msgs_opening_2.join('');
+/*
 msgs_opening_3.push('Nueva York           '); 
 msgs_opening_3.push('Consolidada          '); 
 msgs_opening_3.push('紐約合作基金會              '); 
@@ -87,6 +98,8 @@ msgs_opening_3.push('...........hello?....');
 msgs_opening_3.push('....:)...............');
 msgs_opening_3 = msgs_opening_3.join('');
 msgs_opening = msgs_opening_1.concat(msgs_opening_2, msgs_opening_3);
+*/
+msgs_opening = msgs_opening_1.concat(msgs_opening_2);
 
 var msgs_mid = {};
 var msgs_ending = ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
@@ -186,7 +199,6 @@ function update_msgs(){
 	msg_temp = msgs_temp.substr(pointer,columns*rows).split('');
 	msgs_temp = msgs_temp.toUpperCase();
 	msgs_temp = msgs_temp.split('');
-	
 }
 
 // this is different from update_msgs() (at least for now)
@@ -197,49 +209,10 @@ function update_msgs_opening(){
 	msgs_opening_2 = [];
 	msgs_opening_2.push(now_msg[0]); 
 	msgs_opening_2.push(now_msg[1]); 
+    msgs_opening_2.push('–––––––––––––––––––––'); // en-dash (S)
+    msgs_opening_2.push('—————————————————————'); // em-dash (L)
 	msgs_opening_2 = msgs_opening_2.join('');
 	msgs_opening = msgs_opening_1.concat(msgs_opening_2, msgs_opening_3);
-}
-
-function get_time(){
-	var now = new Date();
-	// set the time to EST
-	now.setTime(now.getTime()+now.getTimezoneOffset()*60*1000);
-	var offset = -300; //Timezone offset for EST in minutes.
-	var now_est = new Date(now.getTime() + offset*60*1000);
-	if(now_est.getHours() >= 12){
-		var m = 'p.m.';
-	}else{
-		var m = 'a.m.';
-	}
-	now_est_hours = now_est.getHours();
-	now_est_mins = now_est.getMinutes();
-	now_est_secs = now_est.getSeconds();
-	if(now_est_hours < 10)
-		now_est_hours = "0"+now_est_hours;
-	if(now_est_mins < 10)
-		now_est_mins = "0"+now_est_mins;
-	if(now_est_secs < 10)
-		now_est_secs = "0"+now_est_secs;
-
-	var now_msg_date = month_names[now_est.getMonth()]+' '+
-					now_est.getDay()+', '+
-					now_est.getFullYear();
-	var now_msg_time = now_est_hours+':'+
-						now_est_mins+':'+
-						now_est_secs+' '+m;
-	var row_char_num = 21;
-	var char_difference = 21 - now_msg_date.length;
-	for(i = 0 ; i < char_difference ; i++){
-		now_msg_date += ' ';
-	}
-	char_difference = 21 - now_msg_time.length;
-	for(i = 0 ; i < char_difference ; i++){
-		now_msg_time += ' ';
-	}
-	now_msg_date = now_msg_date.toUpperCase();
-	now_msg_time = now_msg_time.toUpperCase();
-	return [now_msg_date, now_msg_time];
 }
 
 </script>
