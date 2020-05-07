@@ -111,7 +111,7 @@ msgs_opening_3.push('....:)...............');
 msgs_opening_3 = msgs_opening_3.join('');
 msgs_opening = msgs_opening_1.concat(msgs_opening_2, msgs_opening_3);
 */
-msgs_sections['opening']['string'] = msgs_sections['opening'][0].concat(msgs_sections['opening'][1]);
+// msgs_sections['opening']['string'] = msgs_sections['opening'][0].concat(msgs_sections['opening'][1]);
 
 // msgs_sections[1] = msgs_mid and is an object.
 msgs_sections['mid'] = {};
