@@ -38,7 +38,7 @@ var req_array = [
 		'data_type': 'json',
         'results_count': 3,
         'use_header': false,
-        'cache_lifecycle': 10
+        'cache_lifecycle': 1
 	},
 	{	
 		'name': 'covidtracking',
@@ -72,6 +72,32 @@ var req_array = [
         'use_header': false,
         'cache_lifecycle': false
 	}
+	,{
+		'name':'population',
+		'req_url': 'https://data.cityofnewyork.us/resource/xywu-7bv9.json',
+		'data_type': 'json',
+		'results_count': '',
+		'use_header': false,
+		'cache_lifecycle': 1440
+	}
+	,{
+		'name':'hotspot',
+		'req_url': 'https://data.cityofnewyork.us/resource/varh-9tsp.json',
+		'data_type': 'json',
+		'results_count': '',
+		'use_header': false,
+		'cache_lifecycle': 1440
+	}
+	,{
+		'name':'restaurant-inspection',
+		'req_url': 'https://data.cityofnewyork.us/resource/43nn-pn8j.json',
+		'data_type': 'json',
+		'results_count': '',
+		'use_header': false,
+		'cache_lifecycle': 1440
+	}
+
+	
 ];
 
 var now_msg = get_time();
@@ -90,7 +116,6 @@ msgs_opening_1.push('•••••••••••••••••••�
 msgs_opening_1.push('•••••••••••••••••••••');    // bullet (L)
 */
 
-// msgs_sections[0] = opening
 msgs_sections['opening'] = [];
 msgs_sections['opening'][0] = [];
 msgs_sections['opening'][0].push('NEW YORK CONSOLIDATED'); 
@@ -116,12 +141,9 @@ msgs_opening_3.push('....:)...............');
 msgs_opening_3 = msgs_opening_3.join('');
 msgs_opening = msgs_opening_1.concat(msgs_opening_2, msgs_opening_3);
 */
-// msgs_sections['opening']['string'] = msgs_sections['opening'][0].concat(msgs_sections['opening'][1]);
 
-// msgs_sections[1] = msgs_mid and is an object.
 msgs_sections['mid'] = {};
 
-// msgs_sections[2] = ending;
 msgs_sections['ending'] = ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
 var msgs_break = '///';
 
@@ -171,7 +193,6 @@ function handle_msgs(name, response, results_count = false){
 			this_msgs.push('Currently hospitalized cases: '+response['hospitalizedCurrently'] + msgs_break+' ');
 
 	}else if(name == '311'){
-		// console.log('updating 311');
 		for(i = 0 ; i < response.length ; i++){
         	var this_msg = ' from '+response[i]['agency']+': ';
         	this_msg += response[i]['descriptor']+' is reported around '+response[i]['landmark']+' ';
@@ -190,10 +211,47 @@ function handle_msgs(name, response, results_count = false){
 		if(typeof wind_string != 'undefined')
 			this_msgs.push( ' Winds ' + wind_string.innerHTML + msgs_break );
 
-	}else if(name == 'train'){
-
+	}
+	else if(name == 'train'){
 		this_msgs = [' There is a train arriving now at : ' + response['result'][0]['name'] + ". " + msgs_break ];
+	}
+	else if(name == 'population'){
 
+		// console.log(response[0]);
+		this_msgs = [' Total population in NYC: ' + response[0]['_2020']+". " + msgs_break ];
+		for(i = 1 ; i <response.length ; i++ ){
+			this_msgs.push(' Population in ' + response[i]['borough'].replace('   ', '') + ": " + response[i]['_2020']+"("+response[i]['_2020_boro_share_of_nyc_total']+"%)"+msgs_break );
+		}
+	}
+	else if(name == 'hotspot'){
+		var index = parseInt( response.length * Math.random() );
+		var data_count = 0;
+		this_msgs = [];
+		while(data_count < 1){
+			
+			if(response[index]['type'] == 'Free'){
+				this_msgs.push(' Free public hotspot "'+response[index]['ssid']+'" at '+response[index]['location']);
+				data_count++;
+			}
+			index = parseInt( response.length * Math.random() );
+			
+		}
+	}
+	else if(name == 'restaurant-inspection'){
+		var index = parseInt( response.length * Math.random() );
+		var data_count = 0;
+		this_msgs = [];
+		this_msgs = [' From DOHMH New York City Restaurant Inspection Results : ' ];
+		
+		while(data_count < 1){
+			if(response[index]['critical_flag'] == 'N' && response[index]['grade'] == 'A'){
+				this_msgs.push(response[index]['dba'] + ' on '+ response[index]['street']+' is graded as A. '+msgs_break);
+				data_count++;
+			}
+			index = parseInt( response.length * Math.random() );
+			
+		}
+		console.log(this_msgs);
 	}
 	msgs_sections['mid'][name] = this_msgs;
 	

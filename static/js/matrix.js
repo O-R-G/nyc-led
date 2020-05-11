@@ -114,9 +114,10 @@ function update() {
         if (pointer >= msgs.length){
             pointer = 0;
             isBeginning = true;
+            call_request_json();
         }
         // update_msgs();
-        call_request_json();
+        call_update_cache_mtime();
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         timer = false;
         updates = 0;
