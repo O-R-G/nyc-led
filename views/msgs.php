@@ -37,35 +37,40 @@ var req_array = [
 		'req_url': 'https://api.nytimes.com/svc/news/v3/content/all/all.json?api-key=FJ5pNfQtwlkTP27jg62s2De8IM0Ozvjk', 
 		'data_type': 'json',
         'results_count': 3,
-        'use_header': false
+        'use_header': false,
+        'cache_lifecycle': 10
 	},
 	{	
 		'name': 'covidtracking',
 		'req_url': 'https://covidtracking.com/api/v1/states/current.json', 
 		'data_type': 'json',
         'results_count': '',
-        'use_header': true
+        'use_header': true, 
+        'cache_lifecycle': 10
 	},
 	{	
 		'name': '311',
 		'req_url': 'https://data.cityofnewyork.us/resource/erm2-nwe9.json?$$app_token=LTyWtvrOoHffWyAwXcdEIQDup&$limit=2', 
 		'data_type': 'json',
         'results_count': '',
-        'use_header': true
+        'use_header': true,
+        'cache_lifecycle': 10
 	},
 	{	
 		'name': 'train',
 		'req_url': "https://mtaapi.herokuapp.com/times?hour="+now_hr+"&minute="+now_min,
 		'data_type': 'json',
         'results_count': '',
-        'use_header': false
+        'use_header': false,
+        'cache_lifecycle': 1
 	},
 	{	
 		'name': 'temp',
 		'req_url': 'https://w1.weather.gov/xml/current_obs/KNYC.xml', 
 		'data_type': 'xml',
         'results_count': '',
-        'use_header': false
+        'use_header': false,
+        'cache_lifecycle': false
 	}
 ];
 
@@ -133,7 +138,7 @@ var ready_now = 0;
 var ready_full = req_array.length;
 
 function handle_msgs(name, response, results_count = false){
-	console.log('handle_msgs...'+name);
+	// console.log('handle_msgs...'+name);
 	if(results_count == '')
 		results_count = false;
 	var response = response;
@@ -178,7 +183,6 @@ function handle_msgs(name, response, results_count = false){
 		var oDOM = oParser.parseFromString(response, "application/xml");
 		var current = oDOM.getElementsByTagName('weather')[0];
 		var temp_f = oDOM.getElementsByTagName('temp_f')[0];
-		console.log(temp_f.innerHTML);
 		var temp_c = oDOM.getElementsByTagName('temp_c')[0];
 		var wind_string = oDOM.getElementsByTagName('wind_string')[0];
 		if(typeof temp_f != 'undefined')
@@ -201,7 +205,7 @@ function shuffle(array) {
 }
 
 function update_msgs(isBegining = false){
-	console.log('update_msgs...');
+	// console.log('update_msgs...');
 	msgs_mid_array = Object.keys(msgs_sections['mid']).map(function (key) { 
         return msgs_sections['mid'][key]; 
     }); 
