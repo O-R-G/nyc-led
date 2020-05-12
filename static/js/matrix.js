@@ -1,38 +1,21 @@
 /*
     new york consolidated
-    matrix rain flipboard
+    matrix flipboard
 
-    adapted from https://codepen.io/P3R0/pen/MwgoKv
-    now using d-o-m instead of canvas
+    from query string:
+    query_bg_color    
+    query_color_changing    
+    query_color_settled
+    query_rows
+    query_columns
+    query_font_size        
+    query_font
 
-    msgs[]      all messages assembled, indexed
-                array passed from .php
-    words[]     words in a message              // unused
-                array split from each msgs[]
-    letters[]   letters in a word
-                array split from each words[]
-    msg?    
+    from msgs.js:
+    msg[]       text to be shown
 
-    build msg
-    compare msgs[current] to number of characters available
-    assemble msg which fits in rows * columns characters
-    pad strings as necc w/_ or + or * or .
-
-    values passed from html query:
-
-        query_bg_color
-        query_color_changing
-        query_color_settled
-        query_rows
-        query_columns
-        query_font_size
-        query_font
-
-    values passed from php
-
-        msgs
-        letters
-        words       // unused ----> ** fix **
+    currently triggered from static/js/json.js:
+    var timer = setInterval(update, timer_ms);
 */
 
 var rows = query_rows;                  // [4] 
@@ -49,28 +32,28 @@ var updates_max = 50;       // times to try to match letter [50]
 var pointer = 0;
 
 var d = document.getElementById('d');
-
 // ** fix **  ----->
 // currently uses letter-spacing to accommodate (in main.css)
 // could use proportion of the letter to do the same thing
 // then possibly adjust letter-spacing after that
 d.style.width = font_size * columns + 'px';     // ** fix **
 d.style.height = font_leading * rows + 20 + 'px';  // ** fix **
-
-d.style.fontSize = font_size + 'px';
-// d.style.backgroundColor = '#00F';        // debug
-d.innerHTML = '••••••••••••••••••';   
+d.style.fontSize = font_size + 'px'; 
+d.innerHTML = '••••••••••••••••••'; 
 d.onclick = stop_start;
 
 var mask = document.getElementById('mask');
 mask.style.height = d.style.height;
-mask.style.width = d.style.width;         
+mask.style.width = d.style.width;
 
-// this has to do with how it reloads ... ** fix **
-var isBeginning = true;     /* fix */
+var isBeginning = true;     
 
 function update() {
     // init * should this be moved? *
+    // isBeginning is the problem, likely to do with variable closure
+    // in setInterval calls
+    console.log(isBeginning);
+
     if(isBeginning){
         update_msgs_opening();
         update_msgs(isBeginning);
@@ -80,39 +63,51 @@ function update() {
         isBeginning = false;
     }
 
-// ** debug **
-// this is drawing in funny places on screen ** fix **
-// the issue is to do with length of msg[] and length of letters[]
-// and seems to happen in consistent positions
-console.log(msg.join('').length + ' : ' + msg.join(''));
+// html swallows the repeated spaces
+// even though css white-space: pre-wrap
+// so replace every ' ' with \xa0
+// \xa0 == non-breaking space (&nbsp)
+// ugly way for now, before reworking 
+// update_msgs() and update_msgs_opening()
+
+// now does not match on \xa0 when comparing to ' ' below
+// damn!
+
+// msg_str = msg.join('').replace(/ /g, '\xa0');
+msg_str = msg.join('').replace(/ /g, '•');
+msg = msg_str.split('');
+// console.log(msg_str);
+// console.log(msg);
 
     // display, compare to random letter
     var i;          
     for (var y = 0; y < rows; y++) {
         for (var x = 0; x < columns; x++) {
             i = (y * columns) + x;
-// -----> ** fix **
-// if past the length of letters, then fill in with a blank?
             if ((letters[i] !== msg[i]) && (updates <= updates_max)) {
                 letters[i] = msgs[Math.floor(Math.random()*msgs.length)];   // one random char
             } else {
-                letters[i] = msg[i];                
+                // letters[i] = msg[i];                
+                letters[i] = i % 10;
 
 // ** debug **
+// so this above is not counting the right numbers when working through ... 
+// actually just not drawing the correct number of columns
+// which was juryrigged above using letterspacing so also need to sort that
+// maybe is ignoring spaces?
 // these are the consistent positions (see above)
 // first column of each row
-if ((i == 21) || (i == 42) || (i == 63))
-    console.log('---->' + i + ' : ' + letters[i]);
+    
+// if ((i == 21) || (i == 42) || (i == 63))
+//     console.log('---->' + i + ' : ' + letters[i]);
 
-                // if(i >= letters.length - 1)
-                    // letters[i] = 'x';
                 if(typeof letters[i] == 'undefined')
                     letters[i] = '•';
             }
         }
     }
 
-// check / compare speed ----> ** fix **
+    // check / compare speed ----> ** fix **
     // d.innerText = letters.join('');
     d.innerHTML = letters.join('');
 
@@ -124,20 +119,18 @@ if ((i == 21) || (i == 42) || (i == 63))
         pointer += msg.length;
         if (pointer >= msgs.length){
             pointer = 0;
+// never gets here on the last one ... 
+// may have to do with collapsing whitespace and removing blanks at end-of-line
             isBeginning = true;
             call_request_json();
         }
-// ----> ** fix **
-        // update_msgs();
         call_update_cache_mtime();
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         timer = false;
         updates = 0;
+
     } else
         updates++;
-
-// how when to reload?
-// maybe above
 }
 
 function stop_start() {
@@ -150,9 +143,3 @@ function stop_start() {
         timer = false;
     }
 }
-
-// ** fix ** -----> 
-// how does this start now?
-// > grep -rE 'setInterval' *
-// start
-// var timer = setInterval(update, timer_ms);

@@ -115,7 +115,7 @@ function update_cache(cache_filename = '', response, data_type, now_timestamp){
 	    var xhr_update_cache = new ActiveXObject("Microsoft.XMLHTTP");
 	}
 
-	xhr_update_cache.open( 'POST', 'views/receive_cache.php', true );
+	xhr_update_cache.open( 'POST', 'views/receive-cache', true );
 	// if(data_type == 'json'){
 	// 	xhr_update_cache.setRequestHeader("Content-Type", "application/json");
 	// 	response = JSON.stringify(response);
