@@ -1,80 +1,209 @@
-function request_json_api(json_host, endpoint, argument, cache = false){
-	if (cache) {
-        var doc_root = _SERVER["DOCUMENT_ROOT"]."/";
-        var json = json_cached_api_results(doc_root . '/static/data/' . endpoint . '/' . argument . '.json', json_host . '/' . endpoint . '/' . argument);
-    } else {
-        var json = request_json(json_host . '/' . endpoint . '/' . argument);
-    }
-    return json;
-}
+/*
+    request json with local cache compare
+*/
 
-function request_json(endpoint) {
-    arrContextOptions=array(
-        "ssl"=>array(
-            "verify_peer"=>false,
-            "verify_peer_name"=>false,
-        ),
-    );
-    data = @file_get_contents(endpoint, false, stream_context_create(arrContextOptions));
-    json = json_decode(data);
-    return json;
-}
-
-function build_json_date(date, days) {
-
-    // drupal url format : YYYY-MM-DD
-    // drupal url ranges : YYYY-MM-DD--YYYY-MM-DD
-
-    date_formatted = date('d-m-Y', strtotime(date));
-    date_exploded = explode("-", date_formatted);
-    date = date_exploded[2] . '-' . date_exploded[1] . '-' . date_exploded[0];
-    if (days > 0)
-        date .= '--' . date('Y-m-d', strtotime(date . ' +' . days . ' days'));
+Date.prototype.addDays = function(days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
     return date;
 }
 
-function json_cached_api_results( cache_file = NULL, url = NULL, expires = NULL ) {
-	global request_type, purge_cache, limit_reached, request_limit;
+// required and passed from json.php
+// should check if exist and if not give default values
+// var document_root
+// var cache_filenames 
+// var cache_mtime 
 
-	if( !cache_file ) cache_file = dirname(__FILE__) . '/api-cache.json';
-	if( !expires) expires = time() - 2*24*60*60;      // 2 days
-	// if( !expires) expires = time() - 2*60*60;      // 2 hrs
-	// if( !expires) expires = time() - 1*60*60;      // 1 hr
-	// if( !expires) expires = time() - 10*60;        // 10 min
-	// if( !expires) expires = time() - 2*60;         // 2 min (dev)
-	// if( !expires) expires = time() - 1*60;         // 1 min (dev)
+// check if a data is already in cache, 
+// if it is, stop requesting cache.
+// but it will keep requesting live once the lifecycle is due.
+var cache_status = {};
+for (const p in cache_mtime){
+	cache_status[p] = false;
+}
 
-	if( !file_exists(cache_file) ) {
-
-	    api_results = request_json(url);
-		json_results = json_encode(api_results);
-
-		// Remove cache file on error to avoid writing wrong xml
-		if ( api_results && json_results )
-			file_put_contents(cache_file, json_results);
-		else
-			unlink(cache_file);
+function request_json(name, request_url, data_type, results_count = false, use_header = true, cache_lifecycle = false) {
+    var json = '';
+    var hasCache = ( cache_filenames.indexOf(name+'.'+data_type) != -1 ) ? true : false;
+    var this_mtime = cache_mtime[name+'.'+data_type];
+    var now_timestamp = new Date().getTime();
+    now_timestamp = parseInt(now_timestamp/1000); // ms to s
+    
+    if(cache_lifecycle){
+    	cache_lifecycle = cache_lifecycle * 60;
+    	// update_cache_mtime(name, data_type);
+    	
     }
 
-	// Check that the file is older than the expire time and that it's not empty
-	if ( filectime(cache_file) < expires || file_get_contents(cache_file)  == '' || purge_cache && intval(_SESSION['views']) <= request_limit ) {
-    if (!url) die ("Missing URL");
-		// File is too old, refresh cache
-		api_results = request_json(url);
-		json_results = json_encode(api_results);
+    if( (cache_lifecycle && now_timestamp - this_mtime > cache_lifecycle) || !cache_lifecycle || !hasCache){
+    	// if has cache lifecycle and cache expired
+    	// or cache lifecycle is not specified
+    	// or cache doesn't exist
+		// request live data
+		request_live(name, request_url, data_type, results_count, use_header, hasCache, now_timestamp);
 
-		// Remove cache file on error to avoid writing wrong xml
-		if ( api_results && json_results )
-			file_put_contents(cache_file, json_results);
-		else
-			unlink(cache_file);
-	} else {
-		// Check for the number of purge cache requests to avoid abuse
-		if( intval(_SESSION['views']) >= request_limit )
-			limit_reached = " <span class='error'>Request limit reached (request_limit). Please try purging the cache later.</span>";
-		// Fetch cache
-		json_results = file_get_contents(cache_file);
-		request_type = 'JSON';
-	}
-	return json_decode(json_results);
+    }else{
+    	// request 
+
+    	request_cache(name, data_type, results_count);
+    }
 }
+
+function request_live(name, request_url, data_type,results_count = false, use_header = true, hasCache, now_timestamp, cache_lifecycle = false){
+	var counter = 0;
+	var counter_max = 3;
+	
+	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+	    var httpRequest = new XMLHttpRequest();
+	} else if (window.ActiveXObject) { // IE 6 and older
+	    var httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	httpRequest.onreadystatechange = function(){
+		
+		if (httpRequest.readyState === XMLHttpRequest.DONE) {
+			
+	      if (httpRequest.status === 200) {	
+	      	// if(counter > counter_max && hasCache && cache_lifecycle){
+	      	// 	console.log('reaches maximum');
+	      	// 	request_cache(name, data_type, results_count);
+	      	// }
+      		
+      		if(data_type == 'json'){
+      			var response = JSON.parse(httpRequest.responseText);
+      		}else if(data_type == 'xml'){
+      			var response = httpRequest.responseText;
+      		}
+      		if(response){
+      			now_timestamp = new Date().getTime();
+    			now_timestamp = parseInt(now_timestamp/1000); // ms to s
+      			update_cache(name, response, data_type, now_timestamp); // updat
+      			if(ready_now == 2){
+      				timer = setInterval(update, timer_ms);
+      			}
+      			ready_now ++;
+	        	handle_msgs(name, response, results_count); // static/js/msg.js
+	        	cache_mtime[name+'.'+data_type] = now_timestamp;
+	        	if(name == 'new-york-times'){
+	        		console.log('now is '+now_timestamp);
+	        		console.log('fetching live data for '+name);
+	        		console.log(name+' cache time = '+cache_mtime[name+'.'+data_type]);
+	        	}
+      		}
+	      	counter++;
+	      } else {
+	      	if(hasCache){
+	      		console.log('status !== 200, use cached file for '+name);
+	      		request_cache(name, data_type, results_count);
+	      	}else{
+	      		console.log('please check the request url');
+	      	}
+	      }
+	    }
+	};
+	httpRequest.open('GET', request_url);
+	if(use_header)
+		httpRequest.setRequestHeader('Content-Type', 'application/'+data_type);
+
+	httpRequest.send();
+}
+
+function update_cache(cache_filename = '', response, data_type, now_timestamp){
+	// console.log('update cache: sending json to server...');
+	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+	    var xhr_update_cache = new XMLHttpRequest();
+	} else if (window.ActiveXObject) { // IE 6 and older
+	    var xhr_update_cache = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xhr_update_cache.open( 'POST', 'views/receive_cache.php', true );
+	// if(data_type == 'json'){
+	// 	xhr_update_cache.setRequestHeader("Content-Type", "application/json");
+	// 	response = JSON.stringify(response);
+	// }else if(data_type == 'xml')
+	// 	xhr_update_cache.setRequestHeader("Content-Type", "application/xml");
+	xhr_update_cache.setRequestHeader("Content-Type", "application/"+data_type);
+	// if(data_type == 'json')
+	// 	response = JSON.stringify(response);
+	var data = {
+		"cache_filename": cache_filename, 
+		"response": response, 
+		"data_type": data_type
+	};
+	data = JSON.stringify(data);
+	xhr_update_cache.send(data);
+	cache_mtime[cache_filename+'.'+data_type] = now_timestamp;
+}
+
+function request_cache(cache_filename = '', data_type, results_count = false){
+	// console.log('requesting cache for '+cache_filename);
+	// if(!cache_status[cache_filename]){
+	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+	    var xhr_request_cache = new XMLHttpRequest();
+	} else if (window.ActiveXObject) { // IE 6 and older
+	    var xhr_request_cache = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	var req_url = 'static/data/'+cache_filename+'.'+data_type;
+	// console.log(req_url);
+	xhr_request_cache.onreadystatechange = function(){
+		if (xhr_request_cache.readyState === XMLHttpRequest.DONE) {
+	      if (xhr_request_cache.status === 200) {	
+	      	var response = xhr_request_cache.responseText;
+	      	// console.log(response);
+	      	response = JSON.parse(response);
+	      	if(ready_now == 2){
+	      		timer = setInterval(update, timer_ms);
+	      	}
+	      	if(ready_now <= 2)
+	      		ready_now ++;
+	      	var this_last_updated = xhr_request_cache.getResponseHeader("Last-Modified");
+	      	this_last_updated = parseInt(new Date(this_last_updated).getTime()/1000);
+	      	// console.log(cache_filename);
+	      	// console.log(this_last_updated == cache_mtime[cache_filename]);
+	      	if(this_last_updated != cache_mtime[cache_filename+'.'+data_type]){
+	      		
+	      		
+	      		cache_mtime[cache_filename+'.'+data_type] = this_last_updated;
+	      		if(cache_filename == 'new-york-times'){
+	      			console.log('update from cache for '+cache_filename);
+	      			console.log('new cache mtime = '+cache_mtime[cache_filename+'.'+data_type]);
+	      		}
+	      	}
+	      	handle_msgs(cache_filename, response, results_count);
+
+        	
+        	// cache_status[cache_filename] = true;
+	      }else if(xhr_request_cache.status === 404){
+	      	return false;
+	      }
+	    }
+	};
+	xhr_request_cache.open( 'GET', req_url, true );
+	xhr_request_cache.setRequestHeader("Content-Type", "application/"+data_type);
+	xhr_request_cache.send();
+	// }
+}
+
+function update_cache_mtime(cache_filename, data_type){
+	var req_url = 'static/data/'+cache_filename+'.'+data_type;
+	
+	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+	    var xhr_update_mtime = new XMLHttpRequest();
+	} else if (window.ActiveXObject) { // IE 6 and older
+	    var xhr_update_mtime = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xhr_update_mtime.onreadystatechange = function(){
+		if (xhr_update_mtime.readyState === XMLHttpRequest.DONE) {
+	      if (xhr_update_mtime.status === 200) {	
+	      	var this_last_updated = xhr_update_mtime.getResponseHeader("Last-Modified");
+	      	this_last_updated = parseInt(new Date(this_last_updated).getTime()/1000);
+	      	cache_mtime[cache_filename+'.'+data_type] = this_last_updated;
+	      }
+	    }
+	};
+	xhr_update_mtime.open( 'GET', req_url, true );
+	xhr_update_mtime.setRequestHeader("Content-Type", "application/"+data_type);
+	xhr_update_mtime.send();
+}
+
+
+

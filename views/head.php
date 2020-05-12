@@ -34,6 +34,53 @@ if ($title)
 else
     $title = $site_name;
 
+// query strings    ** dev **
+$query_color_changing = $_GET['color_changing'];
+if($query_color_changing == NULL)
+    $query_color_changing = '#FF0';
+else
+    $query_color_changing = '#'.$query_color_changing;
+$query_color_settled = $_GET['color_settled'];
+if($query_color_settled == NULL)
+    $query_color_settled = '#FF0';
+else
+    $query_color_settled = '#'.$query_color_settled;
+$query_rows = $_GET['rows'];
+if($query_rows == NULL)
+    $query_rows = 4;
+$query_columns = $_GET['columns'];
+if($query_columns == NULL)
+    $query_columns = 21;
+$query_bg_color = $_GET['bg_color'];
+if($query_bg_color == NULL)
+    $query_bg_color = '#000';
+else
+    $query_bg_color = '#'.$query_bg_color;
+$query_font = $_GET['font'];
+if($query_font == NULL)
+    $query_font = 'helveticaautospaced';
+$query_font_size = $_GET['font_size'];
+if($query_font_size == NULL)
+    $query_font_size = '18';
+$query_bg_color = hex_to_rgb ( $query_bg_color );
+function hex_to_rgb( $colour ) {
+    if ( $colour[0] == '#' ) {
+            $colour = substr( $colour, 1 );
+    }
+    if ( strlen( $colour ) == 6 ) {
+            list( $r, $g, $b ) = array( $colour[0] . $colour[1], $colour[2] . $colour[3], $colour[4] . $colour[5] );
+    } elseif ( strlen( $colour ) == 3 ) {
+            list( $r, $g, $b ) = array( $colour[0] . $colour[0], $colour[1] . $colour[1], $colour[2] . $colour[2] );
+    } else {
+            return false;
+    }
+    $r = hexdec( $r );
+    $g = hexdec( $g );
+    $b = hexdec( $b );
+    // return array( 'red' => $r, 'green' => $g, 'blue' => $b );
+    return $r.', '.$g.', '.$b;
+}
+
 $devhash = rand();  // to force .css reloads
 
 ?><!DOCTYPE html>
@@ -53,3 +100,19 @@ $devhash = rand();  // to force .css reloads
         <!-- <script src = 'static/js/msgs.js'></script> -->
     </head>
     <body>
+    <script>
+        // query strings -> js variables
+        // json_encode outputs quotes around each val in array[]
+        // so no additional quotes here to pass as array to js
+        // msgs_array = <?= json_encode($msgs_array); ?>;
+        // needs to be invoked after document body loads
+        var query_color_changing = "<? echo $query_color_changing; ?>";
+        var query_color_settled = "<? echo $query_color_settled; ?>";
+        var query_rows = "<? echo $query_rows; ?>";
+        var query_columns = "<? echo $query_columns; ?>";
+        var query_bg_color = "<? echo $query_bg_color; ?>";
+        var query_font = "<? echo $query_font; ?>";
+        var query_font_size = "<? echo $query_font_size; ?>";
+        var sBody = document.body;
+        sBody.style.background = 'rgb('+query_bg_color+')';
+    </script>

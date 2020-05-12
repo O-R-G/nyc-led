@@ -7,7 +7,7 @@
 
     msgs[]      all messages assembled, indexed
                 array passed from .php
-    words[]     words in a message
+    words[]     words in a message              // unused
                 array split from each msgs[]
     letters[]   letters in a word
                 array split from each words[]
@@ -32,7 +32,7 @@
 
         msgs
         letters
-        words
+        words       // unused ----> ** fix **
 */
 
 var rows = query_rows;                  // [4] 
@@ -91,6 +91,8 @@ console.log(msg.join('').length + ' : ' + msg.join(''));
     for (var y = 0; y < rows; y++) {
         for (var x = 0; x < columns; x++) {
             i = (y * columns) + x;
+// -----> ** fix **
+// if past the length of letters, then fill in with a blank?
             if ((letters[i] !== msg[i]) && (updates <= updates_max)) {
                 letters[i] = msgs[Math.floor(Math.random()*msgs.length)];   // one random char
             } else {
@@ -98,16 +100,19 @@ console.log(msg.join('').length + ' : ' + msg.join(''));
 
 // ** debug **
 // these are the consistent positions (see above)
+// first column of each row
 if ((i == 21) || (i == 42) || (i == 63))
     console.log('---->' + i + ' : ' + letters[i]);
 
+                // if(i >= letters.length - 1)
+                    // letters[i] = 'x';
                 if(typeof letters[i] == 'undefined')
                     letters[i] = '•';
             }
         }
     }
 
-// ** check / compare speed ** ---->
+// check / compare speed ----> ** fix **
     // d.innerText = letters.join('');
     d.innerHTML = letters.join('');
 
@@ -122,6 +127,7 @@ if ((i == 21) || (i == 42) || (i == 63))
             isBeginning = true;
             call_request_json();
         }
+// ----> ** fix **
         // update_msgs();
         call_update_cache_mtime();
         msg = msgs.join('').substr(pointer,columns*rows).split('');
@@ -131,6 +137,7 @@ if ((i == 21) || (i == 42) || (i == 63))
         updates++;
 
 // how when to reload?
+// maybe above
 }
 
 function stop_start() {

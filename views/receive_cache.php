@@ -1,4 +1,5 @@
 <?
+// ** dev **
 
 $data = json_decode(file_get_contents("php://input"), true); 
 // $today = date('Y-m-d');
@@ -13,5 +14,4 @@ $file = fopen('../static/data/' . $file_name, 'w') or die("can't create / open f
 
 fwrite($file, json_encode($data['response']));
 fclose($file);
-
 ?>

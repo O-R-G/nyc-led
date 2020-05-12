@@ -2,13 +2,14 @@
 + time (o-r-g)
 + weather (whether)
 x css 100% width
-
-- subway (heroku)
++ subway (heroku)
   https://github.com/mimouncadosch/MTA-API
   http://mtaapi.herokuapp.com/
-- 311 (open-data)
++ 311 (open-data)
   https://opendata.cityofnewyork.us
-- json parse (ica)
++ json parse (ica)
++ overhaul matrix.js to use document-object-model
 
 - add users n_y_c_full, rw, _r to database n_y_c in mysql
   grant privileges, which may require root user
+
