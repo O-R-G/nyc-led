@@ -132,7 +132,7 @@ ul {
 #d {
     /* matrix (d-o-m) */
     text-align: left;
-    letter-spacing: 7px;
+    /* letter-spacing: 7px; */
     white-space: pre-wrap;
     word-break: break-all;
 }
