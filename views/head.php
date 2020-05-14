@@ -97,6 +97,7 @@ $devhash = rand();  // to force .css reloads
         <link rel="stylesheet" href="/static/css/main.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/helveticaocr.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/helveticaautospaced.css?<?= $devhash; ?>">
+        <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
         <!-- <script src = 'static/js/msgs.js'></script> -->
     </head>
     <body>

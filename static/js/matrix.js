@@ -28,9 +28,10 @@ var font = query_font;
 var timer;                  // update
 var delay;                  // pause between messages
 // var timer_ms = 30;          // ms before next update [30]
+var timer_ms = 50;          // ms before next update [30]
 // var delay_ms = 6000;        // ms after msg complete
-var timer_ms = 5;          // ms before next update [30]
-var delay_ms = 10000;        // ms after msg complete
+// var delay_ms = 10000;        // ms after msg complete
+var delay_ms = 5000;        // ms after msg complete
 var updates = 0;            // counter
 var updates_max = 50;       // times to try to match letter [50]
 var pointer = 0;
@@ -48,9 +49,13 @@ var mask = document.getElementById('mask');
 mask.style.height = d.style.height;
 mask.style.width = d.style.width;
 
+var click = click_load();       // soundjs
+
 var isBeginning = true;     
 
+
 function update() {
+    click_();
     
 // -----> ** fix **
 // init * should this be moved? *    
@@ -89,6 +94,7 @@ function update() {
         delay = setInterval(stop_start, delay_ms);
         letters = [];
         pointer += msg.length;
+
 console.log('msgs.length : ' + msgs.length);
 console.log('pointer : ' + pointer);
         // if (pointer >= msgs.length){
@@ -124,4 +130,15 @@ function stop_start() {
         clearInterval(timer);
         timer = false;
     }
+    click_();
 }
+
+// requires soundjs library in views/head
+function click_load() {
+    if (createjs.Sound.registerSound('/static/sounds/ding-faststart_01.mp3', 'click')) 
+        return true;
+}
+function click_() {
+    createjs.Sound.play('click');
+}
+
