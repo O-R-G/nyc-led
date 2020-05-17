@@ -9,7 +9,7 @@ $uri = explode('/', $requestclean);
 date_default_timezone_set("America/New_York");
 $now = date("h:i:sa");
 
-require_once('./views/head.php');
+require_once('views/head.php');
 
 if ($uri[1] == 'receive-cache')	   
     require_once('views/receive_cache.php');    

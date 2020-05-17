@@ -34,51 +34,33 @@ if ($title)
 else
     $title = $site_name;
 
-// query strings    ** dev **
-$query_color_changing = $_GET['color_changing'];
-if($query_color_changing == NULL)
-    $query_color_changing = '#FF0';
-else
-    $query_color_changing = '#'.$query_color_changing;
-$query_color_settled = $_GET['color_settled'];
-if($query_color_settled == NULL)
-    $query_color_settled = '#FF0';
-else
-    $query_color_settled = '#'.$query_color_settled;
-$query_rows = $_GET['rows'];
-if($query_rows == NULL)
-    $query_rows = 4;
-$query_columns = $_GET['columns'];
-if($query_columns == NULL)
-    $query_columns = 21;
+// query strings        ** dev **
 $query_bg_color = $_GET['bg_color'];
-if($query_bg_color == NULL)
-    $query_bg_color = '#000';
-else
-    $query_bg_color = '#'.$query_bg_color;
-$query_font = $_GET['font'];
-if($query_font == NULL)
-    $query_font = 'helveticaautospaced';
-$query_font_size = $_GET['font_size'];
-if($query_font_size == NULL)
-    $query_font_size = '18';
+$query_bg_color = ($query_bg_color == NULL) ? '#000' : '#' . $query_bg_color;
 $query_bg_color = hex_to_rgb ( $query_bg_color );
+$query_color = $_GET['color'];
+$query_color = ($query_bg_color == NULL) ? '#FFF' : '#' . $query_color;
+$query_rows = $_GET['rows'];
+$query_rows = ($query_rows == NULL) ? 4 : $query_rows;
+$query_columns = $_GET['columns'];
+$query_columns = ($query_columns == NULL) ? 21 : $query_columns;
+$query_font = $_GET['font'];
+$query_font = ($query_font == NULL) ? 'helveticaautospaced' : $query_font;
+$query_font_size = $_GET['font_size'];
+$query_font_size = ($query_font_size == NULL) ? '18' : $query_font_size;
 function hex_to_rgb( $colour ) {
-    if ( $colour[0] == '#' ) {
+    if ( $colour[0] == '#' )
             $colour = substr( $colour, 1 );
-    }
-    if ( strlen( $colour ) == 6 ) {
+    if ( strlen( $colour ) == 6 )
             list( $r, $g, $b ) = array( $colour[0] . $colour[1], $colour[2] . $colour[3], $colour[4] . $colour[5] );
-    } elseif ( strlen( $colour ) == 3 ) {
+    elseif ( strlen( $colour ) == 3 )
             list( $r, $g, $b ) = array( $colour[0] . $colour[0], $colour[1] . $colour[1], $colour[2] . $colour[2] );
-    } else {
+    else
             return false;
-    }
     $r = hexdec( $r );
     $g = hexdec( $g );
     $b = hexdec( $b );
-    // return array( 'red' => $r, 'green' => $g, 'blue' => $b );
-    return $r.', '.$g.', '.$b;
+    return 'rgb(' . $r . ', ' . $g . ', ' . $b . ')';
 }
 
 $devhash = rand();  // to force .css reloads
@@ -93,27 +75,20 @@ $devhash = rand();  // to force .css reloads
         <meta name="apple-mobile-web-app-title" content="nyc-led">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <link rel="apple-touch-icon" href="/media/png/apple-touch-icon.png" />
-        <link rel="stylesheet" href="/static/css/font-relative10_pitch.css?<?= $devhash; ?>">
-        <link rel="stylesheet" href="/static/css/main.css?<?= $devhash; ?>">
+        <link rel="stylesheet" href="/static/css/relative10_pitch.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/helveticaocr.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/helveticaautospaced.css?<?= $devhash; ?>">
+        <link rel="stylesheet" href="/static/css/NYConsolidated.css?<?= $devhash; ?>">
+        <link rel="stylesheet" href="/static/css/main.css?<?= $devhash; ?>">    
         <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
-        <!-- <script src = 'static/js/msgs.js'></script> -->
     </head>
     <body>
-    <script>
-        // query strings -> js variables
-        // json_encode outputs quotes around each val in array[]
-        // so no additional quotes here to pass as array to js
-        // msgs_array = <?= json_encode($msgs_array); ?>;
-        // needs to be invoked after document body loads
-        var query_color_changing = "<? echo $query_color_changing; ?>";
-        var query_color_settled = "<? echo $query_color_settled; ?>";
-        var query_rows = "<? echo $query_rows; ?>";
-        var query_columns = "<? echo $query_columns; ?>";
-        var query_bg_color = "<? echo $query_bg_color; ?>";
-        var query_font = "<? echo $query_font; ?>";
-        var query_font_size = "<? echo $query_font_size; ?>";
-        var sBody = document.body;
-        sBody.style.background = 'rgb('+query_bg_color+')';
-    </script>
+        <script>
+            // query strings -> js variables    ** dev **
+            var query_bg_color = "<?= $query_bg_color; ?>";
+            var query_color = "<?=$query_color; ?>";
+            var query_rows = "<?= $query_rows; ?>";
+            var query_columns = "<?= $query_columns; ?>";
+            var query_font = "<?= $query_font; ?>";
+            var query_font_size = "<?= $query_font_size; ?>";
+        </script>

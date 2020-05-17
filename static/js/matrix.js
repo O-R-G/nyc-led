@@ -4,12 +4,11 @@
 
     from query string:
     query_bg_color    
-    query_color_changing    
-    query_color_settled
+    query_color
     query_rows
     query_columns
-    query_font_size        
     query_font
+    query_font_size        
 
     from msgs.js:
     msg[]       text to be shown
@@ -18,20 +17,24 @@
     var timer = setInterval(update, timer_ms);
 */
 
+var bg_color = query_bg_color;
+var color = query_color;
 var rows = query_rows;                  // [4] 
 var columns = query_columns;            // [21]
+var font = query_font;
 var font_size = query_font_size;        // [18] 24 36 48
 var font_leading = font_size * 1.1667;  // [21]
 var font_w_to_h = .605;                 // helveticaautospaced
 var font_letterspacing = 10;            // 5 [7] 10 20
-var font = query_font;
+
+document.body.style.background = bg_color;
+document.body.style.color = color;
+document.body.style.fontFamily = font;
+
 var timer;                  // update
 var delay;                  // pause between messages
-// var timer_ms = 30;          // ms before next update [30]
-var timer_ms = 50;          // ms before next update [30]
-// var delay_ms = 6000;        // ms after msg complete
-// var delay_ms = 10000;        // ms after msg complete
-var delay_ms = 5000;        // ms after msg complete
+var timer_ms = 50;          // ms before next update [30] 50
+var delay_ms = 1000;        // ms after msg complete 1000 5000 [6000]
 var updates = 0;            // counter
 var updates_max = 50;       // times to try to match letter [50]
 var pointer = 0;
@@ -55,7 +58,7 @@ var isBeginning = true;
 
 
 function update() {
-    click_();
+    click_();   // play sound (soundjs)
     
 // -----> ** fix **
 // init * should this be moved? *    
