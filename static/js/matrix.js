@@ -124,6 +124,10 @@ console.log('finished');
         updates++;
 }
 
+// ** fix ** something funky here
+// maybe how the body click is received
+// or multiple timers?
+
 function stop_start() {
     if (!timer) {
         clearInterval(delay);
@@ -133,6 +137,14 @@ function stop_start() {
         clearInterval(timer);
         timer = false;
     }
+    click_();
+}
+
+function stop() {
+    clearInterval(delay);
+    delay = false;
+    clearInterval(timer);
+    timer = false;
     click_();
 }
 
