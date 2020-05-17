@@ -34,7 +34,7 @@ document.body.style.fontFamily = font;
 var timer;                  // update
 var delay;                  // pause between messages
 var timer_ms = 50;          // ms before next update [30] 50
-var delay_ms = 1000;        // ms after msg complete 1000 5000 [6000]
+var delay_ms = 5000;        // ms after msg complete 1000 5000 [6000]
 var updates = 0;            // counter
 var updates_max = 50;       // times to try to match letter [50]
 var pointer = 0;
