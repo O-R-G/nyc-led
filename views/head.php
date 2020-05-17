@@ -77,6 +77,7 @@ $devhash = rand();  // to force .css reloads
         <link rel="apple-touch-icon" href="/media/png/apple-touch-icon.png" />
         <link rel="stylesheet" href="/static/css/relative10_pitch.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/helveticaocr.css?<?= $devhash; ?>">
+        <link rel="stylesheet" href="/static/css/helveticaneuer.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/helveticaautospaced.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/NYConsolidated.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/main.css?<?= $devhash; ?>">    
