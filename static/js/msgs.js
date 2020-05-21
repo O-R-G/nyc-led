@@ -97,7 +97,41 @@ var req_array = [
 		'use_header': false,
 		'cache_lifecycle': 1440
 	}
-
+	,{
+		'name':'street-tree',
+		'req_url': 'https://data.cityofnewyork.us/resource/uvpi-gqnh.json',
+		'data_type': 'json',
+		'results_count': '',
+		'use_header': false,
+		'cache_lifecycle': 1440
+	}
+	,{
+		// https://aqicn.org/api/
+		'name':'air-quality',
+		'req_url': 'https://api.waqi.info/feed/newyork/?token=e0756365c32aba9371b4d126178465fba05bb6f5',
+		'data_type': 'json',
+		'results_count': '',
+		'use_header': false,
+		'cache_lifecycle': 1440
+	}
+	,{
+		// https://data.cityofnewyork.us/Environment/Energy-Efficiency-Projects/h3qk-ybvt
+		'name':'energy-efficiency-projects',
+		'req_url': 'https://data.cityofnewyork.us/resource/h3qk-ybvt.json',
+		'data_type': 'json',
+		'results_count': '',
+		'use_header': false,
+		'cache_lifecycle': 1440
+	}
+	,{
+		// https://data.cityofnewyork.us/Business/License-Applications/ptev-4hud
+		'name':'DCA-license',
+		'req_url': 'https://data.cityofnewyork.us/resource/ptev-4hud.json',
+		'data_type': 'json',
+		'results_count': '',
+		'use_header': false,
+		'cache_lifecycle': 1440
+	}
 	
 ];
 
@@ -251,17 +285,80 @@ function handle_msgs(name, response, results_count = false){
 	else if(name == 'restaurant-inspection'){
 		var index = parseInt( response.length * Math.random() );
 		var data_count = 0;
+		results_count = results_count ? results_count : 1;
 		this_msgs = [];
 		this_msgs = [' From DOHMH New York City Restaurant Inspection Results : ' ];
 		
-		while(data_count < 1){
+		while(data_count < results_count){
 			if(response[index]['critical_flag'] == 'N' && response[index]['grade'] == 'A'){
 				this_msgs.push(response[index]['dba'] + ' on '+ response[index]['street']+' is graded as A. '+msgs_break);
 				data_count++;
 			}
 			index = parseInt( response.length * Math.random() );			
 		}
-		console.log(this_msgs);
+	}
+	else if(name == 'street-tree'){
+		var index = parseInt( response.length * Math.random() );
+		var data_count = 0;
+		results_count = results_count ? results_count : 1;
+		this_msgs = [];
+		this_msgs = [' Street Tree in NYC : '];
+		
+		while(data_count < results_count){
+			this_msgs.push(response[index]['spc_common'] + ' on '+ response[index]['address']+'. Diameter at Breast Height: '+response[index]['tree_dbh']+' in. '+msgs_break);
+			data_count++;
+			index = parseInt( response.length * Math.random() );			
+		}
+	}
+	else if(name == 'air-quality'){
+		var aqi = response['data']['aqi'];
+		var level = '';
+		if(aqi <= 50){
+			level = 'GOOD';
+		}else if(aqi <= 100){
+			level = 'Moderate';
+		}else if(aqi <= 150){
+			level = 'Unhealthy for Sensitive Groups';
+		}else if(aqi <= 200){
+			level = 'Unhealthy';
+		}else if(aqi <= 300){
+			level = 'Very Unhealthy';
+		}else{
+			level = 'Hazardous';
+		}
+		this_msgs = [];
+		this_msgs = [' Air Quality Index in New York : ' ];
+		
+		this_msgs.push(aqi + ' ('+ level+') '+msgs_break);
+	}
+	else if(name == 'energy-efficiency-projects'){
+		var index = parseInt( response.length * Math.random() );
+		var data_count = 0;
+		results_count = results_count ? results_count : 1;
+		this_msgs = [];
+		this_msgs = [" The City's Energy Efficiency Projects: " ];
+		while(data_count < results_count){
+			if(response[index]['projectsitename'] && response[index]['primaryprojecttype']!='Other'){
+				this_msgs.push(response[index]['primaryprojecttype'] + ' for '+ response[index]['projectsitename']+'. Status: '+response[index]['projectstatus']+' '+msgs_break);
+				data_count++;
+			}
+			index = parseInt( response.length * Math.random() );			
+		}
+	}
+	else if(name == 'DCA-license'){
+		var index = parseInt( response.length * Math.random() );
+		var data_count = 0;
+		results_count = results_count ? results_count : 1;
+		this_msgs = [];
+		this_msgs = [" From DCA : Legally Operating Businesses License issued to" ];
+		
+		while(data_count < results_count){
+			if(response[index]['status']=='Issued'){
+				this_msgs.push(response[index]['business_name']+' '+msgs_break);
+				data_count++;
+			}
+			index = parseInt( response.length * Math.random() );			
+		}
 	}
 	msgs_sections['mid'][name] = this_msgs;
 	
