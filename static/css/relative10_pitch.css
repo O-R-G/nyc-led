@@ -1,0 +1,12 @@
+@font-face {
+    font-family: 'relative10_pitch';
+    src: url('/static/fonts/relative/relative-10pitch-webfont.eot');
+    src: url('/static/fonts/relative/relative-10pitch-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/relative/relative-10pitch-webfont.woff2') format('woff2'),
+         url('/static/fonts/relative/relative-10pitch-webfont.woff') format('woff'),
+         url('/static/fonts/relative/relative-10pitch-webfont.ttf') format('truetype'),
+         url('/static/fonts/relative/relative-10pitch-webfont.svg#relative10_pitch') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}

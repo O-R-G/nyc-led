@@ -19,4 +19,4 @@ body {
     echo $name . '</br></br>';
     echo $body;
 ?></div>
-<div id='name'><a href='/'>NEWYORKCONSOLIDATED&nbsp;</a></div>
+<div id='name'><a href='/'>NEWYORKCONSOLIDATED•</a></div>

@@ -1,8 +1,9 @@
-<script type="text/javascript">
+/* 
+    collect and assemble msg[] for matrix.js
+    includes cacheing
+*/    
 
-/*
-    date / time
-*/
+// date / time
 
 Date.prototype.today = function () { 
     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -103,7 +104,7 @@ var req_array = [
 var now_msg = get_time();
 var msgs, // the final msgs for display. array of letters
 	msgs_sections = {}, // the kept msgs in the form of opening, mid, ending. it needs to stay array so that it has the flexibility to be updated.
-	msgs_temp = []; // the internediate msgs to hold updated msgs, and wait until the current frame is settled. 
+	msgs_temp = []; // the intermediate msgs to hold updated msgs, and wait until the current frame is settled. 
 var msgs_array = [], 
 	msgs_array_temp = [];
 
@@ -142,6 +143,19 @@ msgs_opening_3 = msgs_opening_3.join('');
 msgs_opening = msgs_opening_1.concat(msgs_opening_2, msgs_opening_3);
 */
 
+/*
+// add these to o-r-g amd retrieve?
+// or store in cache txt files?
+// in msgs.js?
+$msgs_temp = [];
+$msgs_temp[] = 'UNIQUE COPY CENTER   ';
+$msgs_temp[] = '     No Thin Special ';
+$msgs_temp[] = 'STORE for RENT call  ';
+$msgs_temp[] = '(347) 680-3340 / / . ';
+$msgs_temp[] = 'Tai Loong Landromat  ';
+$msgs_temp[] = '> Work-in-Progress 合 ';
+*/
+
 msgs_sections['mid'] = {};
 
 msgs_sections['ending'] = ' 0 1 2 3 4 5 6 7 8 9 Have a nice day.';
@@ -155,7 +169,7 @@ var words = [];
 // preventing from the animation starts before data loaded.
 // if ready_now == 0 when an api is loaded, 
 // it fires timer then reading_now++
-// ( json.php )
+// ( json.js )
 var ready_now = 0;
 var ready_full = req_array.length;
 
@@ -216,7 +230,6 @@ function handle_msgs(name, response, results_count = false){
 		this_msgs = [' There is a train arriving now at : ' + response['result'][0]['name'] + ". " + msgs_break ];
 	}
 	else if(name == 'population'){
-
 		// console.log(response[0]);
 		this_msgs = [' Total population in NYC: ' + response[0]['_2020']+". " + msgs_break ];
 		for(i = 1 ; i <response.length ; i++ ){
@@ -227,14 +240,12 @@ function handle_msgs(name, response, results_count = false){
 		var index = parseInt( response.length * Math.random() );
 		var data_count = 0;
 		this_msgs = [];
-		while(data_count < 1){
-			
+		while(data_count < 1){			
 			if(response[index]['type'] == 'Free'){
 				this_msgs.push(' Free public hotspot "'+response[index]['ssid']+'" at '+response[index]['location']);
 				data_count++;
 			}
 			index = parseInt( response.length * Math.random() );
-			
 		}
 	}
 	else if(name == 'restaurant-inspection'){
@@ -248,8 +259,7 @@ function handle_msgs(name, response, results_count = false){
 				this_msgs.push(response[index]['dba'] + ' on '+ response[index]['street']+' is graded as A. '+msgs_break);
 				data_count++;
 			}
-			index = parseInt( response.length * Math.random() );
-			
+			index = parseInt( response.length * Math.random() );			
 		}
 		console.log(this_msgs);
 	}
@@ -259,15 +269,15 @@ function handle_msgs(name, response, results_count = false){
 }
 
 function shuffle(array) {
-  array.sort(() => Math.random() - 0.5);
+    array.sort(() => Math.random() - 0.5);
 }
 
-function update_msgs(isBegining = false){
+function update_msgs(isBeginning = false){
 	// console.log('update_msgs...');
 	msgs_mid_array = Object.keys(msgs_sections['mid']).map(function (key) { 
         return msgs_sections['mid'][key]; 
     }); 
-	if(isBegining)
+	if(isBeginning)
 		shuffle(msgs_mid_array);
 
 	msgs_temp = [msgs_sections['opening']];
@@ -297,4 +307,3 @@ function update_msgs_opening(){
 	msgs_sections['opening'][1] = msgs_sections['opening'][1].join('');
 	msgs_temp[0] = msgs_sections['opening'][0].concat(msgs_sections['opening'][1]);
 }
-</script>

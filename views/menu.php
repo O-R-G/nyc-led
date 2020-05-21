@@ -39,7 +39,7 @@ if($uu->id) {
             }
             ?></ul>
         </ul>
-        <div id='name'><a href='/'>NEWYORKCONSOLIDATED&nbsp;</a></div>
+        <div id='name'><a href='/'>NEWYORKCONSOLIDATED•</a></div>
     </div><?
 }
 ?><div id='xx_show' class='<?= ($body) ? "" : "hidden"; ?>'>
