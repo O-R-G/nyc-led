@@ -58,6 +58,7 @@ var isBeginning = true;
 
 
 function update() {
+
     click_();   // play sound (soundjs)
     
 // -----> ** fix **
@@ -153,7 +154,7 @@ function click_load() {
     if (createjs.Sound.registerSound('/static/sounds/ding-faststart_01.mp3', 'click')) 
         return true;
 }
-function click_() {
-    createjs.Sound.play('click');
-}
 
+function click_() {
+    // createjs.Sound.play('click');
+}

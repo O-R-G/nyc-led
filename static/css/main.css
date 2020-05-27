@@ -20,10 +20,17 @@ a {
     text-decoration: none;
 }
 
+a:hover {
+    /* background-color: #FF0; */
+    opacity: 0.5;
+}
+
 ul {
     list-style-type: none;
     padding-left: 0px;
 }
+
+/* id */
 
 #home a {
     color: #FF0;
@@ -131,10 +138,29 @@ ul {
 
 #d {
     /* matrix (d-o-m) */
-    text-align: left;
+     text-align: left;
     /* letter-spacing: 7px; */
     white-space: pre-wrap;
     word-break: break-all;
+}
+
+
+/* class */
+
+.helveticaautospaced {
+    font-family: 'helveticaautospaced', monospace;
+    font-size: 24px;
+}
+
+.nycon {
+    font-size: 14px;
+    line-height: 18px;;
+    font-family: 'nycon', helvetica, arial, sans-serif;
+}
+
+.nycon a {
+  text-decoration: none;
+  border-bottom: 1px solid #FF0000;
 }
 
 .title_wrapper{
@@ -173,6 +199,14 @@ ul {
 .hidden {
     display: none;
 }
+
+.multi-column {  
+    column-count: 2;
+    column-gap: 40px;
+}
+
+
+/* mobile */
 
 @media screen and (max-width: 768px) {
     #main {

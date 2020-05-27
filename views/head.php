@@ -36,18 +36,18 @@ else
 
 // query strings        ** dev **
 $query_bg_color = $_GET['bg_color'];
-$query_bg_color = ($query_bg_color == NULL) ? '#000' : '#' . $query_bg_color;
+$query_bg_color = ($query_bg_color == NULL) ? '#FFF' : '#' . $query_bg_color;
 $query_bg_color = hex_to_rgb ( $query_bg_color );
 $query_color = $_GET['color'];
-$query_color = ($query_bg_color == NULL) ? '#FFF' : '#' . $query_color;
+$query_color = ($query_color == NULL) ? '#000' : '#' . $query_color;
 $query_rows = $_GET['rows'];
-$query_rows = ($query_rows == NULL) ? 4 : $query_rows;
+$query_rows = ($query_rows == NULL) ? 2 : $query_rows;
 $query_columns = $_GET['columns'];
 $query_columns = ($query_columns == NULL) ? 21 : $query_columns;
 $query_font = $_GET['font'];
 $query_font = ($query_font == NULL) ? 'helveticaautospaced' : $query_font;
 $query_font_size = $_GET['font_size'];
-$query_font_size = ($query_font_size == NULL) ? '18' : $query_font_size;
+$query_font_size = ($query_font_size == NULL) ? '36' : $query_font_size;
 function hex_to_rgb( $colour ) {
     if ( $colour[0] == '#' )
             $colour = substr( $colour, 1 );
