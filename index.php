@@ -13,8 +13,8 @@ require_once('views/head.php');
 
 if ($uri[1] == 'receive-cache')	   
     require_once('views/receive_cache.php');    
-else if ($uri[1] == 'blur')
-    require_once('views/blur.php');
+else if ($uri[1] == 'blink')
+    require_once('views/blink.php');
 else if (!$uri[1])
     require_once('views/home.php');
 else
