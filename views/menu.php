@@ -39,7 +39,9 @@ if($uu->id) {
             }
             ?></ul>
         </ul>
-        <div id='name'><a href='/'>NEWYORKCONSOLIDATED•</a></div>
+        <div id='cursor' class='cursor blink'>
+            <a href='/'>•</a>
+        </div>
     </div><?
 }
 ?><div id='xx_show' class='<?= ($body) ? "" : "hidden"; ?>'>

@@ -13,12 +13,10 @@ if ($cursor_color == '') $cursor_color = 'FFF';
         background-color: #<?= $bg_color; ?>;
     }
 
-    #cursor-container {
+    #cursor {
         position: fixed;
         left: 28px;
         bottom: 20px;
-        white-space: nowrap;
-        padding: 0px 0px 0 0px;
     }
 
     .cursor {
@@ -26,7 +24,7 @@ if ($cursor_color == '') $cursor_color = 'FFF';
         color: #<?= $cursor_color; ?>;
     }
 
-    .animate {
+    .blink {
         animation-name: blink;
         animation-duration: 1.5s;
         animation-iteration-count: infinite;
@@ -39,20 +37,9 @@ if ($cursor_color == '') $cursor_color = 'FFF';
         25%     {opacity: 1.0;}
         100%    {opacity: 1.0;}
     }
-
-    @keyframes blur {
-        from {filter: blur(0px);}
-        to {filter: blur(5px);}
-    }
-
-    @keyframes color {
-        from {color: #FF0;}
-        to {color: #FFF;}
-    }
-
 </style>
 
-<div id='cursor-container' class='cursor animate'>
+<div id='cursor' class='cursor blink'>
     •
 </div>
 
