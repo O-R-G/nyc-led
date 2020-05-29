@@ -53,8 +53,8 @@ $body = $item['body'];  // hide/show
 */
 
 body {
-    background: #CCC;
-    color: #000;
+    background-color: #CCC;
+    color: #FFF;
 }
 
 .multi-column {
@@ -82,6 +82,18 @@ body {
     text-transform: uppercase;
 }
 
+/* mobile */
+
+@media screen and (max-width: 768px) {
+    #main {
+        padding: 25px;
+        width: 70%;
+    }
+
+    .multi-column {
+        column-count: 1;
+    }
+}
 </style>
 
 <div id='main' class='nycon centered centeralign multi-column'><?
