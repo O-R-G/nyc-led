@@ -23,18 +23,18 @@ switch ($v){
         $column_count = 2;
         break;
     case 'c':
-        $left = '25px';
+        $left = '50px';
         $width = '800px';
         $padding = '25px';
         $bg_color = 'transparent';
         $column_count = 3;
         break;
     default:
-        $left = '100px';
-        $width = '600px';
-        $padding = '150px';
-        $bg_color = '#FFF';
-        $column_count = 1;
+        $left = '50px';
+        $width = '800px';
+        $padding = '25px';
+        $bg_color = 'transparent';
+        $column_count = 3;
         break;
 }
 
@@ -70,7 +70,7 @@ body {
 }
 
 .nycon a {
-  color: #000;
+  color: #00F;
   text-decoration: none;
   border-bottom: 1px solid;
 }
@@ -87,9 +87,6 @@ body {
 <div id='main' class='nycon centered centeralign multi-column'><?
     echo $body;
 ?></div>
-<div id='cursor' class='cursor blink'>
-    <a href='/'>•</a>
-</div>
 
 
 

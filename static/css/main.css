@@ -48,11 +48,10 @@ ul {
     height: 100%;
     width: 100%;
     padding: 50px;
-    font-size: 24px;
-    line-height: 36px;
+    font-size: 14px;
+    line-height: 18px;
     /* font-family: "Helvetica", sans-serif; */
-    text-transform: uppercase;
-    background-color: #FFF;
+    background-color: #CCC;
 }
 
 #menu .active {
@@ -210,10 +209,14 @@ ul {
     column-gap: 40px;
 }
 
-
 .cursor {
+    font-family: 'helveticaautospaced', monospace;
     font-size: 36px;
-    color: #<?= $cursor_color; ?>;
+}
+
+.cursor a {
+    text-decoration: none;
+    color: #000;
 }
 
 .blink {
