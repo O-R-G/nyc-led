@@ -7,6 +7,7 @@
 */
 $item = $oo->get(14); // force
 $v = $_GET['v'];
+if (!isset($v)) $v='b';
 switch ($v){
     case 'a':
         $left = '100px';
@@ -30,11 +31,6 @@ switch ($v){
         $column_count = 3;
         break;
     default:
-        $left = '50px';
-        $width = '800px';
-        $padding = '25px';
-        $bg_color = 'transparent';
-        $column_count = 3;
         break;
 }
 
@@ -76,10 +72,11 @@ body {
 }
 
 .nycon b {
-    font-family: 'helveticaautospaced', monospace;
+    /* font-family: 'helveticaautospaced', monospace; */
     font-weight: normal;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    color: #00F;
+    /* letter-spacing: 1px; */
+    /* text-transform: uppercase; */    
 }
 
 /* mobile */

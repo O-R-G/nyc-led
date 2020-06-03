@@ -8,8 +8,8 @@ body {
     width: 100%;
     height: 100%;
     margin: 0px;    
-    background-color: #000;
-    color: #FFF;
+    background-color: #FFF;
+    color: #000;
     /* font-family: 'relative10_pitch', monospace; */
     /* font-family: 'helveticaocr', monospace; */
     font-family: 'helveticaautospaced', monospace;
@@ -42,26 +42,33 @@ ul {
 
 #menu {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     height: 100%;
     width: 100%;
-    padding: 50px;
-    font-size: 14px;
-    line-height: 18px;
-    /* font-family: "Helvetica", sans-serif; */
+    padding: 50px;    
     background-color: #CCC;
+    background-color: transparent;
+
+    /* font styling should get moved to a class */
+    font-family: 'helveticaautospaced', monospace;
+    font-size: 24px;
+    line-height: 36px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #000;
 }
 
 #menu .active {
 }
 
 #menu .static, #home .static, #selected .static {
-    border-bottom:4px solid #FF0;
+    border-bottom: 4px solid;
 }
 
 #menu a {
+    border-bottom: none;
     color: #000;
 }
 
@@ -85,7 +92,7 @@ ul {
 }
 
 #name a:hover {
-    border-bottom:4px solid #00F;
+    border-bottom:4px solid;
 }
 
 #xx_show {
@@ -157,14 +164,14 @@ ul {
 }
 
 .nycon {
-    font-size: 14px;
-    line-height: 18px;;
+    font-size: 15px;
+    line-height: 19px;;
     font-family: 'nycon', helvetica, arial, sans-serif;
 }
 
 .nycon a {
   text-decoration: none;
-  border-bottom: 1px solid #FF0000;
+  border-bottom: 1px solid;
 }
 
 .title_wrapper{
@@ -187,8 +194,6 @@ ul {
     /*background-color: rgba(255, 255, 255, .5);*/
     background-color: rgba(255, 255, 255, 1);
     opacity: 0;
-    /*text-decoration: underline;*/
-    /*border-bottom: 2px solid black;*/
     color: blue;
 }
 
@@ -216,17 +221,16 @@ ul {
 
 .blink {
     animation-name: blink;
-    animation-duration: 1.5s;
+    animation-duration: 0.5s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
-    animation-timing-function: ease-out;
+    /* animation-timing-function: ease-out; */
 }
 
 /* animation */
 
 @keyframes blink {
     0%      {opacity: 0.0;}
-    25%     {opacity: 1.0;}
     100%    {opacity: 1.0;}
 }
 
