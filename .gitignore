@@ -1,3 +1,10 @@
 # ignore nothing for now
 # *.md
 static/data/
+media/*.gif
+media/*.jpeg
+media/*.jpg
+media/*.png
+media/*.pdf
+media/*.tif
+
