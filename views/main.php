@@ -46,14 +46,14 @@ body {
 
 @media screen and (max-width: 768px) {
     #main {
-        top: 25px;
-        left: 25px;
+        top: 20px;
+        left: 20px;
         padding: 25px;
-        width: 70%;
+        width: 75%;
     }
 
     #menu{
-        background-color: #FFF;
+        background-color: #FF0;
     }
 
     .multi-column {

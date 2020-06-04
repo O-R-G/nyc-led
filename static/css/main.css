@@ -163,7 +163,7 @@ ul {
 
 .nycon {
     font-size: 15px;
-    line-height: 20px;;
+    line-height: 20px;
     font-family: 'nycon', helvetica, arial, sans-serif;
 }
 
@@ -236,9 +236,9 @@ ul {
 /* mobile */
 
 @media screen and (max-width: 768px) {
-    #main {
-        padding: 25px;
-        width: 70%;
+    .nycon {
+       font-size: 16px;
+       line-height: 21px;
     }
 }
 
