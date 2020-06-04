@@ -1,68 +1,34 @@
 <?
-
-// better do all this in open-records using styles loaded from deck dammit?
-
-/* 
-    dev
-*/
-$item = $oo->get(14); // force
-$v = $_GET['v'];
-if (!isset($v)) $v='b';
-switch ($v){
-    case 'a':
-        $left = '100px';
-        $width = '600px';
-        $padding = '150px';
-        $bg_color = '#FFF';
-        $column_count = 1;
-        break;
-    case 'b':
-        $left = '100px';
-        $width = '700px';
-        $padding = '100px';
-        $bg_color = '#FFF';
-        $column_count = 2;
-        break;
-    case 'c':
-        $left = '50px';
-        $width = '800px';
-        $padding = '25px';
-        $bg_color = 'transparent';
-        $column_count = 3;
-        break;
-    default:
-        break;
-}
+// dev css in open-rec-gen deck for now
 
 /*
     display menu item
 */
 
-$name = $item['name1'];  // hide/show
-$body = $item['body'];  // hide/show
-
+$name = $item['name1'];  
+$body = $item['body'];  
+$styles = $item['deck'];  
 ?>
 
 <style>
-/* 
-    dev -- move to main.css
-*/
 
 body {
     background-color: #CCC;
-    color: #FFF;
+    color: #000;
+}
+
+#main img {
+    width: 45%;
+    margin-right: 10px;
+}
+
+#menu{
+    background-color: transparent;
 }
 
 .multi-column {
-    column-count: <?= $column_count; ?>;
+    column-count: 1;
     column-gap: 40px;
-}
-
-#main{
-    left: <?= $left; ?>;
-    width: <?= $width; ?>;
-    padding: <?= $padding; ?>;
-    background-color: <?= $bg_color; ?>;
 }
 
 .nycon a {
@@ -72,19 +38,22 @@ body {
 }
 
 .nycon b {
-    /* font-family: 'helveticaautospaced', monospace; */
     font-weight: normal;
     color: #00F;
-    /* letter-spacing: 1px; */
-    /* text-transform: uppercase; */    
 }
 
 /* mobile */
 
 @media screen and (max-width: 768px) {
     #main {
+        top: 25px;
+        left: 25px;
         padding: 25px;
         width: 70%;
+    }
+
+    #menu{
+        background-color: #FFF;
     }
 
     .multi-column {
@@ -93,6 +62,7 @@ body {
 }
 </style>
 
+<?= $styles; ?>
 <div id='main' class='nycon centered centeralign multi-column'><?
     echo $body;
 ?></div>
