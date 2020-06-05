@@ -39,8 +39,38 @@ body {
 
 .nycon b {
     font-weight: normal;
-    color: #00F;
+
+
+    /* color: #00F; */
 }
+
+.nycon b::before {
+    /* content: '↪ '; */
+    content: '↳ ';
+
+}
+
+#mask {
+    position: fixed;
+    top: initial;;
+    left: 10px;
+    bottom: 10px;
+    transform: none;
+    width: 100px;
+    height: 100px;
+    /* background-color: #FF0; */
+}
+
+#display {
+}
+
+#d {
+}
+
+.cursor {
+}
+
+
 
 /* mobile */
 
@@ -53,7 +83,7 @@ body {
     }
 
     #menu{
-        background-color: #FF0;
+        background-color: #CCC;
     }
 
     .multi-column {
@@ -63,9 +93,9 @@ body {
 </style>
 
 <?= $styles; ?>
+        
 <div id='main' class='nycon centered centeralign multi-column'><?
     echo $body;
 ?></div>
 
-
-
+<script src='/static/js/img-zoom.js'></script><?

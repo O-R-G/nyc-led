@@ -47,7 +47,7 @@ ul {
     left: 0px;
     height: 100%;
     width: 100%;
-    padding: 50px;    
+    padding: 50px;
     /* background-color: #FF0; */
     background-color: #CCC;
 
@@ -73,8 +73,7 @@ ul {
 }
 
 #menu a:hover {
-    color: #00F;
-    border-bottom:4px solid #00F;
+    border-bottom:4px solid;
 }
 
 #name {

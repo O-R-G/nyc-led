@@ -41,7 +41,8 @@ var updates_max = 50;       // times to try to match letter [50]
 var pointer = 0;
 
 // init size
-var size = init_size(42, font_char_w);
+// var size = init_size(42, font_char_w);
+var size = init_size(1, font_char_w);
 
 columns = size[0];
 rows = size[1];
@@ -186,6 +187,10 @@ function init_size(chars_max, char_w) {
 
     var _columns = Math.floor(_w / char_w);
     var _rows = Math.floor(chars_max / _columns);
+
+    // normalize edge values
+    _columns = Math.min(_columns, chars_max);
+    _rows = Math.max(_rows, 1);
 
     console.log('_w : ' + _w);
     console.log('_h : ' + _h);
