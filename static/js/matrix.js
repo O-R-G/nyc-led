@@ -28,7 +28,7 @@ var font_w_to_h = .605;                 // helveticaautospaced
 var font_letterspacing = 10;            // 5 [7] 10 20
 var font_char_w = (font_w_to_h * font_size) + font_letterspacing;
 
-document.body.style.background = bg_color;
+// document.body.style.background = bg_color;
 document.body.style.color = color;
 document.body.style.fontFamily = font;
 

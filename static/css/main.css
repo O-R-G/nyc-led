@@ -10,6 +10,7 @@ body {
     margin: 0px;    
     background-color: #FFF;
     color: #000;
+    /* font-family: 'hnr', helvetica, arial; */
     /* font-family: 'relative10_pitch', monospace; */
     /* font-family: 'helveticaocr', monospace; */
     font-family: 'helveticaautospaced', monospace;
@@ -52,11 +53,13 @@ ul {
     background-color: #CCC;
 
     /* font styling should get moved to a class */
-    font-family: 'helveticaautospaced', monospace;
+    /* font-family: 'helveticaautospaced', monospace; */
+    font-family: 'helveticaneuer', helvetica, arial;
+    /* font-family: helvetica, arial, sans-serif; */
     font-size: 24px;
     line-height: 36px;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 0px;
     color: #000;
 }
 
@@ -118,7 +121,7 @@ ul {
     left: 150px;
     width: 450px;
     min-height: 900px;
-    padding: 150px;
+    padding: 100px 150px 150px 150px;
 }
 
 #mask {
@@ -153,7 +156,38 @@ ul {
     bottom: 20px;
 }
 
+#date {
+    display: inline-block;
+    margin-bottom: 2em;
+}
+
+#dates-menu {
+    position: absolute;
+    left: 150px;
+    display: inline-block;
+    margin-bottom: 2em;
+    visibility: hidden;
+}
+
 /* class */
+
+.relative {
+    font-family: 'relative10_pitch', monospace;
+    font-size: 13px;
+    padding: 2px 8px 0px 8px;
+    background-color: #FF0;
+}
+
+.relative a {
+    text-decoration: none;
+    border-bottom: none;
+    color: #000;
+}
+
+.relative a:hover {
+    border-bottom:1px solid;
+}
+o
 
 .helveticaautospaced {
     font-family: 'helveticaautospaced', monospace;

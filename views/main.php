@@ -59,7 +59,7 @@ body {
     transform: none;
     width: 100px;
     height: 100px;
-    background-color: #FF0;
+    background-color: #CCC;
 }
 
 #display {
@@ -95,8 +95,23 @@ body {
 
 <?= $styles; ?>
         
-<div id='main' class='nycon centered centeralign multi-column'><?
-    echo $body;
-?></div>
+<div id='main' class='centered centeralign'>
+    <div id='body' class='nycon multi-column'>
+        <div id='date' class='relative'><?
+            // echo date('F j, Y h:i:s a');
+            echo date('F j, Y');
+        ?></div>
+        <div id='dates-menu' class='relative'><?    
+            $d=strtotime('now');
+            for ($i=1; $i<30; $i++) {
+                $d=strtotime('- ' .  $i. ' days');
+                echo '<a href="">' . date('F j, Y', $d) . '</a><br/>';
+                // echo date('F j, Y', $d) . '<br/>';
+            }
+        ?></div><?
+        echo $body;
+    ?></div>
+</div>
 
-<script src='/static/js/img-zoom.js'></script><?
+<script src='/static/js/dates-menu.js'></script>
+<script src='/static/js/img-zoom.js'></script>
