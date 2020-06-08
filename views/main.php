@@ -39,26 +39,27 @@ body {
 
 .nycon b {
     font-weight: normal;
-
-
     /* color: #00F; */
 }
 
 .nycon b::before {
     /* content: '↪ '; */
     content: '↳ ';
-
-}
+    }
 
 #mask {
     position: fixed;
-    top: initial;;
+    /* top: 100px; */
+    top: inherit; 
+                    /* doesnt quite work correctly */
+                    /* neither did initial */
+                    /* still slides around vertically */
     left: 10px;
     bottom: 10px;
     transform: none;
     width: 100px;
     height: 100px;
-    /* background-color: #FF0; */
+    background-color: #FF0;
 }
 
 #display {

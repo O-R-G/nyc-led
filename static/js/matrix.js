@@ -42,7 +42,13 @@ var pointer = 0;
 
 // init size
 // var size = init_size(42, font_char_w);
-var size = init_size(1, font_char_w);
+// this should be buried into init_()
+// so that can be called at different sizes
+if (typeof is_main_hack === "undefined") {
+    var size = init_size(42, font_char_w);
+} else {
+    var size = init_size(1, font_char_w);
+}
 
 columns = size[0];
 rows = size[1];
