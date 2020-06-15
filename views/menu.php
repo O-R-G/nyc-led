@@ -8,7 +8,7 @@ $nav = $oo->nav($uu->ids);
 // $nav = $oo->nav_full($traverse);
 // $traverse = $oo->traverse($item);
 
-?><div id='menu' class='centered centeralign nycon large <?= ($body) ? "hidden" : ""; ?>'>
+?><div id='menu' aria-hidden='true' class='centered centeralign nycon large <?= ($body) ? "hidden" : ""; ?>'>
     <div id='xx_hide' class='<?= ($body) ? "" : "hidden"; ?>'>
         <img src='/media/svg/x-6-b.svg'>
     </div>

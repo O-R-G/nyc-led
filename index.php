@@ -22,5 +22,6 @@ else
     
 require_once('views/json.php');
 require_once('views/menu.php');
+require_once('views/screen-reader.php');
 require_once('views/foot.php');
 ?>
