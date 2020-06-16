@@ -101,6 +101,7 @@ body {
             // echo date('F j, Y h:i:s a');
             echo date('F j, Y');
         ?></div>
+        <!-- 
         <div id='dates-menu' class='relative' aria-hidden='true'><?    
             $d=strtotime('now');
             for ($i=1; $i<30; $i++) {
@@ -108,10 +109,11 @@ body {
                 echo '<a href="" aria-hidden="true">' . date('F j, Y', $d) . '</a><br/>';
                 // echo date('F j, Y', $d) . '<br/>';
             }
-        ?></div><?
+        ?></div>
+        <script src='/static/js/dates-menu.js'></script>
+        --><?
         echo $body;
     ?></div>
 </div>
 
-<script src='/static/js/dates-menu.js'></script>
 <script src='/static/js/img-zoom.js'></script>

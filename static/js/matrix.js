@@ -72,6 +72,10 @@ var mask = document.getElementById('mask');
 mask.style.height = d.style.height;
 mask.style.width = d.style.width;
 
+// hidden, but contains all text to speak
+// divided by message
+var speak = document.getElementById('speak');
+
 var click = click_load();       // soundjs
 
 var isBeginning = true;     
@@ -93,6 +97,9 @@ function update() {
         msgs_array = msgs_array_temp;
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         isBeginning = false;
+
+        // print whole msg to speak
+        speak.innerText = msg.join('');
     }
 
     // display, compare to random letter
@@ -141,6 +148,10 @@ console.log('finished');
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         timer = false;
         updates = 0;
+
+        // update speak, should call speak text here also?
+        // speak.innerText = msg.join('');
+        speak.innerText = msgs.join('');
     } else
         updates++;
 }

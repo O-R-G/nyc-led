@@ -70,8 +70,10 @@
 		[data-sr-current] {
 			// outline: 5px rgba( 0, 0, 0, .7 ) solid !important;
 			background-color: #ffff00 !important;
-            opacity: 0.1;
-            transition: opacity 2s;
+            /* 
+            filter: blur(10px);
+            transition: filter 2s;
+            */
    		}
 		html[data-sr-current] {
 			outline-offset: -5px;
@@ -111,6 +113,10 @@
 		}
 	}
 
+
+
+    /* focusList */
+
 	function createFocusList() {
 		focusList.push( ...document.querySelectorAll( 'html, body >:not( [aria-hidden=true] )' ) );
 
@@ -123,6 +129,23 @@
 
 			return true;
 		} );
+
+        // *hack* filter all except div id=speak
+
+		focusList = focusList.filter( ( element ) => {
+
+			if ( element.id !== 'speak' ) {
+				return false;
+			}
+
+			return true;
+		} );
+
+        /*
+		focusList.forEach( function (element) {
+            console.log('filtered element.id ------> ' + element.id);
+        } );
+        */
 
 		focusList.forEach( ( element ) => {
 			element.setAttribute( 'tabindex', element.tabIndex );
@@ -144,6 +167,8 @@
 
 		element.setAttribute( 'data-sr-current', true );
 		element.focus();
+
+// console.log('======> ' + element.id);
 
 		announceElement( element );
 	}
@@ -170,6 +195,12 @@
 		} else if ( focusIndex > focusList.length - 1 ) {
 			focusIndex = 0;
 		}
+
+// this works with a option tab so could set timeout maybe
+// force to use div id='speak' ** hack **
+// focusIndex = 2;
+console.log('focusList ------> ' + focusList);
+console.log('focusIndex =====> ' + focusIndex);
 
 		focus( focusList[ focusIndex ] );
 	}
@@ -225,4 +256,14 @@
 	createFocusList();
 
 	document.addEventListener( 'keydown', keyDownHandler );
+
+    /*
+    // setIntervalto force read only div id='speak'
+
+    var speak_now = setInterval(function(){ 
+        //alert("speak now");
+        moveFocus( document.activeElement );
+    }, 5000);
+    */
+
 }( document ) );
