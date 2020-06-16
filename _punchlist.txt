@@ -113,3 +113,14 @@ might both requesting new live data, and that is because of the time
 delay between sending out request and getting date.
 
 **
+
+--
+
+- views/main css
+- image gallery / zoom
+
+- accessibility (semantic, alt txts, screen reader)
+- screen-reader.js
+
+- node.js (!)
+

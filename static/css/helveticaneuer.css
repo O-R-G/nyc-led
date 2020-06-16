@@ -1,11 +1,11 @@
 @font-face {
     font-family: 'helveticaneuer';
-    src: url('/static/fonts/hnr/hnr-medium.eot');
-    src: url('/static/fonts/hnr/hnr-medium.eot?#iefix') format('embedded-opentype'),
-         url('/static/fonts/hnr/hnr-medium.woff2') format('woff2'),
-         url('/static/fonts/hnr/hnr-medium.woff') format('woff'),
-         url('/static/fonts/hnr/hnr-medium.ttf') format('truetype'),
-         url('/static/fonts/hnr/hnr-medium.svg#hnr-medium') format('svg');
+    src: url('/static/fonts/helveticaneuer/helveticaneuer-medium.eot');
+    src: url('/static/fonts/helveticaneuer/helveticaneuer-medium.eot?#iefix') format('embedded-opentype'),
+         url('/static/fonts/helveticaneuer/helveticaneuer-medium.woff2') format('woff2'),
+         url('/static/fonts/helveticaneuer/helveticaneuer-medium.woff') format('woff'),
+         url('/static/fonts/helveticaneuer/helveticaneuer-medium.ttf') format('truetype'),
+         url('/static/fonts/helveticaneuer/helveticaneuer-medium.svg#helveticaneuer-medium') format('svg');
     font-weight: normal;
     font-style: normal;
 }

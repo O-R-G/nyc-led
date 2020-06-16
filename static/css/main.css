@@ -10,9 +10,6 @@ body {
     margin: 0px;    
     background-color: #FFF;
     color: #000;
-    /* font-family: 'hnr', helvetica, arial; */
-    /* font-family: 'relative10_pitch', monospace; */
-    /* font-family: 'helveticaocr', monospace; */
     font-family: 'helveticaautospaced', monospace;
     font-weight: 400;
 }
@@ -49,25 +46,14 @@ ul {
     height: 100%;
     width: 100%;
     padding: 50px;
-    /* background-color: #FF0; */
     background-color: #CCC;
-
-    /* font styling should get moved to a class */
-    /* font-family: 'helveticaautospaced', monospace; */
-    font-family: 'helveticaneuer', helvetica, arial;
-    /* font-family: helvetica, arial, sans-serif; */
-    font-size: 24px;
-    line-height: 36px;
-    text-transform: uppercase;
-    letter-spacing: 0px;
-    color: #000;
 }
 
 #menu .active {
 }
 
 #menu .static, #home .static, #selected .static {
-    border-bottom: 4px solid;
+    border-bottom: 3px solid;
 }
 
 #menu a {
@@ -76,7 +62,13 @@ ul {
 }
 
 #menu a:hover {
-    border-bottom:4px solid;
+    border-bottom:3px solid;
+}
+
+#menu.helveticaneuer {
+    font-size: 24px;
+    line-height: 36px;
+    text-transform: uppercase;
 }
 
 #name {
@@ -122,6 +114,11 @@ ul {
     width: 450px;
     min-height: 900px;
     padding: 100px 150px 150px 150px;
+}
+
+#main img {
+    width: 45%;
+    margin-right: 10px;
 }
 
 #mask {
@@ -187,11 +184,14 @@ ul {
 .relative a:hover {
     border-bottom:1px solid;
 }
-o
 
 .helveticaautospaced {
     font-family: 'helveticaautospaced', monospace;
     font-size: 24px;
+}
+
+.helveticaneuer {
+    font-family: 'helveticaneuer', helvetica, arial, sans-serif;
 }
 
 .nycon {
@@ -203,7 +203,17 @@ o
 .nycon a {
   text-decoration: none;
   border-bottom: 1px solid;
+  color: #000;
 }
+
+.nycon b {
+    font-weight: normal;
+}
+
+.nycon b::before {
+    /* content: '↪ '; */
+    content: '↳ ';
+    }
 
 .title_wrapper{
     position: relative;
@@ -232,8 +242,9 @@ o
     opacity: 1;
 }
 
-.hnr {
-    font-family: 'hnr', helvetica, sans-serif;
+.multi-column {
+    column-count: 1;
+    column-gap: 40px;
 }
 
 .hidden {
@@ -258,6 +269,7 @@ o
     /* animation-timing-function: ease-out; */
 }
 
+
 /* animation */
 
 @keyframes blink {
@@ -269,10 +281,25 @@ o
 /* mobile */
 
 @media screen and (max-width: 768px) {
+
+    #main {
+        top: 20px;
+        left: 20px;
+        padding: 25px;
+        width: 75%;
+    }
+
+    #menu{
+        background-color: #CCC;
+    }
+
     .nycon {
        font-size: 16px;
        line-height: 21px;
     }
+
+    .multi-column {
+        column-count: 1;
+    }
+
 }
-
-

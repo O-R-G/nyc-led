@@ -1,15 +1,15 @@
 <?
 /*
     simple menu
-    adapted from http://www.o-r-g.com
+    adapted from http://www.o-r-g.com    
 */
 
 $nav = $oo->nav($uu->ids);
-// $nav = $oo->nav_full($traverse);
 // $traverse = $oo->traverse($item);
+// $nav = $oo->nav_full($traverse);
 
-?><div id='menu' aria-hidden="true" class='centered centeralign nycon large <?= ($body) ? "hidden" : ""; ?>'>
-    <div id='xx_hide' aria-hidden="true" class='<?= ($body) ? "" : "hidden"; ?>'>
+?><div id='menu' class='centered centeralign helveticaneuer <?= ($body) ? "hidden" : ""; ?>'>
+    <div id='xx_hide' class='<?= ($body) ? "" : "hidden"; ?>'>
         <img src='/media/svg/x-6-b.svg'>
     </div>
     <ul class="nav-level"><?
@@ -32,9 +32,11 @@ $nav = $oo->nav($uu->ids);
         }
         ?></ul>
     </ul>
-</div><?
-?><div id='xx_show' class='<?= ($body) ? "" : "hidden"; ?>'>
+</div>
+
+<div id='xx_show' class='<?= ($body) ? "" : "hidden"; ?>'>
     <img src='/media/svg/hamburger-6-b.svg'>
 </div>
+
 <script type = "text/javascript" src = "/static/js/menu.js"></script>
 
