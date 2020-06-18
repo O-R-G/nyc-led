@@ -26,6 +26,6 @@ $cache_filenames = array_values($cache_filenames);
     var cache_filenames = <? echo json_encode($cache_filenames); ?>;
     var cache_mtime = <? echo json_encode($cache_mtime); ?>;
 </script>
-<script src='/static/js/json.js'></script>
-<script src='/static/js/call_request_json.js'></script>
+<!-- <script src='/static/js/json.js'></script> -->
+<!-- <script src='/static/js/call_request_json.js'></script> -->
 

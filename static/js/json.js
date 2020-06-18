@@ -83,11 +83,6 @@ function request_live(name, request_url, data_type,results_count = false, use_he
       			ready_now ++;
 	        	handle_msgs(name, response, results_count); // static/js/msg.js
 	        	cache_mtime[name+'.'+data_type] = now_timestamp;
-	        	if(name == 'new-york-times'){
-	        		console.log('now is '+now_timestamp);
-	        		console.log('fetching live data for '+name);
-	        		console.log(name+' cache time = '+cache_mtime[name+'.'+data_type]);
-	        	}
       		}
 	      	counter++;
 	      } else {

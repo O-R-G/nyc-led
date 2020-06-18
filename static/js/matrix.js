@@ -35,11 +35,11 @@ document.body.style.fontFamily = font;
 var timer;                  // update
 var delay;                  // pause between messages
 var timer_ms = 50;          // ms before next update [30] 50
-var delay_ms = 5000;        // ms after msg complete 1000 5000 [6000]
+var delay_ms = 5000;        // ms after msg complete 1000 5000 [6000]. will be overwritten when the response is received.
 var updates = 0;            // counter
 var updates_max = 50;       // times to try to match letter [50]
 var pointer = 0;
-
+var current_position = 0;
 // init size
 // var size = init_size(42, font_char_w);
 // this should be buried into init_()
@@ -81,29 +81,33 @@ var click = click_load();       // soundjs
 var isBeginning = true;     
 
 
-function update() {
-
+function update(response) {
+    console.log('update');
     click_();   // play sound (soundjs)
-    
 // -----> ** fix **
 // init * should this be moved? *    
 // isBeginning in setInterval calls -- variable closure?
 // console.log(isBeginning);
 
     if(isBeginning){
-        update_msgs_opening();
-        update_msgs(isBeginning);
-        msgs = msgs_temp;
-        msgs_array = msgs_array_temp;
-        msg = msgs.join('').substr(pointer,columns*rows).split('');
+        console.log('isBeginning');
+        // update_msgs_opening();
+        // update_msgs(isBeginning);
+        // msgs = response_msgs.split('');
+        // msgs_array = msgs_array_temp;
+        // msg = msgs.join('').substr(pointer,columns*rows).split('');
         isBeginning = false;
 
         // print whole msg to speak
         speak.innerText = msg.join('');
     }
-
+    // console.log(msgs);
+    // console.log(msg);
     // display, compare to random letter
-    var i;          
+    
+    var i;
+    // console.log(letters);
+    // console.log(msgs);
     for (var y = 0; y < rows; y++) {
         for (var x = 0; x < columns; x++) {
             i = (y * columns) + x;
@@ -142,9 +146,9 @@ console.log('pointer : ' + pointer);
 console.log('finished');
 
             isBeginning = true;
-            call_request_json();
+            // call_request_json();
         }
-        call_update_cache_mtime();
+        // call_update_cache_mtime();
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         timer = false;
         updates = 0;

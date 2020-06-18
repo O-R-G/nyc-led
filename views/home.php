@@ -1,4 +1,4 @@
-<script src='/static/js/msgs.js'></script>
+<script src='/static/js/msgs-frontend.js'></script>
 <div id="mask">
     <div id="display">
         <div id='d'></div>
