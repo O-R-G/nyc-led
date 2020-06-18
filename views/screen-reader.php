@@ -20,7 +20,7 @@
 </style>
 
 <div id='accessibility'>
-    <img src='/media/svg/speak-6-k.svg'>
+    <img id = 'screen-reader-switch' src='/media/svg/speak-6-k.svg'>
     <img src='/media/svg/accessibility-6-k.svg'>
 </div>
 

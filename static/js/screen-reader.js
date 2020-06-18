@@ -227,21 +227,21 @@ console.log('focusIndex =====> ' + focusIndex);
 	}
 
 	function keyDownHandler( evt ) {
-		if ( evt.altKey && evt.keyCode === 82 ) {
-			evt.preventDefault();
+		// if ( evt.altKey && evt.keyCode === 82 ) {
+		// 	evt.preventDefault();
 
-			if ( !isRunning ) {
-				start();
-			} else {
-				stop();
-			}
-		}
+		// 	if ( !isRunning ) {
+		// 		start();
+		// 	} else {
+		// 		stop();
+		// 	}
+		// }
 
 		if ( !isRunning ) {
 			return false;
 		}
 
-		if ( evt.altKey && evt.keyCode === 9 ) {
+		if ( evt.keyCode === 32 ) {
 			evt.preventDefault();
 
 			moveFocus( evt.shiftKey ? -1 : 1 );
@@ -256,7 +256,14 @@ console.log('focusIndex =====> ' + focusIndex);
 	createFocusList();
 
 	document.addEventListener( 'keydown', keyDownHandler );
-
+	var screen_reader_switch = document.getElementById('screen-reader-switch');
+	screen_reader_switch.addEventListener('click', function(){
+		if ( !isRunning ) {
+				start();
+			} else {
+				stop();
+			}
+	});
     /*
     // setIntervalto force read only div id='speak'
 

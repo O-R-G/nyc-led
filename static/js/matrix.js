@@ -45,9 +45,9 @@ var current_position = 0;
 // this should be buried into init_()
 // so that can be called at different sizes
 if (typeof is_main_hack === "undefined") {
-    var size = init_size(42, font_char_w);
+    var size = init_size2(48, font_char_w);
 } else {
-    var size = init_size(1, font_char_w);
+    var size = init_size2(1, font_char_w);
 }
 
 columns = size[0];
@@ -82,7 +82,7 @@ var isBeginning = true;
 
 
 function update() {
-    // console.log('update');
+    console.log('update');
     click_();   // play sound (soundjs)
 // -----> ** fix **
 // init * should this be moved? *    
@@ -234,7 +234,7 @@ function init_size(chars_max, char_w) {
     return size;
 }
 
-function init_size2(chars_max, char_w) {
+function init_size2(chars_total, char_w) {
 
     // takes target character count and character width
     // returns _columns, _rows
@@ -246,17 +246,18 @@ function init_size2(chars_max, char_w) {
     var _w = window.innerWidth * _w_percent;
     var _h = window.innerHeight;
 
-    var _columns = Math.floor(_w / char_w);
-    var _rows = Math.floor(chars_max / _columns);
+    var _columns = Math.floor(_w / (char_w * 4)) * 4;
+    
+    var _rows = Math.floor(chars_total / _columns);
 
     // normalize edge values
-    _columns = Math.min(_columns, chars_max);
+    _columns = Math.min(_columns, chars_total);
     _rows = Math.max(_rows, 1);
 
     console.log('_w : ' + _w);
     console.log('_h : ' + _h);
     console.log('char_w : ' + char_w);
-    console.log('chars_max : ' + chars_max);
+    console.log('chars_total : ' + chars_total);
     console.log('_columns : ' + _columns);
     console.log('_rows : ' + _rows);
 
