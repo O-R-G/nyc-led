@@ -138,12 +138,12 @@ var now_min = now.minute();
 
 
 var now_msg = get_time();
-var msgs, // the final msgs for display. array of letters
-	msgs_original = []; // the intermediate msgs to hold updated msgs, and wait until the current frame is settled. 
+var msgs; // the final msgs for display. array of letters
+var	msgs_original; // the intermediate msgs to hold updated msgs, and wait until the current frame is settled. 
 var msgs_array = [], 
 	msgs_array_temp = [];
 // var request_url = '/static/data/dummy.json';
-var request_url = 'http://68.183.118.15/now';
+var request_url = 'https://now.n-y-c.org/now';
 var now_timestamp = new Date().getTime();
 now_timestamp = parseInt(now_timestamp/1000); // ms to s
 
@@ -419,8 +419,6 @@ var waiting = setInterval(function(){
 
 
 function request_live(request_url){
-	// var counter = 0;
-	// var counter_max = 3;
 	
 	if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
 	    var httpRequest = new XMLHttpRequest();
@@ -432,37 +430,19 @@ function request_live(request_url){
 		if (httpRequest.readyState === XMLHttpRequest.DONE) {
 			
 	      if (httpRequest.status === 200) {	
-	      	// if(counter > counter_max && hasCache && cache_lifecycle){
-	      	// 	console.log('reaches maximum');
-	      	// 	request_cache(name, data_type, results_count);
-	      	// }
-      		
-      		// if(data_type == 'json'){
-      		// 	var response = JSON.parse(httpRequest.responseText);
-      		// }else if(data_type == 'xml'){
-      		// 	var response = httpRequest.responseText;
-      		// }
+	      	
       		var response = JSON.parse(httpRequest.responseText);
 
       		if(response){
       			console.log(response);
       			now_timestamp = new Date().getTime();
     			now_timestamp = parseInt(now_timestamp/1000); // ms to s
-      			// update_cache(name, response, data_type, now_timestamp); // updat
-      			// if(ready_now == 2){
-      			// 	timer = setInterval(update, timer_ms);
-      			// }
-      			// ready_now ++;
+      			
       			handle_response(response);
       		}
-	      	// counter++;
+
 	      } else {
-	      	// if(hasCache){
-	      	// 	console.log('status !== 200, use cached file for '+name);
-	      	// 	request_cache(name, data_type, results_count);
-	      	// }else{
-	      	// 	console.log('please check the request url');
-	      	// }
+
 	      	console.log('please check the request url');
 	      }
 	    }
@@ -477,17 +457,14 @@ function handle_response(response){
 	current_position = response['position'];
 	pointer = current_position;
 	msgs_original = response['msgs'].toUpperCase().split('');
-	msgs = msgs_original;
+	msgs = response['msgs'].toUpperCase().split('');
 	
 	msg = msgs.join('').substr(pointer,columns*rows).split('');
 
 	var wait = ( now.getSeconds()*1000 + now.getMilliseconds() ) % delay_ms;
-	// console.log(now.getSeconds()*1000, delay_ms);
 	console.log('wait = '+wait);
 	if (wait > delay_ms/2)
 		current_position+=columns*rows;
-
-	// current_position+=columns*rows;
 	
 	setTimeout(function(){
 		// remove the waiting animation
@@ -498,7 +475,5 @@ function handle_response(response){
 	
 
 }
-
-
 
 request_live(request_url);

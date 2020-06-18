@@ -91,7 +91,8 @@ function update() {
 
     if(isBeginning){
         console.log('isBeginning');
-        console.log(msgs_original);
+        // **set msgs back to the original string without placeholder blocks.**
+        // var msgs_temp = ;
         msgs = msgs_original;
         
         // update_msgs_opening();
@@ -131,7 +132,6 @@ function update() {
         clearInterval(timer);
         delay = setInterval(stop_start, delay_ms);
         letters = [];
-        console.log()
         pointer += msg.length;
 
 console.log('msgs.length : ' + msgs.length);
@@ -148,15 +148,12 @@ console.log('pointer : ' + pointer);
             isBeginning = true;
         }
         else if (pointer > msgs.length - columns*rows){
+            // **filling the text with "—" at the last slide**
             while(msgs.length - columns*rows < pointer){
                 msgs.push('–');
             }
-
 // ----> ** fix **
 // never gets here on the last one ... 
-
-
-            
             // call_request_json();
         }
         // call_update_cache_mtime();
