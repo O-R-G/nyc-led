@@ -4,5 +4,5 @@
         <div id='d'></div>
     </div>   
 </div>    
-<div id='speak'>...</div>
+<div id='speak'>•</div>
 <script src='/static/js/matrix.js'></script>
