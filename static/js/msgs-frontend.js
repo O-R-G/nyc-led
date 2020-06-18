@@ -458,13 +458,13 @@ function handle_response(response){
 	pointer = current_position;
 	msgs_original = response['msgs'].toUpperCase().split('');
 	msgs = response['msgs'].toUpperCase().split('');
-	
+	var true_span = updates_max * timer_ms+ delay_ms;
 	msg = msgs.join('').substr(pointer,columns*rows).split('');
 
 	var wait = ( now.getSeconds()*1000 + now.getMilliseconds() ) % delay_ms;
 	console.log('wait = '+wait);
 	if (wait > delay_ms/2)
-		current_position+=columns*rows;
+		current_position++;
 	
 	setTimeout(function(){
 		// remove the waiting animation

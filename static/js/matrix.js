@@ -150,7 +150,7 @@ console.log('pointer : ' + pointer);
         else if (pointer > msgs.length - columns*rows){
             // **filling the text with "—" at the last slide**
             while(msgs.length - columns*rows < pointer){
-                msgs.push('–');
+                msgs.push('•');
             }
 // ----> ** fix **
 // never gets here on the last one ... 
@@ -203,6 +203,38 @@ function click_() {
 }
 
 function init_size(chars_max, char_w) {
+
+    // takes target character count and character width
+    // returns _columns, _rows
+    // _columns * _rows must be <= chars_max
+    // ** should be called on any window resize event **
+
+    var size = [];
+    var _w_percent = 0.75;
+    var _w = window.innerWidth * _w_percent;
+    var _h = window.innerHeight;
+
+    var _columns = Math.floor(_w / char_w);
+    var _rows = Math.floor(chars_max / _columns);
+
+    // normalize edge values
+    _columns = Math.min(_columns, chars_max);
+    _rows = Math.max(_rows, 1);
+
+    console.log('_w : ' + _w);
+    console.log('_h : ' + _h);
+    console.log('char_w : ' + char_w);
+    console.log('chars_max : ' + chars_max);
+    console.log('_columns : ' + _columns);
+    console.log('_rows : ' + _rows);
+
+    size.push(_columns);
+    size.push(_rows);
+
+    return size;
+}
+
+function init_size2(chars_max, char_w) {
 
     // takes target character count and character width
     // returns _columns, _rows
