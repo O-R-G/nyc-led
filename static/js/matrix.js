@@ -81,8 +81,8 @@ var click = click_load();       // soundjs
 var isBeginning = true;     
 
 
-function update(response) {
-    console.log('update');
+function update() {
+    // console.log('update');
     click_();   // play sound (soundjs)
 // -----> ** fix **
 // init * should this be moved? *    
@@ -91,11 +91,14 @@ function update(response) {
 
     if(isBeginning){
         console.log('isBeginning');
+        console.log(msgs_original);
+        msgs = msgs_original;
+        
         // update_msgs_opening();
         // update_msgs(isBeginning);
         // msgs = response_msgs.split('');
         // msgs_array = msgs_array_temp;
-        // msg = msgs.join('').substr(pointer,columns*rows).split('');
+        msg = msgs.join('').substr(pointer,columns*rows).split('');
         isBeginning = false;
 
         // print whole msg to speak
@@ -128,6 +131,7 @@ function update(response) {
         clearInterval(timer);
         delay = setInterval(stop_start, delay_ms);
         letters = [];
+        console.log()
         pointer += msg.length;
 
 console.log('msgs.length : ' + msgs.length);
@@ -138,14 +142,21 @@ console.log('pointer : ' + pointer);
 // somehow there are extra characters in msgs beyond this count
 // maybe because does not add chars when fills out empty spaces?
 // not sure
-        if (pointer >= msgs.length - 100){
+        if(pointer == msgs.length){
+            console.log('finished');
             pointer = 0;
+            isBeginning = true;
+        }
+        else if (pointer > msgs.length - columns*rows){
+            while(msgs.length - columns*rows < pointer){
+                msgs.push('–');
+            }
 
 // ----> ** fix **
 // never gets here on the last one ... 
-console.log('finished');
 
-            isBeginning = true;
+
+            
             // call_request_json();
         }
         // call_update_cache_mtime();

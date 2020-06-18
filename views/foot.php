@@ -1,6 +1,6 @@
     <? 
     if ($uri[1]) {
-        ?><script src='/static/js/msgs.js'></script>
+        ?><script src='/static/js/msgs-frontend.js'></script>
         <div id='mask'>
             <div id='display' class='cursor'>
                 <a href='/'>
@@ -13,7 +13,7 @@
             // but will have to do for now
             is_main_hack = 1; // truly awful way to do this
         </script>
-        <script src='/static/js/msgs.js'></script>
+        <script src='/static/js/msgs-frontend.js'></script>
         <script src='/static/js/matrix.js'></script>
         <script>
             // hack to start bc of loading of json.js
