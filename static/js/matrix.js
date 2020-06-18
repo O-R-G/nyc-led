@@ -246,7 +246,7 @@ function init_size2(chars_total, char_w) {
     var _w = window.innerWidth * _w_percent;
     var _h = window.innerHeight;
 
-    var _columns = Math.floor(_w / (char_w * 4)) * 4;
+    var _columns = Math.floor(_w / (char_w * 12)) * 12;
     
     var _rows = Math.floor(chars_total / _columns);
 
