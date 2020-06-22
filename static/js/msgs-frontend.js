@@ -142,8 +142,9 @@ var msgs; // the final msgs for display. array of letters
 var	msgs_original; // the intermediate msgs to hold updated msgs, and wait until the current frame is settled. 
 var msgs_array = [], 
 	msgs_array_temp = [];
-// var request_url = '/static/data/dummy.json';
-var request_url = 'https://now.n-y-c.org/now';
+// var request_url = 'https://now.n-y-c.org/now';
+var request_url = 'https://now.n-y-c.org/test';
+
 var now_timestamp = new Date().getTime();
 now_timestamp = parseInt(now_timestamp/1000); // ms to s
 
