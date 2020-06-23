@@ -455,36 +455,36 @@ function request_live(request_url){
 function handle_response(response){
 	console.log('handle_response');
 	// ============= working version (not exactly syncing) =====================
-	// now_timestamp = parseInt(response['now']*1000);
-	// delay_ms = response['delay_ms'];
-	// current_position = response['position'];
-	// pointer = current_position;
-	// msgs_original = response['msgs'].toUpperCase().split('');
-	// msgs = response['msgs'].toUpperCase().split('');
-	// var true_delay = (updates_max+1) * timer_ms + delay_ms;
-	// console.log('true_delay = '+true_delay);
-	// msg = msgs.join('').substr(pointer,columns*rows).split('');
-	// var wait = now_timestamp % delay_ms;
-	// console.log('wait = '+wait);
-	// if (wait > delay_ms/2)
-	// 	current_position ++;
-	// current_position ++;
-
-	// ============= lets try this to sync: =====================
 	now_timestamp = parseInt(response['now']*1000);
-	var screen_interval = response['screen_interval'];
-	delay_ms = screen_interval - (updates_max) * timer_ms;
-	console.log(delay_ms);
+	delay_ms = response['delay_ms'];
 	current_position = response['position'];
 	pointer = current_position;
 	msgs_original = response['msgs'].toUpperCase().split('');
 	msgs = response['msgs'].toUpperCase().split('');
+	var true_delay = (updates_max+1) * timer_ms + delay_ms;
+	console.log('true_delay = '+true_delay);
 	msg = msgs.join('').substr(pointer,columns*rows).split('');
-	var wait = now_timestamp % screen_interval;
+	var wait = now_timestamp % delay_ms;
 	console.log('wait = '+wait);
-	if (wait > screen_interval/2)
+	if (wait > delay_ms/2)
 		current_position ++;
 	current_position ++;
+
+	// ============= lets try this to sync: =====================
+	// now_timestamp = parseInt(response['now']*1000);
+	// var screen_interval = response['screen_interval'];
+	// delay_ms = screen_interval - (updates_max) * timer_ms;
+	// console.log(delay_ms);
+	// current_position = response['position'];
+	// pointer = current_position;
+	// msgs_original = response['msgs'].toUpperCase().split('');
+	// msgs = response['msgs'].toUpperCase().split('');
+	// msg = msgs.join('').substr(pointer,columns*rows).split('');
+	// var wait = now_timestamp % screen_interval;
+	// console.log('wait = '+wait);
+	// if (wait > screen_interval/2)
+	// 	current_position ++;
+	// current_position ++;
 
 	setTimeout(function(){
 		// remove the waiting animation
