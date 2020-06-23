@@ -82,7 +82,6 @@ var isBeginning = true;
 
 
 function update() {
-    console.log('update');
     click_();   // play sound (soundjs)
 // -----> ** fix **
 // init * should this be moved? *    
