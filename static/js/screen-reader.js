@@ -84,10 +84,17 @@
 
 	function say( speech, callback ) {
 		const text = new SpeechSynthesisUtterance( speech );
+		// const text = new SpeechSynthesisUtterance( "hello, world." );
 
 		if ( callback ) {
 			text.onend = callback;
 		}
+
+		// a good way to find all the english voices
+		// https://www.digitalocean.com/community/tutorials/how-to-build-a-text-to-speech-app-with-web-speech-api
+		var voices = speechSynthesis.getVoices();
+		// console.log(voices);
+		text.voice =  voices[33];	// samantha
 
 		speechSynthesis.cancel();
 		speechSynthesis.speak( text );
