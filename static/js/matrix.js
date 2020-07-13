@@ -16,6 +16,8 @@
     triggered static/js/json.js:
     var timer = setInterval(update, timer_ms);
 */
+var letters = [];
+var words = [];
 
 var bg_color = query_bg_color;
 var color = query_color;
@@ -32,7 +34,6 @@ var font_char_w = (font_w_to_h * font_size) + font_letterspacing;
 document.body.style.color = color;
 document.body.style.fontFamily = font;
 
-var timer;                  // update
 var delay;                  // pause between messages
 var timer_ms = 50;          // ms before next update [30] 50
 var delay_ms = 5000;        // ms after msg complete 1000 5000 [6000]. will be overwritten when the response is received.
@@ -40,6 +41,10 @@ var updates = 0;            // counter
 var updates_max = 50;       // times to try to match letter [50]
 var pointer = 0;
 var current_position = 0;
+
+// d_html is to add <br> in #d
+var d_html = '';
+
 // init size
 // var size = init_size(42, font_char_w);
 // this should be buried into init_()
@@ -52,11 +57,6 @@ if (typeof is_main_hack === "undefined") {
 
 columns = size[0];
 rows = size[1];
-
-console.log('*****************');
-console.log('columns : ' + columns);
-console.log('rows : ' + rows);
-console.log('*****************');
 
 // should be cleaned up below so updates on window.resize() event
  
@@ -74,7 +74,7 @@ mask.style.width = d.style.width;
 
 // hidden, but contains all text to speak
 // divided by message
-var speak = document.getElementById('speak');
+
 
 var click = click_load();       // soundjs
 
@@ -89,25 +89,23 @@ function update() {
 // console.log(isBeginning);
 
     if(isBeginning){
-        console.log('isBeginning');
         // **set msgs back to the original string without placeholder blocks.**
-        // var msgs_temp = ;
-        msgs = msgs_original;
-        
-        // update_msgs_opening();
-        // update_msgs(isBeginning);
-        // msgs = response_msgs.split('');
-        // msgs_array = msgs_array_temp;
-        msg = msgs.join('').substr(pointer,columns*rows).split('');
+        if(!hasStarted){
+            hasStarted = true;
+        }
+        else
+        {
+            // console.log('else');
+            // msgs = msgs_original;
+            // msg = msgs.join('').substr(pointer,columns*rows).split('');
+            
+            // // print whole msg to speak
+            
+            request_live('https://now.n-y-c.org/now');
+        }
         isBeginning = false;
-
-        // print whole msg to speak
-        speak.innerText = msg.join('');
     }
-    // console.log(msgs);
-    // console.log(msg);
-    // display, compare to random letter
-    
+    // display, compare to random letter 
     var i;
     // console.log(letters);
     // console.log(msgs);
@@ -120,29 +118,38 @@ function update() {
                 letters[i] = msg[i];
                 if(typeof letters[i] == 'undefined')
                     letters[i] = '•';
+
             }
         }
     }
-
-    d.innerText = letters.join('');
-
+    // d.innerText = letters.join('');
+    for(i = 0; i < letters.length ; i++){
+        if(i % columns == 0 && i > 0)
+            d_html += '<br>';
+        d_html += letters[i];
+    }
+    d.innerHTML = d_html;
+    d_html = '';
     // all letters resolved or timed out, move to next msg
     if (letters.join('') == msg.join('')) {
+        // console.log(letters);
+        // console.log(msg[msg.length-1]);
         clearInterval(timer);
+        ticking_end = new Date();
+        ticking_duration = ticking_end - ticking_start + ticking_progress;
+        delay_ms = screen_interval - ticking_duration;
+        // console.log('delay_ms = '+delay_ms);
         delay = setInterval(stop_start, delay_ms);
         letters = [];
         pointer += msg.length;
-
-console.log('msgs.length : ' + msgs.length);
-console.log('pointer : ' + pointer);
-        // if (pointer >= msgs.length){
+        ticking_progress = 0;
 // ----> ** fix **
 // hack !
 // somehow there are extra characters in msgs beyond this count
 // maybe because does not add chars when fills out empty spaces?
 // not sure
         if(pointer == msgs.length){
-            console.log('finished');
+            // console.log('finished');
             pointer = 0;
             isBeginning = true;
         }
@@ -151,8 +158,6 @@ console.log('pointer : ' + pointer);
             while(msgs.length - columns*rows < pointer){
                 msgs.push('•');
             }
-// ----> ** fix **
-// never gets here on the last one ... 
             // call_request_json();
         }
         // call_update_cache_mtime();
@@ -175,10 +180,12 @@ function stop_start() {
     if (!timer) {
         clearInterval(delay);
         delay = false;
+        ticking_start = new Date();
         timer = setInterval(update, timer_ms);
     } else {
         clearInterval(timer);
         timer = false;
+        ticking_progress = new Date() - ticking_start;
     }
     click_();
 }
@@ -220,12 +227,12 @@ function init_size(chars_max, char_w) {
     _columns = Math.min(_columns, chars_max);
     _rows = Math.max(_rows, 1);
 
-    console.log('_w : ' + _w);
-    console.log('_h : ' + _h);
-    console.log('char_w : ' + char_w);
-    console.log('chars_max : ' + chars_max);
-    console.log('_columns : ' + _columns);
-    console.log('_rows : ' + _rows);
+    // console.log('_w : ' + _w);
+    // console.log('_h : ' + _h);
+    // console.log('char_w : ' + char_w);
+    // console.log('chars_max : ' + chars_max);
+    // console.log('_columns : ' + _columns);
+    // console.log('_rows : ' + _rows);
 
     size.push(_columns);
     size.push(_rows);
@@ -253,12 +260,12 @@ function init_size2(chars_total, char_w) {
     _columns = Math.min(_columns, chars_total);
     _rows = Math.max(_rows, 1);
 
-    console.log('_w : ' + _w);
-    console.log('_h : ' + _h);
-    console.log('char_w : ' + char_w);
-    console.log('chars_total : ' + chars_total);
-    console.log('_columns : ' + _columns);
-    console.log('_rows : ' + _rows);
+    // console.log('_w : ' + _w);
+    // console.log('_h : ' + _h);
+    // console.log('char_w : ' + char_w);
+    // console.log('chars_total : ' + chars_total);
+    // console.log('_columns : ' + _columns);
+    // console.log('_rows : ' + _rows);
 
     size.push(_columns);
     size.push(_rows);
