@@ -253,7 +253,8 @@ function init_size2(chars_total, char_w) {
     var _h = window.innerHeight;
 
     var _columns = Math.floor(_w / (char_w * 12)) * 12;
-    
+    if(_columns == 36)
+        _columns = 24;
     var _rows = Math.floor(chars_total / _columns);
 
     // normalize edge values
