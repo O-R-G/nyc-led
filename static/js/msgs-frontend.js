@@ -11,7 +11,8 @@ var now_timestamp = new Date().getTime();
 
 var timer;
 var screen_interval;
-// 
+// using ticking_start and tick_end to justify duration of each slide.
+// ticking_progress is used when the animation is paused.
 var ticking_start, ticking_end, ticking_duration, ticking_progress = 0;
 var screen_interval_remain;
 
