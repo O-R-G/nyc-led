@@ -31,8 +31,8 @@ var font_letterspacing = 10;            // 5 [7] 10 20
 var font_char_w = (font_w_to_h * font_size) + font_letterspacing;
 
 // document.body.style.background = bg_color;
-document.body.style.color = color;
-document.body.style.fontFamily = font;
+// document.body.style.color = color;
+// document.body.style.fontFamily = font;
 
 var delay;                  // pause between messages
 var timer_ms = 50;          // ms before next update [30] 50
@@ -50,9 +50,9 @@ var d_html = '';
 // this should be buried into init_()
 // so that can be called at different sizes
 if (typeof is_main_hack === "undefined") {
-    var size = init_size2(48, font_char_w);
+    var size = init_size(48, font_char_w);
 } else {
-    var size = init_size2(1, font_char_w);
+    var size = init_size(1, font_char_w);
 }
 
 columns = size[0];
@@ -82,33 +82,17 @@ var isBeginning = true;
 
 
 function update() {
-    click_();   // play sound (soundjs)
-// -----> ** fix **
-// init * should this be moved? *    
-// isBeginning in setInterval calls -- variable closure?
-// console.log(isBeginning);
-
     if(isBeginning){
-        // **set msgs back to the original string without placeholder blocks.**
         if(!hasStarted){
             hasStarted = true;
         }
         else
         {
-            // console.log('else');
-            // msgs = msgs_original;
-            // msg = msgs.join('').substr(pointer,columns*rows).split('');
-            
-            // // print whole msg to speak
-            
             request_live('https://now.n-y-c.org/now');
         }
         isBeginning = false;
     }
-    // display, compare to random letter 
     var i;
-    // console.log(letters);
-    // console.log(msgs);
     for (var y = 0; y < rows; y++) {
         for (var x = 0; x < columns; x++) {
             i = (y * columns) + x;
@@ -122,7 +106,6 @@ function update() {
             }
         }
     }
-    // d.innerText = letters.join('');
     for(i = 0; i < letters.length ; i++){
         if(i % columns == 0 && i > 0)
             d_html += '<br>';
@@ -132,24 +115,15 @@ function update() {
     d_html = '';
     // all letters resolved or timed out, move to next msg
     if (letters.join('') == msg.join('')) {
-        // console.log(letters);
-        // console.log(msg[msg.length-1]);
         clearInterval(timer);
         ticking_end = new Date();
         ticking_duration = ticking_end - ticking_start + ticking_progress;
         delay_ms = screen_interval - ticking_duration;
-        // console.log('delay_ms = '+delay_ms);
         delay = setInterval(stop_start, delay_ms);
         letters = [];
         pointer += msg.length;
         ticking_progress = 0;
-// ----> ** fix **
-// hack !
-// somehow there are extra characters in msgs beyond this count
-// maybe because does not add chars when fills out empty spaces?
-// not sure
         if(pointer == msgs.length){
-            // console.log('finished');
             pointer = 0;
             isBeginning = true;
         }
@@ -158,9 +132,7 @@ function update() {
             while(msgs.length - columns*rows < pointer){
                 msgs.push('•');
             }
-            // call_request_json();
         }
-        // call_update_cache_mtime();
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         timer = false;
         updates = 0;
@@ -171,10 +143,6 @@ function update() {
     } else
         updates++;
 }
-
-// ** fix ** something funky here
-// maybe how the body click is received
-// or multiple timers?
 
 function stop_start() {
     if (!timer) {
@@ -187,7 +155,6 @@ function stop_start() {
         timer = false;
         ticking_progress = new Date() - ticking_start;
     }
-    click_();
 }
 
 function stop() {
@@ -195,7 +162,7 @@ function stop() {
     delay = false;
     clearInterval(timer);
     timer = false;
-    click_();
+
 }
 
 // requires soundjs library in views/head
@@ -204,43 +171,7 @@ function click_load() {
         return true;
 }
 
-function click_() {
-    // createjs.Sound.play('click');
-}
-
-function init_size(chars_max, char_w) {
-
-    // takes target character count and character width
-    // returns _columns, _rows
-    // _columns * _rows must be <= chars_max
-    // ** should be called on any window resize event **
-
-    var size = [];
-    var _w_percent = 0.75;
-    var _w = window.innerWidth * _w_percent;
-    var _h = window.innerHeight;
-
-    var _columns = Math.floor(_w / char_w);
-    var _rows = Math.floor(chars_max / _columns);
-
-    // normalize edge values
-    _columns = Math.min(_columns, chars_max);
-    _rows = Math.max(_rows, 1);
-
-    // console.log('_w : ' + _w);
-    // console.log('_h : ' + _h);
-    // console.log('char_w : ' + char_w);
-    // console.log('chars_max : ' + chars_max);
-    // console.log('_columns : ' + _columns);
-    // console.log('_rows : ' + _rows);
-
-    size.push(_columns);
-    size.push(_rows);
-
-    return size;
-}
-
-function init_size2(chars_total, char_w) {
+function init_size(chars_total, char_w) {
 
     // takes target character count and character width
     // returns _columns, _rows
@@ -260,13 +191,6 @@ function init_size2(chars_total, char_w) {
     // normalize edge values
     _columns = Math.min(_columns, chars_total);
     _rows = Math.max(_rows, 1);
-
-    // console.log('_w : ' + _w);
-    // console.log('_h : ' + _h);
-    // console.log('char_w : ' + char_w);
-    // console.log('chars_total : ' + chars_total);
-    // console.log('_columns : ' + _columns);
-    // console.log('_rows : ' + _rows);
 
     size.push(_columns);
     size.push(_rows);

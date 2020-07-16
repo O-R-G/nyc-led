@@ -13,7 +13,13 @@ body {
     font-family: 'helveticaautospaced', monospace;
     font-weight: 400;
 }
-
+body[accessibility='links_underline'] a{
+    text-decoration: underline;
+}
+body[accessibility='negative_contrast']{
+    background-color: #000;
+    color: #fff;
+}
 a {
     text-decoration: none;
 }
@@ -170,9 +176,13 @@ ul {
     /* display: none; */
     top: 0px;
     left: 0px;
-    padding: 10px;
-    opacity: 0;
+    /*padding: 10px;*/
+    /*opacity: 0;*/
     pointer-events: none;
+    height: 0;
+    width: 0;
+    overflow: hidden;
+    /*display: none;*/
 }
 
 #accessibility {
@@ -290,7 +300,29 @@ ul {
     animation-direction: alternate;
     /* animation-timing-function: ease-out; */
 }
-
+#accessibility_list{
+    white-space: nowrap;
+    position: absolute;
+    bottom: 18px;
+    right: 55px;
+    display: none;
+}
+#accessibility_list.expanded{
+    display: initial;
+}
+#accessibility_list > div{
+    display: inline-block;
+    /*margin: 0 5px;*/
+    padding: 0 10px;
+    border-right: 1px solid #000;
+    cursor: pointer;
+}
+#accessibility_list > div:hover{
+    text-decoration: underline;
+}
+#accessibility_list_toggle{
+    cursor: pointer;
+}
 
 /* animation */
 
