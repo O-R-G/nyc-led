@@ -78,8 +78,8 @@ mask.style.width = d.style.width;
 
 var click = click_load();       // soundjs
 
-var isBeginning = true;     
-
+var isBeginning = true;    
+var counter = 0;
 
 function update() {
     if(isBeginning){
@@ -92,6 +92,14 @@ function update() {
         }
         isBeginning = false;
     }
+    if(counter == 0){
+        d.classList.remove('waiting');
+        d.classList.add('opening');
+    }
+    if(counter == 1){
+        d.classList.remove('opening');
+    }
+
     var i;
     for (var y = 0; y < rows; y++) {
         for (var x = 0; x < columns; x++) {
@@ -136,7 +144,8 @@ function update() {
         msg = msgs.join('').substr(pointer,columns*rows).split('');
         timer = false;
         updates = 0;
-
+        if(counter < 2)
+            counter++;
         // update speak, should call speak text here also?
         // speak.innerText = msg.join('');
         speak.innerText = msgs.join('');

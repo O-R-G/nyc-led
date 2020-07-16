@@ -18,8 +18,10 @@ var screen_interval_remain;
 
 // display something while waiting for response;
 var waiting = setInterval(function(){
-	d.innerText = '–';
-	setTimeout(function(){d.innerText = '';}, 500);
+	// d.innerText = '–';
+	setTimeout(function(){
+		// d.innerText = '';
+	}, 500);
 }, 1000);
 
 // if the whole thing has started;

@@ -1,6 +1,6 @@
 <div id="mask">
     <div id="display">
-        <div id='d'></div>
+        <div id='d' class = 'waiting'></div>
     </div>   
 </div>    
 <div id='speak'>•</div>
