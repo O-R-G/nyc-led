@@ -168,7 +168,7 @@ body[accessibility='negative_contrast'] #xx_hide{
     content:'–';
     position: absolute;
     right: 0;
-    bottom: 0;
+    bottom: 5px;
     animation: waiting 1s infinite;
 }
 
@@ -356,6 +356,17 @@ body[accessibility='negative_contrast'] #xx_hide{
 }
 #accessibility_list_container{
     position: relative;
+}
+
+#speak_progress_ctner{
+    margin-top: 5px;
+    height: 5px;
+    background-color: yellow;
+}
+#speak_progress_bar{
+    height: 100%;
+    background-color: #000;
+    width: 0;
 }
 
 body[accessibility='links_underline'] a{

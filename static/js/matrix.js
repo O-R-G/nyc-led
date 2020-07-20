@@ -42,9 +42,6 @@ var current_position = 0;
 
 // d_html is to add <br> in #d
 var d_html = '';
-console.log(window.innerWidth);
-console.log(font_size);
-console.log(font_char_w);
 // init size
 // var size = init_size(42, font_char_w);
 // this should be buried into init_()
@@ -158,7 +155,6 @@ function update() {
             counter++;
         // update speak, should call speak text here also?
         // speak.innerText = msg.join('');
-        speak.innerText = msgs.join('');
     } else
         updates++;
 }

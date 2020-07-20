@@ -28,6 +28,9 @@ var waiting = setInterval(function(){
 var hasStarted = false;
 
 var speak = document.getElementById('speak');
+var speak_all_words = [];
+var speak_progress = 0;
+var speak_progress_bar = document.getElementById('speak_progress_bar');
 
 function request_live(request_url){
 	console.log('request live');
@@ -45,6 +48,7 @@ function handle_response(response){
 	var wait = screen_interval - (now_timestamp % full_loop_ms % screen_interval);
 
 	msgs_original = response['msgs'].toUpperCase().split('');
+	speak.innerText = response['msgs'];
 	if(!hasStarted){
 		// the website is loaded for the first time.
 		current_position = response['position'];
@@ -62,10 +66,16 @@ function handle_response(response){
 		msgs = response['msgs'].toUpperCase().split('');
 		current_position = 0;
 	}
-	
+
+	var speak_text = msgs.join('').split(' ');
+	var check_letters = /^(?=.*[0-9])|(?=.*[a-zA-Z])|([a-zA-Z0-9]+)$/;
+	for (i = 0 ; i < speak_text.length ; i++){
+		if(speak_text[i].match(check_letters))
+			speak_all_words.push(speak_text[i]); 
+	}
+	console.log(speak_all_words.length);
 	pointer = current_position;
-	msg = msgs.join('').substr(pointer,columns*rows).split('');
-	speak.innerText = msg.join('');
+	msg = msgs.join('').substr(pointer,columns*rows).split('');	
 
 	if(!hasStarted){
 		setTimeout(function(){

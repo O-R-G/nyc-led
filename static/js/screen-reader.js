@@ -1,10 +1,13 @@
+var speechStarts, speechEnds;
+
 ( function( document ) {
 	'use strict';
 
 	let isRunning = false;
+	let gotLength = false;
 	let focusList = [];
 	let focusIndex = 0;
-
+	let fuse = 0;
 	const mappings = {
 		a: 'link',
 		button: 'button',
@@ -83,11 +86,12 @@
 	}
 
 	function say( speech, callback ) {
+
 		const text = new SpeechSynthesisUtterance( speech );
 		// const text = new SpeechSynthesisUtterance( "hello, world." );
 
 		if ( callback ) {
-			text.onend = callback;
+			text.addEventListener('end', callback);
 		}
 
 		// a good way to find all the english voices
@@ -98,6 +102,23 @@
 
 		speechSynthesis.cancel();
 		speechSynthesis.speak( text );
+		text.addEventListener('boundary', function(){
+			speak_progress++;
+			console.log(speak_progress, speak_all_words.length);
+			console.log(speak_progress_bar);
+			if(speak_progress > speak_all_words.length)
+				speak_progress = speak_all_words.length;
+			speak_progress_bar.style.width = parseInt(speak_progress / speak_all_words.length * 1000)/10 + '%';
+			
+		});
+		// text.addEventListener('error', function(event){
+		// 	console.log('error event = '+event.error);
+		// 	if(event.error == 'synthesis-failed'){
+				
+		// 		say(focusList[focusIndex].innerText);
+		// 		focusIndex++;
+		// 	}
+		// });
 	}
 
 	function computeRole( element ) {
@@ -125,25 +146,32 @@
     /* focusList */
 
 	function createFocusList() {
+		// focusList = span.speak_word
+		
+		// waiting for the response...
+		// if(document.querySelectorAll( 'span' ).length == 0){
+		// 	setTimeout(createFocusList, 500);
+		// 	return false;
+		// }
 		focusList.push( ...document.querySelectorAll( 'html, body >:not( [aria-hidden=true] )' ) );
-
+		// focusList.push( ...document.querySelectorAll( 'html, body >:not( [aria-hidden=true]), span.speak_word' ) );
 		focusList = focusList.filter( ( element ) => {
 			const styles = getComputedStyle( element );
-
 			if ( styles.visibility === 'hidden' || styles.display === 'none' ) {
 				return false;
 			}
-
 			return true;
 		} );
-
         // *hack* filter all except div id=speak
-
+        // --> span.word_speak
 		focusList = focusList.filter( ( element ) => {
-
+			// console.log(element);
 			if ( element.id !== 'speak' ) {
 				return false;
 			}
+			// if ( !element.classList.contains('speak_word')) {
+			// 	return false;
+			// }
 
 			return true;
 		} );
@@ -161,9 +189,9 @@
 
 	function getActiveElement() {
 		if ( document.activeElement && document.activeElement !== document.body ) {
+			console.log(document.activeElement);
 			return document.activeElement;
 		}
-
 		return focusList[ 0 ];
 	}
 
@@ -181,8 +209,11 @@
 	}
 
 	function moveFocus( offset ) {
+		fuse ++;
+		console.log(fuse);
+		if(fuse > 5)
+			return false;
 		const last = document.querySelector( '[data-sr-current]' );
-
 		if ( last ) {
 			last.removeAttribute( 'data-sr-current' );
 		}
@@ -191,7 +222,7 @@
 			focusIndex = focusList.findIndex( ( element ) => {
 				return element === offset;
 			} );
-
+			// console.log('offset = '+offset);
 			return focus( offset );
 		}
 
@@ -203,19 +234,32 @@
 			focusIndex = 0;
 		}
 
-// this works with a option tab so could set timeout maybe
-// force to use div id='speak' ** hack **
-// focusIndex = 2;
-console.log('focusList ------> ' + focusList);
-console.log('focusIndex =====> ' + focusIndex);
-
+		// this works with a option tab so could set timeout maybe
+		// force to use div id='speak' ** hack **
+		// focusIndex = 2;
+		console.log('focusList ------> ' + focusList);
+		console.log('focusIndex =====> ' + focusIndex);
 		focus( focusList[ focusIndex ] );
 	}
-
+	// function getSpeechLength(){
+	// 	if(!gotLength){
+	// 		speechEnds = new Date;
+	// 		var speechDuration = speechEnds - speechStarts;
+	// 		console.log(speechDuration);
+	// 		gotLength = true;
+	// 	}
+	// }
+	// function preSpeech(){
+	// 	speechStarts =  new Date;
+	// 	var speakText = document.getElementById('speak').innerText;
+	// 	say( speakText, () => {
+	// 		getSpeechLength();
+	// 		isRunning = true;
+	// 	} );
+	// }
 	function start() {
 		say( 'Screen reader on', () => {
 			moveFocus( getActiveElement() );
-
 			isRunning = true;
 		} );
 	}
@@ -250,7 +294,6 @@ console.log('focusIndex =====> ' + focusIndex);
 
 		if ( evt.keyCode === 32 ) {
 			evt.preventDefault();
-
 			moveFocus( evt.shiftKey ? -1 : 1 );
 		} else if ( evt.keyCode === 9 ) {
 			setTimeout( () => {
@@ -265,11 +308,11 @@ console.log('focusIndex =====> ' + focusIndex);
 	document.addEventListener( 'keydown', keyDownHandler );
 	var screen_reader_switch = document.getElementById('screen-reader-switch');
 	screen_reader_switch.addEventListener('click', function(){
-		if ( !isRunning ) {
-				start();
-			} else {
-				stop();
-			}
+		if( !isRunning ) {
+			start();
+		} else {
+			stop();
+		}
 	});
     /*
     // setIntervalto force read only div id='speak'
