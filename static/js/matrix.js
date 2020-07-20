@@ -50,13 +50,18 @@ console.log(font_char_w);
 // this should be buried into init_()
 // so that can be called at different sizes
 
-// if (typeof is_main_hack === "undefined") {
+if (typeof is_main_hack === "undefined") {
+    var size = init_size(48, font_char_w);
+} else {
+    var size = init_size(1, font_char_w);
+}
+// if (isHome) {
 //     var size = init_size(48, font_char_w);
 // } else {
 //     var size = init_size(1, font_char_w);
 // }
 
-var size = init_size(48, font_char_w);
+// var size = init_size(48, font_char_w);
 
 columns = size[0];
 rows = size[1];

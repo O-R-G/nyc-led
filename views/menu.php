@@ -10,7 +10,7 @@ $nav = $oo->nav($uu->ids);
 
 ?><div id='menu' class='centered centeralign helveticaneuer <?= ($body) ? "hidden" : ""; ?>'>
     <div id='xx_hide' class='<?= ($body) ? "" : "hidden"; ?>'>
-        <img src='/media/svg/x-6-b.svg'>
+        <!-- <img src='/media/svg/x-6-b.svg'> -->
     </div>
     <ul class="nav-level"><?
         $prevd = $nav[0]['depth'];
@@ -35,7 +35,7 @@ $nav = $oo->nav($uu->ids);
 </div>
 
 <div id='xx_show' class='<?= ($body) ? "" : "hidden"; ?>'>
-    <img src='/media/svg/hamburger-6-b.svg'>
+    <!-- <img src='/media/svg/hamburger-6-b.svg'> -->
 </div>
 
 <script type = "text/javascript" src = "/static/js/menu.js"></script>
