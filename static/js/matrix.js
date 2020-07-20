@@ -25,6 +25,8 @@ var rows;
 var columns;
 var font = query_font;
 var font_size = query_font_size;        // [18] 24 36 48
+if(window.innerWidth < 500)
+    font_size = 10;
 var font_leading = font_size * 1.1667;  // [21]
 var font_w_to_h = .605;                 // helveticaautospaced
 var font_letterspacing = 10;            // 5 [7] 10 20
@@ -40,7 +42,9 @@ var current_position = 0;
 
 // d_html is to add <br> in #d
 var d_html = '';
-
+console.log(window.innerWidth);
+console.log(font_size);
+console.log(font_char_w);
 // init size
 // var size = init_size(42, font_char_w);
 // this should be buried into init_()

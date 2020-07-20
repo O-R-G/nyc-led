@@ -4,5 +4,5 @@
     </div>   
 </div>    
 <div id='speak'>•</div>
-<!-- <script src='/static/js/msgs-frontend.js'></script> -->
-<!-- <script src='/static/js/matrix.js'></script> -->
+<script src='/static/js/msgs-frontend.js'></script>
+<script src='/static/js/matrix.js'></script>
