@@ -68,11 +68,13 @@ d.style.fontSize = font_size + 'px';
 d.style.letterSpacing = font_letterspacing + 'px'; 
 d.style.width = (font_w_to_h * font_size * columns) +
                 (font_letterspacing * columns) + 'px';
-d.style.height = font_leading * rows + 'px';
+d.style.lineHeight = 1.1667 * font_size + 'px';
+// d.style.height = font_leading * rows + 'px';
+
 d.onclick = stop_start;
 
 var mask = document.getElementById('mask');
-mask.style.height = d.style.height;
+// mask.style.height = d.style.height;
 mask.style.width = d.style.width;
 
 // hidden, but contains all text to speak
