@@ -312,21 +312,26 @@ ul {
     /* animation-timing-function: ease-out; */
 }
 #accessibility_list{
-    white-space: nowrap;
+    /*white-space: nowrap;*/
     position: absolute;
-    bottom: 18px;
+    top: 50%;
+    transform: translate(0, -50%);
+    /*bottom: 18px;*/
     right: 55px;
     display: none;
+    width: calc( 100vw - 70px);
+    text-align: right;
 }
 #accessibility_list.expanded{
     display: initial;
 }
 #accessibility_list > div{
     display: inline-block;
-    /*margin: 0 5px;*/
+    margin: 3px 0;
     padding: 0 10px;
     border-right: 1px solid #000;
     cursor: pointer;
+    line-height: 1em;
 }
 #accessibility_list > div:hover{
     text-decoration: underline;
@@ -334,7 +339,9 @@ ul {
 #accessibility_list_toggle{
     cursor: pointer;
 }
-
+#accessibility_list_container{
+    position: relative;
+}
 /* animation */
 
 @keyframes blink {
@@ -371,6 +378,9 @@ ul {
 
     .multi-column {
         column-count: 1;
+    }
+    #accessibility_list > div{
+        font-size: 12px;
     }
 
 }
