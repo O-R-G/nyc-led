@@ -363,11 +363,10 @@ body[accessibility='negative_contrast'] #xx_hide{
     width: 100vw;
     max-width: 100%;
     height: 5px;
-    /*background-color: yellow;*/
 }
 #speak_progress_bar{
     height: 100%;
-    background-color: #000;
+    background-color: #ff0;
     width: 0;
 }
 
