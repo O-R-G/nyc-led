@@ -20,7 +20,14 @@
 </style>
 
 <div id='accessibility'>
-    <div id = 'screen-reader-switch'></div>
+    <div id = 'screen-reader-ctner'>
+        <div id = 'screen-reader-switch'></div>
+        <div id = 'voice_option_ctner'>
+            <div class = 'voice_option' voice ='0'>Victoria</div>
+            <div class = 'voice_option' voice ='33'>Samantha</div>
+            <div class = 'voice_option' voice ='48'>Google</div>
+        </div>
+    </div>
     <div id = 'accessibility_list_container'>
         <div id = 'accessibility_list_toggle'></div>
         <div id = 'accessibility_list'><div class = 'accessibility_btn' accessibility_feature='high_contrast'>HIGH CONTRAST</div><div class = 'accessibility_btn' accessibility_feature='negative_contrast'>NEGATIVE CONTRAST</div><div class = 'accessibility_btn' accessibility_feature='light_background'>LIGHT BACKGROUND</div><div class = 'accessibility_btn' accessibility_feature='links_underline'>LINKS UNDERLINE</div><div class = 'accessibility_btn' accessibility_feature='readable_font'>READABLE FONT</div><div class = 'accessibility_btn' accessibility_feature='reset'>RESET</div></div>
@@ -47,4 +54,5 @@
     sAccessibility_list_toggle.addEventListener('click', function(){
         sAccessibility_list.classList.toggle('expanded');
     });
+    
 </script>

@@ -210,6 +210,7 @@ body[accessibility='negative_contrast'] #xx_hide{
     right: 15px;
     width: 50px;
     font-family: 'relative10_pitch', monospace;
+    font-size: 12px;
 }
 
 #screen-reader-switch{
@@ -370,7 +371,13 @@ body[accessibility='negative_contrast'] #xx_hide{
     background-color: #ff0;
     width: 0;
 }
-
+#voice_option_ctner{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(0, -100%);
+    text-align: right;
+}
 body[accessibility='links_underline'] a{
     border-bottom: 4px solid !important;
 }
@@ -446,8 +453,8 @@ body[accessibility='readable_font']{
     .multi-column {
         column-count: 1;
     }
-    #accessibility_list > div{
+    /*#accessibility_list > div{
         font-size: 12px;
-    }
+    }*/
 
 }

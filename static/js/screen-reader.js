@@ -7,6 +7,10 @@ var speechStarts, speechEnds;
 	let gotLength = false;
 	let focusList = [];
 	let focusIndex = 0;
+	var text;
+	var voices;
+	var utterance;
+	var current_voice = 33;
 	const mappings = {
 		a: 'link',
 		button: 'button',
@@ -86,7 +90,7 @@ var speechStarts, speechEnds;
 
 	function say( speech, callback ) {
 
-		const text = new SpeechSynthesisUtterance( speech );
+		text = new SpeechSynthesisUtterance( speech );
 		// const text = new SpeechSynthesisUtterance( "hello, world." );
 		text.addEventListener('end', function(){
 			if(isRunning){
@@ -99,21 +103,27 @@ var speechStarts, speechEnds;
 
 		// a good way to find all the english voices
 		// https://www.digitalocean.com/community/tutorials/how-to-build-a-text-to-speech-app-with-web-speech-api
-		var voices = speechSynthesis.getVoices();
-		// console.log(voices);
-		text.voice =  voices[33];	// samantha
+		voices = speechSynthesis.getVoices();
+		// speechSynthesis.addEventListener('voiceschanged',function(){
+		// 	console.log('voiceschanged');
+		// 	voices = this.getVoices();
+		// 	utterance = new SpeechSynthesisUtterance("Screen reader voice test");
+		// 	// utterance.voice = voices[current_voice];
+		// 	speechSynthesis.speak(utterance);
+		// });
+		text.voice =  voices[current_voice];	// samantha
 
 		speechSynthesis.cancel();
 		speechSynthesis.speak( text );
 		text.addEventListener('boundary', function(event){
 			if(speech != 'Screen reader off' && speech != 'Screen reader on'){
-				console.log(speak_progress);
 				speak_progress++;
 				if(speak_progress > speak_all_words.length)
 					speak_progress = speak_all_words.length;
 				speak_progress_bar.style.width = parseInt(speak_progress / speak_all_words.length * 1000)/10 + '%';
 			}			
 		});
+		
 	}
 
 	function computeRole( element ) {
@@ -184,7 +194,6 @@ var speechStarts, speechEnds;
 
 	function getActiveElement() {
 		if ( document.activeElement && document.activeElement !== document.body ) {
-			console.log(document.activeElement);
 			return document.activeElement;
 		}
 		return focusList[ 0 ];
@@ -232,22 +241,7 @@ var speechStarts, speechEnds;
 		console.log('focusIndex =====> ' + focusIndex);
 		focus( focusList[ focusIndex ] );
 	}
-	// function getSpeechLength(){
-	// 	if(!gotLength){
-	// 		speechEnds = new Date;
-	// 		var speechDuration = speechEnds - speechStarts;
-	// 		console.log(speechDuration);
-	// 		gotLength = true;
-	// 	}
-	// }
-	// function preSpeech(){
-	// 	speechStarts =  new Date;
-	// 	var speakText = document.getElementById('speak').innerText;
-	// 	say( speakText, () => {
-	// 		getSpeechLength();
-	// 		isRunning = true;
-	// 	} );
-	// }
+	
 	function start() {
 		say( 'Screen reader on', () => {
 			moveFocus( getActiveElement() );
@@ -305,12 +299,19 @@ var speechStarts, speechEnds;
 	screen_reader_switch.addEventListener('click', function(){
 		if( !isRunning ) {
 			start();
-			console.log(speak_all_words.length);
-			console.log(speak_all_words);
 		} else {
 			stop();
 		}
 	});
+	var sVoice_option = document.getElementsByClassName('voice_option');
+	Array.prototype.forEach.call(sVoice_option, function(el, i){
+        el.addEventListener('click', function(){
+        	stop();
+            var this_voice = parseInt(el.getAttribute('voice'));
+            current_voice = this_voice;
+            setTimeout(start, 500);
+        });
+    });
     /*
     // setIntervalto force read only div id='speak'
 
