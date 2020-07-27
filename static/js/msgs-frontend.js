@@ -6,6 +6,7 @@
 var msgs; // the final msgs for display. array of letters
 var	msgs_original; // the intermediate msgs to hold updated msgs, and wait until the current frame is settled. 
 var msg;
+var msg_speak = '';
 
 var now_timestamp = new Date().getTime();
 
@@ -48,7 +49,8 @@ function handle_response(response){
 	var wait = screen_interval - (now_timestamp % full_loop_ms % screen_interval);
 
 	msgs_original = response['msgs'].toUpperCase().split('');
-	speak.innerText = response['msgs'];
+	msg_speak = response['msgs'].replace(/\/\/\//g, '');
+	msg_speak = response['msgs'].replace(/\//g, ' ');
 	if(!hasStarted){
 		// the website is loaded for the first time.
 		current_position = response['position'];
@@ -60,6 +62,8 @@ function handle_response(response){
 		msgs = msgs.slice(0, current_position) + response['msgs_beginning'] + msgs.slice(current_position);
 		msgs = msgs.toUpperCase().split('');
 
+		speak.innerText = msg_speak;
+
 	}
 	else{
 		// when the loop restart again.
@@ -67,15 +71,15 @@ function handle_response(response){
 		current_position = 0;
 	}
 
-	var speak_text = msgs.join('').split(' ');
-	var check_letters = /^(?=.*[0-9])|(?=.*[a-zA-Z])|([a-zA-Z0-9]+)$/;
-	for (i = 0 ; i < speak_text.length ; i++){
-		if(speak_text[i].match(check_letters))
-			speak_all_words.push(speak_text[i]); 
-	}
-	console.log(speak_all_words.length);
+	speak_all_words = msg_speak.split(/\s+/);
 	pointer = current_position;
-	msg = msgs.join('').substr(pointer,columns*rows).split('');	
+	if(pointer <= msgs.length - (columns*rows))
+		msg = msgs.join('').substr(pointer,columns*rows).split('');	
+	else{
+		while(pointer > msgs.length - (columns*rows))
+			msgs += '•';
+	}
+
 
 	if(!hasStarted){
 		setTimeout(function(){

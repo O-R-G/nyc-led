@@ -209,6 +209,7 @@ body[accessibility='negative_contrast'] #xx_hide{
     bottom: 15px;
     right: 15px;
     width: 50px;
+    font-family: 'relative10_pitch', monospace;
 }
 
 #screen-reader-switch{

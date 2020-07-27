@@ -7,7 +7,6 @@ var speechStarts, speechEnds;
 	let gotLength = false;
 	let focusList = [];
 	let focusIndex = 0;
-	let fuse = 0;
 	const mappings = {
 		a: 'link',
 		button: 'button',
@@ -89,7 +88,11 @@ var speechStarts, speechEnds;
 
 		const text = new SpeechSynthesisUtterance( speech );
 		// const text = new SpeechSynthesisUtterance( "hello, world." );
-
+		text.addEventListener('end', function(){
+			if(isRunning){
+				console.log('reload?');
+			}
+		});
 		if ( callback ) {
 			text.addEventListener('end', callback);
 		}
@@ -102,23 +105,15 @@ var speechStarts, speechEnds;
 
 		speechSynthesis.cancel();
 		speechSynthesis.speak( text );
-		text.addEventListener('boundary', function(){
-			speak_progress++;
-			console.log(speak_progress, speak_all_words.length);
-			console.log(speak_progress_bar);
-			if(speak_progress > speak_all_words.length)
-				speak_progress = speak_all_words.length;
-			speak_progress_bar.style.width = parseInt(speak_progress / speak_all_words.length * 1000)/10 + '%';
-			
+		text.addEventListener('boundary', function(event){
+			if(speech != 'Screen reader off' && speech != 'Screen reader on'){
+				console.log(speak_progress);
+				speak_progress++;
+				if(speak_progress > speak_all_words.length)
+					speak_progress = speak_all_words.length;
+				speak_progress_bar.style.width = parseInt(speak_progress / speak_all_words.length * 1000)/10 + '%';
+			}			
 		});
-		// text.addEventListener('error', function(event){
-		// 	console.log('error event = '+event.error);
-		// 	if(event.error == 'synthesis-failed'){
-				
-		// 		say(focusList[focusIndex].innerText);
-		// 		focusIndex++;
-		// 	}
-		// });
 	}
 
 	function computeRole( element ) {
@@ -209,10 +204,6 @@ var speechStarts, speechEnds;
 	}
 
 	function moveFocus( offset ) {
-		fuse ++;
-		console.log(fuse);
-		if(fuse > 5)
-			return false;
 		const last = document.querySelector( '[data-sr-current]' );
 		if ( last ) {
 			last.removeAttribute( 'data-sr-current' );
@@ -275,6 +266,10 @@ var speechStarts, speechEnds;
 		isRunning = false;
 
 		say( 'Screen reader off' );
+
+		speak_progress_bar.style.width = 0;
+		speak.innerText = msg_speak;
+		speak_progress = 0;
 	}
 
 	function keyDownHandler( evt ) {
@@ -310,6 +305,8 @@ var speechStarts, speechEnds;
 	screen_reader_switch.addEventListener('click', function(){
 		if( !isRunning ) {
 			start();
+			console.log(speak_all_words.length);
+			console.log(speak_all_words);
 		} else {
 			stop();
 		}
