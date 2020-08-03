@@ -8,10 +8,14 @@ var speechStarts, speechEnds;
 	let focusList = [];
 	let focusIndex = 0;
 	var text;
-	var voices;
+	
 	var utterance;
 	var current_voice = 0;
 	var synth = window.speechSynthesis;
+	var voices = false;
+	var voices_options = [];
+
+	
 	const mappings = {
 		a: 'link',
 		button: 'button',
@@ -104,8 +108,8 @@ var speechStarts, speechEnds;
 
 		// a good way to find all the english voices
 		// https://www.digitalocean.com/community/tutorials/how-to-build-a-text-to-speech-app-with-web-speech-api
-		voices = synth.getVoices();
-		text.voice =  voices[current_voice];
+		
+		text.voice =  voices_options[current_voice];
 		console.log(voices);
 		synth.cancel();
 		synth.speak( text );
@@ -237,6 +241,8 @@ var speechStarts, speechEnds;
 	}
 	
 	function start() {
+		
+		
 		say( 'Screen reader on', () => {
 			moveFocus( getActiveElement() );
 			isRunning = true;
@@ -294,12 +300,37 @@ var speechStarts, speechEnds;
 	screen_reader_switch.addEventListener('click', function(){
 		if( !isRunning ) {
 			voice_option_ctner.classList.add('expanded');
+			if(!voices){
+				voices = synth.getVoices();
+				for(var i = 0; i<voices.length; i++ ){
+					console.log(voices[i]['name']);
+					if(voices[i]['name'] == 'Samantha' || 
+						voices[i]['name'] == 'Nicky' ||
+						voices[i]['name'] == 'Victoria' ||
+						voices[i]['name'] == 'Google US English'){
+						voices_options.push(voices[i]);
+					}
+						
+				}
+				for(var i = 0; i< voices_options.length ; i++){
+					console.log(voices_options[i]);
+					var this_option = document.createElement('div');
+					this_option.className = 'voice_option';
+					this_option.innerText = voices_options[i]['name'].toUpperCase();
+					this_option.setAttribute('voice', i);
+					if(i == 0)
+						this_option.classList.add('current');
+					voice_option_ctner.appendChild(this_option);
+				}
+			}
+			
 			start();
 		} else {
 			voice_option_ctner.classList.remove('expanded');
 			stop();
 		}
 	});
+	
 	var sVoice_option = document.getElementsByClassName('voice_option');
 	Array.prototype.forEach.call(sVoice_option, function(el, i){
         el.addEventListener('click', function(){
@@ -309,9 +340,9 @@ var speechStarts, speechEnds;
         	el.classList.add('current');
             var this_voice = parseInt(el.getAttribute('voice'));
             current_voice = this_voice;
-            
             setTimeout(start, 500);
         });
     });
+
 
 }( document ) );
