@@ -252,9 +252,8 @@ var speechStarts, speechEnds;
 
 		focusIndex = 0;
 		isRunning = false;
-
+		synth.cancel();
 		say( 'Screen reader off' );
-
 		speak_progress_bar.style.width = 0;
 		speak.innerText = msg_speak;
 		speak_progress = 0;
