@@ -69,7 +69,7 @@ $isHome = false;
 if(!$uri[1])
     $isHome = true;
 ?><!DOCTYPE html>
-<html>
+<html lang='en'>
     <head>
         <title><? echo $title; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
