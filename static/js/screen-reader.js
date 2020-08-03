@@ -106,7 +106,7 @@ var speechStarts, speechEnds;
 		// https://www.digitalocean.com/community/tutorials/how-to-build-a-text-to-speech-app-with-web-speech-api
 		voices = synth.getVoices();
 		text.voice =  voices[current_voice];
-
+		console.log(voices);
 		synth.cancel();
 		synth.speak( text );
 		text.addEventListener('boundary', function(event){
@@ -252,6 +252,7 @@ var speechStarts, speechEnds;
 
 		focusIndex = 0;
 		isRunning = false;
+		console.log('cancel');
 		synth.cancel();
 		say( 'Screen reader off' );
 		speak_progress_bar.style.width = 0;
