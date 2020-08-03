@@ -371,12 +371,34 @@ body[accessibility='negative_contrast'] #xx_hide{
     background-color: #ff0;
     width: 0;
 }
+#screen-reader-ctner{
+    position: relative;
+}
 #voice_option_ctner{
     position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(0, -100%);
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 55px;
     text-align: right;
+    width: calc( 100vw - 70px);
+    display: none;
+}
+#voice_option_ctner.expanded{
+    display: initial;
+}
+.voice_option{
+    cursor: pointer;
+    display: inline-block;
+    margin: 3px 0;
+    padding: 0 10px;
+    border-right: 1px solid #000;
+    line-height: 1em;
+}
+.voice_option.current{
+    color: #00f;
+}
+.voice_option:hover{
+    color: #00f;
 }
 body[accessibility='links_underline'] a{
     border-bottom: 4px solid !important;

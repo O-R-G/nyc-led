@@ -23,9 +23,9 @@
     <div id = 'screen-reader-ctner'>
         <div id = 'screen-reader-switch'></div>
         <div id = 'voice_option_ctner'>
-            <div class = 'voice_option' voice ='0'>Victoria</div>
-            <div class = 'voice_option' voice ='33'>Samantha</div>
-            <div class = 'voice_option' voice ='48'>Google</div>
+            <div class = 'voice_option current' voice ='0'>VICTORIA</div>
+            <div class = 'voice_option' voice ='33'>SAMANTHA</div>
+            <div class = 'voice_option' voice ='48'>GOOGLE</div>
         </div>
     </div>
     <div id = 'accessibility_list_container'>

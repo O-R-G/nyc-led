@@ -10,7 +10,8 @@ var speechStarts, speechEnds;
 	var text;
 	var voices;
 	var utterance;
-	var current_voice = 33;
+	var current_voice = 0;
+	var synth = window.speechSynthesis;
 	const mappings = {
 		a: 'link',
 		button: 'button',
@@ -103,18 +104,11 @@ var speechStarts, speechEnds;
 
 		// a good way to find all the english voices
 		// https://www.digitalocean.com/community/tutorials/how-to-build-a-text-to-speech-app-with-web-speech-api
-		voices = speechSynthesis.getVoices();
-		// speechSynthesis.addEventListener('voiceschanged',function(){
-		// 	console.log('voiceschanged');
-		// 	voices = this.getVoices();
-		// 	utterance = new SpeechSynthesisUtterance("Screen reader voice test");
-		// 	// utterance.voice = voices[current_voice];
-		// 	speechSynthesis.speak(utterance);
-		// });
-		text.voice =  voices[current_voice];	// samantha
+		voices = synth.getVoices();
+		text.voice =  voices[current_voice];
 
-		speechSynthesis.cancel();
-		speechSynthesis.speak( text );
+		synth.cancel();
+		synth.speak( text );
 		text.addEventListener('boundary', function(event){
 			if(speech != 'Screen reader off' && speech != 'Screen reader on'){
 				speak_progress++;
@@ -296,10 +290,13 @@ var speechStarts, speechEnds;
 
 	document.addEventListener( 'keydown', keyDownHandler );
 	var screen_reader_switch = document.getElementById('screen-reader-switch');
+	var voice_option_ctner =document.getElementById('voice_option_ctner');
 	screen_reader_switch.addEventListener('click', function(){
 		if( !isRunning ) {
+			voice_option_ctner.classList.add('expanded');
 			start();
 		} else {
+			voice_option_ctner.classList.remove('expanded');
 			stop();
 		}
 	});
@@ -307,18 +304,14 @@ var speechStarts, speechEnds;
 	Array.prototype.forEach.call(sVoice_option, function(el, i){
         el.addEventListener('click', function(){
         	stop();
+        	var sCurrent = document.querySelector('.voice_option.current');
+        	sCurrent.classList.remove('current');
+        	el.classList.add('current');
             var this_voice = parseInt(el.getAttribute('voice'));
             current_voice = this_voice;
+            
             setTimeout(start, 500);
         });
     });
-    /*
-    // setIntervalto force read only div id='speak'
-
-    var speak_now = setInterval(function(){ 
-        //alert("speak now");
-        moveFocus( document.activeElement );
-    }, 5000);
-    */
 
 }( document ) );
