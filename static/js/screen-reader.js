@@ -258,7 +258,6 @@ var speechStarts, speechEnds;
 
 		focusIndex = 0;
 		isRunning = false;
-		console.log('cancel');
 		synth.cancel();
 		say( 'Screen reader off' );
 		speak_progress_bar.style.width = 0;
@@ -322,6 +321,18 @@ var speechStarts, speechEnds;
 						this_option.classList.add('current');
 					voice_option_ctner.appendChild(this_option);
 				}
+				var sVoice_option = document.getElementsByClassName('voice_option');
+				Array.prototype.forEach.call(sVoice_option, function(el, i){
+			        el.addEventListener('click', function(){
+			        	stop();
+			        	var sCurrent = document.querySelector('.voice_option.current');
+			        	sCurrent.classList.remove('current');
+			        	el.classList.add('current');
+			            var this_voice = parseInt(el.getAttribute('voice'));
+			            current_voice = this_voice;
+			            setTimeout(start, 500);
+			        });
+			    });
 			}
 			
 			start();
@@ -331,18 +342,7 @@ var speechStarts, speechEnds;
 		}
 	});
 	
-	var sVoice_option = document.getElementsByClassName('voice_option');
-	Array.prototype.forEach.call(sVoice_option, function(el, i){
-        el.addEventListener('click', function(){
-        	stop();
-        	var sCurrent = document.querySelector('.voice_option.current');
-        	sCurrent.classList.remove('current');
-        	el.classList.add('current');
-            var this_voice = parseInt(el.getAttribute('voice'));
-            current_voice = this_voice;
-            setTimeout(start, 500);
-        });
-    });
+	
 
 
 }( document ) );
