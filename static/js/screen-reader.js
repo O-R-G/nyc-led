@@ -110,7 +110,6 @@ var speechStarts, speechEnds;
 		// https://www.digitalocean.com/community/tutorials/how-to-build-a-text-to-speech-app-with-web-speech-api
 		
 		text.voice =  voices_options[current_voice];
-		console.log(voices);
 		synth.cancel();
 		synth.speak( text );
 		text.addEventListener('boundary', function(event){
@@ -302,7 +301,6 @@ var speechStarts, speechEnds;
 			if(!voices){
 				voices = synth.getVoices();
 				for(var i = 0; i<voices.length; i++ ){
-					console.log(voices[i]['name']);
 					if(voices[i]['name'] == 'Samantha' || 
 						voices[i]['name'] == 'Nicky' ||
 						voices[i]['name'] == 'Victoria' ||
@@ -311,8 +309,8 @@ var speechStarts, speechEnds;
 					}
 						
 				}
+				console.log(voices_options);
 				for(var i = 0; i< voices_options.length ; i++){
-					console.log(voices_options[i]);
 					var this_option = document.createElement('div');
 					this_option.className = 'voice_option';
 					this_option.innerText = voices_options[i]['name'].toUpperCase();
@@ -334,7 +332,6 @@ var speechStarts, speechEnds;
 			        });
 			    });
 			}
-			
 			start();
 		} else {
 			voice_option_ctner.classList.remove('expanded');
