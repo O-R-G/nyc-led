@@ -34,7 +34,6 @@ var speak_progress = 0;
 var speak_progress_bar = document.getElementById('speak_progress_bar');
 
 function request_live(request_url){
-	console.log('request live');
 	fetch(request_url)
 		.then(response =>  response.json())
 		.then(function(data){
@@ -42,7 +41,6 @@ function request_live(request_url){
 		})
 }
 function handle_response(response){
-	// console.log(response);
 	now_timestamp = new Date().getTime();
 	screen_interval = response['screen_interval'];
 	var full_loop_ms = response['full_loop_ms'];

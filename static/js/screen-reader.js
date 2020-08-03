@@ -309,7 +309,6 @@ var speechStarts, speechEnds;
 					}
 						
 				}
-				console.log(voices_options);
 				for(var i = 0; i< voices_options.length ; i++){
 					var this_option = document.createElement('div');
 					this_option.className = 'voice_option';
