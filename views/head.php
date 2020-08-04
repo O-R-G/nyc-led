@@ -65,8 +65,11 @@ function hex_to_rgb( $colour ) {
 
 $devhash = rand();  // to force .css reloads
 
+$isHome = false;
+if(!$uri[1])
+    $isHome = true;
 ?><!DOCTYPE html>
-<html>
+<html lang='en'>
     <head>
         <title><? echo $title; ?></title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,12 +87,13 @@ $devhash = rand();  // to force .css reloads
         <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
     </head>
     <body>
-        <script>
-            // query strings -> js variables    ** dev **
-            var query_bg_color = "<?= $query_bg_color; ?>";
-            var query_color = "<?=$query_color; ?>";
-            var query_rows = "<?= $query_rows; ?>";
-            var query_columns = "<?= $query_columns; ?>";
-            var query_font = "<?= $query_font; ?>";
-            var query_font_size = "<?= $query_font_size; ?>";
-        </script>
+    <script>
+        // query strings -> js variables    ** dev **
+        var query_bg_color = "<?= $query_bg_color; ?>";
+        var query_color = "<?=$query_color; ?>";
+        var query_rows = "<?= $query_rows; ?>";
+        var query_columns = "<?= $query_columns; ?>";
+        var query_font = "<?= $query_font; ?>";
+        var query_font_size = "<?= $query_font_size; ?>";
+        var isHome = <? echo json_encode($isHome); ?>;
+    </script>

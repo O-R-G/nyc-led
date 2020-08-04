@@ -1,10 +1,21 @@
+var speechStarts, speechEnds;
+
 ( function( document ) {
 	'use strict';
 
 	let isRunning = false;
+	let gotLength = false;
 	let focusList = [];
 	let focusIndex = 0;
+	var text;
+	
+	var utterance;
+	var current_voice = 0;
+	var synth = window.speechSynthesis;
+	var voices = false;
+	var voices_options = [];
 
+	
 	const mappings = {
 		a: 'link',
 		button: 'button',
@@ -83,14 +94,33 @@
 	}
 
 	function say( speech, callback ) {
-		const text = new SpeechSynthesisUtterance( speech );
 
+		text = new SpeechSynthesisUtterance( speech );
+		// const text = new SpeechSynthesisUtterance( "hello, world." );
+		text.addEventListener('end', function(){
+			if(isRunning){
+				console.log('reload?');
+			}
+		});
 		if ( callback ) {
-			text.onend = callback;
+			text.addEventListener('end', callback);
 		}
 
-		speechSynthesis.cancel();
-		speechSynthesis.speak( text );
+		// a good way to find all the english voices
+		// https://www.digitalocean.com/community/tutorials/how-to-build-a-text-to-speech-app-with-web-speech-api
+		
+		text.voice =  voices_options[current_voice];
+		synth.cancel();
+		synth.speak( text );
+		text.addEventListener('boundary', function(event){
+			if(speech != 'Screen reader off' && speech != 'Screen reader on'){
+				speak_progress++;
+				if(speak_progress > speak_all_words.length)
+					speak_progress = speak_all_words.length;
+				speak_progress_bar.style.width = parseInt(speak_progress / speak_all_words.length * 1000)/10 + '%';
+			}			
+		});
+		
 	}
 
 	function computeRole( element ) {
@@ -118,25 +148,32 @@
     /* focusList */
 
 	function createFocusList() {
+		// focusList = span.speak_word
+		
+		// waiting for the response...
+		// if(document.querySelectorAll( 'span' ).length == 0){
+		// 	setTimeout(createFocusList, 500);
+		// 	return false;
+		// }
 		focusList.push( ...document.querySelectorAll( 'html, body >:not( [aria-hidden=true] )' ) );
-
+		// focusList.push( ...document.querySelectorAll( 'html, body >:not( [aria-hidden=true]), span.speak_word' ) );
 		focusList = focusList.filter( ( element ) => {
 			const styles = getComputedStyle( element );
-
 			if ( styles.visibility === 'hidden' || styles.display === 'none' ) {
 				return false;
 			}
-
 			return true;
 		} );
-
         // *hack* filter all except div id=speak
-
+        // --> span.word_speak
 		focusList = focusList.filter( ( element ) => {
-
+			// console.log(element);
 			if ( element.id !== 'speak' ) {
 				return false;
 			}
+			// if ( !element.classList.contains('speak_word')) {
+			// 	return false;
+			// }
 
 			return true;
 		} );
@@ -156,7 +193,6 @@
 		if ( document.activeElement && document.activeElement !== document.body ) {
 			return document.activeElement;
 		}
-
 		return focusList[ 0 ];
 	}
 
@@ -175,7 +211,6 @@
 
 	function moveFocus( offset ) {
 		const last = document.querySelector( '[data-sr-current]' );
-
 		if ( last ) {
 			last.removeAttribute( 'data-sr-current' );
 		}
@@ -184,7 +219,7 @@
 			focusIndex = focusList.findIndex( ( element ) => {
 				return element === offset;
 			} );
-
+			// console.log('offset = '+offset);
 			return focus( offset );
 		}
 
@@ -196,19 +231,19 @@
 			focusIndex = 0;
 		}
 
-// this works with a option tab so could set timeout maybe
-// force to use div id='speak' ** hack **
-// focusIndex = 2;
-console.log('focusList ------> ' + focusList);
-console.log('focusIndex =====> ' + focusIndex);
-
+		// this works with a option tab so could set timeout maybe
+		// force to use div id='speak' ** hack **
+		// focusIndex = 2;
+		console.log('focusList ------> ' + focusList);
+		console.log('focusIndex =====> ' + focusIndex);
 		focus( focusList[ focusIndex ] );
 	}
-
+	
 	function start() {
+		
+		
 		say( 'Screen reader on', () => {
 			moveFocus( getActiveElement() );
-
 			isRunning = true;
 		} );
 	}
@@ -222,28 +257,30 @@ console.log('focusIndex =====> ' + focusIndex);
 
 		focusIndex = 0;
 		isRunning = false;
-
+		synth.cancel();
 		say( 'Screen reader off' );
+		speak_progress_bar.style.width = 0;
+		speak.innerText = msg_speak;
+		speak_progress = 0;
 	}
 
 	function keyDownHandler( evt ) {
-		if ( evt.altKey && evt.keyCode === 82 ) {
-			evt.preventDefault();
+		// if ( evt.altKey && evt.keyCode === 82 ) {
+		// 	evt.preventDefault();
 
-			if ( !isRunning ) {
-				start();
-			} else {
-				stop();
-			}
-		}
+		// 	if ( !isRunning ) {
+		// 		start();
+		// 	} else {
+		// 		stop();
+		// 	}
+		// }
 
 		if ( !isRunning ) {
 			return false;
 		}
 
-		if ( evt.altKey && evt.keyCode === 9 ) {
+		if ( evt.keyCode === 32 ) {
 			evt.preventDefault();
-
 			moveFocus( evt.shiftKey ? -1 : 1 );
 		} else if ( evt.keyCode === 9 ) {
 			setTimeout( () => {
@@ -256,14 +293,52 @@ console.log('focusIndex =====> ' + focusIndex);
 	createFocusList();
 
 	document.addEventListener( 'keydown', keyDownHandler );
+	var screen_reader_switch = document.getElementById('screen-reader-switch');
+	var voice_option_ctner =document.getElementById('voice_option_ctner');
+	screen_reader_switch.addEventListener('click', function(){
+		if( !isRunning ) {
+			voice_option_ctner.classList.add('expanded');
+			if(!voices){
+				voices = synth.getVoices();
+				for(var i = 0; i<voices.length; i++ ){
+					if(voices[i]['name'] == 'Samantha' || 
+						voices[i]['name'] == 'Nicky' ||
+						voices[i]['name'] == 'Victoria' ||
+						voices[i]['name'] == 'Google US English'){
+						voices_options.push(voices[i]);
+					}
+						
+				}
+				for(var i = 0; i< voices_options.length ; i++){
+					var this_option = document.createElement('div');
+					this_option.className = 'voice_option';
+					this_option.innerText = voices_options[i]['name'].toUpperCase();
+					this_option.setAttribute('voice', i);
+					if(i == 0)
+						this_option.classList.add('current');
+					voice_option_ctner.appendChild(this_option);
+				}
+				var sVoice_option = document.getElementsByClassName('voice_option');
+				Array.prototype.forEach.call(sVoice_option, function(el, i){
+			        el.addEventListener('click', function(){
+			        	stop();
+			        	var sCurrent = document.querySelector('.voice_option.current');
+			        	sCurrent.classList.remove('current');
+			        	el.classList.add('current');
+			            var this_voice = parseInt(el.getAttribute('voice'));
+			            current_voice = this_voice;
+			            setTimeout(start, 500);
+			        });
+			    });
+			}
+			start();
+		} else {
+			voice_option_ctner.classList.remove('expanded');
+			stop();
+		}
+	});
+	
+	
 
-    /*
-    // setIntervalto force read only div id='speak'
-
-    var speak_now = setInterval(function(){ 
-        //alert("speak now");
-        moveFocus( document.activeElement );
-    }, 5000);
-    */
 
 }( document ) );
