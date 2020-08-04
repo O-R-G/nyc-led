@@ -127,3 +127,9 @@ delay between sending out request and getting date.
 - bash sync script / set up mysql allow remote connections as in _digital-ocean-lamp-only.txt
 
 - set up nginx node.js server
+
+- 1. crush on mobile
+Again, the problem is in matrix.js. In init_size(), when the screen width
+(_w) is too small, Math.floor(_w / (char_w * 12)) will return 0 which makes
+_columns 0. That leads to _rows being divided by 0.
+
