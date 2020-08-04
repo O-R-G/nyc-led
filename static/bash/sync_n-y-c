@@ -1,0 +1,19 @@
+#!/bin/sh
+# update _local from _remote (db, media/)
+# does not work as mysql is not setup to be accessed remotely on n-y-c.org
+mysqldump -u athenes -pNormanPotter2987 -h 178.128.207.99 radioathenes_tv > /Library/Webserver/Documents/radioathenes.tv.local/radioathenes_remote.mysql
+mysql -u root -p radioathenes_tv_local < /Library/Webserver/Documents/radioathenes.tv.local/radioathenes_remote.mysql
+rsync -azP reinfurt@staging.radioathenes.tv:/var/www/html/media/ /Library/WebServer/Documents/radioathenes.tv.local/media
+rm /Library/Webserver/Documents/radioathenes.tv.local/radioathenes_remote.mysql
+
+
+# in process!
+
+
+#!/bin/sh
+# does not work as mysql is not setup to be accessed remotely on n-y-c.org
+mysqldump -u nyc_led_full -piusb9d79 -h dev.n-y-c.org n_y_c > /Users/reinfurt/n-y-c.mysql
+# mysql -u root -p ica_local < /Users/reinfurt/ica_full.mysql
+# rsync -azP reinfurt@ica.art:/var/www/html/media/ /Library/WebServer/Documents/www.ica.local/media
+rm /Users/reinfurt/n-y-c.mysql
+
