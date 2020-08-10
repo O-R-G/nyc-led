@@ -7,7 +7,6 @@ var msgs; // the final msgs for display. array of letters
 var	msgs_original; // the intermediate msgs to hold updated msgs, and wait until the current frame is settled. 
 var msg;
 var msg_speak = '';
-
 var now_timestamp = new Date().getTime();
 
 var timer;

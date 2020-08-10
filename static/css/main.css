@@ -339,7 +339,7 @@ body[accessibility='negative_contrast'] #xx_hide{
     width: calc( 100vw - 70px);
     text-align: right;
 }
-#accessibility_list.expanded{
+#accessibility.expanded #accessibility_list{
     display: initial;
 }
 #accessibility_list > div{
@@ -373,18 +373,23 @@ body[accessibility='negative_contrast'] #xx_hide{
 }
 #screen-reader-ctner{
     position: relative;
+    display: none;
+}
+#accessibility.expanded #screen-reader-ctner{
+    display: block;
 }
 #voice_option_ctner{
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
     right: 55px;
+    /*right: 5px;*/
     text-align: right;
     width: calc( 100vw - 70px);
     display: none;
 }
 #voice_option_ctner.expanded{
-    display: initial;
+    display: block;
 }
 .voice_option{
     cursor: pointer;

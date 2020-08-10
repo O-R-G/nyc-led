@@ -288,56 +288,69 @@ var speechStarts, speechEnds;
 			}, 0 );
 		}
 	}
-
+	
 	addStyles();
 	createFocusList();
-
 	document.addEventListener( 'keydown', keyDownHandler );
 	var screen_reader_switch = document.getElementById('screen-reader-switch');
 	var voice_option_ctner =document.getElementById('voice_option_ctner');
+
 	screen_reader_switch.addEventListener('click', function(){
 		if( !isRunning ) {
-			voice_option_ctner.classList.add('expanded');
-			if(!voices){
-				voices = synth.getVoices();
-				for(var i = 0; i<voices.length; i++ ){
-					if(voices[i]['name'] == 'Samantha' || 
-						voices[i]['name'] == 'Nicky' ||
-						voices[i]['name'] == 'Victoria' ||
-						voices[i]['name'] == 'Google US English'){
-						voices_options.push(voices[i]);
-					}
-						
-				}
-				for(var i = 0; i< voices_options.length ; i++){
-					var this_option = document.createElement('div');
-					this_option.className = 'voice_option';
-					this_option.innerText = voices_options[i]['name'].toUpperCase();
-					this_option.setAttribute('voice', i);
-					if(i == 0)
-						this_option.classList.add('current');
-					voice_option_ctner.appendChild(this_option);
-				}
-				var sVoice_option = document.getElementsByClassName('voice_option');
-				Array.prototype.forEach.call(sVoice_option, function(el, i){
-			        el.addEventListener('click', function(){
-			        	stop();
-			        	var sCurrent = document.querySelector('.voice_option.current');
-			        	sCurrent.classList.remove('current');
-			        	el.classList.add('current');
-			            var this_voice = parseInt(el.getAttribute('voice'));
-			            current_voice = this_voice;
-			            setTimeout(start, 500);
-			        });
-			    });
-			}
+			// voice_option_ctner.classList.add('expanded');
+			
 			start();
 		} else {
-			voice_option_ctner.classList.remove('expanded');
+			// voice_option_ctner.classList.remove('expanded');
 			stop();
 		}
 	});
-	
+
+
+	// synth.getVoices(); only workd in setTimeout(0) 
+	setTimeout(function(){
+		if(!voices){
+			voices = synth.getVoices();
+			console.log(voices);
+			for(var i = 0; i<voices.length; i++ ){
+				if(voices[i]['name'] == 'Samantha' || 
+					voices[i]['name'] == 'Nicky' ||
+					voices[i]['name'] == 'Victoria' ||
+					voices[i]['name'] == 'Google US English'){
+					voices_options.push(voices[i]);
+				}
+			}
+			for(var i = 0; i< voices_options.length ; i++){
+				var this_option = document.createElement('div');
+				this_option.className = 'voice_option';
+				this_option.innerText = voices_options[i]['name'].toUpperCase();
+				this_option.setAttribute('voice', i);
+				// if(i == 0)
+				// 	this_option.classList.add('current');
+				voice_option_ctner.appendChild(this_option);
+			}
+			var sVoice_option = document.getElementsByClassName('voice_option');
+			Array.prototype.forEach.call(sVoice_option, function(el, i){
+		        el.addEventListener('click', function(){
+		        	if(isRunning)
+		        		stop();
+		        	var sCurrent = document.querySelector('.voice_option.current');
+		        	if(sCurrent != null)
+		        		sCurrent.classList.remove('current');
+		        	if(sCurrent == el){
+		        		stop();
+		        		return false;
+		        	}
+		        	el.classList.add('current');
+		            var this_voice = parseInt(el.getAttribute('voice'));
+		            current_voice = this_voice;
+		            isRunning = true;
+		            setTimeout(start, 500);
+
+		        });
+		    });
+		}
+	}, 50);
 	
 
 
