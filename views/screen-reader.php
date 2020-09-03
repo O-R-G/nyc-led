@@ -22,7 +22,7 @@
 <div id='accessibility'>
     <div id = 'screen-reader-ctner'>
         <div id = 'screen-reader-switch'></div>
-        <div id = 'voice_option_ctner' class = 'expanded'></div>
+        <!-- <div id = 'voice_option_ctner' class = 'expanded'></div> -->
     </div>
     <div id = 'accessibility_list_container'>
         <div id = 'accessibility_list_toggle'></div>
