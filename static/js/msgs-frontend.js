@@ -32,14 +32,14 @@ var speak_all_words = [];
 var speak_progress = 0;
 var speak_progress_bar = document.getElementById('speak_progress_bar');
 
-function request_live(request_url){
+function request_live(request_url, isHome = true){
 	fetch(request_url)
 		.then(response =>  response.json())
 		.then(function(data){
-			handle_response(data);
+			handle_response(data, isHome);
 		})
 }
-function handle_response(response){
+function handle_response(response, isHome){
 	now_timestamp = new Date().getTime();
 	screen_interval = response['screen_interval'];
 	var full_loop_ms = response['full_loop_ms'];
@@ -58,8 +58,8 @@ function handle_response(response){
 		msgs = response['msgs'];
 		msgs = msgs.slice(0, current_position) + response['msgs_beginning'] + msgs.slice(current_position);
 		msgs = msgs.toUpperCase().split('');
-
-		speak.innerText = msg_speak;
+		if(isHome)
+			speak.innerText = msg_speak;
 
 	}
 	else{
@@ -67,8 +67,8 @@ function handle_response(response){
 		msgs = response['msgs'].toUpperCase().split('');
 		current_position = 0;
 	}
-
-	speak_all_words = msg_speak.split(/\s+/);
+	if(isHome)
+		speak_all_words = msg_speak.split(/\s+/);
 	pointer = current_position;
 	if(pointer <= msgs.length - (columns*rows))
 		msg = msgs.join('').substr(pointer,columns*rows).split('');	
@@ -89,4 +89,4 @@ function handle_response(response){
 
 }
 
-request_live('https://now.n-y-c.org/now');
+request_live('https://now.n-y-c.org/now', isHome);

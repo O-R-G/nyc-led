@@ -6,7 +6,7 @@
     $name = $item['name1'];  
     $body = $item['body'];  
 ?>
-
+<script src='/static/js/msgs-frontend.js'></script>
 <style>
     body {
         background-color: #CCC;    
@@ -23,7 +23,7 @@
         background-color: inherit; 
     }
 </style>
-        
+<div id = 'speak_progress_ctner'><div id = 'speak_progress_bar'></div></div>
 <div id='main' class='centered centeralign'>
     <div id='body' class='nycon multi-column'>
         <div id='date' class='relative'><?
@@ -42,7 +42,8 @@
         --><?
         echo $body;
     ?></div>
-</div>
 
+</div>
+<div id='speak' ><? echo $body; ?></div>
 <!-- <script src='/static/js/dates-menu.js'></script> -->
 <script src='/static/js/img-zoom.js'></script>
