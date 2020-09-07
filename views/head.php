@@ -97,3 +97,4 @@ if(!$uri[1])
         var query_font_size = "<?= $query_font_size; ?>";
         var isHome = <? echo json_encode($isHome); ?>;
     </script>
+    

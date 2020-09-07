@@ -15,7 +15,7 @@ var speechStarts, speechEnds;
 	var voices = false;
 	var voices_options = [];
 
-	
+	var speak_progress_bar = document.getElementById('speak_progress_bar');
 	const mappings = {
 		a: 'link',
 		button: 'button',
@@ -109,7 +109,7 @@ var speechStarts, speechEnds;
 		// a good way to find all the english voices
 		// https://www.digitalocean.com/community/tutorials/how-to-build-a-text-to-speech-app-with-web-speech-api
 		
-		text.voice =  voices_options[current_voice];
+		text.voice =  current_voice;
 		synth.cancel();
 		synth.speak( text );
 		text.addEventListener('boundary', function(event){
@@ -170,6 +170,12 @@ var speechStarts, speechEnds;
 			// console.log(element);
 			if ( element.id !== 'speak' ) {
 				return false;
+			}
+			else{ 
+				if(!isHome){
+					speak_all_words = document.getElementById('speak').innerText.split(/\s+/);
+					console.log(speak_all_words);
+				}
 			}
 			// if ( !element.classList.contains('speak_word')) {
 			// 	return false;
@@ -312,14 +318,14 @@ var speechStarts, speechEnds;
 		if(!voices){
 			voices = synth.getVoices();
 			for(var i = 0; i<voices.length; i++ ){
-				if(voices[i]['name'] == 'Samantha' || 
-					voices[i]['name'] == 'Nicky' ||
-					voices[i]['name'] == 'Victoria' ||
+				if(	voices[i]['name'] == 'Samantha' ||
+					voices[i]['name'] == 'Vicky' ||
 					voices[i]['name'] == 'Google US English'){
 					voices_options.push(voices[i]);
 					if(current_voice == 0){
 						current_voice = voices[i];
 					}
+					// console.log(current_voice);
 				}
 			}
 			// current_voice = voices_options[0][];
