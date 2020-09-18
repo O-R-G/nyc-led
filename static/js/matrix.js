@@ -16,7 +16,6 @@
     triggered static/js/json.js:
     var timer = setInterval(update, timer_ms);
 */
-console.log('ma');
 var letters = [];
 var words = [];
 
@@ -97,6 +96,7 @@ function update() {
         else
         {
             request_live('https://now.n-y-c.org/now', isHome);
+            console.log('isHome = '+isHome);
         }
         isBeginning = false;
     }
