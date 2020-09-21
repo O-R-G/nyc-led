@@ -40,12 +40,9 @@ function outsideClick(event, notelem)	{
 }
 
 var nav_elements = document.querySelectorAll('#menu .nav-level span, #xx_hide, #xx_show');
-
 window.addEventListener('click', function(e){
 	var menu_isExpanded = (xx_hide.style.display === 'block');
-	if(outsideClick(e, nav_elements)){
-		console.log('outside');
-	}
+	
 	if (outsideClick(e, nav_elements) && menu_isExpanded) {
 		console.log('toggle menu');
    		menu.style.display='none';
