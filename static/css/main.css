@@ -440,8 +440,30 @@ body[accessibility='light_background'] *{
 }
 body[accessibility='readable_font']{
     font-family: 'relative10_pitch', monospace;
-} 
+}
 
+ /* subscribe */
+input[type="submit" i] {
+    border: none;
+    background-color: transparent;
+    font-size: 15px;
+    line-height: 20px;
+    font-family: 'nycon', helvetica, arial, sans-serif;
+    cursor: pointer;
+    margin-top: 5px;
+}
+input[type="submit" i]:hover{
+    border-bottom: solid 2px #000;
+}
+.mc-field-group label[for="mce-EMAIL"]{
+    display: block;
+}
+.mc-field-group #mce-EMAIL{
+    display: block;
+    width: 300px;
+    max-width: 100%;
+    padding: 5px 3px;
+}
 
 /* animation */
 
