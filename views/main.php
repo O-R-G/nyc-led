@@ -47,3 +47,19 @@
 <div id='speak' ><? echo $body; ?></div>
 <!-- <script src='/static/js/dates-menu.js'></script> -->
 <script src='/static/js/img-zoom.js'></script>
+<script>
+    var form = document.getElementById('mc-embedded-subscribe-form');
+    if(typeof form !== 'undefined'){
+        var email_input = document.getElementById('mce-EMAIL');
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            if(email_input.value !== ''){
+                form.submit();
+            }
+            else{
+                alert('please provide your email');
+            }
+
+        });
+    }
+</script>
