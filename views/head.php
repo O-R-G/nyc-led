@@ -83,6 +83,7 @@ if(!$uri[1])
         <link rel="stylesheet" href="/static/css/helveticaneuer.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/helveticaautospaced.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/nycon.css?<?= $devhash; ?>">
+        <link rel="stylesheet" href="/static/css/ocrflight.css?<?= $devhash; ?>">
         <link rel="stylesheet" href="/static/css/main.css?<?= $devhash; ?>">    
         <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
     </head>
