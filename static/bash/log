@@ -1,0 +1,26 @@
+
+2020-09-25
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+
+2020-09-25
+mkdir: /home/reinfurt/backup: No such file or directory
+rsync: mkdir "/home/reinfurt/backup/n-y-c.local/media" failed: No such file or directory (2)
+rsync error: error in file IO (code 11) at /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/rsync/rsync-54.120.1/rsync/main.c(545) [receiver=2.6.9]
+rsync: connection unexpectedly closed (8 bytes received so far) [sender]
+rsync error: error in rsync protocol data stream (code 12) at /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/rsync/rsync-54.120.1/rsync/io.c(453) [sender=2.6.9]
+
+2020-09-25
+mkdir: /home/reinfurt/backup: No such file or directory
+rsync: mkdir "/home/reinfurt/backup/n-y-c.local/media" failed: No such file or directory (2)
+rsync error: error in file IO (code 11) at /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/rsync/rsync-54.120.1/rsync/main.c(545) [receiver=2.6.9]
+rsync: connection unexpectedly closed (8 bytes received so far) [sender]
+rsync error: error in rsync protocol data stream (code 12) at /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/rsync/rsync-54.120.1/rsync/io.c(453) [sender=2.6.9]
+
+2020-09-25
+mkdir: /home/reinfurt/backup: No such file or directory
+rsync: mkdir "/home/reinfurt/backup/n-y-c.local/media" failed: No such file or directory (2)
+rsync error: error in file IO (code 11) at /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/rsync/rsync-54.120.1/rsync/main.c(545) [receiver=2.6.9]
+rsync: connection unexpectedly closed (8 bytes received so far) [sender]
+rsync error: error in rsync protocol data stream (code 12) at /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/rsync/rsync-54.120.1/rsync/io.c(453) [sender=2.6.9]
+
+2020-09-25

@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# sync (local <- remote)
+#
+# dump remote .sql, update local .sql
+# sync media/* from remote to local 
+# errors to $LOG
+
+DATE=`date +%Y-%m-%d`
+WWW_LOCAL="/Library/Webserver/Documents/n-y-c.local"
+SQL="$WWW_LOCAL/$DATE.sql"
+LOG="$WWW_LOCAL/static/bash/log"
+DB_USER_REMOTE="n_y_c_rw"
+DB_PASS_REMOTE="iunsa78s7"
+DB_HOST_REMOTE="n-y-c.org"
+DB_NAME_REMOTE="n_y_c"
+DB_USER_LOCAL="root"
+DB_PASS_LOCAL=""
+DB_HOST_LOCAL="localhost"
+DB_NAME_LOCAL="n_y_c_local"
+WWW_USER_REMOTE="reinfurt"
+WWW_HOST_REMOTE="n-y-c.org"
+
+echo "\n$DATE" >>$LOG
+echo "\nStart mysqldump ..."
+mysqldump -u $DB_USER_REMOTE -p$DB_PASS_REMOTE -h $DB_HOST_REMOTE $DB_NAME_REMOTE > $SQL 2>>$LOG
+mysql -u $DB_USER_LOCAL -p$DB_PASS_LOCAL $DB_NAME_LOCAL < $SQL 2>>$LOG
+echo "\nStart rsync ..."
+rsync -azP $WWW_USER_REMOTE@$WWW_HOST_REMOTE:/var/www/html/media/ $WWW_LOCAL/media 2>>$LOG
+rm $SQL
