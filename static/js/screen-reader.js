@@ -174,7 +174,7 @@ var speechStarts, speechEnds;
 			else{ 
 				if(!isHome){
 					speak_all_words = document.getElementById('speak').innerText.split(/\s+/);
-					console.log(speak_all_words);
+					// console.log(speak_all_words);
 				}
 			}
 			// if ( !element.classList.contains('speak_word')) {

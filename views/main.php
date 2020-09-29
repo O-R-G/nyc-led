@@ -5,6 +5,15 @@
 
     $name = $item['name1'];  
     $body = $item['body'];  
+    $find = '/<br>/';
+    $replace = '';
+    $body = preg_replace($find, $replace, $body);
+    $find = '/<div><\/div>/';
+    $replace = '';
+    $body = preg_replace($find, $replace, $body);
+    // $find = '/<\/div>/';
+    // $replace = '<br></div>';
+    // $body = preg_replace($find, $replace, $body);
 ?>
 <script src='/static/js/msgs-frontend.js'></script>
 <style>
@@ -36,7 +45,7 @@
 <script src='/static/js/img-zoom.js'></script>
 <script>
     var form = document.getElementById('mc-embedded-subscribe-form');
-    if(typeof form !== 'undefined'){
+    if(form !== null){
         var email_input = document.getElementById('mce-EMAIL');
         form.addEventListener('submit', function(e){
             e.preventDefault();
