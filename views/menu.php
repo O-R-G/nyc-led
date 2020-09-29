@@ -30,6 +30,9 @@ $nav = $oo->nav($uu->ids);
             }
             $prevd = $d;
         }
+        if ($uri[1]) {
+            ?><li><a class='active' href='/'>Home</a></li><?
+        }
         ?></ul>
     </ul>
 </div>

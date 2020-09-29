@@ -26,7 +26,14 @@
     </div>
     <div id = 'accessibility_list_container'>
         <div id = 'accessibility_list_toggle'></div>
-        <div id = 'accessibility_list'><div class = 'accessibility_btn' accessibility_feature='high_contrast'>HIGH CONTRAST</div><div class = 'accessibility_btn' accessibility_feature='negative_contrast'>NEGATIVE CONTRAST</div><div class = 'accessibility_btn' accessibility_feature='light_background'>LIGHT BACKGROUND</div><div class = 'accessibility_btn' accessibility_feature='links_underline'>LINKS UNDERLINE</div><div class = 'accessibility_btn' accessibility_feature='readable_font'>READABLE FONT</div><div class = 'accessibility_btn' accessibility_feature='reset'>RESET</div></div>
+        <div id = 'accessibility_list'>
+            <!-- <div class = 'accessibility_btn' accessibility_feature='high_contrast'>High contrast</div> -->
+            <div class = 'accessibility_btn' accessibility_feature='light_background'>High contrast</div>
+            <div class = 'accessibility_btn' accessibility_feature='negative_contrast'>Negative contrast</div>
+            <!-- <div class = 'accessibility_btn' accessibility_feature='light_background'>Light background</div> -->
+            <!-- <div class = 'accessibility_btn' accessibility_feature='links_underline'>Underline links</div> -->
+            <!-- <div class = 'accessibility_btn' accessibility_feature='readable_font'>Readable font</div> -->
+            <div class = 'accessibility_btn' accessibility_feature='reset'>Reset</div></div>
     </div>
 </div>
 
@@ -50,6 +57,7 @@
     });
     sAccessibility_list_toggle.addEventListener('click', function(){
         sAccessibility.classList.toggle('expanded');
+        sAccessibility.classList.toggle('yellow');
     });
     
 </script>

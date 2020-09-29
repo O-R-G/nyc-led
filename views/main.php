@@ -11,9 +11,6 @@
     body {
         background-color: #CCC;    
     }
-    #menu {
-        background-color: transparent;
-    }    
     #mask {
         position: fixed;
         top: initial; 
@@ -25,21 +22,11 @@
 </style>
 <div id = 'speak_progress_ctner'><div id = 'speak_progress_bar'></div></div>
 <div id='main' class='centered centeralign'>
-    <div id='body' class='nycon multi-column'>
+    <div id='body' class='helveticaneuer multi-column'>
         <div id='date' class='relative'><?
             // echo date('F j, Y h:i:s a');
             echo date('F j, Y');
-        ?></div>
-        <!--
-        <div id='dates-menu' class='relative' aria-hidden='true'><?    
-            $d=strtotime('now');
-            for ($i=1; $i<30; $i++) {
-                $d=strtotime('- ' .  $i. ' days');
-                echo '<a href="" aria-hidden="true">' . date('F j, Y', $d) . '</a><br/>';
-                // echo date('F j, Y', $d) . '<br/>';
-            }
-        ?></div>
-        --><?
+        ?></div><?
         echo $body;
     ?></div>
 
