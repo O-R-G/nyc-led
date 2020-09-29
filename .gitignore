@@ -7,4 +7,5 @@ static/data/
 #media/*.png
 #media/*.pdf
 #media/*.tif
-
+.htaccess
+open-records-generator/
