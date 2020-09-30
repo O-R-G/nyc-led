@@ -3,17 +3,12 @@
         display menu item
     */
 
+    $date = date('F j, Y');
     $name = $item['name1'];  
     $body = $item['body'];  
-    $find = '/<br>/';
+    $find = '/<div><br><\/div>/';
     $replace = '';
     $body = preg_replace($find, $replace, $body);
-    $find = '/<div><\/div>/';
-    $replace = '';
-    $body = preg_replace($find, $replace, $body);
-    // $find = '/<\/div>/';
-    // $replace = '<br></div>';
-    // $body = preg_replace($find, $replace, $body);
 ?>
 <script src='/static/js/msgs-frontend.js'></script>
 <style>
@@ -29,19 +24,23 @@
         background-color: inherit; 
     }
 </style>
-<div id = 'speak_progress_ctner'><div id = 'speak_progress_bar'></div></div>
-<div id='main' class='centered centeralign'>
-    <div id='body' class='helveticaneuer multi-column'>
-        <div id='date' class='relative'><?
-            // echo date('F j, Y h:i:s a');
-            echo date('F j, Y');
-        ?></div><?
-        echo $body;
-    ?></div>
 
+<div id = 'speak_progress_ctner'>
+    <div id = 'speak_progress_bar'>
+    </div>
 </div>
-<div id='speak' ><? echo $body; ?></div>
-<!-- <script src='/static/js/dates-menu.js'></script> -->
+<div id='content'>
+    <div id='columns' class='helveticaneuer'>
+        <div id='date' class='relative'><? 
+            echo $date; 
+        ?></div><?
+            echo $body;
+    ?></div>
+</div>
+<div id='speak' ><? 
+    echo $body; ?>
+</div>
+
 <script src='/static/js/img-zoom.js'></script>
 <script>
     var form = document.getElementById('mc-embedded-subscribe-form');
