@@ -45,12 +45,23 @@
     Array.prototype.forEach.call(sAccessibility_btn, function(el, i){
         el.addEventListener('click', function(){
             var this_feature = el.getAttribute('accessibility_feature');
-            if(this_feature == 'reset')
+            var activeBtn = document.querySelector('.accessibility_btn.active');
+            
+            if(this_feature == 'reset'){
                 body.setAttribute('accessibility', '');
-            else if(this_feature == body.getAttribute('accessibility'))
+                if(activeBtn != null)
+                    activeBtn.classList.remove('active');
+            }
+            else if(this_feature == body.getAttribute('accessibility')){
                 body.setAttribute('accessibility', '');
-            else
+                el.classList.remove('active');
+            }
+            else{
                 body.setAttribute('accessibility', this_feature);
+                if(activeBtn != null)
+                    activeBtn.classList.remove('active');
+                el.classList.add('active');
+            }
         });
     });
     sAccessibility_list_toggle.addEventListener('click', function(){

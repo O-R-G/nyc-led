@@ -391,6 +391,9 @@ body[accessibility='negative_contrast'] #xx_hide{
 #accessibility_list_container{
     position: relative;
 }
+.accessibility_btn.active{
+    background-color: #ff0;
+}
 
 #speak_progress_ctner{
     position: fixed;
@@ -473,6 +476,9 @@ body[accessibility='negative_contrast'] .yellow #accessibility_list_toggle,
 body[accessibility='negative_contrast'] #accessibility_list_toggle:hover{
     background-image:url('/media/svg/accessibility-6-k.svg');
 }
+body[accessibility='negative_contrast'] button{
+    color: #fff;
+}
 
 body[accessibility='high_contrast'] *{
     color: #000;
@@ -505,6 +511,9 @@ body[accessibility='high_contrast'] .yellow #screen-reader-switch{
 }
 body[accessibility='high_contrast'] #accessibility_list{
     bottom: 17px;
+}
+body[accessibility='high_contrast'] #content{
+    padding-top: 3.5em;
 }
 /*body[accessibility='readable_font']{
     font-family: 'relative10_pitch', monospace;
