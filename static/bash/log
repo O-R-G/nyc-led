@@ -24,3 +24,8 @@ rsync: connection unexpectedly closed (8 bytes received so far) [sender]
 rsync error: error in rsync protocol data stream (code 12) at /AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/rsync/rsync-54.120.1/rsync/io.c(453) [sender=2.6.9]
 
 2020-09-25
+
+2020-10-02
+mysqldump: [Warning] Using a password on the command line interface can be insecure.
+mysqldump: Error: 'Access denied; you need (at least one of) the PROCESS privilege(s) for this operation' when trying to dump tablespaces
+mysql: [Warning] Using a password on the command line interface can be insecure.
