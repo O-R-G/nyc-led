@@ -226,9 +226,11 @@ body[accessibility='negative_contrast'] #xx_hide{
     height: 50px;
     background-size: 100%;
     cursor: pointer;
+    background-color: #fff;
 }
 
-#screen-reader-switch:hover{
+#screen-reader-switch:hover,
+#screen-reader-switch.active{
     background-color: #FF0;
 }
 
@@ -498,8 +500,7 @@ body[accessibility='high_contrast'] .accessibility_btn:last-child{
     border-right: none;
 }
 body[accessibility='high_contrast'] .yellow,
-body[accessibility='high_contrast'] .yellow #accessibility_list_toggle,
-body[accessibility='high_contrast'] .yellow #screen-reader-switch{
+body[accessibility='high_contrast'] .yellow #accessibility_list_toggle{
     background-color: #ff0;
 }
 body[accessibility='high_contrast'] #accessibility_list_toggle{

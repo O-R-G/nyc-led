@@ -245,8 +245,8 @@ var speechStarts, speechEnds;
 		focus( focusList[ focusIndex ] );
 	}
 	
-	function start() {
-		
+	function start(screen_reader_switch) {
+		screen_reader_switch.classList.add('active');
 		
 		say( 'Screen reader on', () => {
 			moveFocus( getActiveElement() );
@@ -256,7 +256,7 @@ var speechStarts, speechEnds;
 
 	function stop() {
 		const current = document.querySelector( '[data-sr-current]' );
-
+		screen_reader_switch.classList.remove('active');
 		if ( current ) {
 			current.removeAttribute( 'data-sr-current' );
 		}
@@ -305,10 +305,10 @@ var speechStarts, speechEnds;
 		if( !isRunning ) {
 			// voice_option_ctner.classList.add('expanded');
 			
-			start();
+			start(screen_reader_switch);
 		} else {
 			// voice_option_ctner.classList.remove('expanded');
-			stop();
+			stop(screen_reader_switch);
 		}
 	});
 
