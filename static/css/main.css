@@ -226,9 +226,11 @@ body[accessibility='negative_contrast'] #xx_hide{
     height: 50px;
     background-size: 100%;
     cursor: pointer;
+    background-color: #fff;
 }
 
-#screen-reader-switch:hover{
+#screen-reader-switch:hover,
+#screen-reader-switch.active{
     background-color: #FF0;
 }
 
@@ -391,6 +393,9 @@ body[accessibility='negative_contrast'] #xx_hide{
 #accessibility_list_container{
     position: relative;
 }
+.accessibility_btn.active{
+    background-color: #ff0;
+}
 
 #speak_progress_ctner{
     position: fixed;
@@ -437,9 +442,9 @@ body[accessibility='negative_contrast'] #xx_hide{
 .voice_option:hover{
     color: #00f;
 }
-body[accessibility='links_underline'] a{
+/*body[accessibility='links_underline'] a{
     border-bottom: 4px solid !important;
-}
+}*/
 body[accessibility='negative_contrast']{
     background-color: #000;
     color: #fff;
@@ -454,31 +459,73 @@ body[accessibility='negative_contrast'] a{
 body[accessibility='negative_contrast'] #menu{
     background-color: #000;
 }
-body[accessibility='negative_contrast'] #menu{
-    background-color: #000;
+body[accessibility='negative_contrast'] .accessibility_btn{
+    color: #000;
 }
-
+body[accessibility='negative_contrast'] #d{
+    color: #fff;
+}
 body[accessibility='negative_contrast'] #screen-reader-switch{
     background-image:url('/media/svg/speak-6-w.svg');
+}
+body[accessibility='negative_contrast'] .yellow #screen-reader-switch{
+    background-image:url('/media/svg/speak-6-k.svg');
 }
 body[accessibility='negative_contrast'] #accessibility_list_toggle{
     background-image:url('/media/svg/accessibility-6-w.svg');
 }
+body[accessibility='negative_contrast'] .yellow #accessibility_list_toggle,
+body[accessibility='negative_contrast'] #accessibility_list_toggle:hover{
+    background-image:url('/media/svg/accessibility-6-k.svg');
+}
+body[accessibility='negative_contrast'] button{
+    color: #fff;
+}
 
-body[accessibility='light_background'] *{
-    color: #000 !important;
-    background-color: #fff !important;
+body[accessibility='high_contrast'] *{
+    color: #000;
+    background-color: #fff;
 }
-body[accessibility='readable_font']{
+
+body[accessibility='high_contrast'] #menu{
+    color: #000;
+    background-color: #fff;
+}
+
+body[accessibility='high_contrast'] .accessibility_btn{
+    border: 1px solid #000;
+    border-right: none;
+}
+body[accessibility='high_contrast'] .accessibility_btn:last-child{
+    border-right: none;
+}
+body[accessibility='high_contrast'] .yellow,
+body[accessibility='high_contrast'] .yellow #accessibility_list_toggle{
+    background-color: #ff0;
+}
+body[accessibility='high_contrast'] #accessibility_list_toggle{
+    border: 1px solid #000;
+}
+body[accessibility='high_contrast'] .yellow #screen-reader-switch{
+    border: 1px solid #000;
+    border-bottom: none;
+}
+body[accessibility='high_contrast'] #accessibility_list{
+    bottom: 17px;
+}
+body[accessibility='high_contrast'] #content{
+    padding-top: 3.5em;
+}
+/*body[accessibility='readable_font']{
     font-family: 'relative10_pitch', monospace;
-}
+}*/
 
 .yellow {
     background-color: #FF0;
 }
 
 /* subscribe */
-input[type="submit" i] {
+button[type="submit"] {
     border: none;
     background-color: transparent;
     font-size: 17px;
@@ -487,14 +534,14 @@ input[type="submit" i] {
     cursor: pointer;
     margin-top: 5px;
 }
-input[type="submit" i]:hover{
+button[type="submit"]:hover{
     border-bottom: solid 2px #000;
 }
 .mc-field-group label[for="mce-EMAIL"]{
     display: block;
     background-color: #FF0;
 }
-.mc-field-group #mce-EMAIL{
+#fieldEmail{
     display: block;
     width: 300px;
     max-width: 100%;
