@@ -7,19 +7,19 @@
 # errors to $LOG
 
 DATE=`date +%Y-%m-%d`
-WWW_LOCAL="/Library/Webserver/Documents/n-y-c.local"
+WWW_LOCAL="/Library/Webserver/Documents/site"
 SQL="$WWW_LOCAL/$DATE.sql"
 LOG="$WWW_LOCAL/static/bash/log"
-DB_USER_REMOTE="n_y_c_remote"
-DB_PASS_REMOTE="hrfqy7c7"
-DB_HOST_REMOTE="n-y-c.org"
-DB_NAME_REMOTE="n_y_c"
-DB_USER_LOCAL="root"
-DB_PASS_LOCAL=""
+DB_USER_REMOTE="username"
+DB_PASS_REMOTE="password"
+DB_HOST_REMOTE="example.com"
+DB_NAME_REMOTE="databasename"
+DB_USER_LOCAL="username"
+DB_PASS_LOCAL="password"
 DB_HOST_LOCAL="localhost"
-DB_NAME_LOCAL="n_y_c_local"
-WWW_USER_REMOTE="reinfurt"
-WWW_HOST_REMOTE="n-y-c.org"
+DB_NAME_LOCAL="databasename_local"
+WWW_USER_REMOTE="username"
+WWW_HOST_REMOTE="example.com"
 
 echo "\n$DATE" >>$LOG
 echo "\nStart mysqldump ..."
