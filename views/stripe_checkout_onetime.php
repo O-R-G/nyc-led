@@ -1,5 +1,5 @@
 <?
-require_once('static/php/composer/vendor/autoload.php');
+// require_once('static/php/composer/vendor/autoload.php');
 
 // get fully-qualified hostname
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
