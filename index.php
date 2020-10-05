@@ -17,8 +17,11 @@ else if ($uri[1] == 'blink')
     require_once('views/blink.php');
 else if (!$uri[1])
     require_once('views/home.php');
-else
+else{
     require_once('views/main.php');
+    if ($uri[1] == 'purchase')
+		require_once('views/stripe_checkout_onetime.php');
+}
     
 require_once('views/screen-reader.php');
 require_once('views/json.php');

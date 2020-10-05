@@ -525,7 +525,9 @@ body[accessibility='high_contrast'] #content{
 }
 
 /* subscribe */
-button[type="submit"] {
+button[type="submit"],
+#stripe_form_submit
+{
     border: none;
     background-color: transparent;
     font-size: 17px;
@@ -534,7 +536,9 @@ button[type="submit"] {
     cursor: pointer;
     margin-top: 5px;
 }
-button[type="submit"]:hover{
+button[type="submit"]:hover,
+#stripe_form_submit:hover
+{
     border-bottom: solid 2px #000;
 }
 .mc-field-group label[for="mce-EMAIL"]{
@@ -548,6 +552,10 @@ button[type="submit"]:hover{
     padding: 5px 3px;
 }
 
+
+#stripe_form{
+    padding: 0 2em;
+}
 /* animation */
 
 @keyframes blink {
