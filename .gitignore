@@ -9,4 +9,5 @@ static/data/
 #media/*.tif
 .htaccess
 open-records-generator/
-static/bash/
+static/bash/backup
+static/bash/sync
