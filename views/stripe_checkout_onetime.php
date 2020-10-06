@@ -19,6 +19,7 @@ else{
 		$isCanceled = true;
 		$this_parent_uri = $uri;
 		array_pop($this_parent_uri);
+		array_shift($this_parent_uri);
 		$this_parent = $oo->get(end($oo->urls_to_ids($this_parent_uri)));
 		$price_id = $this_parent['notes'];
 	}
