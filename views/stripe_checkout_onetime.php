@@ -17,9 +17,9 @@ if(end($uri) == 'success'){
 else{
 	if(end($uri) == 'canceled'){
 		$isCanceled = true;
-		$this_parent_uri = array_shift($uri);
-		var_dump($this_parent_uri);
-		$this_parent = $oo->get(end($oo->urls_to_ids($uri)));
+		$this_parent_uri = $uri;
+		array_pop($this_parent_uri);
+		$this_parent = $oo->get(end($oo->urls_to_ids($this_parent_uri)));
 		$price_id = $this_parent['notes'];
 	}
 	else{
