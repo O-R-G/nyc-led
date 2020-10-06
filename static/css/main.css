@@ -555,6 +555,7 @@ button[type="submit"]:hover,
 
 #stripe_form{
     padding: 0 2em;
+    margin-bottom: 6em;
 }
 /* animation */
 
