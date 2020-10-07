@@ -18,10 +18,10 @@ function img_zoom(img){
     }
 }
 
-// add event listeners to #main img *
-var main = document.getElementById("main");
-if(main !== null){
-    var imgs = main.getElementsByTagName("img");
+// add event listeners to #content img *
+var content = document.getElementById("content");
+if(content !== null){
+    var imgs = content.getElementsByTagName("img");
     if(imgs !== null){
         for(var i=0; i<imgs.length; i++) {
             imgs[i].addEventListener("click", function() {
@@ -29,7 +29,7 @@ if(main !== null){
             });
         }
     }
-    var videos = main.getElementsByTagName("video");
+    var videos = content.getElementsByTagName("video");
     if(videos !== null){
         for(var i=0; i<videos.length; i++) {
             videos[i].addEventListener("click", function() {

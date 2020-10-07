@@ -134,7 +134,7 @@ body[accessibility='negative_contrast'] #xx_hide{
 #columns {
     columns: 250px 6;
     column-gap: 44px;
-    margin: 70px 70px 70px 50px;
+    margin: 63px 63px 63px 63px;
 }
 
 /* use margin instead of <br> */
@@ -575,8 +575,7 @@ input:focus {
 }
 
 #stripe_form{
-    padding: 0 2em;
-    margin-bottom: 6em;
+    margin-left: 63px;
 }
 /* animation */
 
