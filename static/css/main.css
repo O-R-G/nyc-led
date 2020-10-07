@@ -12,7 +12,7 @@ body {
     color: #000;
     font-family: 'helveticaautospaced', monospace;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 17px;
     line-height: 21px;
 }
 
@@ -527,19 +527,33 @@ body[accessibility='high_contrast'] #content{
 button[type="submit"],
 #stripe_form_submit
 {
-    border: none;
-    background-color: transparent;
-    font-size: 17px;
-    line-height: 21px;
-    padding-top: 21px;
+    display: inline-block;
+    height: 50px;
+    width: 170px;
+    padding: 10px 10px 21px 10px;
     cursor: pointer;
-    margin-top: 5px;
+    text-align: left;
+    border: 1px solid #000;
+    background-color: #FFF;
+    font-family: 'relative10_pitch', monospace;
+    font-size: 12px;
+    line-height: 21px;
 }
+
 button[type="submit"]:hover,
 #stripe_form_submit:hover
 {
-    border-bottom: solid 2px #000;
+    background-color: #FF0;
 }
+
+button[type="submit"]:active,
+#stripe_form_submit:active
+{
+    background-color: #EEE;
+    border: #FFF solid 1px;
+    color: #999;
+}
+
 .mc-field-group label[for="mce-EMAIL"]{
     display: block;
     background-color: #FF0;
@@ -547,10 +561,18 @@ button[type="submit"]:hover,
 #fieldEmail{
     display: block;
     width: 300px;
+    height: 20px;
     max-width: 100%;
-    padding: 5px 3px;
+    padding: 10px 10px 10px 15px;
+    font-family: 'helveticaneuer', helvetica, arial, sans-serif;
+    font-size: 17px;
+    line-height: 21px;
 }
 
+input:focus { 
+    outline: none;
+    background-color: #DDD;
+}
 
 #stripe_form{
     padding: 0 2em;

@@ -19,7 +19,7 @@ else if (!$uri[1])
     require_once('views/home.php');
 else{
     require_once('views/main.php');
-    if ($uri[1] == 'purchase')
+    if ($uri[1] == 'buy')
 		require_once('views/stripe_checkout_onetime.php');
 }
     
