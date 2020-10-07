@@ -124,7 +124,6 @@ body[accessibility='negative_contrast'] #xx_hide{
 }
 
 #content {
-    padding: 1em;
 }
 
 #content img {
@@ -135,12 +134,12 @@ body[accessibility='negative_contrast'] #xx_hide{
 #columns {
     columns: 250px 6;
     column-gap: 44px;
-    padding: 1em;
+    margin: 70px 70px 70px 50px;
 }
 
 /* use margin instead of <br> */
 #columns div {
-    margin-bottom: 22px;
+    margin-bottom: 21px;
 }
 
 #mask {
