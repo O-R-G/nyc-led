@@ -134,7 +134,7 @@ body[accessibility='negative_contrast'] #xx_hide{
 #columns {
     columns: 250px 6;
     column-gap: 44px;
-    margin: 63px 63px 63px 63px;
+    margin: 63px 63px 0px 63px;
 }
 
 /* use margin instead of <br> */
@@ -620,6 +620,15 @@ input:focus {
 
     #columns {
         margin: 63px 42px 42px 42px;
+    }
+
+    #columns .break {
+        break-after: initial;
+    }
+
+    #columns .nobreak {
+        break-inside: initial;
+        margin-bottom: initial;
     }
 
     #menu{
