@@ -142,6 +142,15 @@ body[accessibility='negative_contrast'] #xx_hide{
     margin-bottom: 21px;
 }
 
+#columns .break {
+    break-after: column;
+}
+
+#columns .nobreak {
+    break-inside: avoid;
+    margin-bottom: 1000px;
+}
+
 #mask {
     position: absolute;
     overflow: hidden;
@@ -243,6 +252,17 @@ body[accessibility='negative_contrast'] #xx_hide{
 #accessibility_list_toggle:hover{
     background-color: #FF0;
 }
+
+#img-zoom-bg {
+    display: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #CCC;
+}
+
 
 /* class */
 
@@ -530,14 +550,13 @@ button[type="submit"],
     display: inline-block;
     height: 50px;
     width: 170px;
-    padding: 10px 10px 21px 10px;
+    padding: 9px 10px 40px 10px;
     cursor: pointer;
     text-align: left;
-    border: 1px solid #000;
+    border: none;
     background-color: #FFF;
     font-family: 'relative10_pitch', monospace;
-    font-size: 12px;
-    line-height: 21px;
+    font-size: 13px;
 }
 
 button[type="submit"]:hover,
@@ -549,8 +568,7 @@ button[type="submit"]:hover,
 button[type="submit"]:active,
 #stripe_form_submit:active
 {
-    background-color: #EEE;
-    border: #FFF solid 1px;
+    background-color: #DDD;
     color: #999;
 }
 
@@ -558,15 +576,16 @@ button[type="submit"]:active,
     display: block;
     background-color: #FF0;
 }
+
 #fieldEmail{
     display: block;
-    width: 300px;
-    height: 20px;
-    max-width: 100%;
-    padding: 10px 10px 10px 15px;
-    font-family: 'helveticaneuer', helvetica, arial, sans-serif;
-    font-size: 17px;
-    line-height: 21px;
+    width: 85%;
+    height: 18px;
+    border: none;
+    padding: 3px 3px 3px 10px;
+    margin-bottom: 10px;
+    font-family: 'relative10_pitch', monospace;
+    font-size: 13px;
 }
 
 input:focus { 
@@ -606,12 +625,6 @@ input:focus {
     #menu{
         background-color: #CCC;
     }
-
-    /*
-    #columns {
-        columns: 1;
-    }
-    */
 
     .nycon {
        font-size: 16px;

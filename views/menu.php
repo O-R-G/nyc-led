@@ -21,8 +21,11 @@ $nav = $oo->nav($uu->ids);
             }
             if(substr($n['o']['name1'],0,1) != '_') {
                 ?><li><?
+                    // tmp exception buy/1996
+                    if ($n['url'] == 'buy/1996') break;
+                    if ($n['url'] == 'buy') $n['url'] = 'buy/1996';     
                     if($n['o']['id'] != $uu->id) {
-                        ?><a class='active' href='<?= '/' . $n["url"]; ?>'><?= $n['o']['name1']; ?></a><?
+                        ?><a class='active' href='<?= '/' . $n['url']; ?>'><?= $n['o']['name1']; ?></a><?
                     } else {
                         ?><span class='static'><?= $n['o']['name1']; ?></span><?
                     }
@@ -31,7 +34,7 @@ $nav = $oo->nav($uu->ids);
             $prevd = $d;
         }
         if ($uri[1]) {
-            ?><li><a class='active' href='/'>Home</a></li><?
+            ?><li><a class='active' href='/'>↵</a></li><?
         }
         ?></ul>
     </ul>
