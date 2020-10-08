@@ -45,8 +45,8 @@ if(!$isSuccess){
 
 <script>
 (function() {
-  var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
-  // var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
+  // var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
+  var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
 
   var checkoutButton = document.getElementById('stripe_form_submit');
   if(checkoutButton != null){
