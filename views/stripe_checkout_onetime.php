@@ -56,6 +56,9 @@ if(!$isSuccess){
 	    stripe.redirectToCheckout({
 	      lineItems: [{price: '<?= $price_id; ?>', quantity: 1}],
 	      mode: 'payment',
+	      shippingAddressCollection: {
+		    allowedCountries: ['US', 'CA'],
+		  }
 	      // Do not rely on the redirect to the successUrl for fulfilling
 	      // purchases, customers may not always reach the success_url after
 	      // a successful payment.
