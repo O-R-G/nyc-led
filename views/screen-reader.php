@@ -7,7 +7,7 @@
 
 */
 $stored_accessibility = get_cookie('n-y-c_accessibility');
-if($stored_accessibility == none)
+if($stored_accessibility == 'none')
     $stored_accessibility = null;
 
 ?>

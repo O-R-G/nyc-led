@@ -10,8 +10,8 @@ $now = date("h:i:sa");
 
 require_once('views/head.php');
 
-if ($uri[1] == 'receive-cache')	   
-    require_once('views/receive_cache.php');    
+if ($uri[1] == 'receive-cache')
+    require_once('views/receive_cache.php');
 else if ($uri[1] == 'blink')
     require_once('views/blink.php');
 else if (!$uri[1])
@@ -21,7 +21,7 @@ else{
     if ($uri[1] == 'buy')
 		require_once('views/stripe_checkout_onetime.php');
 }
-    
+
 require_once('views/screen-reader.php');
 require_once('views/json.php');
 require_once('views/menu.php');
