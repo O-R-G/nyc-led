@@ -83,7 +83,7 @@ var mask = document.getElementById('mask');
 // divided by message
 
 
-var click = click_load();       // soundjs
+// var click = click_load();       // soundjs
 
 var isBeginning = true;    
 var counter = 0;
@@ -180,11 +180,14 @@ function stop() {
 
 }
 
+/*
 // requires soundjs library in views/head
+// <script src="https://code.createjs.com/1.0.0/soundjs.min.js"></script>
 function click_load() {
     if (createjs.Sound.registerSound('/static/sounds/ding-faststart_01.mp3', 'click')) 
         return true;
 }
+*/
 
 function init_size(chars_total, char_w) {
 

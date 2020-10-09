@@ -305,31 +305,6 @@ body[accessibility='negative_contrast'] #xx_hide{
     content: '↳ ';
 }
 
-.ocrflight {
-    font-family: 'ocrflight', monospace;
-}
-
-.nycon {
-    font-size: 15px;
-    line-height: 20px;
-    font-family: 'nycon', helvetica, arial, sans-serif;
-}
-
-.nycon a {
-  text-decoration: none;
-  border-bottom: 1px solid;
-  color: #000;
-}
-
-.nycon b {
-    font-weight: normal;
-}
-
-.nycon b::before {
-    /* content: '↪ '; */
-    content: '↳ ';
-}
-
 .title_wrapper{
     position: relative;
 }
@@ -652,11 +627,6 @@ input:focus {
 
     #menu{
         background-color: #CCC;
-    }
-
-    .nycon {
-       font-size: 16px;
-       line-height: 21px;
     }
 
     #stripe_form{

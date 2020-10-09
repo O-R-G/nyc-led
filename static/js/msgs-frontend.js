@@ -1,7 +1,7 @@
-/* 
+/*
     collect and assemble msg[] for matrix.js
     includes cacheing
-*/    
+*/
 
 var msgs; // the final msgs for display. array of letters
 var	msgs_original; // the intermediate msgs to hold updated msgs, and wait until the current frame is settled. 
@@ -71,7 +71,7 @@ function handle_response(response, isHome){
 		speak_all_words = msg_speak.split(/\s+/);
 	pointer = current_position;
 	if(pointer <= msgs.length - (columns*rows))
-		msg = msgs.join('').substr(pointer,columns*rows).split('');	
+		msg = msgs.join('').substr(pointer,columns*rows).split('');
 	else{
 		while(pointer > msgs.length - (columns*rows))
 			msgs += '•';

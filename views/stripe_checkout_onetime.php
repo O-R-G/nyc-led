@@ -1,4 +1,7 @@
 <?
+// ini_set('display_errors', '1');
+// echo '** PLEASE BE PATIENT ... DEBUGGING IN PROCESS **';
+
 require_once('static/php/composer/vendor/autoload.php');
 
 // live secret key
@@ -19,6 +22,11 @@ $isProduct = false;
 
 if(end($uri) == 'success'){
 	$isSuccess = true;
+	$this_parent_uri = $uri;
+	array_pop($this_parent_uri);
+	array_shift($this_parent_uri);
+	$this_parent = $oo->get(end($oo->urls_to_ids($this_parent_uri)));
+	$price_id = $this_parent['notes'];
 }
 else{
 	if(end($uri) == 'canceled'){
@@ -29,7 +37,7 @@ else{
 		$this_parent = $oo->get(end($oo->urls_to_ids($this_parent_uri)));
 		$price_id = $this_parent['notes'];
 	}
-	else{
+	else {
 		$isProduct = true;
 		$price_id = $item['notes'];
 	}
