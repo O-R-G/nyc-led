@@ -1,6 +1,9 @@
 <?
 require_once('static/php/composer/vendor/autoload.php');
-
+phpinfo();
+ini_set('display_errors', 0);
+$a = ini_get('display_errors');
+var_dump($a);
 // live secret key
 // \Stripe\Stripe::setApiKey('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');
 
@@ -38,7 +41,7 @@ else{
 	while(ctype_space(substr($price_id, strlen($price_id)-1)))
 		$price_id = substr($price_id, 0, strlen($price_id)-1);
 }
-
+echo "1";
 $session = \Stripe\Checkout\Session::create([
 	'payment_method_types' => ['card'],
 	'mode' => 'payment',
@@ -55,7 +58,7 @@ $session = \Stripe\Checkout\Session::create([
 	'success_url' => $success_url,
 	'cancel_url' => $canceled_url,
 ]);
-
+echo "2";
 
 
 if(!$isSuccess && !$isCanceled){
