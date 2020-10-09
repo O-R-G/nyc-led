@@ -12,7 +12,6 @@ $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVE
 $host = $protocol.$_SERVER["HTTP_HOST"];
 $success_url = $protocol . 'n-y-c.org' . $requestclean . '/success';
 $canceled_url = $protocol . 'n-y-c.org' . $requestclean . '/canceled';
-
 $session = \Stripe\Checkout\Session::create([
 	'payment_method_types' => ['card'],
 	'mode' => 'payment',
@@ -30,7 +29,6 @@ $session = \Stripe\Checkout\Session::create([
 	'success_url' => $success_url,
 	'cancel_url' => $canceled_url,
 ]);
-
 
 $isSuccess = false;
 $isCanceled = false;
