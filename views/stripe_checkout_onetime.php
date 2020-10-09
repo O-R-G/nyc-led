@@ -38,7 +38,7 @@ else{
 	while(ctype_space(substr($price_id, strlen($price_id)-1)))
 		$price_id = substr($price_id, 0, strlen($price_id)-1);
 }
-echo "1";
+
 $session = \Stripe\Checkout\Session::create([
 	'payment_method_types' => ['card'],
 	'mode' => 'payment',
@@ -55,7 +55,6 @@ $session = \Stripe\Checkout\Session::create([
 	'success_url' => $success_url,
 	'cancel_url' => $canceled_url,
 ]);
-echo "2";
 
 
 if(!$isSuccess && !$isCanceled){
