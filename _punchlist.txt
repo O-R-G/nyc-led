@@ -134,5 +134,10 @@ Again, the problem is in matrix.js. In init_size(), when the screen width
 _columns 0. That leads to _rows being divided by 0.
 
 
-
  - rm dev:0aa1148aea
+
+--
+
+9 OCT 2020 (maybe dont need the dates .. )
+
+- remove all references to query in views/head and static/js/matrix.js

@@ -35,6 +35,7 @@ else
     $title = $site_name;
 
 // query strings        ** dev **
+// should remove these 
 $query_bg_color = $_GET['bg_color'];
 $query_bg_color = ($query_bg_color == NULL) ? '#FFF' : '#' . $query_bg_color;
 $query_bg_color = hex_to_rgb ( $query_bg_color );

@@ -3,12 +3,12 @@
     matrix flipboard
 
     from query string:
-    query_bg_color    
+    query_bg_color
     query_color
     query_rows
     query_columns
     query_font
-    query_font_size        
+    query_font_size
 
     from msgs.js:
     msg[]       text to be shown
@@ -24,9 +24,14 @@ var color = query_color;
 var rows;
 var columns;
 var font = query_font;
-var font_size = query_font_size;        // [18] 24 36 48
+// var font_size = query_font_size;        // [18] 24 36 48
+var font_size = 42;			// 36 48
 if(window.innerWidth < 768)
-    font_size = 22;
+    font_size = 32;			// 22
+if(window.innerWidth < 480)
+    font_size = 28;			// 22
+if(window.innerWidth < 400)
+    font_size = 22;			// 22
 var font_leading = font_size * 1.1667;  // [21]
 var font_w_to_h = .605;                 // helveticaautospaced
 var font_letterspacing = 10;            // 5 [7] 10 20
