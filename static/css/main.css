@@ -501,6 +501,20 @@ body[accessibility='negative_contrast'] button{
     color: #fff;
 }
 
+body[accessibility='negative_contrast'] button[type='submit'],
+body[accessibility='negative_contrast'] #stripe_form_submit
+{
+    background-color: #000;
+    border: 1px solid #ff0 !important;
+    color: #ff0;
+}
+body[accessibility='negative_contrast'] button[type='submit']:hover,
+body[accessibility='negative_contrast'] #stripe_form_submit:hover
+{
+    border: 1px solid #fff !important;
+    color: #fff;
+}
+
 body[accessibility='high_contrast'] *{
     color: #000;
     background-color: #fff;
@@ -532,8 +546,11 @@ body[accessibility='high_contrast'] .yellow #screen-reader-switch{
 body[accessibility='high_contrast'] #accessibility_list{
     bottom: 17px;
 }
-body[accessibility='high_contrast'] #content{
-    padding-top: 3.5em;
+body[accessibility='high_contrast'] input,
+body[accessibility='high_contrast'] #stripe_form_submit,
+body[accessibility='high_contrast'] button[type='submit']
+{
+    border: 1px solid #000;
 }
 /*body[accessibility='readable_font']{
     font-family: 'relative10_pitch', monospace;
@@ -581,11 +598,13 @@ button[type="submit"]:active,
     display: block;
     width: 85%;
     height: 18px;
-    border: none;
     padding: 3px 3px 3px 10px;
     margin-bottom: 10px;
     font-family: 'relative10_pitch', monospace;
     font-size: 13px;
+}
+input{
+    border: none;
 }
 
 input:focus { 
@@ -594,7 +613,7 @@ input:focus {
 }
 
 #stripe_form{
-    margin-left: 63px;
+    padding-left: 63px;
     padding-bottom: 63px;
 }
 
@@ -641,7 +660,7 @@ input:focus {
     }
 
     #stripe_form{
-        margin-left: 42px;
+        padding-left: 42px;
         padding-bottom: 105px;
     }
 }
