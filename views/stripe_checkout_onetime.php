@@ -32,10 +32,10 @@ else{
 	while(ctype_space(substr($price_id, strlen($price_id)-1)))
 		$price_id = substr($price_id, 0, strlen($price_id)-1);
 }
-if(!$isSuccess){
+if(!$isSuccess && !$isCanceled){
 ?>
 	<form id = 'stripe_form' method = 'POST' action = '<? echo $currentUrl; ?>/submitting'>
-		<button id = 'stripe_form_submit' type="button"><? echo $isProduct ? 'Buy' : 'Buy Again'; ?></button>
+		<button id = 'stripe_form_submit' type="button">Buy</button>
 	</form>
 	<script src="https://js.stripe.com/v3/"></script>
 	<div id="error-message"></div>

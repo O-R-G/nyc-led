@@ -4,17 +4,22 @@
 
 // zoom the image clicked on
 
+var bg = document.getElementById("img-zoom-bg");
 function img_zoom(img){
     if (img.style.position!='fixed') {
         img.style.position='fixed';
-        img.style.top='0px';
+        img.style.top='50%';
         img.style.left='0px';
         img.style.width='100%';
-        img.play();
+        img.style.transform='translate(0%, -50%)';
+        bg.style.display='block';
+        // img.play();
     } else {
         img.style.position='initial';
         img.style.width='';
-        img.pause();
+        img.style.transform='initial';
+        bg.style.display='none';
+        // img.pause();
     }
 }
 
