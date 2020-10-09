@@ -9,135 +9,22 @@ x css 100% width
   https://opendata.cityofnewyork.us
 + json parse (ica)
 + overhaul matrix.js to use document-object-model
-- add users n_y_c_full, rw, _r to database n_y_c in mysql
++ add users n_y_c_full, rw, _r to database n_y_c in mysql
   grant privileges, which may require root user
-
-**
-
-4/30
-
-it's still in progress and file is kind of messy. The conclusion is:
-1. for each data, the site attempts to fetch from original source first. if
-the attempts reaches a certain times (5 now) and this data has a cache
-file, it uses the cached one. Otherwise it will keep trying to fetch.
-
-2. After the data is fetched, it will be thrown into the msg pool and
-shuffle, then displayed on the page.
-
-3. I am moving towards to, like you said, concentrate all the msg to one or
-two file.
-
-Now I have only tested two sources (nyt and covid), and it seems to work as
-expected.
-
-I am also working on reorganizing the order of files in index.php, due to
-the delay caused by javascript request, to make all variables read
-correctly.
-
-Here's the more details:
-These are the files / directory that I modified / created:
-
-1. views/msgs.php
-this file is mostly javascript. I am planning to put all the msgs-related
-variables here. I also create javascript objects for each data. The format
-is:
-{
-   'name': 'new-york-times',
-   'req_url': 'https://api.nytimes.com/svc/news/v3/content/all/all.json?api-
-key=FJ5pNfQtwlkTP27jg62s2De8IM0Ozvjk',
-   'results_count': 3
-}
-name will be, of course, the property to identify this data. It is also the
-filename of the cache file (new-york-times.json)
-
-handle_msgs() handles the raw json file. the data can be formatted here.
-update_msgs() shuffle the msgs for matrix.js to use.
-
-2. views/json.php (also mostly javascript)
-this file contains function that handle requesting json, update cache, and
-request cache. Whenn updating cache, it would send a request
-to views/receive_cache.php;
-
-3. views/receive_cache.php (still mostly javascript)
-this file writes a cache file to static/data/. I didn't put any augment
-cause I supposed we only and always want one latest cache there.
-
-4. views/call_request_json.php (guess what? mostly javascript!)
-it literally only executes the function requesting json. can be merged
-somewhere else later.
-
-I think that's it. Let me know if you have any question!
-
-**
-
-5/4
-
-I had been continuing the work left from last thursday and it should work
-as we discussed now. Now to add a data, like we talked this morning, we
-would need to:
-1. add an item in req_array (msgs.php)
-2. format the output in handle_msgs() (msgs.php).
-
-I will test it more to see if there's other situations like the CORS error
-on thursday by adding more data! Please let know if there's any questions.
-
-**
-
-5/7
-
-For req_array, a property "cache_lifecycle" is added to specify when a 
-cache is expired and new live data should be fetched (false for 
-requesting live data every time). (msgs.php)
-
-The variable "cache_mtime" is an object that records the last modified 
-time for each cache file.
-
-The workflow now is:
-
--requesting json
-1. At the beginning of a data loop, fire request_json(). (matrix.js)
-2. in request_json(), if this data —
-    has cache_lifecycle && now - last modified date > cache_lifecycle,
-    or has no cache_lifecycle,
-    or has no cache,
-    then the function will request live data. else it requests cache.
-
--updating last modified time of cache files
-
-1. Each time the ticking board refreshes, update_cache_mtime() is fired 
-to update the latest modified time of cache files. (matrix.js)
-
-I think it's pretty much doing the right job now. However, if two 
-clients are approaching the requesting json point very closely, they 
-might both requesting new live data, and that is because of the time 
-delay between sending out request and getting date.
-
-**
-
---
-
-- views/main css
-- image gallery / zoom
-
-- accessibility (semantic, alt txts, screen reader)
-- screen-reader.js
-
-- node.js (!)
-
-- bash sync script / set up mysql allow remote connections as in _digital-ocean-lamp-only.txt
-
-- set up nginx node.js server
-
-- 1. crush on mobile
-Again, the problem is in matrix.js. In init_size(), when the screen width
-(_w) is too small, Math.floor(_w / (char_w * 12)) will return 0 which makes
-_columns 0. That leads to _rows being divided by 0.
-
-
- - rm dev:0aa1148aea
-
---
-
-9 OCT 2020 (maybe dont need the dates .. )
-
-- remove all references to query in views/head and static/js/matrix.js
++ views/main css
++ img-zoom 
++ screen-reader.js
++ accessibility (semantic, alt txts, screen reader)
++ node.js 
++ set up nginx node.js server
++ static/bash/sync, static/bash/backup
+/ crush on mobile -- problem is in matrix.js. 
+  In init_size(), when the screen width (_w) is too small
+  Math.floor(_w / (char_w * 12)) will return 0 which makes
+  _columns 0. That leads to _rows being divided by 0.
++ rm dev:0aa1148aea
+- remove all references to query_* in views/head & static/js/matrix.js
+- further refine font_size breakpoints for screen widths in matrix.js
+- fix static/php/composer on .local
+- review stripe checkout, add sales tax
+- add sales tax and shipping to product cost in views/stripe_checkout_onetime
