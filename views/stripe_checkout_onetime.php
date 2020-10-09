@@ -88,7 +88,9 @@ if(!$isSuccess && !$isCanceled){
 		  result.error.message = 'error';
 		});
 	}
-	redirect('<? echo $session->id; ?>');
+	checkoutButton.addEventListener('click', function(){
+		redirect('<? echo $session->id; ?>');
+	});
   }
 })();
 </script>

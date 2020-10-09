@@ -96,7 +96,6 @@ function update() {
         else
         {
             request_live('https://now.n-y-c.org/now', isHome);
-            console.log('isHome = '+isHome);
         }
         isBeginning = false;
     }

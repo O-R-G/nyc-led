@@ -44,18 +44,18 @@
 
 <script src='/static/js/img-zoom.js'></script>
 <script>
-    var form = document.getElementById('mc-embedded-subscribe-form');
-    if(form !== null){
-        var email_input = document.getElementById('mce-EMAIL');
-        form.addEventListener('submit', function(e){
-            e.preventDefault();
-            if(email_input.value !== ''){
-                form.submit();
-            }
-            else{
-                alert('please provide your email');
-            }
+    // var form = document.getElementById('mc-embedded-subscribe-form');
+    // if(form !== null){
+    //     var email_input = document.getElementById('mce-EMAIL');
+    //     form.addEventListener('submit', function(e){
+    //         e.preventDefault();
+    //         if(email_input.value !== ''){
+    //             form.submit();
+    //         }
+    //         else{
+    //             alert('please provide your email');
+    //         }
 
-        });
-    }
+    //     });
+    // }
 </script>
