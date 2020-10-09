@@ -6,6 +6,10 @@
     based on https://github.com/Comandeer/sr-poc
 
 */
+$stored_accessibility = get_cookie('accessibility');
+if($stored_accessibility == none)
+    $stored_accessibility = null;
+
 ?>
 
 <style>
@@ -37,11 +41,20 @@
 
 <script src='/static/js/screen-reader.js'></script>
 <script>
+    var body = document.body;
+    
+    var stored_accessibility = '<? echo $stored_accessibility; ?>';
+    console.log(stored_accessibility);
+    if(stored_accessibility){
+        body.setAttribute('accessibility', stored_accessibility);
+    }
+
     var sAccessibility = document.getElementById('accessibility');
     var sAccessibility_btn = document.getElementsByClassName('accessibility_btn');
     var sAccessibility_list = document.getElementById('accessibility_list');
     var sAccessibility_list_toggle = document.getElementById('accessibility_list_toggle');
-    var body = document.body;
+    
+
     Array.prototype.forEach.call(sAccessibility_btn, function(el, i){
         el.addEventListener('click', function(){
             var this_feature = el.getAttribute('accessibility_feature');
@@ -49,24 +62,35 @@
             
             if(this_feature == 'reset'){
                 body.setAttribute('accessibility', '');
+                document.cookie = "accessibility=none";
                 if(activeBtn != null)
                     activeBtn.classList.remove('active');
             }
             else if(this_feature == body.getAttribute('accessibility')){
                 body.setAttribute('accessibility', '');
+                document.cookie = "accessibility=none";
                 el.classList.remove('active');
             }
             else{
                 body.setAttribute('accessibility', this_feature);
+                document.cookie = "accessibility="+this_feature;
                 if(activeBtn != null)
                     activeBtn.classList.remove('active');
                 el.classList.add('active');
             }
         });
+
+        var this_feature = el.getAttribute('accessibility_feature');
+        if(this_feature == stored_accessibility)
+        {
+            el.classList.add('active');
+        }
     });
     sAccessibility_list_toggle.addEventListener('click', function(){
         sAccessibility.classList.toggle('expanded');
         sAccessibility.classList.toggle('yellow');
     });
     
+
+
 </script>
