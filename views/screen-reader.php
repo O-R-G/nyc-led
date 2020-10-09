@@ -40,9 +40,10 @@ if($stored_accessibility == none)
 </div>
 
 <script src='/static/js/screen-reader.js'></script>
+<script src='/static/js/cookie.js'></script>
 <script>
     var body = document.body;
-    
+
     var stored_accessibility = '<? echo $stored_accessibility; ?>';
     console.log(stored_accessibility);
     if(stored_accessibility){
@@ -62,18 +63,21 @@ if($stored_accessibility == none)
             
             if(this_feature == 'reset'){
                 body.setAttribute('accessibility', '');
-                document.cookie = "accessibility=none";
+                createCookie('accessibility', 'none');
+                // document.cookie = "accessibility=none";
                 if(activeBtn != null)
                     activeBtn.classList.remove('active');
             }
             else if(this_feature == body.getAttribute('accessibility')){
                 body.setAttribute('accessibility', '');
-                document.cookie = "accessibility=none";
+                createCookie('accessibility', 'none');
+                // document.cookie = "accessibility=none";
                 el.classList.remove('active');
             }
             else{
                 body.setAttribute('accessibility', this_feature);
-                document.cookie = "accessibility="+this_feature;
+                createCookie('accessibility', this_feature);
+                // document.cookie = "accessibility="+this_feature;
                 if(activeBtn != null)
                     activeBtn.classList.remove('active');
                 el.classList.add('active');
