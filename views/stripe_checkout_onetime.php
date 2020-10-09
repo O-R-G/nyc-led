@@ -1,9 +1,6 @@
 <?
 require_once('static/php/composer/vendor/autoload.php');
-phpinfo();
-ini_set('display_errors', 0);
-$a = ini_get('display_errors');
-var_dump($a);
+
 // live secret key
 // \Stripe\Stripe::setApiKey('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');
 
