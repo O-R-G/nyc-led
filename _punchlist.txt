@@ -23,9 +23,10 @@ x css 100% width
   Math.floor(_w / (char_w * 12)) will return 0 which makes
   _columns 0. That leads to _rows being divided by 0.
 + rm dev:0aa1148aea
+- fix static/php/composer on .local
+  update notes, clean up git repo
 - remove all references to query_* in views/head & static/js/matrix.js
 - further refine font_size breakpoints for screen widths in matrix.js
-- fix static/php/composer on .local
 - review stripe checkout, add sales tax
 - add sales tax and shipping to product cost in views/stripe_checkout_onetime
 - resolve git repo v1-node on local and remote
