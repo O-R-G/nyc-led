@@ -11,3 +11,5 @@ static/data/
 open-records-generator/
 static/bash/backup
 static/bash/sync
+static/bash/log
+static/php/composer/
