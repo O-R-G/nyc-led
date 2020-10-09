@@ -12,23 +12,6 @@ $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVE
 $host = $protocol.$_SERVER["HTTP_HOST"];
 $success_url = $protocol . 'n-y-c.org' . $requestclean . '/success';
 $canceled_url = $protocol . 'n-y-c.org' . $requestclean . '/canceled';
-$session = \Stripe\Checkout\Session::create([
-	'payment_method_types' => ['card'],
-	'mode' => 'payment',
-	'billing_address_collection' => 'required',
-	'shipping_address_collection' => [
-		'allowed_countries' => ['US', 'CA'],
-	],
-	'line_items' => [
-		[
-		  'price' => 'price_1HYvXCKIsFHGARAduanMKl1u',
-		  'quantity' => 1,
-		  // 'tax_rates' => ['txr_1Ha1KUKIsFHGARAdJy9u0CCw'],
-		],
-	],
-	'success_url' => $success_url,
-	'cancel_url' => $canceled_url,
-]);
 
 $isSuccess = false;
 $isCanceled = false;
@@ -55,6 +38,27 @@ else{
 	while(ctype_space(substr($price_id, strlen($price_id)-1)))
 		$price_id = substr($price_id, 0, strlen($price_id)-1);
 }
+
+$session = \Stripe\Checkout\Session::create([
+	'payment_method_types' => ['card'],
+	'mode' => 'payment',
+	'billing_address_collection' => 'required',
+	'shipping_address_collection' => [
+		'allowed_countries' => ['US', 'CA'],
+	],
+	'line_items' => [
+		[
+		  'price' => $price_id,
+		  'quantity' => 1,
+		  // 'tax_rates' => ['txr_1Ha1KUKIsFHGARAdJy9u0CCw'],
+		],
+	],
+	'success_url' => $success_url,
+	'cancel_url' => $canceled_url,
+]);
+
+
+
 if(!$isSuccess && !$isCanceled){
 ?>
 	<form id = 'stripe_form' method = 'POST' action = '<? echo $currentUrl; ?>/submitting'>
