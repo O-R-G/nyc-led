@@ -30,3 +30,4 @@ x css 100% width
 - review stripe checkout, add sales tax
 - add sales tax and shipping to product cost in views/stripe_checkout_onetime
 - resolve git repo v1-node on local and remote
+-
