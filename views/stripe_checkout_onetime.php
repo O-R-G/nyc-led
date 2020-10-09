@@ -50,7 +50,6 @@ $session = \Stripe\Checkout\Session::create([
 		[
 		  'price' => $price_id,
 		  'quantity' => 1,
-		  // 'tax_rates' => ['txr_1Ha1KUKIsFHGARAdJy9u0CCw'],
 		],
 	],
 	'success_url' => $success_url,
