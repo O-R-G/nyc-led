@@ -47,6 +47,11 @@ else{
 		$price_id = substr($price_id, 0, strlen($price_id)-1);
 }
 
+// test
+// $price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
+// live
+$price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
+
 $session = \Stripe\Checkout\Session::create([
 	'payment_method_types' => ['card'],
 	'mode' => 'payment',
@@ -59,7 +64,12 @@ $session = \Stripe\Checkout\Session::create([
 		  'price' => $price_id,
 		  'quantity' => 1,
 		],
-	],
+		[
+		  'price' => $price_id_shipping,
+          'description' => 'Shipping via USPS Priority Mail',
+		  'quantity' => 1,
+		],
+    	],
 	'success_url' => $success_url,
 	'cancel_url' => $canceled_url,
 ]);
