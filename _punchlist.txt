@@ -28,6 +28,7 @@ x css 100% width
 - remove all references to query_* in views/head & static/js/matrix.js
 - further refine font_size breakpoints for screen widths in matrix.js
 - review stripe checkout, add sales tax
++ add shipping cost to checkout
 - add sales tax and shipping to product cost in views/stripe_checkout_onetime
 - resolve git repo v1-node on local and remote
 -
