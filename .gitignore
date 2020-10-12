@@ -12,4 +12,5 @@ static/data/
 static/bash/backup
 static/bash/sync
 static/bash/log
+static/php/composer.phar
 vendor/
