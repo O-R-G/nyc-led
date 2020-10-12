@@ -1,14 +1,14 @@
 # ignore nothing for now
 # *.md
-static/data/
 #media/*.gif
 #media/*.jpeg
 #media/*.jpg
 #media/*.png
 #media/*.pdf
 #media/*.tif
+#open-records-generator/
 .htaccess
-open-records-generator/
+static/data/
 static/bash/backup
 static/bash/sync
 static/bash/log
