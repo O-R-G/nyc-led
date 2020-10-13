@@ -5,10 +5,10 @@
 require_once('static/php/composer/vendor/autoload.php');
 
 // live secret key
-\Stripe\Stripe::setApiKey('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');
+//\Stripe\Stripe::setApiKey('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');
 
 // test secret key
-// \Stripe\Stripe::setApiKey('sk_test_51BF2u5KIsFHGARAdD1rbqEPotLTaA6nZ1OCs3A9rx3Ebu3hchZzVRfwQBYOTgdbNkpvCYUFQLtz2qrRY88nakySi00Yv1NabjT');
+\Stripe\Stripe::setApiKey('sk_test_51BF2u5KIsFHGARAdD1rbqEPotLTaA6nZ1OCs3A9rx3Ebu3hchZzVRfwQBYOTgdbNkpvCYUFQLtz2qrRY88nakySi00Yv1NabjT');
 
 // get fully-qualified hostname
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -48,9 +48,9 @@ else{
 }
 
 // test
-// $price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
+$price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
 // live
-$price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
+//$price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
 
 $taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
 
@@ -73,9 +73,9 @@ $session = \Stripe\Checkout\Session::create([
 		  'price' => $price_id_shipping,
           'description' => 'Shipping via USPS Priority Mail',
 		  'quantity' => 1,
-		  'dynamic_tax_rates' => [
-		      $taxrate_ny,
-		  ],
+//		  'dynamic_tax_rates' => [
+//		      $taxrate_ny,
+//		  ],
 		],
     	],
 	'success_url' => $success_url,
@@ -98,9 +98,9 @@ if(!$isSuccess && !$isCanceled){
   if(checkoutButton != null){
   	function redirect(id){
 		// live public key:
-		var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
+		//var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
 		// test public key:
-		// var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
+		var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
 
 		stripe.redirectToCheckout({
 		  // Make the id field from the Checkout Session creation API response
