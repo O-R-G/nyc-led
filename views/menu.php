@@ -6,7 +6,6 @@
 $nav = $oo->nav($uu->ids);
 // $traverse = $oo->traverse($item);
 // $nav = $oo->nav_full($traverse);
-var_dump(count($nav));
 ?><div id='menu' class='centered centeralign helveticaneuer <?= ($body) ? "hidden" : ""; ?>'>
     <div id='xx_hide' class='<?= ($body) ? "" : "hidden"; ?>'>
         <!-- <img src='/media/svg/x-6-b.svg'> -->
