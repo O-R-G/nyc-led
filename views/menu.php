@@ -3,11 +3,10 @@
     simple menu
     adapted from http://www.o-r-g.com    
 */
-
 $nav = $oo->nav($uu->ids);
 // $traverse = $oo->traverse($item);
 // $nav = $oo->nav_full($traverse);
-
+var_dump(count($nav));
 ?><div id='menu' class='centered centeralign helveticaneuer <?= ($body) ? "hidden" : ""; ?>'>
     <div id='xx_hide' class='<?= ($body) ? "" : "hidden"; ?>'>
         <!-- <img src='/media/svg/x-6-b.svg'> -->
@@ -21,9 +20,6 @@ $nav = $oo->nav($uu->ids);
             }
             if(substr($n['o']['name1'],0,1) != '_') {
                 ?><li><?
-                    // tmp exception buy/1996
-                    if ($n['url'] == 'buy/1996') break;
-                    if ($n['url'] == 'buy') $n['url'] = 'buy/1996';     
                     if($n['o']['id'] != $uu->id) {
                         ?><a class='active' href='<?= '/' . $n['url']; ?>'><?= $n['o']['name1']; ?></a><?
                     } else {
