@@ -33,3 +33,5 @@ x css 100% width
 - clean up refs to now.n-y-c.org/now and only point to /now
   then clean up server config and remove now.n-y-c.org which is likely rediundant
 / stop animation when accessibility menu selected
+  (currently a hack, should be better)
+- integrate relative 10 pitch font

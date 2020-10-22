@@ -52,7 +52,11 @@ $price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
 // live
 //$price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
 
-$taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
+// test
+// $taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
+
+// live
+$taxrate_ny = 'txr_1HbeZCKIsFHGARAdBcX9SxD4';
 
 $session = \Stripe\Checkout\Session::create([
 	'payment_method_types' => ['card'],
@@ -73,9 +77,6 @@ $session = \Stripe\Checkout\Session::create([
 		  'price' => $price_id_shipping,
           'description' => 'Shipping via USPS Priority Mail',
 		  'quantity' => 1,
-//		  'dynamic_tax_rates' => [
-//		      $taxrate_ny,
-//		  ],
 		],
     	],
 	'success_url' => $success_url,
