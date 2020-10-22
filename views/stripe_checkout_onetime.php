@@ -5,7 +5,7 @@
 require_once('static/php/composer/vendor/autoload.php');
 
 // live secret key
-//\Stripe\Stripe::setApiKey('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');
+// \Stripe\Stripe::setApiKey('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');
 
 // test secret key
 \Stripe\Stripe::setApiKey('sk_test_51BF2u5KIsFHGARAdD1rbqEPotLTaA6nZ1OCs3A9rx3Ebu3hchZzVRfwQBYOTgdbNkpvCYUFQLtz2qrRY88nakySi00Yv1NabjT');
@@ -47,16 +47,16 @@ else{
 		$price_id = substr($price_id, 0, strlen($price_id)-1);
 }
 
+// live
+// $price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
 // test
 $price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
-// live
-//$price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
 
+// live
+// $taxrate_ny = 'txr_1HbeZCKIsFHGARAdBcX9SxD4';
 // test
-// $taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
+$taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
 
-// live
-$taxrate_ny = 'txr_1HbeZCKIsFHGARAdBcX9SxD4';
 
 $session = \Stripe\Checkout\Session::create([
 	'payment_method_types' => ['card'],
@@ -99,7 +99,7 @@ if(!$isSuccess && !$isCanceled){
   if(checkoutButton != null){
   	function redirect(id){
 		// live public key:
-		//var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
+		// var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
 		// test public key:
 		var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
 
