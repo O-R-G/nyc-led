@@ -35,3 +35,9 @@ x css 100% width
 / stop animation when accessibility menu selected
   (currently a hack, should be better)
 - integrate relative 10 pitch font
+
+/ donate
++ add .Donate
++ add .success and .canceled under .Donate
++ add records of donate amounts under .Donate
+

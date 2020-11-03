@@ -569,7 +569,7 @@ button[type="submit"]:active,
     background-color: #FF0;
 }
 
-#fieldEmail{
+#fieldEmail, input[type='text']{
     display: block;
     width: 85%;
     height: 18px;
@@ -586,6 +586,11 @@ input:focus {
     outline: none;
     background-color: #DDD;
 }
+input.locked{
+    pointer-events: none;
+    background-color: #DDD;
+}
+
 
 #stripe_form{
     padding-left: 63px;
