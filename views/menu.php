@@ -19,6 +19,9 @@ $nav = $oo->nav($uu->ids);
             }
             if(substr($n['o']['name1'],0,1) != '_') {
                 ?><li><?
+                    // tmp exception buy/1996
+                    if ($n['url'] == 'buy/1996') break;
+                    if ($n['url'] == 'buy') $n['url'] = 'buy/1996';
                     if($n['o']['id'] != $uu->id) {
                         ?><a class='active' href='<?= '/' . $n['url']; ?>'><?= $n['o']['name1']; ?></a><?
                     } else {

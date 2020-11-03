@@ -2,7 +2,10 @@
     /*
         display menu item
     */
-
+    if($uri[1] == 'donate' && ($uri[2] != 'success' && $uri[2] != 'canceled')){
+        $donate_id = end($oo->urls_to_ids(array('donate')));
+        $item = $oo->get($donate_id);
+    }
     $date = date('F j, Y');
     $name = $item['name1'];
     $body = $item['body'];
@@ -38,6 +41,7 @@
             echo $body;
     ?></div>
 </div>
+
 <div id='speak' ><?
     echo $body; ?>
 </div>

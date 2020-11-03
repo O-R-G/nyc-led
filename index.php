@@ -16,8 +16,10 @@ else if (!$uri[1])
     require_once('views/home.php');
 else{
     require_once('views/main.php');
-    if ($uri[1] == 'buy' && count($uri) > 2)
+    if ( ($uri[1] == 'buy' && count($uri) > 2) )
 		require_once('views/stripe_checkout_onetime.php');
+	if ($uri[1] == 'donate')
+		require_once('views/donate.php');
 }
 
 require_once('views/screen-reader.php');
