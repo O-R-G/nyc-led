@@ -61,12 +61,12 @@ if(isset($_POST['donate_amount']) && intval($_POST['donate_amount'])){
 
 	<?
 }
-else if(!$uri[2] || !is_nan(intval($uri[2])) )
+else if(!$uri[2])
 {
 	// /donate
 	$amount = 0;
-	if(!is_nan(intval($uri[2])))
-		$amount = intval($uri[2]);
+	if(isset($_GET['amount']) && intval($_GET['amount']) )
+		$amount = intval($_GET['amount']);
 	?>
 	<script>
 		var amount = <?= $amount ?>;
