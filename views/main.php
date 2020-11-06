@@ -42,8 +42,8 @@
     ?></div>
 </div>
 
-<div id='speak' ><?
-    echo $body; ?>
+<div id='speak' >
+    <? echo $body; ?>
 </div>
 
 <script src='/static/js/img-zoom.js'></script>
