@@ -54,13 +54,15 @@ function handle_response(response, isHome){
 	if(!hasStarted){
 		// the website is loaded for the first time.
 		current_position = response['position'];
+		console.log('initial position: '+current_position);
 		current_position += 48;
+		current_position += 96;
 		if(current_position > msgs_original.length)
 			current_position = 48;
-		
 		msgs = response['msgs'];
-		msgs = msgs.slice(0, current_position) + response['msgs_beginning'] + msgs.slice(current_position);
+		msgs = msgs.slice(0, current_position) + response['msgs_opening'] + msgs.slice(current_position);
 		msgs = msgs.toUpperCase().split('');
+
 		if(isHome)
 			speak.innerText = msg_speak;
 
@@ -90,11 +92,6 @@ function handle_response(response, isHome){
 
 		}, wait);
 	}
-	else
-	{
-		isBeginning = false;
-	}
-
 }
 
 request_live('https://now.n-y-c.org/now', isHome);
