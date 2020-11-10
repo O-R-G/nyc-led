@@ -33,11 +33,14 @@ var speak_progress = 0;
 var speak_progress_bar = document.getElementById('speak_progress_bar');
 
 function request_live(request_url, isHome = true){
+	// if(timer && hasStarted)
+		// clearInterval(timer);
+
 	fetch(request_url)
-		.then(response =>  response.json())
-		.then(function(data){
-			handle_response(data, isHome);
-		})
+	.then(response =>  response.json())
+	.then(function(data){
+		handle_response(data, isHome);
+	})
 }
 function handle_response(response, isHome){
 	now_timestamp = new Date().getTime();
@@ -77,14 +80,19 @@ function handle_response(response, isHome){
 			msgs += '•';
 	}
 
-
-	if(!hasStarted){
+	if(!hasStarted)
+	{
 		setTimeout(function(){
 			clearInterval(waiting);
 			ticking_start = new Date();
 			// remove the waiting animation
 			timer = setInterval(update, timer_ms);
+
 		}, wait);
+	}
+	else
+	{
+		isBeginning = false;
 	}
 
 }

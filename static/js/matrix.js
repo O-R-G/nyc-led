@@ -99,14 +99,11 @@ var counter = 0;
 
 function update() {
     if(isBeginning){
-        if(!hasStarted){
+        if(!hasStarted)
             hasStarted = true;
-        }
         else
-        {
             request_live('https://now.n-y-c.org/now', isHome);
-        }
-        isBeginning = false;
+        
     }
     if(counter == 0){
         d.classList.remove('waiting');
@@ -126,7 +123,6 @@ function update() {
                 letters[i] = msg[i];
                 if(typeof letters[i] == 'undefined')
                     letters[i] = '•';
-
             }
         }
     }
