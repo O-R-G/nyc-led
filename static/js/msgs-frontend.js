@@ -54,7 +54,6 @@ function handle_response(response, isHome){
 	if(!hasStarted){
 		// the website is loaded for the first time.
 		current_position = response['position'];
-		console.log('initial position: '+current_position);
 		current_position += 48;
 		current_position += 96;
 		if(current_position > msgs_original.length)
