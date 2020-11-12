@@ -2,10 +2,13 @@
     /*
         display menu item
     */
-    if($uri[1] == 'donate' && ($uri[2] != 'success' && $uri[2] != 'canceled')){
+
+	// ** should really be fixed to use query  **
+    if($uri[1] == 'donate' && ($uri[2] != 'success' && $uri[2] != 'canceled' && $uri[2] != 'founding-partner')){
         $donate_id = end($oo->urls_to_ids(array('donate')));
         $item = $oo->get($donate_id);
     }
+
     $date = date('F j, Y');
     $name = $item['name1'];
     $body = $item['body'];
