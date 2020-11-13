@@ -1,15 +1,18 @@
 <?php
-/* 
-	class for dealing with URLS	
+/*
+	class for dealing with URLS
 */
 class URL extends URL_Base
-{	
+{
 	function __construct()
 	{
 		global $oo;
-		$urls = explode('/', $_SERVER['REQUEST_URI']);
+
+		// nginx-specific
+		$urls = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+		$urls = explode('/', $urls);
 		$urls = array_slice($urls, 1);
-		
+
 		// check that the object that this URL refers to exists
 		try
 		{

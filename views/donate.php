@@ -63,10 +63,11 @@ if(isset($_POST['donate_amount']) && intval($_POST['donate_amount'])){
 }
 else if(!$uri[2])
 {
-	// /donate
+	// /donate?xxx
 	$amount = 0;
-	if(isset($_GET['amount']) && intval($_GET['amount']) )
-		$amount = intval($_GET['amount']);
+	if ($_GET && intval($_GET))
+		$amount = array_key_first($_GET);
+
 	?>
 	<script>
 		var amount = <?= $amount ?>;
