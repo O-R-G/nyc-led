@@ -536,6 +536,7 @@ body[accessibility='high_contrast'] button[type='submit']
 }
 
 /* subscribe */
+input[type="submit"],
 button[type="submit"],
 #stripe_form_submit
 {
@@ -551,12 +552,14 @@ button[type="submit"],
     font-size: 13px;
 }
 
+input[type="submit"]:hover,
 button[type="submit"]:hover,
 #stripe_form_submit:hover
 {
     background-color: #FF0;
 }
 
+input[type="submit"]:active,
 button[type="submit"]:active,
 #stripe_form_submit:active
 {

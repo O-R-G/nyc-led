@@ -6,6 +6,7 @@
     $date = date('F j, Y');
     $name = $item['name1'];
     $body = $item['body'];
+    $deck = $item['deck'];
     $find = '/<div><br><\/div>/';
     $replace = '';
     $body = preg_replace($find, $replace, $body);
