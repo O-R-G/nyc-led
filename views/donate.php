@@ -45,13 +45,13 @@ if(isset($_POST['amount']) &&
 	    $msg .= 'Payment by ' . $_POST['payment_method'] . "\n";
 	    $msg = wordwrap($msg,70);
 
-	    $headers = "From: info@n-y-c.org";
+	    $headers = "From: donations@n-y-c.org";
     
 	    // send email
 	    if ($debug)
-		    mail("reinfurt@o-r-g.com","New York Consolidated donation",$msg,"From: donations@n-y-c.org");
+		    mail("reinfurt@o-r-g.com","New York Consolidated donation",$msg,$headers);
 	    if ($live)
-		    mail("mia@n-y-c.org","New York Consolidated donation",$msg,"From: donations@n-y-c.org");
+		    mail("mia@n-y-c.org","New York Consolidated donation",$msg,$headers);
     
 	    // if paying online then continue to stripe
 	    // otherwise redirect to /thank-you
@@ -162,8 +162,7 @@ if ($uri[2] != 'success' && $uri[2] != 'canceled' && $uri[2] != 'submitted'){
 				<option value="stripe"> Continue online (credit card, Apple Pay)</option>
 				<option value="check or wire"> Please send me the details for a check/wire transfer</option>
 			</select>
-			<input type="submit">
-			<!-- <input type="submit" id="stripe_form_submit"> -->
+			<input type="submit" id="stripe_form_submit">
 		</form>
         <div class="break">&nbsp;</div>
         <div class="break">&nbsp;</div>
@@ -186,7 +185,7 @@ function cleanup_($key, $value) {
     return $value;
 }
 ?><script>
-	var amount = <?= $amount ?>;
+	var amount = <?= $amount; ?>;
 	var sDonate_amount = document.getElementById('donate_amount');
 	if(amount)
 	{
