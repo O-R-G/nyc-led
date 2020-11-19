@@ -6,10 +6,10 @@
     $date = date('F j, Y');
     $name = $item['name1'];
     $body = $item['body'];
+    $deck = $item['deck'];
     $find = '/<div><br><\/div>/';
     $replace = '';
     $body = preg_replace($find, $replace, $body);
-
 ?>
 <script src='/static/js/msgs-frontend.js'></script>
 <style>
@@ -38,8 +38,9 @@
             echo $body;
     ?></div>
 </div>
-<div id='speak' ><?
-    echo $body; ?>
+
+<div id='speak' >
+    <? echo $body; ?>
 </div>
 
 <script src='/static/js/img-zoom.js'></script>

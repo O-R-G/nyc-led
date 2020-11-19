@@ -126,7 +126,6 @@ function update() {
                 letters[i] = msg[i];
                 if(typeof letters[i] == 'undefined')
                     letters[i] = '•';
-
             }
         }
     }

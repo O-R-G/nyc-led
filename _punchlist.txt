@@ -36,3 +36,9 @@ x css 100% width
   (currently a hack, should be better)
 - integrate relative 10 pitch font
 - add donate button (stripe)
+
+/ donate
++ add .Donate
++ add .success and .canceled under .Donate
++ add records of donate amounts under .Donate
+
