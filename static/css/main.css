@@ -595,6 +595,7 @@ select {
   	border: 1px solid #000;
 	color: #333;
 	background-color: #FFF;
+    background: url(/media/svg/v-9-k.svg) 96% / 6% no-repeat #FFF;
 }
 
 input, textarea {
