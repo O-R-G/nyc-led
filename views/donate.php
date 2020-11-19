@@ -45,14 +45,28 @@ if(isset($_POST['amount']) &&
 	    $msg .= 'Payment by ' . $_POST['payment_method'] . "\n";
 	    $msg = wordwrap($msg,70);
 
-	    $headers = "From: donations@n-y-c.org";
-    
+	    // $headers = "From: donations@n-y-c.org";
+	    // $headers = "From: info@n-y-c.org";
+
+        $headers = 'From: info@n-y-c.org' . "\r\n" ;
+        $headers .='Reply-To: info@n-y-c.org' . "\r\n" ;
+        $headers .='X-Mailer: PHP/' . phpversion();
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";  
+
 	    // send email
 	    if ($debug)
 		    mail("reinfurt@o-r-g.com","New York Consolidated donation",$msg,$headers);
 	    if ($live)
-		    mail("mia@n-y-c.org","New York Consolidated donation",$msg,$headers);
-    
+		    $test = mail("mia@n-y-c.org","New York Consolidated donation",$msg,$headers);
+/*
+        if ($test)
+            echo "OK!";
+        else 
+            "NO.";
+        die();
+*/
+
 	    // if paying online then continue to stripe
 	    // otherwise redirect to /thank-you
     
