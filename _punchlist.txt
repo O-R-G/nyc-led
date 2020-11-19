@@ -34,10 +34,10 @@ x css 100% width
   then clean up server config and remove now.n-y-c.org which is likely rediundant
 / stop animation when accessibility menu selected
   (currently a hack, should be better)
-- integrate relative 10 pitch font
 + add donate button (stripe)
 + add .Donate
 + add .success and .canceled under .Donate
 + add records of donate amounts under .Donate
-- validate donate form
++ validate donate form
+- integrate relative 10 pitch colophon font
 
