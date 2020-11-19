@@ -51,7 +51,7 @@ if(isset($_POST['amount']) &&
 	    if ($debug)
 		    mail("reinfurt@o-r-g.com","New York Consolidated donation",$msg,"From: donations@n-y-c.org");
 	    if ($live)
-		    mail("mia@n-y-c.org","New York Consolidated donation",$msg);
+		    mail("mia@n-y-c.org","New York Consolidated donation",$msg,"From: donations@n-y-c.org");
     
 	    // if paying online then continue to stripe
 	    // otherwise redirect to /thank-you
