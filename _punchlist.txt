@@ -39,5 +39,11 @@ x css 100% width
 + add .success and .canceled under .Donate
 + add records of donate amounts under .Donate
 + validate donate form
+/ resolve php mail() blacklisting gmail and other
+  perhaps integrate a separate mail service
 - integrate relative 10 pitch colophon font
++ moved n-y-c.org to new server and now three do droplets
+  www.n-y-c.org
+  now.n-y-c.org
+  staging.n-y-c.org
 
