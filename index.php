@@ -8,6 +8,11 @@ $uri = explode('/', $requestclean);
 date_default_timezone_set("America/New_York");
 $now = date("h:i:sa");
 
+/*
+if (!$uri[1])
+	die('Please be patient. Upgrade in process . . .');
+*/
+
 require_once('views/head.php');
 
 if ($uri[1] == 'receive-cache')

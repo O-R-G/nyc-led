@@ -11,6 +11,13 @@
                 'payment_method'
 */
 
+/*
+// debug
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+*/
+
 if(isset($_POST['amount']) &&
 	intval($_POST['amount']) &&
 	isset($_POST['payment_method']) &&
@@ -31,10 +38,10 @@ if(isset($_POST['amount']) &&
     if (!$error) {
 
 	    // generate email
-    
-	    $debug = true;
+
+	    // $debug = true;
 	    $live = true;
-    
+
 	    $msg  = "New York Consolidated has received a donation.\n\n";
 	    $msg .= $_POST['name'] . "\n";
 	    $msg .= $_POST['name_to_acknowledge'] . "\n";
@@ -59,33 +66,32 @@ if(isset($_POST['amount']) &&
 		    mail("reinfurt@o-r-g.com","New York Consolidated donation",$msg,$headers);
 	    if ($live)
 		    // $test = mail("mia@n-y-c.org","New York Consolidated donation",$msg,$headers);
-		    $test = mail("forward@o-r-g.com","New York Consolidated donation",$msg,$headers);
+		    mail("forward@o-r-g.com","New York Consolidated donation",$msg,$headers);
 
 	    // if paying online then continue to stripe
 	    // otherwise redirect to /thank-you
-    
+
 	    if ($_POST['payment_method'] != "stripe") {
-    
 		    ?><script>window.location.replace('/donate/submitted');</script><?
 	    } else {
-    
+
 		    // processing entered amount and call stripe
 		    $amount = intval($_POST['amount']);
 		    $amount = $amount * 100;
 		    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
 		    $host = $protocol.$_SERVER["HTTP_HOST"];
-    
+
 		    $success_url = $host.'/donate/success';
 		    $canceled_url = $host.'/donate/canceled';
-    
+
 		    require_once('static/php/composer/vendor/autoload.php');
-    
+
 		    // live secret key
 		    // \Stripe\Stripe::setApiKey('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');
-    
+
 		    // test secret key
 		    \Stripe\Stripe::setApiKey('sk_test_51BF2u5KIsFHGARAdD1rbqEPotLTaA6nZ1OCs3A9rx3Ebu3hchZzVRfwQBYOTgdbNkpvCYUFQLtz2qrRY88nakySi00Yv1NabjT');
-    
+
 		    $session = \Stripe\Checkout\Session::create([
 			    'payment_method_types' => ['card'],
 			    // 'mode' => 'payment',
