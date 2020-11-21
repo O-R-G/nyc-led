@@ -42,14 +42,14 @@ if(isset($_POST['amount']) &&
 	    // $debug = true;
 	    $live = true;
 
-	    $msg  = "New York Consolidated has received a donation.\n\n";
-	    $msg .= $_POST['name'] . "\n";
-	    $msg .= $_POST['name_to_acknowledge'] . "\n";
-	    $msg .= $_POST['mailing_address'] . "\n";
-	    $msg .= $_POST['email'] . "\n";
-	    $msg .= $_POST['telephone'] . "\n\n";
-	    $msg .= '$' . $_POST['amount'] . "\n";
-	    $msg .= 'Payment by ' . $_POST['payment_method'] . "\n";
+	    $msg  = "New York Consolidated has received a donation.\r\n\r\n";
+	    $msg .= $_POST['name'] . "\r\n";
+	    $msg .= $_POST['name_to_acknowledge'] . "\r\n";
+	    $msg .= $_POST['mailing_address'] . "\r\n";
+	    $msg .= $_POST['email'] . "\r\n";
+	    $msg .= $_POST['telephone'] . "\r\n\r\n";
+	    $msg .= '$' . $_POST['amount'] . "\r\n";
+	    $msg .= 'Payment by ' . $_POST['payment_method'] . "\r\n";
 	    $msg = wordwrap($msg,70);
 
 	    // $headers = "From: donations@n-y-c.org";
@@ -59,7 +59,7 @@ if(isset($_POST['amount']) &&
         $headers .='Reply-To: info@n-y-c.org' . "\r\n" ;
         $headers .='X-Mailer: PHP/' . phpversion();
         $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";  
+        $headers .= "Content-type: text/plain; charset=UTF-8\r\n";  
 
 	    // send email
 	    if ($debug)
