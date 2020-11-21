@@ -39,7 +39,7 @@ if(isset($_POST['amount']) &&
 
 	    // generate email
 
-	    // $debug = true;
+	    $debug = false;
 	    $live = true;
 
 	    $msg  = "New York Consolidated has received a donation.\r\n\r\n";
@@ -65,7 +65,6 @@ if(isset($_POST['amount']) &&
 	    if ($debug)
 		    mail("reinfurt@o-r-g.com","New York Consolidated donation",$msg,$headers);
 	    if ($live)
-		    // $test = mail("mia@n-y-c.org","New York Consolidated donation",$msg,$headers);
 		    mail("forward@o-r-g.com","New York Consolidated donation",$msg,$headers);
 
 	    // if paying online then continue to stripe
@@ -87,10 +86,10 @@ if(isset($_POST['amount']) &&
 		    require_once('static/php/composer/vendor/autoload.php');
 
 		    // live secret key
-		    // \Stripe\Stripe::setApiKey('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');
+		    \Stripe\Stripe::setApiKey('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');
 
 		    // test secret key
-		    \Stripe\Stripe::setApiKey('sk_test_51BF2u5KIsFHGARAdD1rbqEPotLTaA6nZ1OCs3A9rx3Ebu3hchZzVRfwQBYOTgdbNkpvCYUFQLtz2qrRY88nakySi00Yv1NabjT');
+		    // \Stripe\Stripe::setApiKey('sk_test_51BF2u5KIsFHGARAdD1rbqEPotLTaA6nZ1OCs3A9rx3Ebu3hchZzVRfwQBYOTgdbNkpvCYUFQLtz2qrRY88nakySi00Yv1NabjT');
 
 		    $session = \Stripe\Checkout\Session::create([
 			    'payment_method_types' => ['card'],
@@ -113,9 +112,9 @@ if(isset($_POST['amount']) &&
 		    (function() {
 		  	    function redirect(id){
 				    // live public key:
-				    // var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
+				    var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
 				    // test public key:
-				    var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
+				    // var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
     
 				    stripe.redirectToCheckout({
 				      // Make the id field from the Checkout Session creation API response
