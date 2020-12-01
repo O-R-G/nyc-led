@@ -4,6 +4,8 @@
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link href="https://n-y-c.org/static/css/relative10_pitch.css" rel="stylesheet" type="text/css">
+    <link href="https://n-y-c.org/static/css/helveticaneuer.css" rel="stylesheet" type="text/css">
+    <link href="https://n-y-c.org/static/css/helveticaautospaced.css" rel="stylesheet" type="text/css">
     <title></title>
     <style>
       /* -------------------------------------
@@ -20,10 +22,7 @@
 
       body {
         background-color: #ffffff;
-        font-family: 'relative10_pitch', Courier, "Courier New", monospace;
         -webkit-font-smoothing: antialiased;
-        font-size: 13px;
-        line-height: 17px;
         margin: 0;
         padding: 0;
         -ms-text-size-adjust: 100%;
@@ -54,9 +53,9 @@
         display: block;
         margin: 0 auto !important;
         /* makes it centered */
-        max-width: 400px;
+        max-width: 500px;
         padding: 10px;
-        width: 400px; 
+        width: 500px; 
       }
 
       /* This should also be a block element, so that it will fill 100% of the .container */
@@ -64,7 +63,7 @@
         box-sizing: border-box;
         display: block;
         margin: 0 auto;
-        max-width: 450px;
+        max-width: 500px;
         padding: 10px; 
       }
 
@@ -98,15 +97,40 @@
         .footer a {
           color: #666666;
       }
-
-      #block {
-        width: 10%;
-        float: right;
-      }
-
+            
       .arrow {
         width: 10%;
       }
+
+      .relative10_pitch {
+        display: inline-block;
+        font-family: 'relative10_pitch', Courier, "Courier New", monospace; 
+        font-size: 13px;
+      }
+
+      .helveticaneuer {
+        font-family: 'helveticaneuer', helvetica, arial, sans-serif;
+        font-size: 17px;
+        line-height: 21px;
+      }
+
+      .helveticaautospaced {
+        display: inline-block;
+        font-family: 'helveticaautospaced', 'relative10_pitch', monospace; 
+        font-size: 17px;
+        letter-spacing: 3px;
+      }
+
+      .helveticaautospaced a {
+        border-bottom: none;
+      }
+
+      #block {
+        width: auto;
+        height: 21px;
+        float: right;
+      }
+
 
       /* -------------------------------------
           TYPOGRAPHY
@@ -131,7 +155,11 @@
       a {
         color: #000000;
         text-decoration: none;
-        border-bottom: 1px solid #000000;
+        border-bottom: 1px solid #ff0000;
+      }
+
+      a:hover {
+        color: #ff0000;
       }
 
       /* -------------------------------------
@@ -278,7 +306,7 @@
       }
     </style>
     </head>
-    <body class="">
+    <body class="helveticaneuer">
         <span class="preheader">New York Consolidated</span>
         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
             <tr>
@@ -292,35 +320,32 @@
                                         <tr>
                                             <td>
                                                 <multiline>
-                                                    <p>Month Day, YEAR</p>
-                                                    <p>This is the main body of the email. Whatever you are announcing should go <a href=''>here</a>. Always keep the paragraphs short (2-3 sentences) as the line length is also short and that will work best.</p>
-                                                    <p>For example, here is a paragraph. And it is very short.</p>
-                                                    <p>Where <a href=''>this one</a> is much longer. It is really quite a lot longer than the previous one. Well, <a href=''>at least somewhat</a> longer. Either way you can see that it goes on for a while and seems to say at least a few things. This does not mean that it has more to say, but rather that what it has to say is said in a <a href=''>longer</a> fashion.</p>
-                                                    <p>This is the main body of the email. Whatever you are announcing should go <a href=''>here</a>. Always keep the paragraphs short (2-3 sentences) as the line length is also short and that will work best.</p>
+                                                    <p class='relative10_pitch'>Wednesday November 4, 2020</p>
+                                                    <p>It’s a strange morning, <a href='https://static01.nyt.com/images/2020/11/04/nytfrontpage/scan.pdf'>this one</a>. Last night was the Presidential election, and the results aren’t yet final. I guess that we maybe feel much like you do right now. On edge. Anxious. Not sure what comes next. New York City businesses are staring at a second <a href='https://www1.nyc.gov/site/sbs/businesses/covid19-business-tips-faqs.page'>lock down</a> due to the Corona virus. Street life, which bloomed over the summer, is starting to retreat indoors. We are preparing to spend more time alone.</p>
+                                                    <p>It isn’t the first time New York has felt like this. We don't necessarily remember it, but we have seen enough pictures <a href='https://untappedcities.com/wp-content/uploads/2016/11/10-Gritty-Old-Times-Square_Walking-Tour_Manhattan_NYC_Untapped-Cities_9.jpg'>to have an idea what it felt like</a>. New York around 1977 was a different place and in many ways that we find positive. We are optimistic.</p>
+                                                    <p>There were spaces for artists. Spaces for making art. Spaces for living as an artist. Spaces for showing what was being made. And spaces for distributing art outside of a commercial context. Financial pressures in the city were not what they are today.</p>
+                                                    <p>That year, 1977, and riding in the backseat of a New York City taxi, graphic designer <a href='https://en.wikipedia.org/wiki/Milton_Glaser'>Milton Glaser</a> sketched out this familiar logo:</p>
                                                 </multiline>
-                                                <img src="images/i-heart-ny.png" width="400" editable="true" />                                                                                                    
+                                                <img src="images/i-heart-ny.png" width="500" editable="true" />                                                                                                    
                                                 <multiline>
-                                                    <p>For example, here is a paragraph. And it is very short.</p>
-                                                    <p>Where <a href=''>this one</a> is much longer. It is really quite a lot longer than the previous one. Well, <a href=''>at least somewhat</a> longer. Either way you can see that it goes on for a while and seems to say at least a few things. This does not mean that it has more to say, but rather that what it has to say is said in a <a href=''>longer</a> fashion.</p>
-                                                    <p>This is the main body of the email. Whatever you are announcing should go <a href=''>here</a>. Always keep the paragraphs short (2-3 sentences) as the line length is also short and that will work best.</p>
+                                                    <p>I heart New York. It’s a sentiment that is easy to get behind. <a href='https://www.google.com/search?q=i+heart+n+y&client=safari&rls=en&sxsrf=ALeKk01MhmgnxBCkdM9aBdLxoDKjXEYxHg:1606856819534&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjKjLuP2K3tAhWJGVkFHb5dCBIQ_AUoAXoECBEQAw&biw=950&bih=755'>Many, many people have</a>. In the thick of deep uncertainty now, still we are happy to be here, with each other, and not anywhere else. We know this graphic from its endless repetition on T-shirts, I took bags, hats, keychains, you name it, and other things. It is now a registered trademark of the State of New York Department of Tourism.</p>
+                                                    <p>What now then, while we wait? What's to be done in this limbo zone between the start of the pandemic and the return to some kind of regular city life. It can't be, it must not be, to prepare for a return to normal. Neither can it be a return to the <a href='https://youtu.be/AHftFsPweMM'>new normal</a>, a term more convenient and passive than imaginative and constructive and which gets tossed around so easily.</p>
                                                 </multiline>
-                                                <img src="images/i-block-ny.png" width="400" editable="true" />
+                                                <img src="images/i-block-ny.png" width="500" editable="true" />
                                                 <multiline>
-                                                    <p>For example, here is a paragraph. And it is very short.</p>
-                                                    <p>Where <a href=''>this one</a> is much longer. It is really quite a lot longer than the previous one. Well, <a href=''>at least somewhat</a> longer. Either way you can see that it goes on for a while and seems to say at least a few things. This does not mean that it has more to say, but rather that what it has to say is said in a <a href=''>longer</a> fashion.</p>
+                                                    <p>How to keep things <a href='https://www.youtube.com/watch?v=-lOphHxe28M'>moving</a>?</p>
+                                                    <p>And, when everything feels so perfectly static. Well, let's make it over, let's make it new, and let's make it the way we want it to be. We can make it more just. We can make it more possible. This is group work. It relies on each everyone. There are a lot of us, still. And we're strongest together.</p>
+                                                    <p><a class='relative10_pitch' href='https://www.n-y-c.org'>Continue reading . . .</a></p>
                                                 </multiline>
-                                                <p><img class="arrow" src="images/arrow-x-5-k.png" width="100"></p>
-                                                <multiline>
-                                                    <p>NEW YORK CONSOLIDATED<br>225 W 13 ST<br>NY, NY 10001</p>
-                                                </multiline>
+                                                <!-- <p><img class="arrow" src="images/arrow-x-5-k.png" width="100"></p> -->
+                                                <p><a href="https://www.n-y-c.org"><img id="block" src="images/new-york-consolidated-block.gif" width="300" /></a><br></p>
+                                                <p class='helveticaautospaced'>NEW YORK CONSOLIDATED<br>225 W 13 ST NY, NY 10011 <br><a href="https://www.n-y-c.org">N-Y-C.ORG</a></p>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="content-block powered-by">
-                                                <a href="https://www.n-y-c.org"><img id="block" src="images/new-york-consolidated-block.gif" width="300" /></a>
                                                 <!-- <p><img class="arrow" src="images/arrow-down-5-k.png" width="100"></p> -->
-                                                <p><a href="https://www.n-y-c.org">www.n-y-c.org</a></p>
-                                                <p><unsubscribe>Unsubscribe</unsubscribe></p>
+                                                <p class='relative10_pitch'><unsubscribe>Unsubscribe</unsubscribe></p>
                                             </td>
                                         </tr>
                                     </table>
