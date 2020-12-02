@@ -46,4 +46,4 @@ x css 100% width
   www.n-y-c.org
   now.n-y-c.org
   staging.n-y-c.org
-
+/ static/html newsletter
