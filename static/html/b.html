@@ -1,0 +1,369 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="https://n-y-c.org/static/css/relative10_pitch.css" rel="stylesheet" type="text/css">
+    <link href="https://n-y-c.org/static/css/helveticaneuer.css" rel="stylesheet" type="text/css">
+    <link href="https://n-y-c.org/static/css/helveticaautospaced.css" rel="stylesheet" type="text/css">
+    <title></title>
+    <style>
+      /* -------------------------------------
+          GLOBAL RESETS
+      ------------------------------------- */
+      
+      /*All the styling goes here*/
+      
+      img {
+        border: none;
+        -ms-interpolation-mode: bicubic;
+        max-width: 100%; 
+      }
+
+      body {
+        /* background-color: #ffffff; */
+        -webkit-font-smoothing: antialiased;
+        margin: 0;
+        padding: 0;
+        -ms-text-size-adjust: 100%;
+        -webkit-text-size-adjust: 100%; 
+      }
+
+      table {
+        /* background-color: #ffffff; */
+        border-collapse: separate;
+        mso-table-lspace: 0pt;
+        mso-table-rspace: 0pt;
+        width: 100%; }
+        table td {
+          vertical-align: top; 
+      }
+
+      /* -------------------------------------
+          BODY & CONTAINER
+      ------------------------------------- */
+
+      .body {
+        /* background-color: #ffffff; */
+        width: 100%; 
+      }
+
+      /* Set a max-width, and make it display as block so it will automatically stretch to that width, but will also shrink down on a phone or something */
+      .container {
+        display: block;
+        margin: 0 auto !important;
+        /* makes it centered */
+        max-width: 500px;
+        padding: 10px;
+        width: 500px; 
+      }
+
+      /* This should also be a block element, so that it will fill 100% of the .container */
+      .content {
+        box-sizing: border-box;
+        display: block;
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 10px; 
+      }
+
+      /* -------------------------------------
+          HEADER, FOOTER, MAIN
+      ------------------------------------- */
+      .main {
+        /* background: #ffffff; */
+        border-radius: 3px;
+        width: 100%; 
+      }
+
+      .wrapper {
+        box-sizing: border-box;
+        padding: 20px; 
+      }
+
+      .content-block {
+        /*
+        padding-bottom: 10px;
+        padding-top: 10px;
+        */
+      }
+
+      .footer {
+        clear: both;
+        margin-top: 10px;
+        width: 100%; 
+      }
+        .footer td,
+        .footer p,
+        .footer span,
+        .footer a {
+          color: #666666;
+      }
+            
+      .arrow {
+        height: 42px;
+        width: auto;
+        vertical-align: bottom;
+      }
+
+      .relative10_pitch {
+        font-family: 'relative10_pitch', Courier, "Courier New", monospace; 
+        font-size: 14px;
+        line-height: 21px;
+      }
+
+      .helveticaneuer {
+        font-family: 'helveticaneuer', helvetica, arial, sans-serif;
+        font-size: 17px;
+        line-height: 21px;
+      }
+
+      .helveticaautospaced {
+        display: inline-block;
+        font-family: 'helveticaautospaced', 'relative10_pitch', monospace; 
+        font-size: 17px;
+        letter-spacing: 3px;
+      }
+
+      .helveticaautospaced a {
+        border-bottom: none;
+      }
+
+      #block {
+        width: auto;
+        height: 42px;
+        padding: 10px 5px 10px 10px;
+        float: right;
+      }
+
+
+      /* -------------------------------------
+          TYPOGRAPHY
+      ------------------------------------- */
+      h1 {
+        text-transform: capitalize; 
+      }
+
+      p,
+      ul,
+      ol {
+        margin: 0;
+        margin-bottom: 17px; 
+      }
+        p li,
+        ul li,
+        ol li {
+          list-style-position: inside;
+          margin-left: 5px; 
+      }
+
+      a {
+        color: #000000;
+        text-decoration: none;
+        border-bottom: 1px solid #ff0000;
+      }
+
+      a:hover {
+        color: #ff0000;
+      }
+
+      /* -------------------------------------
+          OTHER STYLES THAT MIGHT BE USEFUL
+      ------------------------------------- */
+      .last {
+        margin-bottom: 0; 
+      }
+
+      .first {
+        margin-top: 0; 
+      }
+
+      .align-center {
+        text-align: center; 
+      }
+
+      .align-right {
+        text-align: right; 
+      }
+
+      .align-left {
+        text-align: left; 
+      }
+
+      .clear {
+        clear: both; 
+      }
+
+      .mt0 {
+        margin-top: 0; 
+      }
+
+      .mb0 {
+        margin-bottom: 0; 
+      }
+
+      .preheader {
+        color: transparent;
+        display: none;
+        height: 0;
+        max-height: 0;
+        max-width: 0;
+        opacity: 0;
+        overflow: hidden;
+        mso-hide: all;
+        visibility: hidden;
+        width: 0; 
+      }
+
+      .powered-by a {
+        text-decoration: none; 
+      }
+
+      hr {
+        border: 0;
+        border-bottom: 1px solid #f6f6f6;
+        margin: 20px 0; 
+      }
+
+      /* -------------------------------------
+          RESPONSIVE AND MOBILE FRIENDLY STYLES
+      ------------------------------------- */
+      @media only screen and (max-width: 620px) {
+        table[class=body] h1 {
+          /* font-size: 28px !important; */
+          margin-bottom: 10px !important; 
+        }
+        table[class=body] p,
+        table[class=body] ul,
+        table[class=body] ol,
+        table[class=body] td,
+        table[class=body] span,
+        table[class=body] a {
+          /* font-size: 16px !important; */
+        }
+        table[class=body] .wrapper,
+        table[class=body] .article {
+          padding: 10px !important; 
+        }
+        table[class=body] .content {
+          padding: 0 !important; 
+        }
+        table[class=body] .container {
+          padding: 0 !important;
+          width: 100% !important; 
+        }
+        table[class=body] .main {
+          border-left-width: 0 !important;
+          border-radius: 0 !important;
+          border-right-width: 0 !important; 
+        }
+        table[class=body] .btn table {
+          width: 100% !important; 
+        }
+        table[class=body] .btn a {
+          width: 100% !important; 
+        }
+        table[class=body] .img-responsive {
+          height: auto !important;
+          max-width: 100% !important;
+          width: auto !important; 
+        }
+      }
+
+      /* -------------------------------------
+          PRESERVE THESE STYLES IN THE HEAD
+      ------------------------------------- */
+      @media all {
+        .ExternalClass {
+          width: 100%; 
+        }
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+          line-height: 100%; 
+        }
+        .apple-link a {
+          color: inherit !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          font-weight: inherit !important;
+          line-height: inherit !important;
+          text-decoration: none !important; 
+        }
+        #MessageViewBody a {
+          color: inherit;
+          text-decoration: none;
+          font-size: inherit;
+          font-family: inherit;
+          font-weight: inherit;
+          line-height: inherit;
+        }
+        .btn-primary table td:hover {
+          background-color: #34495e !important; 
+        }
+        .btn-primary a:hover {
+          background-color: #34495e !important;
+          border-color: #34495e !important; 
+        } 
+      }
+    </style>
+    </head>
+    <body class="relative10_pitch">
+    <!-- <body class="helveticaneuer"> -->
+        <span class="preheader">New York Consolidated</span>
+        <p><a href="https://www.n-y-c.org"><img id="block" src="images/new-york-consolidated-block.gif" width="300" /></a><br></p>
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+            <tr>
+                <td>&nbsp;</td>
+                <td class="container">
+                    <div class="content">
+                        <table role="presentation" class="main">
+                            <tr>
+                                <td class="wrapper">
+                                    <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <td>
+                                                <multiline>
+                                                    <p class='relative10_pitch'>Wednesday November 4, 2020</p>
+                                                    <p>It’s a strange morning, <a href='https://static01.nyt.com/images/2020/11/04/nytfrontpage/scan.pdf'>this one</a>. Last night was the Presidential election, and the results aren’t yet final. I guess that we maybe feel much like you do right now. On edge. Anxious. Not sure what comes next. New York City businesses are staring at a second <a href='https://www1.nyc.gov/site/sbs/businesses/covid19-business-tips-faqs.page'>lock down</a> due to the Corona virus. Street life, which bloomed over the summer, is starting to retreat indoors. We are preparing to spend more time alone.</p>
+                                                    <p>It isn’t the first time New York has felt like this. We don't necessarily remember it, but we have seen enough pictures <a href='https://untappedcities.com/wp-content/uploads/2016/11/10-Gritty-Old-Times-Square_Walking-Tour_Manhattan_NYC_Untapped-Cities_9.jpg'>to have an idea what it felt like</a>. New York around 1977 was a different place and in many ways that we find positive. We are optimistic.</p>
+                                                    <p>There were spaces for artists. Spaces for making art. Spaces for living as an artist. Spaces for showing what was being made. And spaces for distributing art outside of a commercial context. Financial pressures in the city were not what they are today.</p>
+                                                    <p>That year, 1977, and riding in the backseat of a New York City taxi, graphic designer <a href='https://en.wikipedia.org/wiki/Milton_Glaser'>Milton Glaser</a> sketched out this familiar logo:</p>
+                                                </multiline>
+                                                <img src="images/i-heart-ny.png" width="500" editable="true" />                                                                                                    
+                                                <multiline>
+                                                    <p>I heart New York. It’s a sentiment that is easy to get behind. <a href='https://www.google.com/search?q=i+heart+n+y&client=safari&rls=en&sxsrf=ALeKk01MhmgnxBCkdM9aBdLxoDKjXEYxHg:1606856819534&source=lnms&tbm=isch&sa=X&ved=2ahUKEwjKjLuP2K3tAhWJGVkFHb5dCBIQ_AUoAXoECBEQAw&biw=950&bih=755'>Many, many people have</a>. In the thick of deep uncertainty now, still we are happy to be here, with each other, and not anywhere else. We know this graphic from its endless repetition on T-shirts, I took bags, hats, keychains, you name it, and other things. It is now a registered trademark of the State of New York Department of Tourism.</p>
+                                                    <p>What now then, while we wait? What's to be done in this limbo zone between the start of the pandemic and the return to some kind of regular city life. It can't be, it must not be, to prepare for a return to normal. Neither can it be a return to the <a href='https://youtu.be/AHftFsPweMM'>new normal</a>, a term more convenient and passive than imaginative and constructive and which gets tossed around so easily.</p>
+                                                </multiline>
+                                                <img src="images/i-block-ny.png" width="500" editable="true" />
+                                                <multiline>
+                                                    <p>How to keep things <a href='https://www.youtube.com/watch?v=-lOphHxe28M'>moving</a>?</p>
+                                                    <p>And, when everything feels so perfectly static. Well, let's make it over, let's make it new, and let's make it the way we want it to be. We can make it more just. We can make it more possible. This is group work. It relies on each everyone. There are a lot of us, still. And we're strongest together.</p>
+                                                    <p><a class='relative10_pitch' href='https://www.n-y-c.org'>Continue reading . . .</a></p>
+                                                </multiline>
+                                                <p><img class="arrow" src="images/arrow-down-5-k.png" width="100"></p>
+                                                <!-- <p><img class="arrow" src="images/arrow-x-5-k.png" width="100"></p> -->
+                                                <p class='helveticaautospaced'>NEW YORK CONSOLIDATED<br>225 W 13 ST NY, NY 10011 <br><a href="https://www.n-y-c.org">N-Y-C.ORG</a></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="content-block powered-by">
+                                                <p class='relative10_pitch'><unsubscribe>Unsubscribe</unsubscribe></p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    </body>
+</html>
