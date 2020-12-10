@@ -7,6 +7,7 @@
 #media/*.pdf
 #media/*.tif
 #open-records-generator/
+.DS_Store
 .htaccess
 static/data/
 static/bash/backup
