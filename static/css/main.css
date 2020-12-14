@@ -30,6 +30,17 @@ ul {
     padding-left: 0px;
 }
 
+blockquote {
+    font-family: 'relative10_pitch', monospace;
+    font-size: 13px;
+}
+
+blockquote a {
+    text-decoration: none;
+    border-bottom: none;
+    color: #000;
+}
+
 /* id */
 
 #home a {
