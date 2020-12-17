@@ -15,7 +15,7 @@ $nav = $oo->nav($uu->ids);
     style='<?= ($buy) ? "display:none;" : "" ?>'
 */
 
-$buy = ($uri[1] == 'buy') ? true : false;
+$buy = ($uri[1] == 'buy' && !$uri[2]) ? true : false;
 
 ?><div id='menu' class='centered centeralign helveticaneuer <?= ($body) ? "hidden" : ""; ?>' style='<?= ($buy) ? "display:block;" : "" ?>'>
     <div id='xx_hide' class='<?= ($body) ? "" : "hidden"; ?>'>
