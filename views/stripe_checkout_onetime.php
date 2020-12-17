@@ -48,9 +48,11 @@ else{
 }
 
 // live
-if ($uri[1] == '1996')
+if ($uri[2] == '1996')
     $price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
-if ($uri[1] == 'alice-mackler')
+else if ($uri[2] == 'alice-mackler')
+    $price_id_shipping = 'price_1HzCaqKIsFHGARAdcQpMZM1Y';
+else
     $price_id_shipping = 'price_1HzCaqKIsFHGARAdcQpMZM1Y';
 
 // test
