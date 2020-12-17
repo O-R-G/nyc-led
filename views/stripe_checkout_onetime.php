@@ -48,7 +48,11 @@ else{
 }
 
 // live
-$price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
+if ($uri[1] == '1996')
+    $price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
+if ($uri[1] == 'alice-mackler')
+    $price_id_shipping = 'price_1HzCaqKIsFHGARAdcQpMZM1Y';
+
 // test
 // $price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
 
