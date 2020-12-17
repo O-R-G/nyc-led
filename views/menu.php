@@ -6,7 +6,18 @@
 $nav = $oo->nav($uu->ids);
 // $traverse = $oo->traverse($item);
 // $nav = $oo->nav_full($traverse);
-?><div id='menu' class='centered centeralign helveticaneuer <?= ($body) ? "hidden" : ""; ?>'>
+
+/*
+    tmp fix to show publications / buy
+    uses $buy in two places to set initial style
+    this could be done better, but for now ...
+
+    style='<?= ($buy) ? "display:none;" : "" ?>'
+*/
+
+$buy = ($uri[1] == 'buy') ? true : false;
+
+?><div id='menu' class='centered centeralign helveticaneuer <?= ($body) ? "hidden" : ""; ?>' style='<?= ($buy) ? "display:block;" : "" ?>'>
     <div id='xx_hide' class='<?= ($body) ? "" : "hidden"; ?>'>
         <!-- <img src='/media/svg/x-6-b.svg'> -->
     </div>
@@ -38,7 +49,7 @@ $nav = $oo->nav($uu->ids);
     </ul>
 </div>
 
-<div id='xx_show' class='<?= ($body) ? "" : "hidden"; ?>'>
+<div id='xx_show' class='<?= ($body) ? "" : "hidden"; ?>' style='<?= ($buy) ? "display:none;" : "" ?>'>
     <!-- <img src='/media/svg/hamburger-6-b.svg'> -->
 </div>
 
