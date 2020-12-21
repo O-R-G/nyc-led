@@ -49,7 +49,7 @@ else{
 
 // live
 if ($uri[2] == '1996')
-    $price_id_shipping = 'price_1HaWeDKIsFHGARAd1BpgmFAE';
+    $price_id_shipping = 'price_1I0xAYKIsFHGARAd8Q5sQkn6';
 else if ($uri[2] == 'alice-mackler')
     $price_id_shipping = 'price_1HzCaqKIsFHGARAdcQpMZM1Y';
 else
