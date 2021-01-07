@@ -1,15 +1,16 @@
 <?
-// ini_set('display_errors', '1');
-// echo '** PLEASE BE PATIENT ... DEBUGGING IN PROCESS **';
 require_once('static/php/composer/vendor/autoload.php');
+require_once('static/php/stripe_key.php');
 
 $test = true;
 
-// set secret key
-if ($test) 
-    \Stripe\Stripe::setApiKey('sk_test_51BF2u5KIsFHGARAdD1rbqEPotLTaA6nZ1OCs3A9rx3Ebu3hchZzVRfwQBYOTgdbNkpvCYUFQLtz2qrRY88nakySi00Yv1NabjT');
-else
-    \Stripe\Stripe::setApiKey('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');
+// set key
+if ($test) {
+    ini_set('display_errors', '1');
+    \Stripe\Stripe::setApiKey($stripe_key_test);
+} else {
+    \Stripe\Stripe::setApiKey($stripe_key_live);
+}
 
 // get fully-qualified hostname
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -50,6 +51,8 @@ if(end($uri) == 'success'){
 // set price and shipping
 if ($test) {
     // test
+    // price_id forced to 1996 test price rather than o-r-g notes
+    $price_id = 'price_1HYvXCKIsFHGARAduanMKl1u';
     $price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
     $taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
 } else {
@@ -63,9 +66,25 @@ if ($test) {
     $taxrate_ny = 'txr_1HbeZCKIsFHGARAdBcX9SxD4';
 }
 
-// set coupon based on url
-// 2swxxLhE
-// remove shipping
+// wholesale?
+if(end($uri) == 'wholesale'){
+    // set coupon, remove shipping
+    if ($test) {
+        $coupon_id = '2swxxLhE';
+        // $taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
+        // $price_id_shipping = NULL;
+    } else {
+        $coupon_id = '2swxxLhE';
+        // $price_id_shipping = NULL;
+    }
+}
+
+/* 
+    ** todo *
+
+    branch on /wholesale to determine what is added or not to stripe session
+    maybe can be added to existing session?
+*/
 
 // populate session
 $session = \Stripe\Checkout\Session::create([
@@ -88,9 +107,9 @@ $session = \Stripe\Checkout\Session::create([
           'description' => 'Shipping via USPS Priority Mail',
 		  'quantity' => 1,
 		],
-    	],      
+    ],      
     'discounts' => [[
-        'coupon' => '2swxxLhE',
+        'coupon' => $coupon_id,
     ]],
 	'success_url' => $success_url,
 	'cancel_url' => $canceled_url,
@@ -105,14 +124,17 @@ if(!$isSuccess && !$isCanceled){
 <script>
 (function() {
   var checkoutButton = document.getElementById('stripe_form_submit');
+  var test = <? echo json_encode($test); ?>;
+  var stripe_key_test_public = 'pk_test_WsDyphr31j1ki9BzVhlqmmMA';
+  var stripe_key_live_public = 'pk_live_WPSu14Hwjt9VxMIqSznbkiRC';;
   if(checkoutButton != null){
   	function redirect(id){
-        if ($test) {
+        if (test) {
 		    // test public key:
-    		var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
+    		var stripe = Stripe(stripe_key_test_public);
         } else {
 		    // live public key:
-		    var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
+		    var stripe = Stripe(stripe_key_live_public);
         }
 		stripe.redirectToCheckout({
 		  // Make the id field from the Checkout Session creation API response
