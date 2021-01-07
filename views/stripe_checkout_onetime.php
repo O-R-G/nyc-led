@@ -14,8 +14,8 @@ require_once('static/php/stripe_key.php');
 $test = true;
 $wholesale = ($uri[3] == 'wholesale');
 $partners = ($uri[3] == 'partners');
-$copies = (($partners || $wholesale) && is_numeric($uri[4]));
-if ($copies)
+$copies = ($uri[3] == 'copies');
+if (($partners || $wholesale || $copies) && is_numeric($uri[4]));
     $quantity = ($uri[4]); 
 $isSuccess = false;
 $isCanceled = false;
@@ -112,7 +112,7 @@ if ($wholesale || $partners) {
             'coupon' => $coupon_id,
         ]],
     ];
-    if ($copies)
+    if ($quantity)
         $session_['line_items'][0]['quantity'] = $quantity;
 } else {
     $session_['line_items'][0]['dynamic_tax_rates'] = [
@@ -121,11 +121,11 @@ if ($wholesale || $partners) {
 		],
     ];
     $session_['line_items'][] = [
-		    'price' => $price_id_shipping,
-            'description' => 'Shipping via USPS Priority Mail',
-		    'quantity' => 1,
+	'price' => $price_id_shipping,
+	'description' => 'Shipping via USPS Priority Mail',
+	'quantity' => 1,
     ];
-    if ($copies)
+    if ($quantity)
         $session_['line_items'][0]['quantity'] = $quantity;
 }
 
