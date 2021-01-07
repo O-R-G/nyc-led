@@ -47,3 +47,11 @@ x css 100% width
   now.n-y-c.org
   staging.n-y-c.org
 / static/html newsletter
+- wholesale stripe
+  + local
+  + sync
+  + staging
+  - discount
+    url
+    45%, 70%
+    no sales tax

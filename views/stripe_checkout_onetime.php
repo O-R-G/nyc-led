@@ -1,14 +1,15 @@
 <?
 // ini_set('display_errors', '1');
 // echo '** PLEASE BE PATIENT ... DEBUGGING IN PROCESS **';
-
 require_once('static/php/composer/vendor/autoload.php');
 
-// live secret key
-\Stripe\Stripe::setApiKey('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');
+$test = true;
 
-// test secret key
-// \Stripe\Stripe::setApiKey('sk_test_51BF2u5KIsFHGARAdD1rbqEPotLTaA6nZ1OCs3A9rx3Ebu3hchZzVRfwQBYOTgdbNkpvCYUFQLtz2qrRY88nakySi00Yv1NabjT');
+// set secret key
+if ($test) 
+    \Stripe\Stripe::setApiKey('sk_test_51BF2u5KIsFHGARAdD1rbqEPotLTaA6nZ1OCs3A9rx3Ebu3hchZzVRfwQBYOTgdbNkpvCYUFQLtz2qrRY88nakySi00Yv1NabjT');
+else
+    \Stripe\Stripe::setApiKey('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');
 
 // get fully-qualified hostname
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
@@ -27,8 +28,7 @@ if(end($uri) == 'success'){
 	array_shift($this_parent_uri);
 	$this_parent = $oo->get(end($oo->urls_to_ids($this_parent_uri)));
 	$price_id = $this_parent['notes'];
-}
-else{
+} else {
 	if(end($uri) == 'canceled'){
 		$isCanceled = true;
 		$this_parent_uri = $uri;
@@ -47,23 +47,27 @@ else{
 		$price_id = substr($price_id, 0, strlen($price_id)-1);
 }
 
-// live
-if ($uri[2] == '1996')
-    $price_id_shipping = 'price_1I0xAYKIsFHGARAd8Q5sQkn6';
-else if ($uri[2] == 'alice-mackler')
-    $price_id_shipping = 'price_1HzCaqKIsFHGARAdcQpMZM1Y';
-else
-    $price_id_shipping = 'price_1HzCaqKIsFHGARAdcQpMZM1Y';
+// set price and shipping
+if ($test) {
+    // test
+    $price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
+    $taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
+} else {
+    // live 
+    if ($uri[2] == '1996')
+        $price_id_shipping = 'price_1I0xAYKIsFHGARAd8Q5sQkn6';
+    else if ($uri[2] == 'alice-mackler')
+        $price_id_shipping = 'price_1HzCaqKIsFHGARAdcQpMZM1Y';
+    else
+        $price_id_shipping = 'price_1HzCaqKIsFHGARAdcQpMZM1Y';
+    $taxrate_ny = 'txr_1HbeZCKIsFHGARAdBcX9SxD4';
+}
 
-// test
-// $price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
+// set coupon based on url
+// 2swxxLhE
+// remove shipping
 
-// live
-$taxrate_ny = 'txr_1HbeZCKIsFHGARAdBcX9SxD4';
-// test
-// $taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
-
-
+// populate session
 $session = \Stripe\Checkout\Session::create([
 	'payment_method_types' => ['card'],
 	'mode' => 'payment',
@@ -84,31 +88,32 @@ $session = \Stripe\Checkout\Session::create([
           'description' => 'Shipping via USPS Priority Mail',
 		  'quantity' => 1,
 		],
-    	],
+    	],      
+    'discounts' => [[
+        'coupon' => '2swxxLhE',
+    ]],
 	'success_url' => $success_url,
 	'cancel_url' => $canceled_url,
 ]);
 
-
 if(!$isSuccess && !$isCanceled){
-?>
-	<form id = 'stripe_form' method = 'POST' action = '<? echo $currentUrl; ?>/submitting'>
+    ?><form id = 'stripe_form' method = 'POST' action = '<? echo $currentUrl; ?>/submitting'>
 		<button id = 'stripe_form_submit' type="button">Buy</button>
-	</form>
-<?
+	</form><?
 }
-?>
-<script src="https://js.stripe.com/v3/"></script>
+?><script src="https://js.stripe.com/v3/"></script>
 <script>
 (function() {
   var checkoutButton = document.getElementById('stripe_form_submit');
   if(checkoutButton != null){
   	function redirect(id){
-		// live public key:
-		var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
-		// test public key:
-		// var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
-
+        if ($test) {
+		    // test public key:
+    		var stripe = Stripe('pk_test_WsDyphr31j1ki9BzVhlqmmMA');
+        } else {
+		    // live public key:
+		    var stripe = Stripe('pk_live_WPSu14Hwjt9VxMIqSznbkiRC');
+        }
 		stripe.redirectToCheckout({
 		  // Make the id field from the Checkout Session creation API response
 		  // available to this file, so you can provide it as parameter here
