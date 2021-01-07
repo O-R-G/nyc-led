@@ -14,7 +14,7 @@ require_once('static/php/stripe_key.php');
 $test = true;
 $wholesale = ($uri[3] == 'wholesale');
 $partners = ($uri[3] == 'partners');
-$copies = (($uri[3] == 'copies' || $wholesale) && is_numeric($uri[4]));
+$copies = (($partners || $wholesale) && is_numeric($uri[4]));
 if ($copies)
     $quantity = ($uri[4]); 
 $isSuccess = false;
