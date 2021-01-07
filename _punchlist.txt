@@ -47,11 +47,14 @@ x css 100% width
   now.n-y-c.org
   staging.n-y-c.org
 / static/html newsletter
-- wholesale stripe
++ stripe wholesale
   + local
   + sync
   + staging
-  - discount
+  + discount
     url
     45%, 70%
     no sales tax
+    build session array, then create
+  + hide stripe secret key (!)
+    store local, .gitignore

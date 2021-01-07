@@ -1,62 +1,75 @@
 <?
+/* 
+    build and populate stripe one-time checkout session
+
+    /buy/1996 (1)
+    /buy/1996/copies/10 (10)
+    /buy/1996/wholesale/100 (100 @ 45% discount)
+    /buy/1996/partners/1000 (1000 @ 75% discount)
+*/
+    
 require_once('static/php/composer/vendor/autoload.php');
 require_once('static/php/stripe_key.php');
 
 $test = true;
-
-// set key
-if ($test) {
-    ini_set('display_errors', '1');
-    \Stripe\Stripe::setApiKey($stripe_key_test);
-} else {
-    \Stripe\Stripe::setApiKey($stripe_key_live);
-}
-
-// get fully-qualified hostname
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-$host = $protocol.$_SERVER["HTTP_HOST"];
-$success_url = $protocol . 'n-y-c.org' . $requestclean . '/success';
-$canceled_url = $protocol . 'n-y-c.org' . $requestclean . '/canceled';
-
+$wholesale = ($uri[3] == 'wholesale');
+$partners = ($uri[3] == 'partners');
+$copies = (($uri[3] == 'copies' || $wholesale) && is_numeric($uri[4]));
+if ($copies)
+    $quantity = ($uri[4]); 
 $isSuccess = false;
 $isCanceled = false;
 $isProduct = false;
-
-if(end($uri) == 'success'){
-	$isSuccess = true;
-	$this_parent_uri = $uri;
-	array_pop($this_parent_uri);
-	array_shift($this_parent_uri);
-	$this_parent = $oo->get(end($oo->urls_to_ids($this_parent_uri)));
-	$price_id = $this_parent['notes'];
-} else {
-	if(end($uri) == 'canceled'){
-		$isCanceled = true;
-		$this_parent_uri = $uri;
-		array_pop($this_parent_uri);
-		array_shift($this_parent_uri);
-		$this_parent = $oo->get(end($oo->urls_to_ids($this_parent_uri)));
-		$price_id = $this_parent['notes'];
-	}
-	else {
-		$isProduct = true;
-		$price_id = $item['notes'];
-	}
-	while(ctype_space(substr($price_id, 0, 1)))
-		$price_id = substr($price_id, 1);
-	while(ctype_space(substr($price_id, strlen($price_id)-1)))
-		$price_id = substr($price_id, 0, strlen($price_id)-1);
-}
-
-// set price and shipping
 if ($test) {
-    // test
-    // price_id forced to 1996 test price rather than o-r-g notes
+    \Stripe\Stripe::setApiKey($stripe_key_test);
+} else
+    \Stripe\Stripe::setApiKey($stripe_key_live);
+if (!($stripe_key_test || $stripe_key_live))
+    die('API key not loaded ...');
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$host = $protocol.$_SERVER["HTTP_HOST"];
+$success_url = $protocol . $host . $requestclean . '/success';
+$canceled_url = $protocol . $host . $requestclean . '/canceled';
+// ini_set('display_errors', '1');
+
+/*
+    set price, shipping, sales tax, coupon
+*/
+
+if ($test) {
+    // forced to 1996-test price rather than o-r-g
     $price_id = 'price_1HYvXCKIsFHGARAduanMKl1u';
     $price_id_shipping = 'price_1HaWaPKIsFHGARAdmvRq3hLF';
     $taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
+    if ($wholesale)
+        $coupon_id = '2swxxLhE';
+    if ($partners)
+        $coupon_id = 'guiJWtf1'; 
 } else {
-    // live 
+    if(end($uri) == 'success'){
+	    $isSuccess = true;
+	    $this_parent_uri = $uri;
+	    array_pop($this_parent_uri);
+	    array_shift($this_parent_uri);
+	    $this_parent = $oo->get(end($oo->urls_to_ids($this_parent_uri)));
+	    $price_id = $this_parent['notes'];
+    } else {
+	    if(end($uri) == 'canceled'){
+		    $isCanceled = true;
+		    $this_parent_uri = $uri;
+		    array_pop($this_parent_uri);
+		    array_shift($this_parent_uri);
+		    $this_parent = $oo->get(end($oo->urls_to_ids($this_parent_uri)));
+		    $price_id = $this_parent['notes'];
+	    } else {
+		    $isProduct = true;
+		    $price_id = $item['notes'];
+	    }
+	    while(ctype_space(substr($price_id, 0, 1)))
+		    $price_id = substr($price_id, 1);
+	    while(ctype_space(substr($price_id, strlen($price_id)-1)))
+		    $price_id = substr($price_id, 0, strlen($price_id)-1);
+    }
     if ($uri[2] == '1996')
         $price_id_shipping = 'price_1I0xAYKIsFHGARAd8Q5sQkn6';
     else if ($uri[2] == 'alice-mackler')
@@ -64,30 +77,20 @@ if ($test) {
     else
         $price_id_shipping = 'price_1HzCaqKIsFHGARAdcQpMZM1Y';
     $taxrate_ny = 'txr_1HbeZCKIsFHGARAdBcX9SxD4';
+    if ($wholesale)
+        $coupon_id = '81MXnu1M'; 
+    if ($partners)
+        $coupon_id = 'DMa0UOg9'; 
 }
 
-// wholesale?
-if(end($uri) == 'wholesale'){
-    // set coupon, remove shipping
-    if ($test) {
-        $coupon_id = '2swxxLhE';
-        // $taxrate_ny = 'txr_1Hbe1jKIsFHGARAdZVHSX9A4';
-        // $price_id_shipping = NULL;
-    } else {
-        $coupon_id = '2swxxLhE';
-        // $price_id_shipping = NULL;
-    }
-}
+/*
+    build session
 
-/* 
-    ** todo *
-
-    branch on /wholesale to determine what is added or not to stripe session
-    maybe can be added to existing session?
+    wholesale = no shipping, no sales tax, and 45% coupon
+    partners = no shipping, no sales tax, and 75% coupon
 */
 
-// populate session
-$session = \Stripe\Checkout\Session::create([
+$session_ = [
 	'payment_method_types' => ['card'],
 	'mode' => 'payment',
 	'billing_address_collection' => 'required',
@@ -98,23 +101,39 @@ $session = \Stripe\Checkout\Session::create([
 		[
 		  'price' => $price_id,
 		  'quantity' => 1,
-		  'dynamic_tax_rates' => [
-		      $taxrate_ny,
-		  ],
 		],
-		[
-		  'price' => $price_id_shipping,
-          'description' => 'Shipping via USPS Priority Mail',
-		  'quantity' => 1,
-		],
-    ],      
-    'discounts' => [[
-        'coupon' => $coupon_id,
-    ]],
+    ],
 	'success_url' => $success_url,
 	'cancel_url' => $canceled_url,
-]);
+];
+if ($wholesale || $partners) {
+    $session_[] = [
+        'discounts' => [[
+            'coupon' => $coupon_id,
+        ]],
+    ];
+    if ($copies)
+        $session_['line_items'][0]['quantity'] = $quantity;
+} else {
+    $session_['line_items'][0]['dynamic_tax_rates'] = [
+		[
+            $taxrate_ny,
+		],
+    ];
+    $session_['line_items'][] = [
+		    'price' => $price_id_shipping,
+            'description' => 'Shipping via USPS Priority Mail',
+		    'quantity' => 1,
+    ];
+    if ($copies)
+        $session_['line_items'][0]['quantity'] = $quantity;
+}
 
+/*
+    stripe api
+*/
+
+$session = \Stripe\Checkout\Session::create($session_);
 if(!$isSuccess && !$isCanceled){
     ?><form id = 'stripe_form' method = 'POST' action = '<? echo $currentUrl; ?>/submitting'>
 		<button id = 'stripe_form_submit' type="button">Buy</button>
